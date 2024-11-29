@@ -1,0 +1,5 @@
+{
+  "editor.formatOnSave": true,
+  "i18n-ally.extract.autoDetect": true,
+  "i18n-ally.keystyle": "nested",
+}
