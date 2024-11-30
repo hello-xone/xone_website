@@ -62,21 +62,21 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
               // },
               {
                 content: (
-                  <ExternalLink href={EXTERNAL_LINKS.docs}>
+                  <ExternalLink to={EXTERNAL_LINKS.docs + 'developers/ready'}>
                     <Text>Docs</Text>
                   </ExternalLink>
                 )
               },
               {
                 content: (
-                  <ExternalLink href={EXTERNAL_LINKS.TestnetExplorer}>
+                  <ExternalLink to={EXTERNAL_LINKS.TestnetExplorer}>
                     <Text>Testnet explorer</Text>
                   </ExternalLink>
                 )
               },
               {
                 content: (
-                  <ExternalLink href={EXTERNAL_LINKS.faucet}>
+                  <ExternalLink to={EXTERNAL_LINKS.faucet}>
                     <Text>Faucet</Text>
                   </ExternalLink>
                 )

@@ -26,7 +26,7 @@ const Footer = (props: Props) => {
           <Box color='white' ml={{ lg: 'auto' }} textAlign='left'>
             <Text color='#bcbfcd' fontWeight='bold' mb="2">Xone Chain</Text>
             <Flex
-              justifyContent={{ base: 'center', lg: 'initial' }}
+              justifyContent='flex-start'
               as='a'
               href={EXTERNAL_LINKS.docs + 'study/xone'}
               target='_blank'
@@ -40,7 +40,7 @@ const Footer = (props: Props) => {
             </Flex>
             <Flex
               as='a'
-              justifyContent={{ base: 'center', lg: 'initial' }}
+              justifyContent='flex-start'
               href={EXTERNAL_LINKS.docs + 'study/service'}
               target='_blank'
               alignItems='center'
@@ -54,7 +54,7 @@ const Footer = (props: Props) => {
             </Flex>
             <Flex
               as='a'
-              justifyContent={{ base: 'center', lg: 'initial' }}
+              justifyContent='flex-start'
               href={EXTERNAL_LINKS.docs + 'study/privacy'}
               target='_blank'
               alignItems='center'
@@ -68,7 +68,7 @@ const Footer = (props: Props) => {
             </Flex>
             <Flex
               as='a'
-              justifyContent={{ base: 'center', lg: 'initial' }}
+              justifyContent='flex-start'
               href={EXTERNAL_LINKS.Events}
               target='_blank'
               alignItems='center'
@@ -84,7 +84,7 @@ const Footer = (props: Props) => {
           <Box color='white' ml={{ lg: 'auto' }} textAlign='left'>
             <Text color='#bcbfcd' fontWeight='bold' mb="2">Build</Text>
             <Flex
-              justifyContent={{ base: 'center', lg: 'initial' }}
+              justifyContent='flex-start'
               as='a'
               href={EXTERNAL_LINKS.docs + 'developers/ready'}
               target='_blank'
@@ -98,7 +98,7 @@ const Footer = (props: Props) => {
             </Flex>
             <Flex
               as='a'
-              justifyContent={{ base: 'center', lg: 'initial' }}
+              justifyContent='flex-start'
               href={EXTERNAL_LINKS.docs + 'developers/rpc'}
               target='_blank'
               alignItems='center'
@@ -112,7 +112,7 @@ const Footer = (props: Props) => {
             </Flex>
             <Flex
               as='a'
-              justifyContent={{ base: 'center', lg: 'initial' }}
+              justifyContent='flex-start'
               href={EXTERNAL_LINKS.docs + 'developers/tools'}
               target='_blank'
               alignItems='center'
@@ -126,7 +126,7 @@ const Footer = (props: Props) => {
             </Flex>
             <Flex
               as='a'
-              justifyContent={{ base: 'center', lg: 'initial' }}
+              justifyContent='flex-start'
               href={EXTERNAL_LINKS.docs + 'developers/explorers'}
               target='_blank'
               alignItems='center'
@@ -140,7 +140,7 @@ const Footer = (props: Props) => {
             </Flex>
             <Flex
               as='a'
-              justifyContent={{ base: 'center', lg: 'initial' }}
+              justifyContent='flex-start'
               href={EXTERNAL_LINKS.faucet}
               target='_blank'
               alignItems='center'
@@ -154,7 +154,7 @@ const Footer = (props: Props) => {
             </Flex>
             <Flex
               as='a'
-              justifyContent={{ base: 'center', lg: 'initial' }}
+              justifyContent='flex-start'
               href={EXTERNAL_LINKS.Github}
               target='_blank'
               alignItems='center'
@@ -168,11 +168,11 @@ const Footer = (props: Props) => {
             </Flex>
           </Box>
 
-          <Box ml={{ lg: 'auto' }} textAlign={{ base: 'center', lg: 'initial' }}>
+          <Box ml={{ lg: 'auto' }} textAlign='left'>
             <Text color='#bcbfcd' fontWeight='bold' mb="2">Follow Us</Text>
             <Flex
               alignItems='center'
-              justifyContent={{ base: 'center', lg: 'initial' }}
+              justifyContent='flex-start'
               mt='3'
               gap='4'
             >
@@ -184,7 +184,7 @@ const Footer = (props: Props) => {
             </Flex>
           </Box>
           <Box ml={{ lg: 'auto' }} textAlign={{ base: 'center', lg: 'right' }}>
-            <Text color='whiteAlpha.500'>&copy; 2024 Xone.</Text>
+            <Text color='whiteAlpha.500'>&copy; {new Date().getFullYear()} Xone.</Text>
           </Box>
         </Flex>
       </Container>
