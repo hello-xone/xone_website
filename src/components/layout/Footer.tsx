@@ -176,11 +176,11 @@ const Footer = (props: Props) => {
               mt='3'
               gap='4'
             >
-              <IconButton as={FaXTwitter} href='https://x.com/xone_chain' />
-              <IconButton as={PiTelegramLogo} href='https://t.me/Xone_Group' />
+              <IconButton as={FaXTwitter} href={EXTERNAL_LINKS.Twitter} />
+              <IconButton as={PiTelegramLogo} href={EXTERNAL_LINKS.Telegram} />
               <IconButton as={FaGithub} href={EXTERNAL_LINKS.Github} />
-              <IconButton as={FiYoutube} href='https://www.youtube.com/@HelloXone' />
-              <IconButton as={SiMedium} href='https://medium.com/@xone_chain' />
+              <IconButton as={FiYoutube} href={EXTERNAL_LINKS.Youtube} />
+              <IconButton as={SiMedium} href={EXTERNAL_LINKS.Medium} />
             </Flex>
           </Box>
           <Box ml={{ lg: 'auto' }} textAlign={{ base: 'center', lg: 'right' }}>

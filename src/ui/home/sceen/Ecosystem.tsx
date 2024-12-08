@@ -25,6 +25,12 @@ const Ecosystem = (props: Props) => {
     return [firstHalf, secondHalf];
   }, [images]);
 
+  const logoStyle = {
+    width: '150px',
+    height: 'auto',
+    margin: '0 16px',
+  };
+
   return (
     <Box py='60px'>
       <Container>
@@ -91,7 +97,7 @@ const Ecosystem = (props: Props) => {
                     return (
                       <SwiperSlide key={img.default}>
                         <Center h={{ base: '70', md: '60px' }}>
-                          <Img draggable={false} src={img.default} h='full' objectFit='contain' />
+                          <Img draggable={false} src={img.default} h='full' objectFit='contain' style={logoStyle} />
                         </Center>
                       </SwiperSlide>
                     );
