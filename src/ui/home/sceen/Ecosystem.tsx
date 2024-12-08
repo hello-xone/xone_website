@@ -1,10 +1,9 @@
 import RedButton from '@/components/comm/button/RedButton';
-import { Box, Center, Container, Flex, Heading, Img, SimpleGrid, Text, Icon } from '@chakra-ui/react';
+import { Box, Center, Container, Heading, Img, Text, Icon } from '@chakra-ui/react';
 import React, { useMemo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, FreeMode } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import { MdOutlineArrowOutward } from 'react-icons/md';
-
 
 type Props = {};
 
@@ -15,7 +14,16 @@ const Ecosystem = (props: Props) => {
       { default: string }
     >;
   }, []);
-  console.log(images);
+
+  const imagesArr = useMemo(() => {
+    const keys = Object.keys(images);
+    const mid = Math.ceil(keys.length / 2);
+
+    const firstHalf = keys.slice(0, mid).map((key) => images[key]);
+    const secondHalf = keys.slice(mid).map((key) => images[key]);
+
+    return [firstHalf, secondHalf];
+  }, [images]);
 
   return (
     <Box py='60px'>
@@ -26,7 +34,14 @@ const Ecosystem = (props: Props) => {
             <Text color='gray.500' mt='1'>
               Discover an ecosystem with a mission — open, adaptable, and committed to advancing the
               future of blockchain.
-              <Text as='a' color='red.pri' fontWeight='bold' textDecoration='none' _hover={{ textDecoration: 'underline' }} ml='1'>
+              <Text
+                as='a'
+                color='red.pri'
+                fontWeight='bold'
+                textDecoration='none'
+                _hover={{ textDecoration: 'underline' }}
+                ml='1'
+              >
                 {' '}
                 Know more <Icon as={MdOutlineArrowOutward} fontSize='16px' />
               </Text>
@@ -36,53 +51,57 @@ const Ecosystem = (props: Props) => {
             Get started
           </RedButton> */}
         </Box>
-        <Box mt='40px'>
-          {/* <Swiper
-            className='seamlesswrap'
-            modules={[Autoplay, FreeMode]}
-            observer
-            observeParents
-            speed={4000}
-            loop
-            slidesPerView={3}
-            spaceBetween={20}
-            freeMode={{
-              enabled: true,
-              momentum: false // 禁用惯性滑动
-            }}
-            grabCursor
-            direction='horizontal'
-            autoplay={{
-              delay: 0,
-              stopOnLastSlide: false,
-              reverseDirection: false,
-              disableOnInteraction: false
-            }}
-            onTouchEnd={(swiper) => {
-              if (swiper) {
-                swiper.autoplay.running = true;
-                swiper.autoplay.start();
-                swiper.slideNext(); // 确保方向是前进
-              }
-            }}
-            breakpoints={{
-              750: {
-                slidesPerView: 6,
-                spaceBetween: 10
-              }
-            }}
-          >
-            {Object.keys(images).map((key) => {
-              return (
-                <SwiperSlide key={key}>
-                  <Center h={{ base: '70', md: '40px' }}>
-                    <Img src={images[key].default} h='full' objectFit='contain' />
-                  </Center>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper> */}
+        <Box>
+          {imagesArr.map((imgs, i) => {
+            return (
+              <Box mt='40px' key={i}>
+                <Swiper
+                  className='seamlesswrap'
+                  modules={[Autoplay]}
+                  observer
+                  observeParents
+                  speed={4000}
+                  loop
+                  slidesPerView={3}
+                  spaceBetween={30}
+                  grabCursor
+                  direction='horizontal'
+                  autoplay={{
+                    delay: 0,
+                    stopOnLastSlide: false,
+                    reverseDirection: i % 2 !== 0,
+                    disableOnInteraction: false
+                  }}
+                  allowTouchMove={false}
+                  onTouchEnd={(swiper) => {
+                    if (swiper) {
+                      swiper.autoplay.running = true;
+                      swiper.autoplay.start();
+                      // swiper.slideNext(); // 确保方向是前进
+                    }
+                  }}
+                  breakpoints={{
+                    750: {
+                      slidesPerView: 6,
+                      spaceBetween: 40
+                    }
+                  }}
+                >
+                  {imgs.map((img) => {
+                    return (
+                      <SwiperSlide key={img.default}>
+                        <Center h={{ base: '70', md: '60px' }}>
+                          <Img draggable={false} src={img.default} h='full' objectFit='contain' />
+                        </Center>
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
+              </Box>
+            );
+          })}
 
+          {/* 
           <SimpleGrid
             columns={{ base: 2, md: 3, lg: 6, xl: 6 }}
             gap='30px 12px'
@@ -92,7 +111,7 @@ const Ecosystem = (props: Props) => {
             {Object.keys(images).map((key) => {
               return <Img key={key} src={images[key].default} />;
             })}
-          </SimpleGrid>
+          </SimpleGrid> */}
         </Box>
       </Container>
     </Box>

@@ -1,37 +1,63 @@
-import { Box, Menu, MenuButton, MenuItem, MenuItemProps, MenuList, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItemProps,
+  MenuList,
+  Text,
+  useDisclosure
+} from '@chakra-ui/react';
 import NavButton from './NavButton';
 import { css } from '@emotion/react';
 import { MenuList_CSS } from '@/assets/style/menu';
 import ExternalLink from '@/components/comm/ExternalLink';
 import { EXTERNAL_LINKS } from '@/lib/external';
 import { Link } from 'react-router-dom';
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 
 type Props = {
   text: string;
 };
 
 const NavMenuButton = (props: Props) => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const closeTimerRef = useRef<number>();
+  const _onOpen = () => {
+    clearTimeout(closeTimerRef.current);
+    onOpen();
+  };
+
   return (
-    <Box>
-      <Menu closeOnSelect={false}>
-        {({ isOpen }) => {
+    <Box
+      onMouseLeave={() => {
+        closeTimerRef.current = setTimeout(() => {
+          onClose();
+        }, 50);
+      }}
+    >
+      <Menu closeOnSelect={false} isOpen={isOpen} onClose={onClose}>
+        {({ isOpen: _isOpen }) => {
           return (
             <>
               <MenuButton
+                onMouseOver={_onOpen}
                 css={css`
                   &:hover {
                     > span {
                       > div {
-                        background-color: #f2f0ff;
+                        &::after {
+                          background-color: #ed0000;
+                          width: 100%;
+                        }
                       }
                     }
                   }
                 `}
               >
-                <NavButton active={isOpen} text={props.text} />
+                <NavButton active={_isOpen} text={props.text} />
               </MenuButton>
-              <MenuList css={MenuList_CSS}>
+              <MenuList onMouseOver={_onOpen} css={MenuList_CSS}>
                 {/* <CMenuItem href={'/'}>Get started</CMenuItem> */}
 
                 <CMenuItem href={EXTERNAL_LINKS.docs + 'developers/ready'}>
@@ -73,19 +99,19 @@ const CMenuItem = memo((props: { href?: string } & MenuItemProps) => {
       fontWeight='bold'
       bgColor='white'
       _hover={{
-        bgColor: '#F2F0FF'
+        bgColor: 'priRed.100'
       }}
       {...(href
         ? href?.startsWith('/')
           ? {
-            as: Link,
-            to: href
-          }
+              as: Link,
+              to: href
+            }
           : {
-            as: 'a',
-            href: href,
-            target: '_blank'
-          }
+              as: 'a',
+              href: href,
+              target: '_blank'
+            }
         : {})}
       {...rest}
     />
