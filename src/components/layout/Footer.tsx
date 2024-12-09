@@ -55,7 +55,7 @@ const Footer = (props: Props) => {
             <Flex
               as='a'
               justifyContent='flex-start'
-              href={EXTERNAL_LINKS.docs + '/study/media'}
+              href={EXTERNAL_LINKS.docs + 'study/media'}
               target='_blank'
               alignItems='center'
               mt='2'
