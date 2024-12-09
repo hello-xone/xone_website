@@ -41,6 +41,34 @@ const Footer = (props: Props) => {
             <Flex
               as='a'
               justifyContent='flex-start'
+              href={EXTERNAL_LINKS.Events}
+              target='_blank'
+              alignItems='center'
+              mt='2'
+              gap='1'
+              color='#808080'
+              _hover={{ color: '#ffffff' }}
+            >
+              <Text>Events</Text>
+              <Icon as={MdOutlineArrowOutward} fontSize='16px' />
+            </Flex>
+            <Flex
+              as='a'
+              justifyContent='flex-start'
+              href={EXTERNAL_LINKS.docs + '/study/media'}
+              target='_blank'
+              alignItems='center'
+              mt='2'
+              gap='1'
+              color='#808080'
+              _hover={{ color: '#ffffff' }}
+            >
+              <Text>Media Kit</Text>
+              <Icon as={MdOutlineArrowOutward} fontSize='16px' />
+            </Flex>
+            <Flex
+              as='a'
+              justifyContent='flex-start'
               href={EXTERNAL_LINKS.docs + 'study/service'}
               target='_blank'
               alignItems='center'
@@ -64,20 +92,6 @@ const Footer = (props: Props) => {
               _hover={{ color: '#ffffff' }}
             >
               <Text>Privacy Policy</Text>
-              <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-            </Flex>
-            <Flex
-              as='a'
-              justifyContent='flex-start'
-              href={EXTERNAL_LINKS.Events}
-              target='_blank'
-              alignItems='center'
-              mt='2'
-              gap='1'
-              color='#808080'
-              _hover={{ color: '#ffffff' }}
-            >
-              <Text>Events</Text>
               <Icon as={MdOutlineArrowOutward} fontSize='16px' />
             </Flex>
           </Box>
