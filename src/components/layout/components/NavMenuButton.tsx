@@ -112,6 +112,24 @@ const NavMenuButton = (props: Props) => {
                       </ExternalLink>
                     </CMenuItem>
                   </>
+                ) : props.text === 'Ecosystem' ? (
+                  <>
+                    <CMenuItem href={EXTERNAL_LINKS.TokenUp}>
+                      <ExternalLink>
+                        <Text>TokenUp</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.SwapX}>
+                      <ExternalLink>
+                        <Text>SwapX</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.Bridge}>
+                      <ExternalLink>
+                        <Text>RainLink</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                  </>
                 ) : null}
               </MenuList>
             </>

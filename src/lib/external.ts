@@ -10,5 +10,7 @@ export const EXTERNAL_LINKS = {
   Medium: 'https://medium.com/@xone_chain',
   Donate: 'https://knight.center/',
   DonateDocs: 'https://docs.knight.center/',
-  Bridge: 'https://bridge.xonetest.plus/'
+  Bridge: 'https://bridge.xonetest.plus/',
+  TokenUp: 'https://tokenup.xonetest.plus/',
+  SwapX: 'https://swapx.xonetest.plus/zh'
 };

@@ -53,6 +53,7 @@ const Header = (props: Props) => {
               <NavMenuButton text="Build" />
               <NavMenuButton text="Donate" />
               <NavMenuButton text="Social" />
+              <NavMenuButton text="Ecosystem" />
             </Box>
 
             <MobileMenuButton isOpen={isOpen} onClick={toggle} ml="auto" />
