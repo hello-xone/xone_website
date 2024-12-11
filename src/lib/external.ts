@@ -14,4 +14,5 @@ export const EXTERNAL_LINKS = {
   TokenUp:'https://tokenup.xonetest.plus/',
   SwapX:'https://swapx.xonetest.plus/zh',
   RainLink:'https://bridge.xonetest.plus/',
+
 };
