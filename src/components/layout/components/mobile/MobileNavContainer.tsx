@@ -84,7 +84,7 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
             ]}
           />
            <MobileNavMenu
-            title='c'
+            title='Donate'
             menus={[
               // {
               //   content: (
