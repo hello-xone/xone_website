@@ -6,6 +6,7 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { PiTelegramLogo } from 'react-icons/pi';
 import { FaGithub } from 'react-icons/fa';
 import { SiMedium } from 'react-icons/si';
+import { RiDiscordLine } from "react-icons/ri";
 import { EXTERNAL_LINKS } from '@/lib/external';
 
 type Props = {};
@@ -195,6 +196,7 @@ const Footer = (props: Props) => {
               <IconButton as={FaGithub} href={EXTERNAL_LINKS.Github} />
               <IconButton as={FiYoutube} href={EXTERNAL_LINKS.Youtube} />
               <IconButton as={SiMedium} href={EXTERNAL_LINKS.Medium} />
+              <IconButton as={RiDiscordLine} href={EXTERNAL_LINKS.Discord} />
             </Flex>
           </Box>
           <Box ml={{ lg: 'auto' }} textAlign={{ base: 'center', lg: 'right' }}>
