@@ -89,7 +89,7 @@ const NavMenuButton = (props: Props) => {
                       </ExternalLink>
                     </CMenuItem>
                   </>
-                ) : props.text === 'Social' ? (
+                ): props.text === 'Social' ? (
                   <>
                     <CMenuItem href={EXTERNAL_LINKS.Twitter}>
                       <ExternalLink>
@@ -109,6 +109,24 @@ const NavMenuButton = (props: Props) => {
                     <CMenuItem href={EXTERNAL_LINKS.Medium}>
                       <ExternalLink>
                         <Text>News</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                  </>
+                ) : props.text === 'Ecosystem' ? (
+                  <>
+                    <CMenuItem href={EXTERNAL_LINKS.TokenUp}>
+                      <ExternalLink>
+                        <Text>TokenUp</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.SwapX}>
+                      <ExternalLink>
+                        <Text>SwapX</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.RainLink}>
+                      <ExternalLink>
+                        <Text>RainLink</Text>
                       </ExternalLink>
                     </CMenuItem>
                   </>
