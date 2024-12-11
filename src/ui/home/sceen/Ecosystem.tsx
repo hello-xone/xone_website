@@ -108,7 +108,7 @@ const Ecosystem = (props: Props) => {
                   }}
                 >
                   {imgs.map((img, index) => {
-                    const imgName = img.default;
+                    const imgName = Object.keys(images)[index];
                     const lastIndex = imgName.lastIndexOf("\/");
                     const indexImg = imgName.substring(lastIndex + 1, imgName.length);
                     const link = imageLinks[indexImg];
