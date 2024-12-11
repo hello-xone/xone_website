@@ -37,7 +37,6 @@ const Ecosystem = (props: Props) => {
   const imagesArr = useMemo(() => {
     const keys = Object.keys(images);
     const mid = Math.ceil(keys.length / 2);
-
     const firstHalf = keys.slice(0, mid).map((key) => images[key]);
     const secondHalf = keys.slice(mid).map((key) => images[key]);
 
@@ -110,7 +109,9 @@ const Ecosystem = (props: Props) => {
                 >
                   {imgs.map((img, index) => {
                     const imgName = Object.keys(images)[index];
-                    const link = imageLinks[imgName];
+                    const lastIndex = imgName .lastIndexOf("\/");
+                  const indexImg   = imgName .substring(lastIndex + 1, imgName.length);
+                    const link = imageLinks[indexImg];
                     console.log(imgName, link);
                     return (
                       <SwiperSlide key={img.default}>
