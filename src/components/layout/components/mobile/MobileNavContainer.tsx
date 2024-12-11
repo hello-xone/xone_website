@@ -84,7 +84,11 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
             ]}
           />
            <MobileNavMenu
+<<<<<<< HEAD
             title='Donate'
+=======
+            title='c'
+>>>>>>> d5aedb3c9feba426d4e9cf5e26a1eee16d7c042f
             menus={[
               // {
               //   content: (
@@ -149,6 +153,7 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
               }
             ]}
           />
+<<<<<<< HEAD
           <MobileNavMenu
             title='Ecosystem'
             menus={[
@@ -182,6 +187,8 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
               },
             ]}
           />
+=======
+>>>>>>> d5aedb3c9feba426d4e9cf5e26a1eee16d7c042f
         </Box>
       </Collapse>
     </Box>
