@@ -58,24 +58,61 @@ const NavMenuButton = (props: Props) => {
                 <NavButton active={_isOpen} text={props.text} />
               </MenuButton>
               <MenuList onMouseOver={_onOpen} css={MenuList_CSS}>
-                {/* <CMenuItem href={'/'}>Get started</CMenuItem> */}
-
-                <CMenuItem href={EXTERNAL_LINKS.docs + 'developers/ready'}>
-                  <ExternalLink>
-                    <Text>Docs</Text>
-                  </ExternalLink>
-                </CMenuItem>
-                <CMenuItem href={EXTERNAL_LINKS.TestnetExplorer}>
-                  <ExternalLink>
-                    <Text>Testnet explorer</Text>
-                  </ExternalLink>
-                </CMenuItem>
-
-                <CMenuItem href={EXTERNAL_LINKS.faucet}>
-                  <ExternalLink>
-                    <Text>Faucet</Text>
-                  </ExternalLink>
-                </CMenuItem>
+                {props.text === 'Build' ? (
+                  <>
+                    <CMenuItem href={EXTERNAL_LINKS.docs + 'developers/ready'}>
+                      <ExternalLink>
+                        <Text>Developer Docs</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.TestnetExplorer}>
+                      <ExternalLink>
+                        <Text>Testnet explorer</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.faucet}>
+                      <ExternalLink>
+                        <Text>Faucet</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                  </>
+                ) : props.text === 'Donate' ? (
+                  <>
+                    <CMenuItem href={EXTERNAL_LINKS.Donate}>
+                      <ExternalLink>
+                        <Text>Go to Donate</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.DonateDocs}>
+                      <ExternalLink>
+                        <Text>Donate Support</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                  </>
+                ) : props.text === 'Social' ? (
+                  <>
+                    <CMenuItem href={EXTERNAL_LINKS.Twitter}>
+                      <ExternalLink>
+                        <Text>X</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.Telegram}>
+                      <ExternalLink>
+                        <Text>Telegram</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.Events}>
+                      <ExternalLink>
+                        <Text>Events</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.Medium}>
+                      <ExternalLink>
+                        <Text>News</Text>
+                      </ExternalLink>
+                    </CMenuItem>
+                  </>
+                ) : null}
               </MenuList>
             </>
           );
@@ -104,14 +141,14 @@ const CMenuItem = memo((props: { href?: string } & MenuItemProps) => {
       {...(href
         ? href?.startsWith('/')
           ? {
-              as: Link,
-              to: href
-            }
+            as: Link,
+            to: href
+          }
           : {
-              as: 'a',
-              href: href,
-              target: '_blank'
-            }
+            as: 'a',
+            href: href,
+            target: '_blank'
+          }
         : {})}
       {...rest}
     />

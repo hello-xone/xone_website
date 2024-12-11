@@ -7,5 +7,8 @@ export const EXTERNAL_LINKS = {
   Twitter: 'https://x.com/xone_chain',
   Telegram: 'https://t.me/Xone_Group',
   Youtube: 'https://www.youtube.com/@HelloXone',
-  Medium: 'https://medium.com/@xone_chain'
+  Medium: 'https://medium.com/@xone_chain',
+  Donate: 'https://knight.center/',
+  DonateDocs: 'https://docs.knight.center/',
+  Bridge: 'https://bridge.xonetest.plus/'
 };

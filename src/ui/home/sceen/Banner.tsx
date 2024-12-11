@@ -36,7 +36,7 @@ const Banner = (props: Props) => {
           >
             Start Building
           </Button>
-          <ExternalLink ml='40px' fontWeight='bold' fontSize='lg'>
+          <ExternalLink to={EXTERNAL_LINKS.Bridge} ml='40px' fontWeight='bold' fontSize='lg'>
             Bridge
           </ExternalLink>
         </Flex>
