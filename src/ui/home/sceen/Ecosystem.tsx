@@ -14,7 +14,6 @@ const Ecosystem = (props: Props) => {
     >;
   }, []);
 
-  // 配置每个图片对应的链接
   const imageLinks: Record<string, string> = {
     'aleta planet.svg': 'https://aletaplanet.com/',
     'color-black.svg': 'https://pancakeswap.finance/home',
@@ -111,7 +110,6 @@ const Ecosystem = (props: Props) => {
                   {imgs.map((img, index) => {
                     const imgName = Object.keys(images)[index];
                     const link = imageLinks[imgName];
-                    console.log(imgName, link);
                     return (
                       <SwiperSlide key={img.default}>
                         <Center h={{ base: '70', md: '60px' }}>
