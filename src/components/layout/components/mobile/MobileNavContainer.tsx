@@ -83,6 +83,72 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
               }
             ]}
           />
+           <MobileNavMenu
+            title='Donate'
+            menus={[
+              // {
+              //   content: (
+              //     <Text as={Link} to='/'>
+              //       Get started
+              //     </Text>
+              //   )
+              // },
+              {
+                content: (
+                  <ExternalLink to={EXTERNAL_LINKS.Donate}>
+                    <Text>Go to Donate</Text>
+                  </ExternalLink>
+                )
+              },
+              {
+                content: (
+                  <ExternalLink to={EXTERNAL_LINKS.DonateDocs}>
+                    <Text>Donate Support</Text>
+                  </ExternalLink>
+                )
+              }
+            ]}
+          />
+           <MobileNavMenu
+            title='Social'
+            menus={[
+              // {
+              //   content: (
+              //     <Text as={Link} to='/'>
+              //       Get started
+              //     </Text>
+              //   )
+              // },
+              {
+                content: (
+                  <ExternalLink to={EXTERNAL_LINKS.Twitter}>
+                    <Text>X</Text>
+                  </ExternalLink>
+                )
+              },
+              {
+                content: (
+                  <ExternalLink to={EXTERNAL_LINKS.Telegram}>
+                    <Text>Telegram</Text>
+                  </ExternalLink>
+                )
+              },
+              {
+                content: (
+                  <ExternalLink to={EXTERNAL_LINKS.Events}>
+                    <Text>Events</Text>
+                  </ExternalLink>
+                )
+              },
+                {
+                content: (
+                  <ExternalLink to={EXTERNAL_LINKS.Medium}>
+                    <Text>News</Text>
+                  </ExternalLink>
+                )
+              }
+            ]}
+          />
         </Box>
       </Collapse>
     </Box>
