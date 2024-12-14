@@ -56,6 +56,34 @@ const Footer = (props: Props) => {
             <Flex
               as='a'
               justifyContent='flex-start'
+              href={EXTERNAL_LINKS.docs + 'study/bug'}
+              target='_blank'
+              alignItems='center'
+              mt='2'
+              gap='1'
+              color='#808080'
+              _hover={{ color: '#ffffff' }}
+            >
+              <Text>Bounty Hunter</Text>
+              <Icon as={MdOutlineArrowOutward} fontSize='16px' />
+            </Flex>
+            <Flex
+              as='a'
+              justifyContent='flex-start'
+              href={EXTERNAL_LINKS.docs + 'study/wiki'}
+              target='_blank'
+              alignItems='center'
+              mt='2'
+              gap='1'
+              color='#808080'
+              _hover={{ color: '#ffffff' }}
+            >
+              <Text>White Paper</Text>
+              <Icon as={MdOutlineArrowOutward} fontSize='16px' />
+            </Flex>
+            <Flex
+              as='a'
+              justifyContent='flex-start'
               href={EXTERNAL_LINKS.docs + 'study/media'}
               target='_blank'
               alignItems='center'

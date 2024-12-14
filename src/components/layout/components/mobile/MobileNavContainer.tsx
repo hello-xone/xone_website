@@ -80,6 +80,13 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
                     <Text>Faucet</Text>
                   </ExternalLink>
                 )
+              },
+              {
+                content: (
+                  <ExternalLink to={EXTERNAL_LINKS.docs + 'study/bug'}>
+                    <Text>Bounty Hunter</Text>
+                  </ExternalLink>
+                )
               }
             ]}
           />

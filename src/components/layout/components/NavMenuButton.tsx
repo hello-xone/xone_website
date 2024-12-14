@@ -75,6 +75,11 @@ const NavMenuButton = (props: Props) => {
                         <Text>Faucet</Text>
                       </ExternalLink>
                     </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.docs + 'study/bug'}>
+                      <ExternalLink>
+                        <Text>Bounty Hunter</Text>
+                      </ExternalLink>
+                    </CMenuItem>
                   </>
                 ) : props.text === 'Donate' ? (
                   <>
