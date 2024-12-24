@@ -1,6 +1,6 @@
 export const EXTERNAL_LINKS = {
-  faucet: 'https://faucet.xone.plus/',
-  docs: 'https://docs.xone.plus/',
+  faucet: 'https://faucet.xone.org/',
+  docs: 'https://docs.xone.org/',
   TestnetExplorer: 'https://testnet.xscscan.com/',
   Events: 'https://lu.ma/xone',
   Github: 'https://github.com/huione-labs',
@@ -14,5 +14,5 @@ export const EXTERNAL_LINKS = {
   TokenUp:'https://tokenup.xonetest.plus/',
   SwapX:'https://swapx.xonetest.plus/zh',
   RainLink:'https://bridge.xonetest.plus/',
-  Discord: 'https://discord.gg/TykpCEbY',
+  Discord: 'https://discord.gg/Du9y2GHV',
 };

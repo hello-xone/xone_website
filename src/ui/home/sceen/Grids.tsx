@@ -2,6 +2,7 @@ import RedButton from '@/components/comm/button/RedButton';
 import { Box, Container, Flex, Grid, GridItem, Heading, Img, Text } from '@chakra-ui/react';
 import IMG_Cube from '@/assets/imgs/home/cube.png';
 import IMG_Reward from '@/assets/imgs/home/reward.png';
+import { EXTERNAL_LINKS } from '@/lib/external';
 
 type Props = {};
 
@@ -22,7 +23,7 @@ const Grids = (props: Props) => {
               Xone is a high-performance, interoperable blockchain platform combining EVM
               compatibility with Cosmos modularity.
             </Text>
-            <RedButton mt='20px' size='lg' to='https://docs.xone.plus/developers/ready'>
+            <RedButton mt='20px' size='lg' to={EXTERNAL_LINKS.docs + 'developers/ready'}>
               Learn more
             </RedButton>
             <Img src={IMG_Cube} w='full' mt='20px' />

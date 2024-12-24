@@ -24,7 +24,7 @@ const Banner = (props: Props) => {
         <Flex alignItems='center' mt='30px' justifyContent={{ base: 'center', md: 'initial' }}>
           <Button
             as='a'
-            href={EXTERNAL_LINKS.docs + 'developers/tools'}
+            href={EXTERNAL_LINKS.docs + 'developers/guide'}
             target='_blank'
             rel='noopener noreferrer'
             colorScheme='priRed'
