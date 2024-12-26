@@ -1,5 +1,4 @@
 import { Box, Container, Heading, Img, Text } from '@chakra-ui/react';
-import React from 'react';
 
 import IMG_raisecup from '@/assets/imgs/home/raisecup.png';
 import RedButton from '@/components/comm/button/RedButton';

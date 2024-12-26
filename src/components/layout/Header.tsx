@@ -16,26 +16,20 @@ const Header = (props: Props) => {
 
   useEffect(() => {
     // Uncomment if dynamic header height is required
-    // if (wrapRef.current?.clientHeight) {
-    //   document.documentElement.style.setProperty(
-    //     '--app-header-height',
-    //     wrapRef.current?.clientHeight + 'px'
-    //   );
-    // }
+    if (wrapRef.current?.clientHeight) {
+      document.documentElement.style.setProperty(
+        '--app-header-height',
+        wrapRef.current?.clientHeight + 'px'
+      );
+    }
   }, []);
 
   return (
-    <>
+    <Box ref={wrapRef} position='fixed' top='0' left='0' right='0' zIndex={10}>
       <Flex
         h={{ base: '64px' }}
         alignItems='center'
-        position='fixed'
-        top='0'
-        left='0'
-        right='0'
         bgColor='white'
-        zIndex={10}
-        ref={wrapRef}
         borderBottom='1px solid #e0e0e0'
       >
         <Container>
@@ -126,36 +120,21 @@ const Header = (props: Props) => {
           </Flex>
         </Container>
       </Flex>
-      <Box
-        bg='#000000'
-        color='white'
-        py='8px'
-        textAlign='center'
-        fontSize='14px'
-        fontWeight='bold'
-        position='fixed'
-        top={{ base: '64px', md: '64px' }}
-        left='0'
-        right='0'
-        zIndex={9}
-      >
+      <Box bg='#000000' color='white' py='8px' textAlign='center' fontSize='14px' fontWeight='bold'>
         <Box
           as='a'
           href='https://knight.center/'
           target='_blank'
           rel='noopener noreferrer'
-          sx={{
-            textDecoration: 'none',
-            color: 'inherit',
-            _hover: {
-              textDecoration: 'underline'
-            }
+          px='2'
+          _hover={{
+            textDecoration: 'underline'
           }}
         >
           🎉 Join us to illuminate the possibilities of the future with action. →
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 
