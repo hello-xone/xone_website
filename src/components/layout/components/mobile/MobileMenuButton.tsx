@@ -1,4 +1,4 @@
-import { Box, BoxProps, Center, Icon } from '@chakra-ui/react';
+import { Box, BoxProps, Center } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import { clsx } from 'clsx';
 

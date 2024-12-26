@@ -1,7 +1,8 @@
-import RedButton from '@/components/comm/button/RedButton';
-import { Box, Container, Flex, Grid, GridItem, Heading, Img, Text } from '@chakra-ui/react';
+import { Box, Container, Grid, GridItem, Heading, Img, Text } from '@chakra-ui/react';
+
 import IMG_Cube from '@/assets/imgs/home/cube.png';
 import IMG_Reward from '@/assets/imgs/home/reward.png';
+import RedButton from '@/components/comm/button/RedButton';
 import { EXTERNAL_LINKS } from '@/lib/external';
 
 type Props = {};

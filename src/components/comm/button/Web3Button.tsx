@@ -1,9 +1,11 @@
-import { isSupportedChain } from '@/config/wallet/wagmiClient';
-import { useUserState } from '@/store/user';
 import { ButtonProps } from '@chakra-ui/react';
 import { useWeb3Modal } from '@web3modal/wagmi/react';
 import { useMemo } from 'react';
 import { useAccount, useSwitchChain } from 'wagmi';
+
+import { isSupportedChain } from '@/config/wallet/wagmiClient';
+import { useUserState } from '@/store/user';
+
 import LoadingButton from './LoadingButton';
 
 export function Web3Button(

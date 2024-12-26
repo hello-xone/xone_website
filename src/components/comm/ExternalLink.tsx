@@ -1,8 +1,9 @@
-import { getToProps } from '@/utils/helper';
 import { BoxProps, Flex, Icon } from '@chakra-ui/react';
 import React, { memo, ReactNode, useMemo } from 'react';
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import { To } from 'react-router';
+
+import { getToProps } from '@/utils/helper';
 
 type Props = {
   children: ReactNode;

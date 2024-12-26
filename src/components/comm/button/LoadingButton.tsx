@@ -1,8 +1,9 @@
-import { getToProps } from '@/utils/helper';
 import { Button, ButtonProps } from '@chakra-ui/react';
 import { useMemo, useState } from 'react';
 import { To } from 'react-router';
 import { Link } from 'react-router-dom';
+
+import { getToProps } from '@/utils/helper';
 
 function LoadingButton(
   props: {

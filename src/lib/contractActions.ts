@@ -1,5 +1,6 @@
+import { waitForTransactionReceipt,writeContract as write } from '@wagmi/core';
+
 import { wagmiConfig } from '@/config/wallet/wagmiClient';
-import { writeContract as write, waitForTransactionReceipt } from '@wagmi/core';
 
 type TWriteParameters = {
   address: string;

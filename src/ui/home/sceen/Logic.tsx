@@ -1,6 +1,7 @@
-import RedButton from '@/components/comm/button/RedButton';
-import { Box, Container, Flex, Heading, Img, Text } from '@chakra-ui/react';
+import { Box, Container, Heading, Img, Text } from '@chakra-ui/react';
+
 import IMG_Logic from '@/assets/imgs/home/logic.png';
+import RedButton from '@/components/comm/button/RedButton';
 
 type Props = {};
 

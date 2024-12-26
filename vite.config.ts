@@ -1,8 +1,9 @@
-import { defineConfig } from 'vite';
-import { resolve } from 'path';
-import svgr from 'vite-plugin-svgr';
 import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import svgr from 'vite-plugin-svgr';
+
 const r = (p: string) => resolve(__dirname, p);
 
 // https://vitejs.dev/config/

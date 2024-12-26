@@ -11,8 +11,8 @@ export const EXTERNAL_LINKS = {
   Donate: 'https://knight.center/',
   DonateDocs: 'https://docs.knight.center/',
   Bridge: 'https://bridge.xonetest.plus/',
-  TokenUp:'https://tokenup.xonetest.plus/',
-  SwapX:'https://swapx.xonetest.plus/zh',
-  RainLink:'https://bridge.xonetest.plus/',
-  Discord: 'https://discord.gg/Du9y2GHV',
+  TokenUp: 'https://tokenup.xonetest.plus/',
+  SwapX: 'https://swapx.xonetest.plus/zh',
+  RainLink: 'https://bridge.xonetest.plus/',
+  Discord: 'https://discord.gg/Du9y2GHV'
 };

@@ -1,13 +1,15 @@
 import { Box, Container, Flex, Icon, Img, Text } from '@chakra-ui/react';
-import { MdOutlineArrowOutward } from 'react-icons/md';
-import IconButton from '../comm/button/IconButton';
-import { FiYoutube } from 'react-icons/fi';
-import { FaXTwitter } from 'react-icons/fa6';
-import { PiTelegramLogo } from 'react-icons/pi';
-import { FaGithub } from 'react-icons/fa';
 import { BiLogoMediumSquare } from "react-icons/bi";
+import { FaGithub } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { FiYoutube } from 'react-icons/fi';
+import { MdOutlineArrowOutward } from 'react-icons/md';
+import { PiTelegramLogo } from 'react-icons/pi';
 import { RiDiscordLine } from "react-icons/ri";
+
 import { EXTERNAL_LINKS } from '@/lib/external';
+
+import IconButton from '../comm/button/IconButton';
 
 type Props = {};
 

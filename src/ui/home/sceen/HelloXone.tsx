@@ -1,19 +1,10 @@
-import {
-  Box,
-  Center,
-  Container,
-  Flex,
-  Heading,
-  Icon,
-  Img,
-  SimpleGrid,
-  Text
-} from '@chakra-ui/react';
-import IconCoin from '@/assets/svg/coin.svg?react';
-import IconBVI from '@/assets/svg/bvi.svg?react';
-import IconMod from '@/assets/svg/mod.svg?react';
-import IconFee from '@/assets/svg/fee.svg?react';
+import { Box, Center, Container, Flex, Heading, Icon, Img, Text } from '@chakra-ui/react';
 import { ElementType } from 'react';
+
+import IconBVI from '@/assets/svg/bvi.svg?react';
+import IconCoin from '@/assets/svg/coin.svg?react';
+import IconFee from '@/assets/svg/fee.svg?react';
+import IconMod from '@/assets/svg/mod.svg?react';
 
 type Props = {};
 

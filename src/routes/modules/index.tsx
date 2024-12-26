@@ -1,5 +1,6 @@
-import { Navigate, RouteObject } from 'react-router';
 import { lazy } from 'react';
+import { Navigate, RouteObject } from 'react-router';
+
 import BaseLayout from '@/components/layout/BaseLayout';
 
 export const Routes: RouteObject[] = [

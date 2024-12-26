@@ -1,9 +1,11 @@
 import Axios from 'axios';
-import { localCache } from './localStorage';
 import { getAccount } from 'wagmi/actions';
+
 import { wagmiConfig } from '@/config/wallet/wagmiClient';
-import { UserState } from '@/store/user';
 import { Envs } from '@/lib/env';
+import { UserState } from '@/store/user';
+
+import { localCache } from './localStorage';
 
 declare module 'axios' {
   interface IAxiosResponse<T = null> {

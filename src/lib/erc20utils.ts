@@ -1,7 +1,9 @@
-import { wagmiConfig } from '@/config/wallet/wagmiClient';
 import { readContract } from '@wagmi/core';
-import { writeContract } from './contractActions';
 import { erc20Abi, maxUint256 } from 'viem';
+
+import { wagmiConfig } from '@/config/wallet/wagmiClient';
+
+import { writeContract } from './contractActions';
 
 export const Erc20BalanceOf = (contractAddress: TAddress, from: TAddress | string) => {
   return readContract(wagmiConfig, {

@@ -1,8 +1,8 @@
-import { Box, Center, Container, Heading, Img, Text, Icon } from '@chakra-ui/react';
-import React, { useMemo } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+import { Box, Center, Container, Heading, Icon, Img, Text } from '@chakra-ui/react';
+import { useMemo } from 'react';
 import { MdOutlineArrowOutward } from 'react-icons/md';
+import { Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 type Props = {};
 
@@ -30,7 +30,7 @@ const Ecosystem = (props: Props) => {
     'TokenUp.svg': 'https://tokenup.xonetest.plus/',
     'TRON.svg': 'https://tron.network/',
     'Uniswap.svg': 'https://app.uniswap.org/',
-    'Xion.svg': 'https://xion.burnt.com/',
+    'Xion.svg': 'https://xion.burnt.com/'
   };
 
   const imagesArr = useMemo(() => {
@@ -45,28 +45,28 @@ const Ecosystem = (props: Props) => {
   const logoStyle = {
     width: '150px',
     height: 'auto',
-    margin: '0 16px',
+    margin: '0 16px'
   };
 
   return (
-    <Box py="60px">
+    <Box py='60px'>
       <Container>
-        <Box display={{ md: 'flex' }} alignItems="center">
-          <Box flex="1">
-            <Heading fontSize="32px">Explore the ecosystem</Heading>
-            <Text color="gray.500" mt="1">
+        <Box display={{ md: 'flex' }} alignItems='center'>
+          <Box flex='1'>
+            <Heading fontSize='32px'>Explore the ecosystem</Heading>
+            <Text color='gray.500' mt='1'>
               Discover an ecosystem with a mission — open, adaptable, and committed to advancing the
               future of blockchain.
               <Text
-                as="a"
-                color="red.pri"
-                fontWeight="bold"
-                textDecoration="none"
+                as='a'
+                color='red.pri'
+                fontWeight='bold'
+                textDecoration='none'
                 _hover={{ textDecoration: 'underline' }}
-                ml="1"
+                ml='1'
               >
                 {' '}
-                Know more <Icon as={MdOutlineArrowOutward} fontSize="16px" />
+                Know more <Icon as={MdOutlineArrowOutward} fontSize='16px' />
               </Text>
             </Text>
           </Box>
@@ -74,9 +74,9 @@ const Ecosystem = (props: Props) => {
         <Box>
           {imagesArr.map((imgs, i) => {
             return (
-              <Box mt="40px" key={i}>
+              <Box mt='40px' key={i}>
                 <Swiper
-                  className="seamlesswrap"
+                  className='seamlesswrap'
                   modules={[Autoplay]}
                   observer
                   observeParents
@@ -85,12 +85,12 @@ const Ecosystem = (props: Props) => {
                   slidesPerView={3}
                   spaceBetween={30}
                   grabCursor
-                  direction="horizontal"
+                  direction='horizontal'
                   autoplay={{
                     delay: 0,
                     stopOnLastSlide: false,
                     reverseDirection: i % 2 !== 0,
-                    disableOnInteraction: false,
+                    disableOnInteraction: false
                   }}
                   allowTouchMove={false}
                   onTouchEnd={(swiper) => {
@@ -102,28 +102,24 @@ const Ecosystem = (props: Props) => {
                   breakpoints={{
                     750: {
                       slidesPerView: 6,
-                      spaceBetween: 40,
-                    },
+                      spaceBetween: 40
+                    }
                   }}
                 >
                   {imgs.map((img) => {
                     const imgName = img.default;
-                    const lastIndex = imgName.lastIndexOf("\/");
+                    const lastIndex = imgName.lastIndexOf('/');
                     const indexImg = imgName.substring(lastIndex + 1, imgName.length);
                     const link = imageLinks[indexImg];
                     return (
                       <SwiperSlide key={img.default}>
                         <Center h={{ base: '70', md: '60px' }}>
-                          <a
-                            href={link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
+                          <a href={link} target='_blank' rel='noopener noreferrer'>
                             <Img
                               draggable={false}
                               src={img.default}
-                              h="full"
-                              objectFit="contain"
+                              h='full'
+                              objectFit='contain'
                               style={logoStyle}
                             />
                           </a>

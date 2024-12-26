@@ -1,7 +1,7 @@
-import IMG_bg from '@/assets/imgs/home/bg-pc.png';
 import { Box, Button, Container, Flex, Heading, Text } from '@chakra-ui/react';
+
+import IMG_bg from '@/assets/imgs/home/bg-pc.png';
 import ExternalLink from '@/components/comm/ExternalLink';
-import RedButton from '@/components/comm/button/RedButton';
 import { EXTERNAL_LINKS } from '@/lib/external';
 
 type Props = {};

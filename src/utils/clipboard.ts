@@ -1,5 +1,6 @@
-import { Toast } from '@/components/Toast';
 import copy from 'copy-to-clipboard';
+
+import { Toast } from '@/components/Toast';
 
 export function copyText(text: string) {
   if (copy(text)) {

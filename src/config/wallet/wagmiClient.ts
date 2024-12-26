@@ -1,7 +1,7 @@
 import { createWeb3Modal } from '@web3modal/wagmi/react';
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
-
 import { lineaSepolia, polygonAmoy, sepolia } from 'viem/chains';
+
 const projectId = import.meta.env.VITE_APP_PROJECT_ID;
 
 export const chains = [sepolia, polygonAmoy, lineaSepolia] as const;

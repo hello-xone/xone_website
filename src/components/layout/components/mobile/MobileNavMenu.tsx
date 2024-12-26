@@ -1,7 +1,9 @@
 import { Box, Collapse, Flex, Icon, Text, useDisclosure } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
 import { IoChevronDown } from 'react-icons/io5';
+
 import MobileNavButton from './MobileNavButton';
+
 type Props = {
   title: ReactNode;
   menus: TNavMenuItem[];
@@ -13,7 +15,7 @@ export type TNavMenuItem = {
 
 const MobileNavMenu = (props: Props) => {
   const { title, menus } = props;
-  const { isOpen, onClose, onToggle } = useDisclosure();
+  const { isOpen, onToggle } = useDisclosure();
   return (
     <Box>
       <MobileNavButton borderBottomColor={isOpen ? 'transparent' : '#F5F5F5'} onClick={onToggle}>

@@ -1,8 +1,11 @@
-import { Box, Button, Center, Container, Flex, Heading, Img, Text } from '@chakra-ui/react';
-import React, { ReactNode, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import NavMenuButton from './components/NavMenuButton';
+import { Box, Center, Container, Flex, Img } from '@chakra-ui/react';
+import { useEffect, useRef } from 'react';
+
+import { EXTERNAL_LINKS } from '@/lib/external';
+
+import ExternalLink from '../comm/ExternalLink';
 import MobileMenuButton from './components/mobile/MobileMenuButton';
+import NavMenuButton, { CMenuItem } from './components/NavMenuButton';
 import { useMobileNavModal } from './hooks';
 
 type Props = {};
@@ -25,65 +28,128 @@ const Header = (props: Props) => {
     <>
       <Flex
         h={{ base: '64px' }}
-        alignItems="center"
-        position="fixed"
-        top="0"
-        left="0"
-        right="0"
-        bgColor="white"
+        alignItems='center'
+        position='fixed'
+        top='0'
+        left='0'
+        right='0'
+        bgColor='white'
         zIndex={10}
         ref={wrapRef}
-        borderBottom="1px solid #e0e0e0"
+        borderBottom='1px solid #e0e0e0'
       >
         <Container>
-          <Flex alignItems="center">
+          <Flex alignItems='center'>
             <Center>
-              <Img src="/imgs/logo-text.png" h="34px" />
+              <Img src='/imgs/logo-text.png' h='34px' />
             </Center>
 
             <Box
               display={{ base: 'none', lg: 'flex' }}
-              alignItems="center"
-              flex="1"
-              maxW="640px"
-              px="20px"
-              mx="auto"
-              gap="20px"
+              alignItems='center'
+              flex='1'
+              maxW='640px'
+              px='20px'
+              mx='auto'
+              gap='20px'
             >
-              <NavMenuButton text="Build" />
-              <NavMenuButton text="Donate" />
-              <NavMenuButton text="Social" />
-              <NavMenuButton text="Ecosystem" />
+              <NavMenuButton
+                text='Build'
+                MenuListContent={
+                  <>
+                    <CMenuItem href={EXTERNAL_LINKS.docs + 'developers/ready'}>
+                      <ExternalLink>Developer Docs</ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.TestnetExplorer}>
+                      <ExternalLink>Testnet explorer</ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.faucet}>
+                      <ExternalLink>Faucet</ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.docs + 'study/bug'}>
+                      <ExternalLink>Bounty Hunter</ExternalLink>
+                    </CMenuItem>
+                  </>
+                }
+              />
+              <NavMenuButton
+                text='Donate'
+                MenuListContent={
+                  <>
+                    <CMenuItem href={EXTERNAL_LINKS.Donate}>
+                      <ExternalLink>Go to Donate</ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.DonateDocs}>
+                      <ExternalLink>Donate Support</ExternalLink>
+                    </CMenuItem>
+                  </>
+                }
+              />
+              <NavMenuButton
+                text='Social'
+                MenuListContent={
+                  <>
+                    <CMenuItem href={EXTERNAL_LINKS.Twitter}>
+                      <ExternalLink>X</ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.Telegram}>
+                      <ExternalLink>Telegram</ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.Events}>
+                      <ExternalLink>Events</ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.Medium}>
+                      <ExternalLink>News</ExternalLink>
+                    </CMenuItem>
+                  </>
+                }
+              />
+              <NavMenuButton
+                text='Ecosystem'
+                MenuListContent={
+                  <>
+                    <CMenuItem href={EXTERNAL_LINKS.TokenUp}>
+                      <ExternalLink>TokenUp</ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.SwapX}>
+                      <ExternalLink>SwapX</ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.RainLink}>
+                      <ExternalLink>RainLink</ExternalLink>
+                    </CMenuItem>
+                  </>
+                }
+              />
             </Box>
 
-            <MobileMenuButton isOpen={isOpen} onClick={toggle} ml="auto" />
+            <MobileMenuButton isOpen={isOpen} onClick={toggle} ml='auto' />
           </Flex>
         </Container>
       </Flex>
       <Box
-        bg="#000000"
-        color="white"
-        py="8px"
-        textAlign="center"
-        fontSize="14px"
-        fontWeight="bold"
-        position="fixed"
+        bg='#000000'
+        color='white'
+        py='8px'
+        textAlign='center'
+        fontSize='14px'
+        fontWeight='bold'
+        position='fixed'
         top={{ base: '64px', md: '64px' }}
-        left="0"
-        right="0"
+        left='0'
+        right='0'
         zIndex={9}
       >
         <Box
-          as="a"
-          href="https://knight.center/"
-          target="_blank"
-          rel="noopener noreferrer"
+          as='a'
+          href='https://knight.center/'
+          target='_blank'
+          rel='noopener noreferrer'
           sx={{
             textDecoration: 'none',
             color: 'inherit',
             _hover: {
-              textDecoration: 'underline',
-            },
+              textDecoration: 'underline'
+            }
           }}
         >
           🎉 Join us to illuminate the possibilities of the future with action. →

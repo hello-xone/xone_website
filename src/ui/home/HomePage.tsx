@@ -1,14 +1,16 @@
-import React from 'react';
-import Banner from './sceen/Banner';
 import { Box, Container, Heading, Img, Text } from '@chakra-ui/react';
+import React from 'react';
+
 import IMG_raisecup from '@/assets/imgs/home/raisecup.png';
 import RedButton from '@/components/comm/button/RedButton';
-import HelloXone from './sceen/HelloXone';
-import Grids from './sceen/Grids';
-import Ecosystem from './sceen/Ecosystem';
-import Logic from './sceen/Logic';
-import Embrace from './sceen/Embrace';
 import { EXTERNAL_LINKS } from '@/lib/external';
+
+import Banner from './sceen/Banner';
+import Ecosystem from './sceen/Ecosystem';
+import Embrace from './sceen/Embrace';
+import Grids from './sceen/Grids';
+import HelloXone from './sceen/HelloXone';
+import Logic from './sceen/Logic';
 
 type Props = {};
 

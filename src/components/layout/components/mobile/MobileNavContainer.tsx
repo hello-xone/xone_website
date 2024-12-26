@@ -1,9 +1,10 @@
-import { Box, Collapse, useDisclosure, Text } from '@chakra-ui/react';
+import { Box, Collapse, Text, useDisclosure } from '@chakra-ui/react';
 import { forwardRef, Ref, useEffect, useImperativeHandle } from 'react';
-import MobileNavMenu from './MobileNavMenu';
-import { Link } from 'react-router-dom';
+
 import ExternalLink from '@/components/comm/ExternalLink';
 import { EXTERNAL_LINKS } from '@/lib/external';
+
+import MobileNavMenu from './MobileNavMenu';
 
 type Props = {};
 
@@ -90,7 +91,7 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
               }
             ]}
           />
-           <MobileNavMenu
+          <MobileNavMenu
             title='Donate'
             menus={[
               // {
@@ -116,7 +117,7 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
               }
             ]}
           />
-           <MobileNavMenu
+          <MobileNavMenu
             title='Social'
             menus={[
               // {
@@ -147,7 +148,7 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
                   </ExternalLink>
                 )
               },
-                {
+              {
                 content: (
                   <ExternalLink to={EXTERNAL_LINKS.Medium}>
                     <Text>News</Text>

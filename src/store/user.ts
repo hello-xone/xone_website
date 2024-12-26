@@ -1,11 +1,12 @@
-import { Api_Auth } from '@/api/auth';
-import { Api_User } from '@/api/user';
-import { localCache } from '@/utils/localStorage';
+import { signMessage } from '@wagmi/core';
 import { useMemo } from 'react';
 import { proxy, useSnapshot } from 'valtio';
 import { useAccount } from 'wagmi';
-import { signMessage } from '@wagmi/core';
+
+import { Api_Auth } from '@/api/auth';
+import { Api_User } from '@/api/user';
 import { wagmiConfig } from '@/config/wallet/wagmiClient';
+import { localCache } from '@/utils/localStorage';
 
 type TUserState = {
   userInfo?: TUser;

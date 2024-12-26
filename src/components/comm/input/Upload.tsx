@@ -1,4 +1,4 @@
-import { Box, Center, Icon, Img, Input, InputProps } from '@chakra-ui/react';
+import { Center, Icon, Img, Input, InputProps } from '@chakra-ui/react';
 import React, { useRef, useState } from 'react';
 import { GoPlus } from 'react-icons/go';
 import { IoMdCloseCircle } from 'react-icons/io';
@@ -6,7 +6,6 @@ import { IoMdCloseCircle } from 'react-icons/io';
 type Props = InputProps & {
   accept: 'image/*' | 'video/*' | 'audio/*' | (string & {});
   onDelete?(): void;
-  // onChange(file: File): void;
 };
 
 const UploadFile = (props: Props) => {

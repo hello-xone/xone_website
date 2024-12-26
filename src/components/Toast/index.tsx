@@ -1,4 +1,4 @@
-import { UseToastOptions, createStandaloneToast } from '@chakra-ui/react';
+import { createStandaloneToast,UseToastOptions } from '@chakra-ui/react';
 
 const { ToastContainer, toast } = createStandaloneToast({
   defaultOptions: {
