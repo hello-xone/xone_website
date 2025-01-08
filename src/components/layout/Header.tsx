@@ -21,6 +21,10 @@ const Header = (props: Props) => {
         '--app-header-height',
         wrapRef.current?.clientHeight + 'px'
       );
+      document.documentElement.style.setProperty(
+        '--app-header-alert-height',
+        (wrapRef.current.lastChild as HTMLDivElement)?.clientHeight + 'px'
+      );
     }
   }, []);
 
@@ -47,6 +51,25 @@ const Header = (props: Props) => {
               mx='auto'
               gap='20px'
             >
+              <NavMenuButton
+                text='Study'
+                MenuListContent={
+                  <>
+                    <CMenuItem href={EXTERNAL_LINKS.docs + 'study/xone'}>
+                      <ExternalLink>What is Xone?</ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.docs + 'study/account'}>
+                      <ExternalLink>What is a Xone Account?</ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.docs + 'study/xoc'}>
+                      <ExternalLink>Xone Coin</ExternalLink>
+                    </CMenuItem>
+                    <CMenuItem href={EXTERNAL_LINKS.docs + 'study/gas'}>
+                      <ExternalLink>Gas Fees</ExternalLink>
+                    </CMenuItem>
+                  </>
+                }
+              />
               <NavMenuButton
                 text='Build'
                 MenuListContent={

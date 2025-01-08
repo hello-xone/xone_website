@@ -42,7 +42,7 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
     <Box
       display={isOpen ? 'block' : 'none'}
       position='fixed'
-      top='var(--app-header-height)'
+      top='calc(var(--app-header-height) - var(--app-header-alert-height))'
       left='0'
       right='0'
       bottom='0'
@@ -51,6 +51,47 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
     >
       <Collapse endingHeight='100%' in={isOpen} animateOpacity>
         <Box minH='100%' bgColor='white' py='20px'>
+          <MobileNavMenu
+            title='Study'
+            menus={[
+              // {
+              //   content: (
+              //     <Text as={Link} to='/'>
+              //       Get started
+              //     </Text>
+              //   )
+              // },
+              {
+                content: (
+                  <ExternalLink to={EXTERNAL_LINKS.docs + 'study/xone'}>
+                    <Text>What is Xone?</Text>
+                  </ExternalLink>
+                )
+              },
+              {
+                content: (
+                  <ExternalLink to={EXTERNAL_LINKS.docs + 'study/account'}>
+                    <Text>What is a Xone Account?</Text>
+                  </ExternalLink>
+                )
+              },
+              {
+                content: (
+                  <ExternalLink to={EXTERNAL_LINKS.docs + 'study/xoc'}>
+                    <Text>Xone Coin</Text>
+                  </ExternalLink>
+                )
+              },
+              {
+                content: (
+                  <ExternalLink to={EXTERNAL_LINKS.docs + 'study/gas'}>
+                    <Text>Gas Fees</Text>
+                  </ExternalLink>
+                )
+              }
+            ]}
+          />
+
           <MobileNavMenu
             title='Build'
             menus={[
