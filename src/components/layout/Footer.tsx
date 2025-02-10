@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Icon, Img, Text } from '@chakra-ui/react';
+import { Box, Container, Flex, Img, Text } from '@chakra-ui/react';
 import { BiLogoMediumSquare } from 'react-icons/bi';
 import { FaGithub } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
@@ -10,6 +10,8 @@ import { EXTERNAL_LINKS } from '@/lib/external';
 
 import IconButton from '../comm/button/IconButton';
 import ExternalLink from '../comm/ExternalLink';
+import FooterLinks from './components/FooterLinks';
+import { BuildLinks, XoneChainLinks } from './config/links';
 
 type Props = {};
 
@@ -31,25 +33,26 @@ const Footer = (props: Props) => {
           mt='10'
         >
           <Box>
-            <Img src='/imgs/xone-logo-white.png' w='130px' mx={{ base: 'auto', lg: undefined }} />
+            <Img src='/imgs/xone-logo-white.png' w='130px' />
           </Box>
 
           <Box
             ml={{ lg: 'auto' }}
             display={{ base: 'flex' }}
-            flexDir='column'
+            // flexDir='column'
             alignItems={{ base: 'center', lg: 'flex-start' }}
-            gap='2'
+            gap='10'
+            justifyContent={{ base: 'center', lg: 'flex-start' }}
             w={{ base: '100%', lg: 'initial' }}
           >
-            {/* <FooterLinks title='Xone Chain' links={XoneChainLinks} />
+            <FooterLinks title='Xone Chain' links={XoneChainLinks} />
 
             <FooterLinks
-              ml={{ base: 'auto', md: '180px', lg: '100px', xl: '200px' }}
+              ml={{ base: '0', md: '180px', lg: '100px', xl: '200px' }}
               title='Build'
               links={BuildLinks}
-            /> */}
-            <Box>
+            />
+            {/* <Box>
               <ExternalLink to={EXTERNAL_LINKS.docs + 'study/service'} color='white'>
                 Terms of Service
               </ExternalLink>
@@ -58,7 +61,7 @@ const Footer = (props: Props) => {
               <ExternalLink to={EXTERNAL_LINKS.docs + 'study/privacy'} color='white'>
                 Privacy Policy
               </ExternalLink>
-            </Box>
+            </Box> */}
           </Box>
 
           <Box ml={{ base: '0', lg: 'auto' }} textAlign={{ base: 'center', lg: 'left' }}>
