@@ -3,13 +3,13 @@ import { BiLogoMediumSquare } from 'react-icons/bi';
 import { FaGithub } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { FiYoutube } from 'react-icons/fi';
-import { MdOutlineArrowOutward } from 'react-icons/md';
 import { PiTelegramLogo } from 'react-icons/pi';
 import { RiDiscordLine } from 'react-icons/ri';
 
 import { EXTERNAL_LINKS } from '@/lib/external';
 
 import IconButton from '../comm/button/IconButton';
+import ExternalLink from '../comm/ExternalLink';
 
 type Props = {};
 
@@ -26,213 +26,42 @@ const Footer = (props: Props) => {
           gap='8'
           flexDir={{ base: 'column', lg: 'row' }}
           w='full'
-          alignItems='flex-start'
+          alignItems={{ base: 'center', lg: 'flex-start' }}
           mb='10'
           mt='10'
         >
           <Box>
-            <Img src='/imgs/logo-text-white.png' w='130px' mx={{ base: 'auto', lg: undefined }} />
+            <Img src='/imgs/xone-logo-white.png' w='130px' mx={{ base: 'auto', lg: undefined }} />
           </Box>
 
-          <Box ml={{ lg: 'auto' }} display={{ base: 'flex' }} w={{ base: '100%', lg: 'initial' }}>
-            <Box color='white' textAlign='left'>
-              <Text color='#bcbfcd' fontWeight='bold' mb='2'>
-                Xone Chain
-              </Text>
-              <Flex
-                justifyContent='flex-start'
-                as='a'
-                href={EXTERNAL_LINKS.docs + 'study/xone'}
-                target='_blank'
-                alignItems='center'
-                gap='1'
-                color='#808080'
-                _hover={{ color: '#ffffff' }}
-              >
-                <Text>About</Text>
-                <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Flex>
-              <Flex
-                as='a'
-                justifyContent='flex-start'
-                href={EXTERNAL_LINKS.Events}
-                target='_blank'
-                alignItems='center'
-                mt='2'
-                gap='1'
-                color='#808080'
-                _hover={{ color: '#ffffff' }}
-              >
-                <Text>Events</Text>
-                <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Flex>
-              <Flex
-                as='a'
-                justifyContent='flex-start'
-                href={EXTERNAL_LINKS.docs + 'study/bug'}
-                target='_blank'
-                alignItems='center'
-                mt='2'
-                gap='1'
-                color='#808080'
-                _hover={{ color: '#ffffff' }}
-              >
-                <Text>Bounty Hunter</Text>
-                <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Flex>
-              <Flex
-                as='a'
-                justifyContent='flex-start'
-                href={EXTERNAL_LINKS.docs + 'study/wiki'}
-                target='_blank'
-                alignItems='center'
-                mt='2'
-                gap='1'
-                color='#808080'
-                _hover={{ color: '#ffffff' }}
-              >
-                <Text>White Paper</Text>
-                <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Flex>
-              <Flex
-                as='a'
-                justifyContent='flex-start'
-                href={EXTERNAL_LINKS.docs + 'study/media'}
-                target='_blank'
-                alignItems='center'
-                mt='2'
-                gap='1'
-                color='#808080'
-                _hover={{ color: '#ffffff' }}
-              >
-                <Text>Media Kit</Text>
-                <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Flex>
-              <Flex
-                as='a'
-                justifyContent='flex-start'
-                href={EXTERNAL_LINKS.docs + 'study/service'}
-                target='_blank'
-                alignItems='center'
-                mt='2'
-                gap='1'
-                color='#808080'
-                _hover={{ color: '#ffffff' }}
-              >
-                <Text>Terms of Service</Text>
-                <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Flex>
-              <Flex
-                as='a'
-                justifyContent='flex-start'
-                href={EXTERNAL_LINKS.docs + 'study/privacy'}
-                target='_blank'
-                alignItems='center'
-                mt='2'
-                gap='1'
-                color='#808080'
-                _hover={{ color: '#ffffff' }}
-              >
-                <Text>Privacy Policy</Text>
-                <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Flex>
-            </Box>
+          <Box
+            ml={{ lg: 'auto' }}
+            display={{ base: 'flex' }}
+            flexDir='column'
+            alignItems={{ base: 'center', lg: 'flex-start' }}
+            gap='2'
+            w={{ base: '100%', lg: 'initial' }}
+          >
+            {/* <FooterLinks title='Xone Chain' links={XoneChainLinks} />
 
-            <Box
-              color='white'
+            <FooterLinks
               ml={{ base: 'auto', md: '180px', lg: '100px', xl: '200px' }}
-              textAlign='left'
-            >
-              <Text color='#bcbfcd' fontWeight='bold' mb='2'>
-                Build
-              </Text>
-              <Flex
-                justifyContent='flex-start'
-                as='a'
-                href={EXTERNAL_LINKS.docs + 'developers/ready'}
-                target='_blank'
-                alignItems='center'
-                gap='1'
-                color='#808080'
-                _hover={{ color: '#ffffff' }}
-              >
-                <Text>Developer Docs</Text>
-                <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Flex>
-              <Flex
-                as='a'
-                justifyContent='flex-start'
-                href={EXTERNAL_LINKS.docs + 'developers/rpc'}
-                target='_blank'
-                alignItems='center'
-                mt='2'
-                gap='1'
-                color='#808080'
-                _hover={{ color: '#ffffff' }}
-              >
-                <Text>RPC Endpoints</Text>
-                <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Flex>
-              <Flex
-                as='a'
-                justifyContent='flex-start'
-                href={EXTERNAL_LINKS.docs + 'developers/tools'}
-                target='_blank'
-                alignItems='center'
-                mt='2'
-                gap='1'
-                color='#808080'
-                _hover={{ color: '#ffffff' }}
-              >
-                <Text>Tools</Text>
-                <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Flex>
-              <Flex
-                as='a'
-                justifyContent='flex-start'
-                href={EXTERNAL_LINKS.docs + 'developers/explorers'}
-                target='_blank'
-                alignItems='center'
-                mt='2'
-                gap='1'
-                color='#808080'
-                _hover={{ color: '#ffffff' }}
-              >
-                <Text>Block Explorers</Text>
-                <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Flex>
-              <Flex
-                as='a'
-                justifyContent='flex-start'
-                href={EXTERNAL_LINKS.faucet}
-                target='_blank'
-                alignItems='center'
-                mt='2'
-                gap='1'
-                color='#808080'
-                _hover={{ color: '#ffffff' }}
-              >
-                <Text>Faucets</Text>
-                <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Flex>
-              <Flex
-                as='a'
-                justifyContent='flex-start'
-                href={EXTERNAL_LINKS.Github}
-                target='_blank'
-                alignItems='center'
-                mt='2'
-                gap='1'
-                color='#808080'
-                _hover={{ color: '#ffffff' }}
-              >
-                <Text>Github</Text>
-                <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Flex>
+              title='Build'
+              links={BuildLinks}
+            /> */}
+            <Box>
+              <ExternalLink to={EXTERNAL_LINKS.docs + 'study/service'} color='white'>
+                Terms of Service
+              </ExternalLink>
+            </Box>
+            <Box>
+              <ExternalLink to={EXTERNAL_LINKS.docs + 'study/privacy'} color='white'>
+                Privacy Policy
+              </ExternalLink>
             </Box>
           </Box>
 
-          <Box ml={{ lg: 'auto' }} textAlign='left'>
+          <Box ml={{ base: '0', lg: 'auto' }} textAlign={{ base: 'center', lg: 'left' }}>
             <Text color='#bcbfcd' fontWeight='bold' mb='2'>
               Follow Us
             </Text>

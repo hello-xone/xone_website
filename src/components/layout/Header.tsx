@@ -21,11 +21,29 @@ const Header = (props: Props) => {
         '--app-header-height',
         wrapRef.current?.clientHeight + 'px'
       );
-      document.documentElement.style.setProperty(
-        '--app-header-alert-height',
-        (wrapRef.current.lastChild as HTMLDivElement)?.clientHeight + 'px'
-      );
+      if (wrapRef.current.querySelector('.alert-box')) {
+        document.documentElement.style.setProperty(
+          '--app-header-alert-height',
+          wrapRef.current.querySelector('.alert-box')?.clientHeight + 'px'
+        );
+      }
     }
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+
+      if (scrollPosition > 10) {
+        document.documentElement.style.setProperty('--app-header-bg-color', 'white');
+      } else {
+        document.documentElement.style.setProperty('--app-header-bg-color', 'transparent');
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
@@ -33,13 +51,15 @@ const Header = (props: Props) => {
       <Flex
         h={{ base: '64px' }}
         alignItems='center'
-        bgColor='white'
-        borderBottom='1px solid #e0e0e0'
+        transition='background-color 0.3s ease'
+        bgColor={'var(--app-header-bg-color)'}
+        // bgColor='white'
+        // borderBottom='1px solid #e0e0e0'
       >
         <Container>
           <Flex alignItems='center'>
             <Center>
-              <Img src='/imgs/logo-text.png' h='34px' />
+              <Img src='/imgs/xone-logo-black.png' h='34px' />
             </Center>
 
             <Box
@@ -48,7 +68,7 @@ const Header = (props: Props) => {
               flex='1'
               maxW='640px'
               px='20px'
-              mx='auto'
+              ml='auto'
               gap='20px'
             >
               <NavMenuButton
@@ -143,7 +163,8 @@ const Header = (props: Props) => {
           </Flex>
         </Container>
       </Flex>
-      <Box bg='#000000' color='white' py='8px' textAlign='center' fontSize='14px' fontWeight='bold'>
+
+      {/* <Box bg='#000000' color='white' py='8px' textAlign='center' fontSize='14px' fontWeight='bold'>
         <Box
           as='a'
           href='https://knight.center/'
@@ -156,7 +177,7 @@ const Header = (props: Props) => {
         >
           🎉 Join us to illuminate the possibilities of the future with action. →
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 };

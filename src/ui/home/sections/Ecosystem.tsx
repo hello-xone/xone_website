@@ -56,7 +56,7 @@ const Ecosystem = (props: Props) => {
             <Heading fontSize='32px'>Explore the ecosystem</Heading>
             <Text color='gray.500' mt='1'>
               Discover an ecosystem with a mission — open, adaptable, and committed to advancing the
-              future of blockchain.
+              {/* future of blockchain.
               <Text
                 as='a'
                 color='red.pri'
@@ -67,7 +67,7 @@ const Ecosystem = (props: Props) => {
               >
                 {' '}
                 Know more <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Text>
+              </Text> */}
             </Text>
           </Box>
         </Box>

@@ -6,7 +6,7 @@ type Props = {};
 
 const Home = (props: Props) => {
   return (
-    <Box className='pt-header'>
+    <Box>
       <HomePage />
     </Box>
   );

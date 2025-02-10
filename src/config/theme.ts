@@ -2,10 +2,11 @@ import { ColorMode, extendTheme, localStorageManager } from '@chakra-ui/react';
 
 export const Theme = extendTheme({
   fonts: {
-    body: `"Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
-    heading: `"Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`
+    body: `"Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
+    heading: `"Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`
   },
   colors: {
+    steelGray: '#718096',
     priBlack: {
       100: '#e0e0e0',
       200: '#bdbdbd',
@@ -27,7 +28,8 @@ export const Theme = extendTheme({
       '200': '#ffc0c0',
       '300': '#ff9494',
       '400': '#ff5757',
-      '500': '#ff2323',
+      // '500': '#ff2323',
+      500: '#FF2F2F',
       '600': '#ed0000',
       '700': '#d70000',
       '800': '#b10303',

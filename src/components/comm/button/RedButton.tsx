@@ -4,7 +4,7 @@ import LoadingButton from './LoadingButton';
 
 type Props = React.ComponentProps<typeof LoadingButton>;
 
-const RedButton = (props: Props) => {
+const OutlineButton = (props: Props) => {
   return (
     <LoadingButton
       rounded='full'
@@ -22,4 +22,4 @@ const RedButton = (props: Props) => {
   );
 };
 
-export default RedButton;
+export default OutlineButton;
