@@ -140,7 +140,14 @@ const FeatureCard = ({
         <Text color='steelGray' mt='20px' fontSize='sm'>
           {description}
         </Text>
-        <OutlineButton mt='20px' size='lg' to={buttonLink}>
+        <OutlineButton
+          mt='20px'
+          size='lg'
+          to={buttonLink}
+          sx={{
+            '--chakra-colors-priRed-500': 'black'
+          }}
+        >
           {buttonText}
         </OutlineButton>
       </Box>

@@ -1,6 +1,7 @@
-import { Box, Container, Heading, Img, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Heading, Img, Text } from '@chakra-ui/react';
 
 import IMG_1CH from '@/assets/imgs/home/1CH.png';
+import IMG_embrace from '@/assets/imgs/home/embrace.png';
 import OutlineButton from '@/components/comm/button/RedButton';
 import { EXTERNAL_LINKS } from '@/lib/external';
 
@@ -23,12 +24,12 @@ const HomePage = (props: Props) => {
           display={{ lg: 'flex' }}
           alignItems='center'
           bgColor='priRed.50'
-          rounded='15px'
+          rounded={{ lg: '15px' }}
           py='20px'
           px={{ base: '20px', lg: '60px' }}
         >
           <Box flex='1'>
-            <Heading fontSize={{ base: '20px', md: '40px' }} fontWeight='600'>
+            <Heading fontSize={{ base: '28px', md: '40px' }} fontWeight='600'>
               Reliable,community-driven governance
             </Heading>
             <Text mt='20px' fontSize='14px' color='#718096'>
@@ -54,7 +55,35 @@ const HomePage = (props: Props) => {
       <Grids />
       <Ecosystem />
       <Logic />
-      <Embrace />
+
+      <Box mt={{ base: '40px', md: '120px' }} mb='120px'>
+        <Container
+          display='flex'
+          flexDir={{ base: 'column-reverse', lg: 'row' }}
+          alignItems='center'
+          bgColor='priRed.50'
+          rounded={{ lg: '15px' }}
+          py='20px'
+          px={{ base: '20px', lg: '60px' }}
+        >
+          <Box flexShrink='0' mt={{ base: '10', md: '0' }}>
+            <Img src={IMG_embrace} mx={{ base: 'auto' }} />
+          </Box>
+          <Box ml='auto' flex='1' textAlign={{ lg: 'right' }}>
+            <Heading fontSize={{ base: '28px', md: '40px' }} fontWeight='600'>
+              Embrace the future together
+            </Heading>
+            <Text mt='20px' fontSize='14px' color='#718096' maxW='600px' ml='auto'>
+              Join us in building value—focus on impactful contributions that drive real rewards.
+              Track your impact on the blockchain and be part of our journey.
+            </Text>
+            <Button colorScheme='priBlack' mt='40px' size='lg' rounded='full'>
+              Explore BVl
+            </Button>
+          </Box>
+        </Container>
+      </Box>
+      {/* <Embrace /> */}
     </Box>
   );
 };

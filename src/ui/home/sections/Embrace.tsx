@@ -1,11 +1,15 @@
 import { Box, Button, Container, Heading, Text } from '@chakra-ui/react';
-import React from 'react';
 
 type Props = {};
 
 const Embrace = (props: Props) => {
   return (
-    <Box bg={'linear-gradient(181.17deg, #F2F0FF 0.97%, #FFFFFF 98.97%)'} pt='60px' pb='100px'>
+    <Box
+      bg={'linear-gradient(181.17deg, #F2F0FF 0.97%, #FFFFFF 98.97%)'}
+      pt='60px'
+      pb='100px'
+      mt='120px'
+    >
       <Container textAlign='center'>
         <Heading fontSize='48px'>Embrace the future together</Heading>
         <Text mt='3' color='gray.500' maxW='980px' mx='auto'>
