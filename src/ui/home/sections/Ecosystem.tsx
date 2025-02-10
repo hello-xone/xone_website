@@ -1,4 +1,16 @@
-import { Box, Center, Container, Heading, Icon, Img, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Center,
+  Container,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Icon,
+  Img,
+  Text,
+  useMediaQuery
+} from '@chakra-ui/react';
 import { useMemo } from 'react';
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import { Autoplay } from 'swiper/modules';
@@ -48,6 +60,8 @@ const Ecosystem = (props: Props) => {
     margin: '0 16px'
   };
 
+  const [minMD] = useMediaQuery('(min-width: 48em)');
+
   return (
     <Box py='60px'>
       <Container>
@@ -71,67 +85,88 @@ const Ecosystem = (props: Props) => {
             </Text>
           </Box>
         </Box>
-        <Box>
-          {imagesArr.map((imgs, i) => {
-            return (
-              <Box mt='40px' key={i}>
-                <Swiper
-                  className='seamlesswrap'
-                  modules={[Autoplay]}
-                  observer
-                  observeParents
-                  speed={4000}
-                  loop
-                  slidesPerView={3}
-                  spaceBetween={30}
-                  grabCursor
-                  direction='horizontal'
-                  autoplay={{
-                    delay: 0,
-                    stopOnLastSlide: false,
-                    reverseDirection: i % 2 !== 0,
-                    disableOnInteraction: false
-                  }}
-                  allowTouchMove={false}
-                  onTouchEnd={(swiper) => {
-                    if (swiper) {
-                      swiper.autoplay.running = true;
-                      swiper.autoplay.start();
-                    }
-                  }}
-                  breakpoints={{
-                    750: {
-                      slidesPerView: 6,
-                      spaceBetween: 40
-                    }
-                  }}
-                >
-                  {imgs.map((img) => {
-                    const imgName = img.default;
-                    const lastIndex = imgName.lastIndexOf('/');
-                    const indexImg = imgName.substring(lastIndex + 1, imgName.length);
-                    const link = imageLinks[indexImg];
-                    return (
-                      <SwiperSlide key={img.default}>
-                        <Center h={{ base: '70', md: '60px' }}>
-                          <a href={link} target='_blank' rel='noopener noreferrer'>
-                            <Img
-                              draggable={false}
-                              src={img.default}
-                              h='full'
-                              objectFit='contain'
-                              style={logoStyle}
-                            />
-                          </a>
-                        </Center>
-                      </SwiperSlide>
-                    );
-                  })}
-                </Swiper>
-              </Box>
-            );
-          })}
-        </Box>
+        {minMD && (
+          <Box>
+            {imagesArr.map((imgs, i) => {
+              return (
+                <Box mt='40px' key={i}>
+                  <Swiper
+                    className='seamlesswrap'
+                    modules={[Autoplay]}
+                    observer
+                    observeParents
+                    speed={4000}
+                    loop
+                    slidesPerView={3}
+                    spaceBetween={30}
+                    grabCursor
+                    direction='horizontal'
+                    autoplay={{
+                      delay: 0,
+                      stopOnLastSlide: false,
+                      reverseDirection: i % 2 !== 0,
+                      disableOnInteraction: false
+                    }}
+                    allowTouchMove={false}
+                    onTouchEnd={(swiper) => {
+                      if (swiper) {
+                        swiper.autoplay.running = true;
+                        swiper.autoplay.start();
+                      }
+                    }}
+                    breakpoints={{
+                      750: {
+                        slidesPerView: 6,
+                        spaceBetween: 40
+                      }
+                    }}
+                  >
+                    {imgs.map((img) => {
+                      const imgName = img.default;
+                      const lastIndex = imgName.lastIndexOf('/');
+                      const indexImg = imgName.substring(lastIndex + 1, imgName.length);
+                      const link = imageLinks[indexImg];
+                      return (
+                        <SwiperSlide key={img.default}>
+                          <Center h={{ base: '70', md: '60px' }}>
+                            <a href={link} target='_blank' rel='noopener noreferrer'>
+                              <Img
+                                draggable={false}
+                                src={img.default}
+                                h='full'
+                                objectFit='contain'
+                                style={logoStyle}
+                              />
+                            </a>
+                          </Center>
+                        </SwiperSlide>
+                      );
+                    })}
+                  </Swiper>
+                </Box>
+              );
+            })}
+          </Box>
+        )}
+        {!minMD && (
+          <Grid
+            templateColumns='repeat(2, 1fr)'
+            gap='5'
+            justifyItems='center'
+            alignItems='center'
+            rowGap='10'
+            columnGap='5'
+            mt='10'
+          >
+            {Object.entries(images).map(([key, value], i) => {
+              return (
+                <GridItem key={i}>
+                  <Img src={value.default} />
+                </GridItem>
+              );
+            })}
+          </Grid>
+        )}
       </Container>
     </Box>
   );
