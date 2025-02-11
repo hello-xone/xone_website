@@ -68,20 +68,20 @@ const Ecosystem = (props: Props) => {
         <Box display={{ md: 'flex' }} alignItems='center'>
           <Box flex='1'>
             <Heading fontSize='32px'>Explore the ecosystem</Heading>
-            <Text color='gray.500' mt='1'>
+            <Text color="gray.500" mt="1">
               Discover an ecosystem with a mission — open, adaptable, and committed to advancing the
-              {/* future of blockchain.
+              future of blockchain.
               <Text
-                as='a'
-                color='red.pri'
-                fontWeight='bold'
-                textDecoration='none'
+                as="a"
+                color="red.pri"
+                fontWeight="bold"
+                textDecoration="none"
                 _hover={{ textDecoration: 'underline' }}
-                ml='1'
+                ml="1"
               >
                 {' '}
-                Know more <Icon as={MdOutlineArrowOutward} fontSize='16px' />
-              </Text> */}
+                Know more <Icon as={MdOutlineArrowOutward} fontSize="16px" />
+              </Text>
             </Text>
           </Box>
         </Box>
