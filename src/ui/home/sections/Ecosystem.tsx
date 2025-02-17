@@ -9,7 +9,8 @@ import {
   Icon,
   Img,
   Text,
-  useMediaQuery
+  useMediaQuery,
+  Link
 } from '@chakra-ui/react';
 import { useMemo } from 'react';
 import { MdOutlineArrowOutward } from 'react-icons/md';
@@ -129,7 +130,7 @@ const Ecosystem = (props: Props) => {
                       return (
                         <SwiperSlide key={img.default}>
                           <Center h={{ base: '70', md: '60px' }}>
-                            <a href={link} target='_blank' rel='noopener noreferrer'>
+                            <Link href={link} target='_blank' rel='noopener noreferrer'>
                               <Img
                                 draggable={false}
                                 src={img.default}
@@ -137,7 +138,7 @@ const Ecosystem = (props: Props) => {
                                 objectFit='contain'
                                 style={logoStyle}
                               />
-                            </a>
+                             </Link>
                           </Center>
                         </SwiperSlide>
                       );
