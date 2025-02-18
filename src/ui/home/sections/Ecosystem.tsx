@@ -38,9 +38,9 @@ const Ecosystem = (props: Props) => {
     'rainlink.svg': 'https://bridge.xonetest.plus/',
     'Sui.svg': 'https://sui.io/',
     'SunSwap.svg': 'https://sun.io/',
-    'SwapX.svg': 'https://swapx.xonetest.plus/zh',
+    'SwapX.svg': 'https://swapx.exchange/en',
     'thunes.svg': 'https://www.thunes.com/',
-    'TokenUp.svg': 'https://tokenup.xonetest.plus/',
+    'TokenUp.svg': 'https://tokenup.org/en',
     'TRON.svg': 'https://tron.network/',
     'Uniswap.svg': 'https://app.uniswap.org/',
     'Xion.svg': 'https://xion.burnt.com/'

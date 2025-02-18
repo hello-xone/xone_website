@@ -17,11 +17,11 @@ const Banner = (props: Props) => {
     >
       <Container pt='20px' textAlign={{ base: 'center', md: 'left' }}>
         <Heading fontWeight='700' fontSize={{ base: '36px', md: '48px' }} textAlign='center'>
-          Uniting Global Innovation and Opportunity
+          Let’s Embrace The Future Together!
         </Heading>
         <Flex flexDir={{ base: 'column-reverse', md: 'column' }}>
           <Text mt='20px' textAlign='center'>
-            Empowering Connections, Building Together, Winning as One
+          Xone Chain is a modular Layer 1 blockchain that goes beyond scalability and efficiency. It focuses on ensuring every on-chain action creates tangible, traceable value.
           </Text>
           <Flex
             alignItems='center'
@@ -56,7 +56,7 @@ const Banner = (props: Props) => {
               w={{ base: '100%', md: '180px' }}
               color='white'
             >
-              Bridge
+              Bridge(Test)
             </Button>
           </Flex>
         </Flex>
