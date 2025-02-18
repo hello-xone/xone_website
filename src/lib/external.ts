@@ -6,13 +6,14 @@ export const EXTERNAL_LINKS = {
   Github: 'https://github.com/huione-labs',
   Twitter: 'https://x.com/xone_chain',
   Telegram: 'https://t.me/Xone_Group',
+  TelegramDevelopers: 'https://t.me/Xone_Developers',
   Youtube: 'https://www.youtube.com/@HelloXone',
   Medium: 'https://medium.com/@xone_chain',
   Donate: 'https://knight.center/',
   DonateDocs: 'https://docs.knight.center/',
   Bridge: 'https://bridge.xonetest.plus/',
-  TokenUp: 'https://tokenup.xonetest.plus/',
-  SwapX: 'https://swapx.xonetest.plus/zh',
+  TokenUp: 'https://tokenup.org/en',
+  SwapX: 'https://swapx.exchange/en',
   RainLink: 'https://bridge.xonetest.plus/',
   Discord: 'https://discord.gg/Du9y2GHV'
 };
