@@ -54,8 +54,10 @@ import { readContract } from '@/utils/contract';
 import { formatReleaseNumber } from '@/utils/format/number';
 
 import InstructionModal from '../components/InstructionModal';
+import { useReleaseContext } from '../context/hooks';
 
 export const MAX_AMOUNT = '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+
 
 
 const UserReleaseForm = (props: Props) => {
@@ -69,6 +71,8 @@ const UserReleaseForm = (props: Props) => {
     writeContract,
     waitForTransactionReceipt
   } = useWalletKit();
+  const { releaseState = {} } = useReleaseContext();
+
 
   const [paddingReleaseInfo, setPaddingReleaseInfo] = useState(
     {} as ParsePaddingReleaseInfo
@@ -76,8 +80,9 @@ const UserReleaseForm = (props: Props) => {
   const {
     lockTotal = '0.00',
     releaseTotal = '0.00',
-    peddingReleaseTotal = '0.00',
+    // peddingReleaseTotal = '0.00',
   } = paddingReleaseInfo;
+
 
   const paddingRelease = async () => {
     const res: PaddingReleaseInfo = await readContract({
@@ -108,6 +113,7 @@ const UserReleaseForm = (props: Props) => {
     setBalance(Number(formatUnits(res, 18)));
   };
 
+
   useEffect(() => {
     console.log('walletAddress', walletAddress);
     if (walletAddress) {
@@ -134,6 +140,7 @@ const UserReleaseForm = (props: Props) => {
     console.log('disconnect:res', res);
   };
 
+
   const [amount, setAmount] = useState('');
   const [displayAmount, setDisplayAmount] = useState('');
 
@@ -150,6 +157,7 @@ const UserReleaseForm = (props: Props) => {
 
     return formattedInt;
   };
+
 
   const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value.replace(/[^\d.]/g, '');
@@ -179,6 +187,11 @@ const UserReleaseForm = (props: Props) => {
   };
 
   const handleSendWXOC = async () => {
+    if (connectStatus !== ConnectStatus.Connected) {
+      Toast.error('Please connect wallet!');
+      return;
+    }
+    await switchNetwork(Number(import.meta.env.VITE_APP_TEST_CHAIN_ID));
     const data = await readContract({
       address: import.meta.env.VITE_APP_WXOC_ADDRESS,
       abi: ERC20Abi,
@@ -196,11 +209,6 @@ const UserReleaseForm = (props: Props) => {
       });
       await waitForTransactionReceipt(hash);
     }
-    if (connectStatus !== ConnectStatus.Connected) {
-      Toast.error('Please connect wallet!');
-      return;
-    }
-    await switchNetwork(Number(import.meta.env.VITE_APP_TEST_CHAIN_ID));
     console.log('amount', amount, parseUnits(amount, 18));
     const res = await writeContract({
       address: import.meta.env.VITE_APP_XOC_MIGRATE_ADDRESS,
@@ -279,7 +287,7 @@ const UserReleaseForm = (props: Props) => {
                 Releasable(XOC):
               </Text>
               <Text fontSize='26px' fontWeight='600' ml='10px'>
-                {peddingReleaseTotal}
+                {formatReleaseNumber(releaseState.reRelease || 0)}
               </Text>
             </Flex>
             <Flex alignItems='center' justifyContent='space-between'>
@@ -302,7 +310,7 @@ const UserReleaseForm = (props: Props) => {
                   Releasable(XOC):
                 </Text>
                 <Text fontSize='26px' fontWeight='600' ml='10px'>
-                  {peddingReleaseTotal}
+                  {formatReleaseNumber(releaseState.reRelease || 0)}
                 </Text>
               </Flex>
               <Box display='flex' flexDir='column' w={{ base: 'auto', md: '190px' }}>

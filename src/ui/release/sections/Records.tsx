@@ -56,16 +56,18 @@ type SearchData = {
 const Records = (props: Props) => {
   const [searchData, setSearchData] = useState<SearchData>({
     pageNum: 1,
-    startDate: undefined,
-    endDate: undefined,
+    startDate: dayjs(),
+    endDate: dayjs().subtract(7, 'day'),
     timezone: 'Asia/Singapore',
     searchValue: '',
   });
+
 
   const [inputValue, setInputValue] = useState('');
   const [records, setRecords] = useState<ReleaseRecord[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
+
 
   // 使用 useMemo 包装防抖函数
   const handleDebounceSearch = useMemo(
@@ -79,6 +81,7 @@ const Records = (props: Props) => {
     [] // updateSearchData 是稳定的引用,不需要加入依赖
   );
 
+
   useEffect(() => {
     handleDebounceSearch(inputValue);
   }, [inputValue, handleDebounceSearch]);
@@ -91,15 +94,6 @@ const Records = (props: Props) => {
     }));
   };
 
-  useEffect(() => {
-    const end = dayjs();
-    const start = end.subtract(7, 'day');
-    updateSearchData({
-      startDate: start,
-      endDate: end
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -135,6 +129,7 @@ const Records = (props: Props) => {
     fetchData();
   }, [searchData]);
 
+
   const handleLoadMore = () => {
     updateSearchData({
       pageNum: searchData.pageNum + 1
@@ -162,6 +157,7 @@ const Records = (props: Props) => {
     });
   };
 
+
   // 验证时间范围
   const validateDateRange = (start: any, end: any) => {
     if (!start && !end) return true;
@@ -182,6 +178,7 @@ const Records = (props: Props) => {
     const zonedDate = date.tz(timezone, false);
     return new Date(zonedDate.format('YYYY-MM-DD HH:ss:ss')).getTime()
   };
+
 
   return (
     <Box mt='24px'>
@@ -210,7 +207,7 @@ const Records = (props: Props) => {
           </ExternalLink>
         </Flex>
 
-        <Flex alignItems='center' mt='5'>
+        <Flex alignItems='center' mt='5' gap={{ base: '10px', md: '16px' }}>
           <RangePicker
             value={[searchData.startDate, searchData.endDate]}
             locale={enUS}
@@ -227,7 +224,6 @@ const Records = (props: Props) => {
             rounded='full'
             w={{ base: '100%', md: '164px' }}
             focusBorderColor='red.pri'
-            ml='16px'
             defaultValue="Asia/Singapore"
           >
             {ALLOWED_TIMEZONES.map((tz) => (
@@ -243,6 +239,7 @@ const Records = (props: Props) => {
             ml='auto'
             value={inputValue}
             onChange={handleSearch}
+            className='search-input'
           />
         </Flex>
 

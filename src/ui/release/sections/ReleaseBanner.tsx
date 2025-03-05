@@ -9,11 +9,13 @@ import { readContract } from '@/utils/contract';
 import { formatReleaseNumber } from '@/utils/format/number';
 
 import EpochTimeLine from '../components/EpochTimeLine';
+import { useReleaseContext } from '../context/hooks';
 
 type Props = {};
 
 const ReleaseBanner = (props: Props) => {
   const [releaseInfo, setReleaseInfo] = useState({} as Record<string, string>);
+  const { setReleaseState } = useReleaseContext();
 
   const getReleaseInfo = async () => {
     const res = await readContract({
@@ -26,6 +28,7 @@ const ReleaseBanner = (props: Props) => {
     Object.keys(res).forEach((key: any) => {
       formatRes[key] = formatUnits(res[key], 18);
     });
+    setReleaseState(formatRes);
     setReleaseInfo(formatRes);
   };
 
@@ -36,6 +39,7 @@ const ReleaseBanner = (props: Props) => {
       getReleaseInfo();
     }, 10000);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -100,7 +104,7 @@ const ReleaseBanner = (props: Props) => {
             <Heading size='lg'>
               {formatReleaseNumber(releaseInfo.nextEpochRelease)}
             </Heading>
-            <Text>Next Released (XOC)</Text>
+            <Text>Next Release (XOC)</Text>
           </Box>
 
           <Box w={{ base: '100%', md: 'auto' }}>

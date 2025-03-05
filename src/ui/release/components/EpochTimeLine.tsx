@@ -343,7 +343,7 @@ const EpochTimeLine = (props: Props) => {
           position='absolute'
           bottom='18px'
           minW='100%'
-          w={`${Math.max(100, details.length * 10)}%`}
+          w={{ base: `${Math.max(100, details.length * 20)}%`, lg: `${Math.max(100, details.length * 10)}%` }}
         >
           <Flex
             position='absolute'
@@ -523,7 +523,7 @@ const EpochContent = memo(
             >
               Block #{epochInfo.blockNum.toString()}
             </Text>
-            <Flex color={statusStyles[status].color} border={statusStyles[status].border} fontWeight='bold' rounded='full' alignItems='center' gap='8px' px='10px' py='6px' h='26px' bg={statusStyles[status].bg}>
+            <Flex color={statusStyles[status].color} border={statusStyles[status].border} fontWeight='bold' rounded='full' alignItems='center' gap='8px' px='10px' py='6px' h='26px' bg={statusStyles[status].bg} fontSize={{ base: '12px', lg: '14px' }}>
               <Box w='5px' h='5px' bg={statusStyles[status].color} rounded='full' />
               {statusText[status]}
             </Flex>
