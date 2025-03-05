@@ -41,7 +41,6 @@ type PaddingReleaseInfo = {
 type ParsePaddingReleaseInfo = {
   lockTotal: string;
   releaseTotal: string;
-  peddingReleaseTotal: string;
 };
 
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -80,7 +79,6 @@ const UserReleaseForm = (props: Props) => {
   const {
     lockTotal = '0.00',
     releaseTotal = '0.00',
-    // peddingReleaseTotal = '0.00',
   } = paddingReleaseInfo;
 
 
@@ -93,10 +91,14 @@ const UserReleaseForm = (props: Props) => {
       args: [walletAddress],
     });
     console.log('paddingRelease:res', res);
+    // res = {
+    //   lockTotal: BigInt(1000000000000000000000n),
+    //   releaseTotal: BigInt(50000000000000000000n),
+    //   peddingReleaseTotal: BigInt(0n),
+    // } // TEST
     setPaddingReleaseInfo({
-      lockTotal: formatReleaseNumber(res.lockTotal),
-      releaseTotal: formatReleaseNumber(res.releaseTotal),
-      peddingReleaseTotal: formatReleaseNumber(res.peddingReleaseTotal),
+      lockTotal: formatReleaseNumber(formatUnits(res.lockTotal - res.releaseTotal, 18)),
+      releaseTotal: formatReleaseNumber(formatUnits(res.peddingReleaseTotal, 18)),
     });
   };
 
@@ -362,100 +364,100 @@ const UserReleaseForm = (props: Props) => {
                   mt={{ base: '30px', lg: '0' }}
                   onChange={handleAmountChange}
                 />
-                <Button rounded='lg' onClick={handleMaxClick} w='124px' ml="auto" position="absolute" right="0" bottom="0">
+                <Button rounded='lg' onClick={handleMaxClick} w='124px' ml="auto" position="absolute" right="0" bottom={{ base: '40px', lg: '0' }}>
                   ALL
                 </Button>
               </ Flex>
               <Flex
-              mt='10'
-              bgColor='#FFF0F0'
-              p={{ base: '10px', lg: '24px' }}
-              rounded='lg'
-              flexDir='column'
-              fontSize='14px'
-              fontWeight='500'
-            >
-              <Flex alignItems='center' justifyContent='space-between'>
-                <Flex alignItems='center'>
-                  Lock Total (XOC)
-                  <Popover placement='top' trigger='hover'>
-                    <PopoverTrigger>
-                      <Flex
-                        cursor='pointer'
-                        ml='8px'
-                        alignItems='center'
-                        justifyContent='center'
-                      >
-                        <Icon as={LuInfo} />
-                      </Flex>
-                    </PopoverTrigger>
-                    <PopoverContent bg='#FFF0F0'>
-                      <PopoverArrow bg='#FFF0F0' />
-                      <PopoverBody>
-                        <Text>
-                          When you send XoneTestnet WXOC tokens to our contract
-                          address, they will be locked and await the next
-                          release for the corresponding amount to be unlocked.
-                          <Text
-                            as='a'
-                            target='_blank'
-                            color='red.pri'
-                            ml='8px'
-                            _hover={{ textDecor: 'underline' }}
-                            href={EXTERNAL_LINKS.docs + 'study/release#about-the-release-mechanism'}
-                          >
-                            Please go here &gt;&gt;
+                mt='10'
+                bgColor='#FFF0F0'
+                p={{ base: '10px', lg: '24px' }}
+                rounded='lg'
+                flexDir='column'
+                fontSize='14px'
+                fontWeight='500'
+              >
+                <Flex alignItems='center' justifyContent='space-between'>
+                  <Flex alignItems='center'>
+                    Lock Total (XOC)
+                    <Popover placement='top' trigger='hover'>
+                      <PopoverTrigger>
+                        <Flex
+                          cursor='pointer'
+                          ml='8px'
+                          alignItems='center'
+                          justifyContent='center'
+                        >
+                          <Icon as={LuInfo} />
+                        </Flex>
+                      </PopoverTrigger>
+                      <PopoverContent bg='#FFF0F0'>
+                        <PopoverArrow bg='#FFF0F0' />
+                        <PopoverBody>
+                          <Text>
+                            When you send XoneTestnet WXOC tokens to our contract
+                            address, they will be locked and await the next
+                            release for the corresponding amount to be unlocked.
+                            <Text
+                              as='a'
+                              target='_blank'
+                              color='red.pri'
+                              ml='8px'
+                              _hover={{ textDecor: 'underline' }}
+                              href={EXTERNAL_LINKS.docs + 'study/release#about-the-release-mechanism'}
+                            >
+                              Please go here &gt;&gt;
+                            </Text>
                           </Text>
-                        </Text>
-                      </PopoverBody>
-                    </PopoverContent>
-                  </Popover>
+                        </PopoverBody>
+                      </PopoverContent>
+                    </Popover>
+                  </Flex>
+                  <Text fontSize='14px' fontWeight='500'>
+                    {lockTotal}
+                  </Text>
                 </Flex>
-                <Text fontSize='14px' fontWeight='500'>
-                  {lockTotal}
-                </Text>
-              </Flex>
-              <Flex alignItems='center' justifyContent='space-between'>
-                <Flex alignItems='center'>
-                  Release Total (XOC)
-                  <Popover placement='top' trigger='hover'>
-                    <PopoverTrigger>
-                      <Flex
-                        cursor='pointer'
-                        ml='8px'
-                        alignItems='center'
-                        justifyContent='center'
-                      >
-                        <Icon as={LuInfo} />
-                      </Flex>
-                    </PopoverTrigger>
-                    <PopoverContent bg='#FFF0F0'>
-                      <PopoverArrow bg='#FFF0F0' />
-                      <PopoverBody>
-                        <Text>
-                          When releasing XoneMainnet XOC, the amount you can
-                          release is calculated based on the locked amount in
-                          your address. If you haven't made any releases before,
-                          Xone will send all previously releasable amounts to
-                          your XoneMainnet address when you confirm the release.
-                          <Text
-                            as='a'
-                            target='_blank'
-                            color='red.pri'
-                            ml='8px'
-                            _hover={{ textDecor: 'underline' }}
-                            href={EXTERNAL_LINKS.docs + 'study/release#how-do-i-calculate-the-tokens-i-can-release'}
-                          >
-                            Learn more &gt;&gt;
+                <Flex alignItems='center' justifyContent='space-between'>
+                  <Flex alignItems='center'>
+                    Release Total (XOC)
+                    <Popover placement='top' trigger='hover'>
+                      <PopoverTrigger>
+                        <Flex
+                          cursor='pointer'
+                          ml='8px'
+                          alignItems='center'
+                          justifyContent='center'
+                        >
+                          <Icon as={LuInfo} />
+                        </Flex>
+                      </PopoverTrigger>
+                      <PopoverContent bg='#FFF0F0'>
+                        <PopoverArrow bg='#FFF0F0' />
+                        <PopoverBody>
+                          <Text>
+                            When releasing XoneMainnet XOC, the amount you can
+                            release is calculated based on the locked amount in
+                            your address. If you haven't made any releases before,
+                            Xone will send all previously releasable amounts to
+                            your XoneMainnet address when you confirm the release.
+                            <Text
+                              as='a'
+                              target='_blank'
+                              color='red.pri'
+                              ml='8px'
+                              _hover={{ textDecor: 'underline' }}
+                              href={EXTERNAL_LINKS.docs + 'study/release#how-do-i-calculate-the-tokens-i-can-release'}
+                            >
+                              Learn more &gt;&gt;
+                            </Text>
                           </Text>
-                        </Text>
-                      </PopoverBody>
-                    </PopoverContent>
-                  </Popover>
+                        </PopoverBody>
+                      </PopoverContent>
+                    </Popover>
+                  </Flex>
+                  <Text>{releaseTotal}</Text>
                 </Flex>
-                <Text>{releaseTotal}</Text>
               </Flex>
-            </Flex>
               <Box>
                 <Button
                   mt='10'
@@ -481,7 +483,7 @@ const UserReleaseForm = (props: Props) => {
                 </Button>
               </Box>
             </Box>
-            
+
             <Flex
               mt='10'
               bgColor='#FFF0F0'

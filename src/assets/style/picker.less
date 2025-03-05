@@ -1,6 +1,7 @@
 /* rc-picker 仿Ant Design样式 */
 .rc-picker {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.85);
   border: 1px solid rgb(217, 217, 217);
@@ -11,6 +12,14 @@
   height: 40px;
   border-radius: 20px;
   padding: 0 20px;
+
+  @media (max-width: 768px) {
+    > *:not(.rc-picker-suffix) {
+      width: 0;
+      opacity: 0;
+      z-index: -1;
+    }
+  }
 
   &-input {
     input {
@@ -45,24 +54,26 @@
     border: 1px solid #f0f0f0;
     border-radius: 4px;
 
-    &-container{
+    &-container {
       overflow-x: hidden;
-    overflow-y: hidden;
-    vertical-align: top;
-    background-repeat: initial;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px;
-    transition-behavior: normal;
-    transition-duration: 0.3s;
-    transition-timing-function: ease;
-    transition-delay: 0s;
-    transition-property: margin;
-    display: inline-block;
-    pointer-events: auto;
-    background: rgb(255, 255, 255);
+      overflow-y: hidden;
+      vertical-align: top;
+      background-repeat: initial;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      border-bottom-left-radius: 8px;
+      box-shadow: rgba(0, 0, 0, 0.08) 0px 6px 16px 0px,
+        rgba(0, 0, 0, 0.12) 0px 3px 6px -4px,
+        rgba(0, 0, 0, 0.05) 0px 9px 28px 8px;
+      transition-behavior: normal;
+      transition-duration: 0.3s;
+      transition-timing-function: ease;
+      transition-delay: 0s;
+      transition-property: margin;
+      display: inline-block;
+      pointer-events: auto;
+      background: rgb(255, 255, 255);
     }
   }
 
@@ -129,7 +140,7 @@
     }
   }
 
-  &-datetime-panel .rc-picker-time-panel{
+  &-datetime-panel .rc-picker-time-panel {
     border-color: #f0f0f0;
   }
   &-range {
@@ -143,11 +154,16 @@
     }
   }
 
-  &-clear{
+  &-clear {
     right: 40px;
     top: 50%;
     transform: translateY(-50%);
   }
 }
-  
-  
+
+.search-input {
+  @media (max-width: 768px) {
+    width: 56px;
+    padding: 0 20px;
+  }
+}

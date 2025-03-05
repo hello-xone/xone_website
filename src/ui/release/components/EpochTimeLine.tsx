@@ -67,14 +67,14 @@ const EpochTimeLine = (props: Props) => {
     });
     setEpochDetailsInfo(res);
     // 设置当前区块为活动状态
-    const currentIndex = res.details.findIndex(
+    const currentIndex = Math.max(0, res.details.findIndex(
       (item: any) => item.epoch === res.curlEpoch
-    );
+    ));
     // const currentIndex = 3; // TEST
     console.log('currentIndex---', currentIndex);
-    setActiveIndex(currentIndex >= 0 ? currentIndex : null);
+    setActiveIndex(currentIndex);
     setTimeout(() => {
-      scrollToCenter(currentIndex >= 0 ? currentIndex : res.details.length - 1);
+      scrollToCenter(currentIndex);
     }, 100);
   };
 

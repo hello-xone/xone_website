@@ -56,8 +56,8 @@ type SearchData = {
 const Records = (props: Props) => {
   const [searchData, setSearchData] = useState<SearchData>({
     pageNum: 1,
-    startDate: dayjs(),
-    endDate: dayjs().subtract(7, 'day'),
+    startDate: dayjs().subtract(7, 'day'),
+    endDate: dayjs(),
     timezone: 'Asia/Singapore',
     searchValue: '',
   });
@@ -245,7 +245,7 @@ const Records = (props: Props) => {
 
         <Box mt='5'>
           {records.length > 0 ? (
-            <ReleaseTable records={records} />
+            <ReleaseTable records={records} timezone={searchData.timezone} />
           ) : (
             <Text textAlign="center" py={8}>
               No matching data found!

@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import { memo, ReactNode, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { MenuList_CSS } from '@/assets/style/menu';
 import { getToProps } from '@/utils/helper';
@@ -31,6 +31,8 @@ const NavMenuButton = (props: Props) => {
     onOpen();
   };
 
+  const isActive = useLocation().pathname === to;
+
   return (
     <Box
       onMouseLeave={() => {
@@ -40,7 +42,7 @@ const NavMenuButton = (props: Props) => {
       }}
     >
       {to ? (
-        <NavButton {...getToProps(to)} text={text} />
+        <NavButton {...getToProps(to)} text={text} active={isActive} />
       ) : (
         <Menu closeOnSelect={false} isOpen={isOpen}>
           {({ isOpen: _isOpen }) => {

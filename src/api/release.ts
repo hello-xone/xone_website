@@ -19,6 +19,7 @@ export interface ReleaseRecord {
   successTime: string;
   amountStr: string;
   lockAmountStr: string;
+  successTimestamp: number;
 }
 
 // 分页数据的类型定义
@@ -65,11 +66,7 @@ export const Api_Release = {
   },
 
   // 获取每日统计数据
-  dailyStats(params: {
-    start: number;
-    end: number;
-    type: number;
-  }) {
+  dailyStats(params: { start: number; end: number; type: number }) {
     return axios.get<ApiResponse<DailyCount[]>>('/count/daily', {
       params,
     });

@@ -10,6 +10,7 @@ import {
   useBreakpointValue
 } from '@chakra-ui/react';
 import { css } from '@emotion/react';
+import dayjs from 'dayjs';
 import { formatUnits } from 'viem';
 
 import { ReleaseRecord } from '@/api/release';
@@ -19,10 +20,11 @@ import { formatReleaseNumber } from '@/utils/format/number';
 
 type Props = {
   records?: ReleaseRecord[];
+  timezone: string;
 };
 
 const ReleaseTable = (props: Props) => {
-  const { records = [] } = props;
+  const { records = [], timezone } = props;
 
   // 使用useBreakpointValue判断是否为移动端
   const isMobile = useBreakpointValue({ base: true, md: false });
@@ -60,7 +62,7 @@ const ReleaseTable = (props: Props) => {
             {records.length ? records.map((record) => (
               <Tr key={record.id}>
                 <Td>{isMobile ? formatAddress(record.address) : record.address}</Td>
-                <Td>{record.createdTime}</Td>
+                <Td>{dayjs(record.successTimestamp).tz(timezone).format('YYYY-MM-DD HH:mm:ss')}</Td>
                 <Td>{formatReleaseNumber(formatUnits(BigInt(record.amountStr), 18))}</Td>
               </Tr>
             )) : (

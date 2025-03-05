@@ -1,5 +1,6 @@
 import { Box, Flex, FlexProps, Icon, Input } from '@chakra-ui/react';
 import { css } from '@emotion/react';
+import { useRef } from 'react';
 import { CiSearch } from 'react-icons/ci';
 
 type Props = {
@@ -10,6 +11,12 @@ type Props = {
 
 const SearchInput = (props: Props) => {
   const { value, placeholder, onChange, ...rest } = props;
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleIconClick = () => {
+    inputRef.current?.focus();
+  };
+
   return (
     <Flex
       alignItems='center'
@@ -25,12 +32,13 @@ const SearchInput = (props: Props) => {
         }
       `}
     >
-      <Icon as={CiSearch} mr='2' />
+      <Icon as={CiSearch} mr='2' onClick={handleIconClick} />
       <Box flex='1 0 0'>
         <Input
           variant='unstyled'
           value={value}
           placeholder={placeholder}
+          ref={inputRef}
           onChange={(e) => onChange?.(e.target.value)}
         />
       </Box>
