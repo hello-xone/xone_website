@@ -166,6 +166,12 @@ const UserReleaseForm = (props: Props) => {
       const [, decimal] = input.split(".");
       if (decimal?.length > 2) return;
     }
+    
+    if (Number(input) > Number(balance)) {
+      setAmount(balance.toString());
+      setDisplayAmount(formatDisplayValue(balance.toString()));
+      return;
+    }
 
     setAmount(input);
     setDisplayAmount(formatDisplayValue(input));

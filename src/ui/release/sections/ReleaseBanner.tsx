@@ -28,6 +28,7 @@ const ReleaseBanner = (props: Props) => {
     Object.keys(res).forEach((key: any) => {
       formatRes[key] = formatUnits(res[key], 18);
     });
+    console.log('getReleaseInfo', formatRes);
     setReleaseState(formatRes);
     setReleaseInfo(formatRes);
   };

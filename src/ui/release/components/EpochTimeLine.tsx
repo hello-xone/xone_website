@@ -50,6 +50,7 @@ const EpochTimeLine = (props: Props) => {
   const animationFrameRef = useRef<number>();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const restoreTimeoutRef = useRef<number>();
+  const intervalRef = useRef<NodeJS.Timeout>();
 
   const { details = [], curlEpoch } = epochDetailsInfo; // curlEpoch
   // const curlEpoch = BigInt(3); // TEST
@@ -288,7 +289,13 @@ const EpochTimeLine = (props: Props) => {
   // };
 
   useEffect(() => {
+    // 首次加载时执行
     getEpochDetailsInfo();
+
+    // 设置10秒轮询
+    intervalRef.current = setInterval(() => {
+      getEpochDetailsInfo();
+    }, 10000);
 
     const timeline = timelineRef.current;
     if (timeline) {
@@ -311,6 +318,9 @@ const EpochTimeLine = (props: Props) => {
       // if (restoreTimeoutRef.current) {
       //   window.clearTimeout(restoreTimeoutRef.current);
       // }
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
