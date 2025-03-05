@@ -11,7 +11,6 @@ export const ReleaseProvider = ({ children }: { children: React.ReactNode }) => 
   };
 
   return (
-    <ReleaseContext.Provider value={{ releaseState, setReleaseState }}>
     <ReleaseContext.Provider value={{ releaseState, setReleaseState, recordsRefreshCount, addRecordsRefreshCount }}>
       {children}
     </ReleaseContext.Provider>
