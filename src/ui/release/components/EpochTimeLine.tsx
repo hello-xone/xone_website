@@ -27,10 +27,14 @@ type EpochInfo = {
 type EpochStatus = 'released' | 'releasing' | 'pending';
 
 const getEpochStatus = (epoch: bigint, curlEpoch: bigint): EpochStatus => {
+  if (curlEpoch < BigInt(51)) {
+    return epoch === BigInt(0) ? 'releasing' : 'pending';
+  }
   if (epoch < curlEpoch) return 'released';
   if (epoch === curlEpoch) return 'releasing';
   return 'pending';
-};
+}
+
 
 const EpochTimeLine = (props: Props) => {
   const [epochDetailsInfo, setEpochDetailsInfo] = useState<EpochDetailsInfo>(
@@ -58,9 +62,8 @@ const EpochTimeLine = (props: Props) => {
       rpcUrl: import.meta.env.VITE_APP_MAIN_RPC_URL,
     });
     console.log('getEpochDetailsInfo:res', res);
-    // res.details = res.details.slice(1, 30); // TEST
-    // 删除第 2 - 49 个区块
-    res.details.splice(1, 48);
+    // 删除第 1-50 个区块
+    res.details.splice(1, 50);
     res.details.forEach((item: any) => {
       item.curlRelease = formatUnits(item.curlRelease, 18);
       item.alRelease = formatUnits(item.alRelease, 18);

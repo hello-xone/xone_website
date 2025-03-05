@@ -29,6 +29,7 @@ import { formatAddress } from '@/utils/format/address';
 import { debounce } from '@/utils/helper';
 
 import ReleaseTable from '../components/ReleaseTable';
+import { useReleaseContext } from '../context/hooks';
 
 type Props = {};
 
@@ -62,6 +63,7 @@ const Records = (props: Props) => {
     searchValue: '',
   });
 
+  const { recordsRefreshCount } = useReleaseContext();
 
   const [inputValue, setInputValue] = useState('');
   const [records, setRecords] = useState<ReleaseRecord[]>([]);
@@ -95,39 +97,42 @@ const Records = (props: Props) => {
   };
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const { startDate, endDate, pageNum, timezone, searchValue } = searchData;
+  const fetchData = async () => {
+    const { startDate, endDate, pageNum, timezone, searchValue } = searchData;
 
-      try {
-        setLoading(true);
-        const params = {
-          startTime: startDate ? convertToUTC(startDate, timezone) : undefined,
-          endTime: endDate ? convertToUTC(endDate, timezone) : undefined,
-          pageNum,
-          pageSize: 10,
-          address: searchValue,
-        };
-        console.log('---params---', params);
-        const res: any = await Api_Release.releaseRecords(params);
+    try {
+      setLoading(true);
+      const params = {
+        startTime: startDate ? convertToUTC(startDate, timezone) : undefined,
+        endTime: endDate ? convertToUTC(endDate, timezone) : undefined,
+        pageNum,
+        pageSize: 10,
+        address: searchValue,
+      };
+      console.log('---params---', params);
+      const res: any = await Api_Release.releaseRecords(params);
 
-        const newRecords = res.result.records;
-        if (pageNum > 1) {
-          setRecords(prev => [...prev, ...newRecords]);
-        } else {
-          setRecords(newRecords);
-        }
-
-        setHasMore(res.result.current < res.result.pages);
-      } catch (error) {
-        console.log('error=========', error);
-      } finally {
-        setLoading(false);
+      const newRecords = res.result.records;
+      if (pageNum > 1) {
+        setRecords(prev => [...prev, ...newRecords]);
+      } else {
+        setRecords(newRecords);
       }
-    };
+      setHasMore(res.result.current < res.result.pages);
+    } catch (error) {
+      console.log('error=========', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+
+  useEffect(() => {
+    console.log('recordsRefreshCount', recordsRefreshCount);
     fetchData();
-  }, [searchData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchData, recordsRefreshCount]);
+
 
 
   const handleLoadMore = () => {
