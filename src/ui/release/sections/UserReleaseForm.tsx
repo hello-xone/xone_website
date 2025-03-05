@@ -27,6 +27,7 @@ import WalletIcon from '@/assets/imgs/release/wallet.svg?react';
 import XOCMigrateAbi from '@/config/abi/XOCMigrate.json';
 import XOCReleaseAbi from '@/config/abi/XOCRelease.json';
 import { formatAddress } from '@/utils/format/address';
+import { EXTERNAL_LINKS } from '@/lib/external';
 
 type Props = {};
 
@@ -365,9 +366,11 @@ const UserReleaseForm = (props: Props) => {
                           release for the corresponding amount to be unlocked.
                           <Text
                             as='a'
+                            target='_blank'
                             color='red.pri'
                             ml='8px'
                             _hover={{ textDecor: 'underline' }}
+                            href={EXTERNAL_LINKS.docs + 'study/release#about-the-release-mechanism'}
                           >
                             Please go here &gt;&gt;
                           </Text>
@@ -405,9 +408,11 @@ const UserReleaseForm = (props: Props) => {
                           your XoneMainnet address when you confirm the release.
                           <Text
                             as='a'
+                            target='_blank'
                             color='red.pri'
                             ml='8px'
                             _hover={{ textDecor: 'underline' }}
+                            href={EXTERNAL_LINKS.docs + 'study/release#how-do-i-calculate-the-tokens-i-can-release'}
                           >
                             Learn more &gt;&gt;
                           </Text>
@@ -436,14 +441,16 @@ const UserReleaseForm = (props: Props) => {
                     Xone Testnet gas fees. Out of gas?{' '}
                     <Text
                       as='a'
+                      target="_blank"
                       color='red.pri'
                       _hover={{ textDecor: 'underline' }}
+                      href={EXTERNAL_LINKS.faucet}
                     >
                       Get some here&gt;&gt;
                     </Text>
                   </ListItem>
                   <ListItem>
-                    Each release has a limit, so plan ahead accordingly.
+                    There is a limit on the number of XOCs released each time. Please make a corresponding release plan in advance. The locked WXOC cannot be retrieved. The number will determine the XOCs you can release each time.
                   </ListItem>
                   <ListItem>
                     It's recommended to familiarize yourself with the release
@@ -452,7 +459,9 @@ const UserReleaseForm = (props: Props) => {
                     <Text
                       as='a'
                       color='red.pri'
+                      target="_blank"
                       _hover={{ textDecor: 'underline' }}
+                      href={EXTERNAL_LINKS.docs + 'study/release'}
                     >
                       here
                     </Text>

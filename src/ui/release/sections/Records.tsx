@@ -172,13 +172,13 @@ const Records = (props: Props) => {
           <ExternalLink
             ml='2'
             color='red.pri'
-            to={`${import.meta.env.VITE_APP_MAIN_BLOCK_EXPLORER_URL}/address/0xd77aFA297F044CB3F2c0bF6d3cDB149811863059`}
+            to={`${import.meta.env.VITE_APP_MAIN_BLOCK_EXPLORER_URL}/address/${import.meta.env.VITE_APP_XOC_RELEASE_ADDRESS}`}
           >
             <Text color='red.pri' display={{ base: 'none', md: 'block' }}>
-              0xd77aFA297F044CB3F2c0bF6d3cDB149811863059
+              {import.meta.env.VITE_APP_XOC_RELEASE_ADDRESS}
             </Text>
             <Text color='red.pri' display={{ base: 'block', md: 'none' }}>
-              {formatAddress('0xd77aFA297F044CB3F2c0bF6d3cDB149811863059')}
+              {formatAddress(import.meta.env.VITE_APP_XOC_RELEASE_ADDRESS)}
             </Text>
           </ExternalLink>
         </Flex>
