@@ -5,7 +5,7 @@ export const EXTERNAL_LINKS = {
   Events: 'https://lu.ma/xone',
   Github: 'https://github.com/huione-labs',
   Twitter: 'https://x.com/xone_chain',
-  Telegram: 'https://t.me/Xone_Group',
+  Telegram: 'https://t.me/hello_xonechain',
   TelegramDevelopers: 'https://t.me/Xone_Developers',
   Youtube: 'https://www.youtube.com/@HelloXone',
   Medium: 'https://medium.com/@xone_chain',
