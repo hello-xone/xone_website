@@ -100,7 +100,7 @@ const ReleaseBanner = (props: Props) => {
             <Heading size='lg'>
               {formatReleaseNumber(releaseInfo.nextEpochRelease)}
             </Heading>
-            <Text>Next (XOC)</Text>
+            <Text>Next Released (XOC)</Text>
           </Box>
 
           <Box w={{ base: '100%', md: 'auto' }}>

@@ -276,7 +276,7 @@ const UserReleaseForm = (props: Props) => {
               display={{ base: 'flex', md: 'none' }}
             >
               <Text fontSize='16px' fontWeight='500'>
-                Current Release Remaining(XOC):
+                Releasable(XOC):
               </Text>
               <Text fontSize='26px' fontWeight='600' ml='10px'>
                 {peddingReleaseTotal}
@@ -299,7 +299,7 @@ const UserReleaseForm = (props: Props) => {
               </Heading>
               <Flex alignItems='center' display={{ base: 'none', md: 'flex' }}>
                 <Text fontSize='24px' fontWeight='500'>
-                  Current Release Remaining(XOC):
+                  Releasable(XOC):
                 </Text>
                 <Text fontSize='26px' fontWeight='600' ml='10px'>
                   {peddingReleaseTotal}
@@ -358,32 +358,7 @@ const UserReleaseForm = (props: Props) => {
                   ALL
                 </Button>
               </ Flex>
-              <Box>
-                <Button
-                  mt='10'
-                  colorScheme='priRed'
-                  rounded='full'
-                  w='35%'
-                  maxW='500px'
-                  variant='outline'
-                  onClick={handleSendWXOC}
-                >
-                  Send WXOC
-                </Button>
-                <Button
-                  mt='10'
-                  ml='24px'
-                  colorScheme='priRed'
-                  rounded='full'
-                  w='35%'
-                  maxW='500px'
-                  onClick={handleReleaseXOC}
-                >
-                  Release XOC
-                </Button>
-              </Box>
-            </Box>
-            <Flex
+              <Flex
               mt='10'
               bgColor='#FFF0F0'
               p={{ base: '10px', lg: '24px' }}
@@ -473,6 +448,32 @@ const UserReleaseForm = (props: Props) => {
                 <Text>{releaseTotal}</Text>
               </Flex>
             </Flex>
+              <Box>
+                <Button
+                  mt='10'
+                  colorScheme='priRed'
+                  rounded='full'
+                  w='35%'
+                  maxW='500px'
+                  variant='outline'
+                  onClick={handleSendWXOC}
+                >
+                  Send WXOC
+                </Button>
+                <Button
+                  mt='10'
+                  ml='24px'
+                  colorScheme='priRed'
+                  rounded='full'
+                  w='35%'
+                  maxW='500px'
+                  onClick={handleReleaseXOC}
+                >
+                  Release XOC
+                </Button>
+              </Box>
+            </Box>
+            
             <Flex
               mt='10'
               bgColor='#FFF0F0'
