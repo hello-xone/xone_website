@@ -1,6 +1,5 @@
 import { Box, Flex, FlexProps, Icon, Input } from '@chakra-ui/react';
 import { css } from '@emotion/react';
-import React from 'react';
 import { CiSearch } from 'react-icons/ci';
 
 type Props = {
@@ -17,6 +16,7 @@ const SearchInput = (props: Props) => {
       border='1px solid #D4D6D9'
       px='5'
       py='2'
+      h='40px'
       rounded='full'
       {...rest}
       css={css`

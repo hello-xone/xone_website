@@ -22,11 +22,12 @@ import {
   useWalletKit,
   WalletKitProvider,
 } from '@web3jskit/walletkit';
+import BigNumber from "bignumber.js";
 
 import WalletIcon from '@/assets/imgs/release/wallet.svg?react';
+import ERC20Abi from '@/config/abi/ERC20.json'
 import XOCMigrateAbi from '@/config/abi/XOCMigrate.json';
 import XOCReleaseAbi from '@/config/abi/XOCRelease.json';
-import { formatAddress } from '@/utils/format/address';
 import { EXTERNAL_LINKS } from '@/lib/external';
 
 type Props = {};
@@ -46,13 +47,16 @@ type ParsePaddingReleaseInfo = {
 import { ChangeEvent, useEffect, useState } from 'react';
 import { FaRegLightbulb } from 'react-icons/fa6';
 import { LuInfo } from 'react-icons/lu';
-import { parseUnits } from 'viem';
+import { formatUnits, parseUnits } from 'viem';
 
 import { Toast } from '@/components/Toast';
 import { readContract } from '@/utils/contract';
 import { formatReleaseNumber } from '@/utils/format/number';
 
 import InstructionModal from '../components/InstructionModal';
+
+export const MAX_AMOUNT = '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+
 
 const UserReleaseForm = (props: Props) => {
   const {
@@ -63,6 +67,7 @@ const UserReleaseForm = (props: Props) => {
     currentNetwork,
     switchNetwork,
     writeContract,
+    waitForTransactionReceipt
   } = useWalletKit();
 
   const [paddingReleaseInfo, setPaddingReleaseInfo] = useState(
@@ -90,9 +95,27 @@ const UserReleaseForm = (props: Props) => {
     });
   };
 
+  const [balance, setBalance] = useState<number>(0);
+  const getBalance = async () => {
+    const res = await readContract({
+      address: import.meta.env.VITE_APP_WXOC_ADDRESS,
+      abi: ERC20Abi,
+      functionName: 'balanceOf',
+      args: [walletAddress],
+      rpcUrl: import.meta.env.VITE_APP_TEST_RPC_URL,
+    });
+    console.log('getBalance:res', res);
+    setBalance(Number(formatUnits(res, 18)));
+  };
+
   useEffect(() => {
     console.log('walletAddress', walletAddress);
-    walletAddress && paddingRelease();
+    if (walletAddress) {
+      paddingRelease();
+      getBalance();
+    } else {
+      setBalance(0);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletAddress]);
 
@@ -148,14 +171,31 @@ const UserReleaseForm = (props: Props) => {
       Toast.error('Please connect wallet!');
       return;
     }
-    // if (maxAmount) {
-    //   const roundedDisplay = Number(maxAmount).toFixed(2);
-    //   setAmount(maxAmount);
-    //   setDisplayAmount(formatDisplayValue(roundedDisplay));
-    // }
+    if (balance) {
+      const roundedDisplay = Number(balance).toFixed(2);
+      setAmount(roundedDisplay);
+      setDisplayAmount(formatDisplayValue(roundedDisplay));
+    }
   };
 
   const handleSendWXOC = async () => {
+    const data = await readContract({
+      address: import.meta.env.VITE_APP_WXOC_ADDRESS,
+      abi: ERC20Abi,
+      functionName: 'allowance',
+      args: [walletAddress, import.meta.env.VITE_APP_XOC_MIGRATE_ADDRESS],
+      rpcUrl: import.meta.env.VITE_APP_TEST_RPC_URL,
+    });
+    console.log('allowance', data);
+    if (BigNumber(data.toString()).lt(BigNumber(amount).shiftedBy(18))) {
+      const hash = await writeContract({
+        abi: ERC20Abi,
+        address: import.meta.env.VITE_APP_WXOC_ADDRESS,
+        functionName: "approve",
+        args: [import.meta.env.VITE_APP_XOC_MIGRATE_ADDRESS, MAX_AMOUNT],
+      });
+      await waitForTransactionReceipt(hash);
+    }
     if (connectStatus !== ConnectStatus.Connected) {
       Toast.error('Please connect wallet!');
       return;
@@ -168,8 +208,11 @@ const UserReleaseForm = (props: Props) => {
       functionName: 'migrate',
       args: [parseUnits(amount, 18)],
     });
+    console.log(res);
+    await waitForTransactionReceipt(res);
     Toast.success('Send WXOC success!');
     paddingRelease();
+    getBalance();
     setAmount('');
     setDisplayAmount('');
     console.log('sendWXOC:res', res);
@@ -189,10 +232,11 @@ const UserReleaseForm = (props: Props) => {
     });
     Toast.success('Release XOC success!');
     paddingRelease();
+    getBalance();
     console.log('releaseXOC:res', res);
   };
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const onClose = () => {
     setIsOpen(false);
@@ -261,28 +305,33 @@ const UserReleaseForm = (props: Props) => {
                   {peddingReleaseTotal}
                 </Text>
               </Flex>
-              <Box display='flex' flexDir='column'>
+              <Box display='flex' flexDir='column' w={{ base: 'auto', md: '190px' }}>
                 {connectStatus === ConnectStatus.Connected ? (
                   <Button
-                    variant='unstyled'
                     _hover={{
                       textDecor: 'underline',
                     }}
+                    variant='link'
                     color='red.pri'
+                    display='flex'
+                    alignItems='center'
+                    justifyContent='flex-end'
                     onClick={handleDisconnect}
                   >
-                    {formatAddress(walletAddress)}
+                    <Icon as={WalletIcon} mr='8px' />
+                    {formatReleaseNumber(balance)}
                   </Button>
                 ) : (
                   <Button
-                    variant='unstyled'
                     _hover={{
                       textDecor: 'underline',
                     }}
+                    variant='link'
                     color='red.pri'
-                    onClick={handleConnect}
                     display='flex'
                     alignItems='center'
+                    justifyContent='flex-end'
+                    onClick={handleConnect}
                   >
                     <Icon as={WalletIcon} mr='8px' />
                     Connect Wallet
@@ -292,7 +341,7 @@ const UserReleaseForm = (props: Props) => {
             </Flex>
 
             <Box textAlign='center'>
-              <Flex direction="row" align="flex-end" maxW="500px" mx="auto" mt="30px" >
+              <Flex direction="row" align="flex-end" justifyContent="center" mt="30px" position="relative">
                 <Input
                   maxW='500px'
                   fontSize={{ base: '26px', lg: '36px' }}
@@ -305,7 +354,7 @@ const UserReleaseForm = (props: Props) => {
                   mt={{ base: '30px', lg: '0' }}
                   onChange={handleAmountChange}
                 />
-                <Button rounded='lg' onClick={handleMaxClick} w='124px' ml="auto">
+                <Button rounded='lg' onClick={handleMaxClick} w='124px' ml="auto" position="absolute" right="0" bottom="0">
                   ALL
                 </Button>
               </ Flex>
@@ -458,8 +507,8 @@ const UserReleaseForm = (props: Props) => {
                     understand the rules{' '}
                     <Text
                       as='a'
-                      color='red.pri'
                       target="_blank"
+                      color='red.pri'
                       _hover={{ textDecor: 'underline' }}
                       href={EXTERNAL_LINKS.docs + 'study/release'}
                     >

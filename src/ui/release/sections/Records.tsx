@@ -24,6 +24,7 @@ import { RiArrowDownSLine } from 'react-icons/ri';
 import { Api_Release, ReleaseRecord } from '@/api/release';
 import ExternalLink from '@/components/comm/ExternalLink';
 import SearchInput from '@/components/comm/input/SearchInput';
+import { Toast } from '@/components/Toast';
 import { formatAddress } from '@/utils/format/address';
 import { debounce } from '@/utils/helper';
 
@@ -36,125 +37,151 @@ dayjs.extend(timezone);
 
 // 限制时区选项
 const ALLOWED_TIMEZONES = [
-  { label: 'UTC+0', value: 'UTC' },
-  { label: 'UTC+1', value: 'Europe/Paris' },
-  { label: 'UTC+7', value: 'Asia/Bangkok' },
-  { label: 'UTC+8', value: 'Asia/Singapore' },
-  { label: 'UTC+9', value: 'Asia/Tokyo' },
-  { label: 'UTC-8', value: 'America/Los_Angeles' }
+  { label: 'UTC-8', value: 'Etc/GMT+8' },       // 固定偏移
+  { label: 'UTC+0', value: 'UTC' },        // 固定偏移
+  { label: 'UTC+1', value: 'Etc/GMT-1' },      // 固定偏移
+  { label: 'UTC+7', value: 'Asia/Bangkok' },   // 地理时区（无夏令时）
+  { label: 'UTC+8', value: 'Asia/Singapore' },  // 地理时区（无夏令时）
+  { label: 'UTC+9', value: 'Asia/Tokyo' },      // 地理时区（无夏令时）
 ];
 
+type SearchData = {
+  pageNum: number;
+  startDate: any;
+  endDate: any;
+  timezone: string;
+  searchValue: string;
+};
+
 const Records = (props: Props) => {
-  const [startDate, setStartDate] = useState<any>();
-  const [endDate, setEndDate] = useState<any>();
-  const [searchValue, setSearchValue] = useState('');
+  const [searchData, setSearchData] = useState<SearchData>({
+    pageNum: 1,
+    startDate: undefined,
+    endDate: undefined,
+    timezone: 'Asia/Singapore',
+    searchValue: '',
+  });
+
+  const [inputValue, setInputValue] = useState('');
   const [records, setRecords] = useState<ReleaseRecord[]>([]);
-  const [pageNum, setPageNum] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [selectedTimezone, setSelectedTimezone] = useState<string>('Asia/Singapore');
 
-  const debouncedSearch = useMemo(
+  // 使用 useMemo 包装防抖函数
+  const handleDebounceSearch = useMemo(
     () =>
       debounce((value: string) => {
-        onSearch(1, value);
+        updateSearchData({
+          searchValue: value
+        });
       }, 500),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [] // updateSearchData 是稳定的引用,不需要加入依赖
   );
 
-  // 设置默认时间范围为最近7天
+  useEffect(() => {
+    handleDebounceSearch(inputValue);
+  }, [inputValue, handleDebounceSearch]);
+
+  const updateSearchData = (updates: Partial<typeof searchData>) => {
+    setSearchData(prev => ({
+      ...prev,
+      ...updates,
+      pageNum: updates.pageNum ?? 1
+    }));
+  };
+
   useEffect(() => {
     const end = dayjs();
     const start = end.subtract(7, 'day');
-    setStartDate(start);
-    setEndDate(end);
-    onSearch(1, searchValue, start, end);
+    updateSearchData({
+      startDate: start,
+      endDate: end
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // 验证时间范围
-  const validateDateRange = (start: any, end: any) => {
-    if (!start || !end) return true;
-    const diff = end.diff(start, 'hour');
-    return diff >= 1 && diff <= 2160; // 1小时到90天
+  useEffect(() => {
+    const fetchData = async () => {
+      const { startDate, endDate, pageNum, timezone, searchValue } = searchData;
+
+      try {
+        setLoading(true);
+        const params = {
+          startTime: startDate ? convertToUTC(startDate, timezone) : undefined,
+          endTime: endDate ? convertToUTC(endDate, timezone) : undefined,
+          pageNum,
+          pageSize: 10,
+          address: searchValue,
+        };
+        console.log('---params---', params);
+        const res: any = await Api_Release.releaseRecords(params);
+
+        const newRecords = res.result.records;
+        if (pageNum > 1) {
+          setRecords(prev => [...prev, ...newRecords]);
+        } else {
+          setRecords(newRecords);
+        }
+
+        setHasMore(res.result.current < res.result.pages);
+      } catch (error) {
+        console.log('error=========', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [searchData]);
+
+  const handleLoadMore = () => {
+    updateSearchData({
+      pageNum: searchData.pageNum + 1
+    });
   };
 
-  const onChange = (dates: any) => {
-    const [start, end] = dates || [];
-    if (!validateDateRange(start, end)) {
-      // 显示错误提示
-      return;
-    }
-    setStartDate(start);
-    setEndDate(end);
-    onSearch(1, searchValue, start, end);
-  };
-
-  // 处理回车搜索
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      onSearch(1, searchValue);
-    }
+  const handleSearch = (value: string | React.FormEvent<HTMLDivElement>) => {
+    const searchValue = typeof value === 'string' ? value : '';
+    setInputValue(searchValue);
   };
 
   const handleTimezoneChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedTimezone(e.target.value);
+    updateSearchData({ timezone: e.target.value });
   };
 
-  const convertToUTC = (date: any) => {
-    return date.unix() * 1000;
-  };
-
-  const handleSearch = (value: string) => {
-    setSearchValue(value);
-    debouncedSearch(value);
-  };
-
-  const onSearch = async (
-    page?: number,
-    searchText?: string,
-    start?: any,
-    end?: any
-  ) => {
-    try {
-      setLoading(true);
-      const res: any = await Api_Release.releaseRecords({
-        startTime: start ? convertToUTC(start) : undefined,
-        endTime: end ? convertToUTC(end) : undefined,
-        pageNum: page || 1,
-        pageSize: 10,
-        address: searchText || undefined,
-      });
-
-      const newRecords = res.result.records;
-      if (page && page > 1) {
-        setRecords((prev) => [...prev, ...newRecords]);
-        setPageNum(page);
-      } else {
-        setRecords(newRecords);
-        setPageNum(1);
-      }
-
-      // 检查是否还有更多数据
-      setHasMore(res.result.current < res.result.pages);
-    } catch (error) {
-      console.log('error=========', error);
-    } finally {
-      setLoading(false);
+  const onChange = (dates: any) => {
+    const [startDate, endDate] = dates || [];
+    if (!validateDateRange(startDate, endDate)) {
+      return;
     }
+    console.log('---onChange2---', startDate, endDate);
+    updateSearchData({
+      startDate,
+      endDate,
+    });
   };
 
-  const handleLoadMore = () => {
-    const nextPage = pageNum + 1;
-    onSearch(nextPage, searchValue, startDate, endDate);
+  // 验证时间范围
+  const validateDateRange = (start: any, end: any) => {
+    if (!start && !end) return true;
+    if (!start || !end) return false;
+    const diff = end.diff(start, 'hour');
+    if (diff < 1) {
+      Toast.error('The time range cannot be less than 1 hour');
+      return false;
+    } else if (diff > 2160) {
+      Toast.error('The time range cannot be greater than 90 days');
+      return false;
+    }
+    return diff >= 1 && diff <= 2160; // 1小时到90天
   };
 
-  useEffect(() => {
-    return () => {
-      debouncedSearch.cancel();
-    };
-  }, [debouncedSearch]);
+  const convertToUTC = (date: any, timezone?: string) => {
+    if (!date) return undefined;
+    const zonedDate = date.tz(timezone, false);
+    return new Date(zonedDate.format('YYYY-MM-DD HH:ss:ss')).getTime()
+  };
 
   return (
     <Box mt='24px'>
@@ -185,7 +212,7 @@ const Records = (props: Props) => {
 
         <Flex alignItems='center' mt='5'>
           <RangePicker
-            value={[startDate, endDate]}
+            value={[searchData.startDate, searchData.endDate]}
             locale={enUS}
             generateConfig={generateConfig}
             showTime
@@ -195,13 +222,13 @@ const Records = (props: Props) => {
           />
 
           <Select
-            value={selectedTimezone}
+            value={searchData.timezone}
             onChange={handleTimezoneChange}
             rounded='full'
             w={{ base: '100%', md: '164px' }}
             focusBorderColor='red.pri'
             ml='16px'
-            defaultValue="Asia/Singapore" // UTC+8
+            defaultValue="Asia/Singapore"
           >
             {ALLOWED_TIMEZONES.map((tz) => (
               <option key={tz.value} value={tz.value}>
@@ -214,23 +241,19 @@ const Records = (props: Props) => {
             placeholder='Search Address'
             w={{ base: '100%', md: '320px' }}
             ml='auto'
-            value={searchValue}
-            onChange={(value: any) => handleSearch(value)}
-            onKeyPress={handleKeyPress}
+            value={inputValue}
+            onChange={handleSearch}
           />
         </Flex>
 
         <Box mt='5'>
           {records.length > 0 ? (
-            <ReleaseTable
-              records={records}
-            />
+            <ReleaseTable records={records} />
           ) : (
             <Text textAlign="center" py={8}>
               No matching data found!
             </Text>
           )}
-          {/* load more */}
           <Flex justifyContent='center'>
             {hasMore && (
               <Button

@@ -4,16 +4,18 @@ import {
   TableContainer,
   Tbody,
   Td,
-  Tfoot,
   Th,
   Thead,
   Tr,
   useBreakpointValue
 } from '@chakra-ui/react';
 import { css } from '@emotion/react';
+import { formatUnits } from 'viem';
 
 import { ReleaseRecord } from '@/api/release';
 import { formatAddress } from '@/utils/format/address';
+import { formatReleaseNumber } from '@/utils/format/number';
+
 
 type Props = {
   records?: ReleaseRecord[];
@@ -59,7 +61,7 @@ const ReleaseTable = (props: Props) => {
               <Tr key={record.id}>
                 <Td>{isMobile ? formatAddress(record.address) : record.address}</Td>
                 <Td>{record.createdTime}</Td>
-                <Td>{record.amountStr}</Td>
+                <Td>{formatReleaseNumber(formatUnits(BigInt(record.amountStr), 18))}</Td>
               </Tr>
             )) : (
               <Tr>

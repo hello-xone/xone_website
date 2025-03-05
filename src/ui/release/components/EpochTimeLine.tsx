@@ -59,6 +59,8 @@ const EpochTimeLine = (props: Props) => {
     });
     console.log('getEpochDetailsInfo:res', res);
     // res.details = res.details.slice(1, 30); // TEST
+    // 删除第 2 - 49 个区块
+    res.details.splice(1, 48);
     res.details.forEach((item: any) => {
       item.curlRelease = formatUnits(item.curlRelease, 18);
       item.alRelease = formatUnits(item.alRelease, 18);
