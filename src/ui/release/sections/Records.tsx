@@ -38,12 +38,12 @@ dayjs.extend(timezone);
 
 // 限制时区选项
 const ALLOWED_TIMEZONES = [
-  { label: 'UTC-8', value: 'Etc/GMT+8' },       // 固定偏移
-  { label: 'UTC+0', value: 'UTC' },        // 固定偏移
-  { label: 'UTC+1', value: 'Etc/GMT-1' },      // 固定偏移
-  { label: 'UTC+7', value: 'Asia/Bangkok' },   // 地理时区（无夏令时）
-  { label: 'UTC+8', value: 'Asia/Singapore' },  // 地理时区（无夏令时）
-  { label: 'UTC+9', value: 'Asia/Tokyo' },      // 地理时区（无夏令时）
+  { label: 'UTC-8', value: 'Etc/GMT+8', offset: -16 },  // Los Angeles
+  { label: 'UTC+0', value: 'Etc/GMT+0', offset: -8 },   // London
+  { label: 'UTC+1', value: 'Etc/GMT-1', offset: -7 },   // Berlin
+  { label: 'UTC+7', value: 'Etc/GMT-7', offset: -1 },   // Bangkok 
+  { label: 'UTC+8', value: 'Etc/GMT-8', offset: 0 },    // Singapore
+  { label: 'UTC+9', value: 'Etc/GMT-9', offset: 1 },    // Tokyo
 ];
 
 type SearchData = {
@@ -59,7 +59,7 @@ const Records = (props: Props) => {
     pageNum: 1,
     startDate: dayjs().subtract(7, 'day'),
     endDate: dayjs(),
-    timezone: 'Asia/Singapore',
+    timezone: 'Etc/GMT-8',
     searchValue: '',
   });
 
@@ -96,12 +96,26 @@ const Records = (props: Props) => {
     }));
   };
 
+  const convertToUTC = (date: any, timezone?: string) => {
+    if (!date) return undefined;
+
+    // 获取时区的offset
+    const tzConfig = ALLOWED_TIMEZONES.find(tz => tz.value === timezone);
+    const offset = tzConfig?.offset || 0;
+
+    // 转换为UTC+8时间戳
+    const localTime = date.valueOf();
+    return localTime + (offset * 60 * 60 * 1000);
+  };
+
+
 
   const fetchData = async () => {
     const { startDate, endDate, pageNum, timezone, searchValue } = searchData;
 
     try {
       setLoading(true);
+      console.log('localTime---', startDate, endDate, timezone);
       const params = {
         startTime: startDate ? convertToUTC(startDate, timezone) : undefined,
         endTime: endDate ? convertToUTC(endDate, timezone) : undefined,
@@ -110,6 +124,8 @@ const Records = (props: Props) => {
         address: searchValue,
       };
       console.log('---params---', params);
+      console.log('startTime---', params.startTime, new Date(params.startTime ?? 0));
+      console.log('endTime---', params.endTime, new Date(params.endTime ?? 0));
       const res: any = await Api_Release.releaseRecords(params);
 
       const newRecords = res.result.records;
@@ -177,14 +193,7 @@ const Records = (props: Props) => {
     }
     return diff >= 1 && diff <= 2160; // 1小时到90天
   };
-
-  const convertToUTC = (date: any, timezone?: string) => {
-    if (!date) return undefined;
-    const zonedDate = date.tz(timezone, false);
-    return new Date(zonedDate.format('YYYY-MM-DD HH:ss:ss')).getTime()
-  };
-
-
+  
   return (
     <Box mt='24px'>
       <Container
