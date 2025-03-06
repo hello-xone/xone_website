@@ -1,0 +1,8 @@
+{
+    "logo": "https://metamask.io/favicons/default/apple-touch-icon.png",
+    "type": ["Payment", "Infra-and-Tools"],
+    "name": "MetaMask",
+    "url": "https://metamask.io/",
+    "description": "The Leading Crypto Wallet Platform, Blockchain Wallet.",
+    "state": true
+}

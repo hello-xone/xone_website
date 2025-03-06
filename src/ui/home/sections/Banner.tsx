@@ -46,7 +46,7 @@ const Banner = (props: Props) => {
 
             <Button
               as='a'
-              href={EXTERNAL_LINKS.Bridge}
+              href='/apps'
               target='_blank'
               rel='noopener noreferrer'
               colorScheme='priBlack'
@@ -56,7 +56,7 @@ const Banner = (props: Props) => {
               w={{ base: '100%', md: '180px' }}
               color='white'
             >
-              Bridge(Test)
+              Explore DApps
             </Button>
           </Flex>
         </Flex>

@@ -1,12 +1,16 @@
 import { Box, Collapse, Flex, Icon, Text, useDisclosure } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
 import { IoChevronDown } from 'react-icons/io5';
+import { To } from 'react-router';
+
+import { getToProps } from '@/utils/helper';
 
 import MobileNavButton from './MobileNavButton';
 
 type Props = {
   title: ReactNode;
-  menus: TNavMenuItem[];
+  to?: To;
+  children?: ReactNode;
 };
 
 export type TNavMenuItem = {
@@ -14,29 +18,22 @@ export type TNavMenuItem = {
 };
 
 const MobileNavMenu = (props: Props) => {
-  const { title, menus } = props;
+  const { title, to, children } = props;
   const { isOpen, onToggle } = useDisclosure();
   return (
     <Box>
-      <MobileNavButton borderBottomColor={isOpen ? 'transparent' : '#F5F5F5'} onClick={onToggle}>
+      <MobileNavButton
+        {...getToProps(to)}
+        borderBottomColor={isOpen ? 'transparent' : '#F5F5F5'}
+        onClick={onToggle}
+      >
         <Text color={isOpen ? 'red.pri' : undefined}>{title}</Text>
-        <Icon ml='2' as={IoChevronDown} />
+        {!to ? <Icon ml='2' as={IoChevronDown} /> : undefined}
       </MobileNavButton>
       <Collapse in={isOpen} animateOpacity>
-        {menus?.map((menu, i) => {
-          return (
-            <Flex
-              key={i}
-              alignItems='center'
-              h='48px'
-              px='40px'
-              fontWeight='bold'
-              bgColor='#F2F0FF'
-            >
-              {menu.content}
-            </Flex>
-          );
-        })}
+        <Box px='40px' bgColor='#F2F0FF'>
+          {children}
+        </Box>
       </Collapse>
     </Box>
   );

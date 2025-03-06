@@ -1,0 +1,8 @@
+{
+    "logo": "https://www.openzeppelin.com/hubfs/openzeppelin-favicon-1.png",
+    "type": ["Infra-and-Tools"],
+    "name": "OpenZeppelin",
+    "url": "https://www.openzeppelin.com/",
+    "description": "A library for secure and standard smart contracts.",
+    "state": true
+}

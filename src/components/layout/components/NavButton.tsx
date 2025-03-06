@@ -1,21 +1,23 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, BoxProps, Text } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 
 type Props = {
   text: string;
   active?: boolean;
-};
+} & BoxProps;
 
 const NavButton = (props: Props) => {
+  const { text, active, ...rest } = props;
   return (
     <Box
       py='8px'
       cursor='pointer'
+      display='block'
       // rounded='full'
       px='20px'
       fontWeight='bold'
       position='relative'
-      className={props.active ? 'active' : ''}
+      className={active ? 'active' : ''}
       css={css`
         &::after {
           position: absolute;
@@ -34,8 +36,9 @@ const NavButton = (props: Props) => {
           }
         }
       `}
+      {...rest}
     >
-      <Text>{props.text}</Text>
+      <Text>{text}</Text>
     </Box>
   );
 };

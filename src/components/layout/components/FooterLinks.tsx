@@ -18,8 +18,8 @@ const FooterLinks = (props: Props) => {
         {title}
       </Text>
       <Flex flexDirection='column' gap='2'>
-        {links.map((link) => (
-          <Box>
+        {links.map((link, i) => (
+          <Box key={i}>
             <ExternalLink to={link.to} color='#808080' _hover={{ color: '#ffffff' }}>
               {link.text}
             </ExternalLink>

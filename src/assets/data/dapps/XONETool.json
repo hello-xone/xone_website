@@ -1,0 +1,8 @@
+{
+    "logo": "",
+    "type": ["Infra-and-Tools"],
+    "name": "XONETool",
+    "url": "https://www.xonetool.org",
+    "description": "The on-chain tool platform designed specifically for XONE Chain is committed to providing developers and users with safe, convenient and efficient tool services, including but not limited to core functions such as contract deployment, block data query, account management, and transaction analysis.",
+    "state": false
+}

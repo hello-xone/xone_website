@@ -1,0 +1,8 @@
+{
+    "logo": "",
+    "type": ["Payment"],
+    "name": "Settlement",
+    "url": "https://www.payout.plus",
+    "description": "Seamless Web3 Payments. Settled.",
+    "state": false
+}

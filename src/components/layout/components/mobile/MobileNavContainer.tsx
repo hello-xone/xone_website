@@ -1,9 +1,14 @@
-import { Box, Collapse, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Collapse, Flex, Text, useDisclosure } from '@chakra-ui/react';
 import { forwardRef, Ref, useEffect, useImperativeHandle } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 import ExternalLink from '@/components/comm/ExternalLink';
+import { ReactRouterLink } from '@/components/comm/ReactRouterLink';
+import RouteLink from '@/components/comm/RouteLink';
 import { EXTERNAL_LINKS } from '@/lib/external';
+import { isExternalLink } from '@/utils/helper';
 
+import { MENUS_CONFIG } from '../../config/menus';
 import MobileNavMenu from './MobileNavMenu';
 
 type Props = {};
@@ -17,11 +22,15 @@ export type TMobileNavContainerRef = {
 
 function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
+  const location = useLocation();
+
   useEffect(() => {
     if (isOpen) {
+      document.documentElement.style.setProperty('--app-header-bg-color', 'white');
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'hidden auto';
+      document.documentElement.style.setProperty('--app-header-bg-color', 'transparent');
     }
   }, [isOpen]);
 
@@ -38,6 +47,10 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
     [isOpen]
   );
 
+  useEffect(() => {
+    onClose();
+  }, [location.pathname]);
+
   return (
     <Box
       display={isOpen ? 'block' : 'none'}
@@ -50,187 +63,17 @@ function MobileNavContainer(props: Props, ref: Ref<TMobileNavContainerRef>) {
       zIndex={10}
     >
       <Collapse endingHeight='100%' in={isOpen} animateOpacity>
-        <Box minH='100%' bgColor='white' py='20px'>
-          <MobileNavMenu
-            title='Study'
-            menus={[
-              // {
-              //   content: (
-              //     <Text as={Link} to='/'>
-              //       Get started
-              //     </Text>
-              //   )
-              // },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.docs + 'study/xone'}>
-                    <Text>What is Xone?</Text>
-                  </ExternalLink>
-                )
-              },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.docs + 'study/account'}>
-                    <Text>What is a Xone Account?</Text>
-                  </ExternalLink>
-                )
-              },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.docs + 'study/xoc'}>
-                    <Text>Xone Coin</Text>
-                  </ExternalLink>
-                )
-              },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.docs + 'study/gas'}>
-                    <Text>Gas Fees</Text>
-                  </ExternalLink>
-                )
-              }
-            ]}
-          />
-
-          <MobileNavMenu
-            title='Build'
-            menus={[
-              // {
-              //   content: (
-              //     <Text as={Link} to='/'>
-              //       Get started
-              //     </Text>
-              //   )
-              // },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.docs + 'developers/ready'}>
-                    <Text>Docs</Text>
-                  </ExternalLink>
-                )
-              },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.TestnetExplorer}>
-                    <Text>Testnet explorer</Text>
-                  </ExternalLink>
-                )
-              },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.faucet}>
-                    <Text>Faucet</Text>
-                  </ExternalLink>
-                )
-              },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.docs + 'study/bug'}>
-                    <Text>Bounty Hunter</Text>
-                  </ExternalLink>
-                )
-              }
-            ]}
-          />
-          <MobileNavMenu
-            title='Donate'
-            menus={[
-              // {
-              //   content: (
-              //     <Text as={Link} to='/'>
-              //       Get started
-              //     </Text>
-              //   )
-              // },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.Donate}>
-                    <Text>Go to Donate</Text>
-                  </ExternalLink>
-                )
-              },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.DonateDocs}>
-                    <Text>Donate Support</Text>
-                  </ExternalLink>
-                )
-              }
-            ]}
-          />
-          <MobileNavMenu
-            title='Social'
-            menus={[
-              // {
-              //   content: (
-              //     <Text as={Link} to='/'>
-              //       Get started
-              //     </Text>
-              //   )
-              // },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.Twitter}>
-                    <Text>X</Text>
-                  </ExternalLink>
-                )
-              },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.Telegram}>
-                    <Text>Telegram</Text>
-                  </ExternalLink>
-                )
-              },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.Events}>
-                    <Text>Events</Text>
-                  </ExternalLink>
-                )
-              },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.Medium}>
-                    <Text>News</Text>
-                  </ExternalLink>
-                )
-              }
-            ]}
-          />
-          <MobileNavMenu
-            title='Ecosystem'
-            menus={[
-              // {
-              //   content: (
-              //     <Text as={Link} to='/'>
-              //       Get started
-              //     </Text>
-              //   )
-              // },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.TokenUp}>
-                    <Text>TokenUp</Text>
-                  </ExternalLink>
-                )
-              },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.SwapX}>
-                    <Text>SwapX</Text>
-                  </ExternalLink>
-                )
-              },
-              {
-                content: (
-                  <ExternalLink to={EXTERNAL_LINKS.RainLink}>
-                    <Text>RainLink</Text>
-                  </ExternalLink>
-                )
-              }
-            ]}
-          />
+        <Box minH='100%' bgColor='white' py='20px' height='100%' maxW='100%' overflow='auto'>
+          {MENUS_CONFIG.map((menu, index) => (
+            <MobileNavMenu key={index} title={menu.text} to={menu.href}>
+              {menu.items &&
+                menu.items.map((item, subIndex) => (
+                  <Flex key={subIndex} alignItems='center' h='48px' fontWeight='bold'>
+                    <RouteLink to={item.href}>{item.label}</RouteLink>
+                  </Flex>
+                ))}
+            </MobileNavMenu>
+          ))}
         </Box>
       </Collapse>
     </Box>

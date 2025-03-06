@@ -1,0 +1,8 @@
+{
+    "logo": "https://trufflesuite.com/assets/favicon-32x32.png",
+    "type": ["Infra-and-Tools"],
+    "name": "Truffle",
+    "url": "https://trufflesuite.com/",
+    "description": "A suite of development tools for Ethereum smart contracts.",
+    "state": true
+}

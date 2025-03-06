@@ -38,6 +38,15 @@ export const Theme = extendTheme({
     }
   },
   components: {
+    Button: {
+      sizes: {
+        '2xl': {
+          h: '64px', // 设置按钮高度
+          fontSize: '16px', // 文字大小
+          px: '30px' // 内边距
+        }
+      }
+    },
     Container: {
       baseStyle: {
         width: '100%',

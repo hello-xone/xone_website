@@ -9,7 +9,6 @@ import { RiDiscordLine } from 'react-icons/ri';
 import { EXTERNAL_LINKS } from '@/lib/external';
 
 import IconButton from '../comm/button/IconButton';
-import ExternalLink from '../comm/ExternalLink';
 import FooterLinks from './components/FooterLinks';
 import { BuildLinks, XoneChainLinks } from './config/links';
 
@@ -40,7 +39,7 @@ const Footer = (props: Props) => {
             ml={{ lg: 'auto' }}
             display={{ base: 'flex' }}
             // flexDir='column'
-            alignItems={{ base: 'center', lg: 'flex-start' }}
+            alignItems={{ base: '', lg: 'flex-start' }}
             gap='10'
             justifyContent={{ base: 'center', lg: 'flex-start' }}
             w={{ base: '100%', lg: 'initial' }}

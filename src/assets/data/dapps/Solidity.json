@@ -1,0 +1,8 @@
+{
+    "logo": "https://soliditylang.org/assets/favicon.ico",
+    "type": ["Infra-and-Tools"],
+    "name": "Solidity",
+    "url": "https://soliditylang.org/",
+    "description": "The primary programming language for writing Ethereum smart contracts.",
+    "state": true
+}

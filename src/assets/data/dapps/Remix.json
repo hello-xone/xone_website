@@ -1,0 +1,8 @@
+{
+    "logo": "https://remix.ethereum.org/assets/img/remix-logo-blue.png",
+    "type": ["Infra-and-Tools"],
+    "name": "Remix",
+    "url": "https://remix.ethereum.org/",
+    "description": "An online IDE for developing Solidity smart contracts.",
+    "state": true
+}

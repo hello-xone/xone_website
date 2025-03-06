@@ -1,0 +1,8 @@
+{
+    "logo": "https://hardhat.org/favicon.ico",
+    "type": ["Infra-and-Tools"],
+    "name": "Hardhat",
+    "url": "https://hardhat.org/",
+    "description": "A development environment for compiling, deploying, and testing smart contracts.",
+    "state": true
+}

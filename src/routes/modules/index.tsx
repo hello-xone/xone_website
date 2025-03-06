@@ -11,6 +11,37 @@ export const Routes: RouteObject[] = [
       {
         index: true,
         Component: lazy(() => import('@/pages/Home.tsx'))
+      },
+      {
+        path: 'apps',
+        children: [
+          {
+            index: true,
+            Component: lazy(() => import('@/pages/apps/Apps.tsx'))
+          }
+        ]
+      },
+      {
+        path: 'build',
+        children: [
+          {
+            index: true,
+            Component: lazy(() => import('@/pages/build/Build.tsx'))
+          },
+          {
+            path: 'access',
+            Component: lazy(() => import('@/pages/build/access/Access'))
+          }
+        ]
+      },
+      {
+        path: 'release',
+        children: [
+          {
+            index: true,
+            Component: lazy(() => import('@/pages/release/Release.tsx'))
+          }
+        ]
       }
     ]
   },

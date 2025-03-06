@@ -11,7 +11,10 @@ export const formatNumber = (amount?: BigNumber.Value, decimalPlaces = 6) => {
   }
 
   // 向下取整到指定小数位数
-  const roundedAmount = BigNumber(amount).dp(decimalPlaces, BigNumber.ROUND_DOWN);
+  const roundedAmount = BigNumber(amount).dp(
+    decimalPlaces,
+    BigNumber.ROUND_DOWN
+  );
 
   // 使用 numeral 进行格式化
   const formattedAmount = numeral(roundedAmount.toString()).format(
@@ -36,4 +39,8 @@ const formatBigNumber = (amount?: BigNumber.Value, decimalPlaces = 4) => {
 
 export function formatNumberAsAbbreviated(input: any) {
   return numeral(input).format('0.0a').toUpperCase();
+}
+
+export function formatReleaseNumber(input: any) {
+  return numeral(input).format('0,0.00');
 }

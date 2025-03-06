@@ -4,8 +4,11 @@ import { useEffect, useRef } from 'react';
 import { EXTERNAL_LINKS } from '@/lib/external';
 
 import ExternalLink from '../comm/ExternalLink';
+import { ReactRouterLink } from '../comm/ReactRouterLink';
+import RouteLink from '../comm/RouteLink';
 import MobileMenuButton from './components/mobile/MobileMenuButton';
 import NavMenuButton, { CMenuItem } from './components/NavMenuButton';
+import { MENUS_CONFIG } from './config/menus';
 import { useMobileNavModal } from './hooks';
 
 type Props = {};
@@ -58,7 +61,7 @@ const Header = (props: Props) => {
       >
         <Container>
           <Flex alignItems='center'>
-            <Center>
+            <Center as={ReactRouterLink} to='/'>
               <Img src='/imgs/xone-logo-black.png' h='34px' />
             </Center>
 
@@ -71,92 +74,18 @@ const Header = (props: Props) => {
               ml='auto'
               gap='20px'
             >
-              <NavMenuButton
-                text='Study'
-                MenuListContent={
-                  <>
-                    <CMenuItem href={EXTERNAL_LINKS.docs + 'study/xone'}>
-                      <ExternalLink>What is Xone?</ExternalLink>
-                    </CMenuItem>
-                    <CMenuItem href={EXTERNAL_LINKS.docs + 'study/account'}>
-                      <ExternalLink>What is a Xone Account?</ExternalLink>
-                    </CMenuItem>
-                    <CMenuItem href={EXTERNAL_LINKS.docs + 'study/xoc'}>
-                      <ExternalLink>Xone Coin</ExternalLink>
-                    </CMenuItem>
-                    <CMenuItem href={EXTERNAL_LINKS.docs + 'study/gas'}>
-                      <ExternalLink>Gas Fees</ExternalLink>
-                    </CMenuItem>
-                  </>
-                }
-              />
-              <NavMenuButton
-                text='Build'
-                MenuListContent={
-                  <>
-                    <CMenuItem href={EXTERNAL_LINKS.docs + 'developers/ready'}>
-                      <ExternalLink>Developer Docs</ExternalLink>
-                    </CMenuItem>
-                    <CMenuItem href={EXTERNAL_LINKS.TestnetExplorer}>
-                      <ExternalLink>Testnet explorer</ExternalLink>
-                    </CMenuItem>
-                    <CMenuItem href={EXTERNAL_LINKS.faucet}>
-                      <ExternalLink>Faucet</ExternalLink>
-                    </CMenuItem>
-                    <CMenuItem href={EXTERNAL_LINKS.docs + 'study/bug'}>
-                      <ExternalLink>Bounty Hunter</ExternalLink>
-                    </CMenuItem>
-                  </>
-                }
-              />
-              <NavMenuButton
-                text='Donate'
-                MenuListContent={
-                  <>
-                    <CMenuItem href={EXTERNAL_LINKS.Donate}>
-                      <ExternalLink>Go to Donate</ExternalLink>
-                    </CMenuItem>
-                    <CMenuItem href={EXTERNAL_LINKS.DonateDocs}>
-                      <ExternalLink>Donate Support</ExternalLink>
-                    </CMenuItem>
-                  </>
-                }
-              />
-              <NavMenuButton
-                text='Social'
-                MenuListContent={
-                  <>
-                    <CMenuItem href={EXTERNAL_LINKS.Twitter}>
-                      <ExternalLink>X</ExternalLink>
-                    </CMenuItem>
-                    <CMenuItem href={EXTERNAL_LINKS.Telegram}>
-                      <ExternalLink>Telegram</ExternalLink>
-                    </CMenuItem>
-                    <CMenuItem href={EXTERNAL_LINKS.Events}>
-                      <ExternalLink>Events</ExternalLink>
-                    </CMenuItem>
-                    <CMenuItem href={EXTERNAL_LINKS.Medium}>
-                      <ExternalLink>News</ExternalLink>
-                    </CMenuItem>
-                  </>
-                }
-              />
-              <NavMenuButton
-                text='Ecosystem'
-                MenuListContent={
-                  <>
-                    <CMenuItem href={EXTERNAL_LINKS.TokenUp}>
-                      <ExternalLink>TokenUp</ExternalLink>
-                    </CMenuItem>
-                    <CMenuItem href={EXTERNAL_LINKS.SwapX}>
-                      <ExternalLink>SwapX</ExternalLink>
-                    </CMenuItem>
-                    <CMenuItem href={EXTERNAL_LINKS.RainLink}>
-                      <ExternalLink>RainLink</ExternalLink>
-                    </CMenuItem>
-                  </>
-                }
-              />
+              {MENUS_CONFIG.map((menu, index) => (
+                <NavMenuButton key={index} text={menu.text} to={menu.href}>
+                  {menu.items &&
+                    menu.items.map((item, subIndex) => (
+                      <CMenuItem key={subIndex}>
+                        <RouteLink w='full' to={item.href}>
+                          {item.label}
+                        </RouteLink>
+                      </CMenuItem>
+                    ))}
+                </NavMenuButton>
+              ))}
             </Box>
 
             <MobileMenuButton isOpen={isOpen} onClick={toggle} ml='auto' />
@@ -164,10 +93,10 @@ const Header = (props: Props) => {
         </Container>
       </Flex>
 
-      {/* <Box bg='#000000' color='white' py='8px' textAlign='center' fontSize='14px' fontWeight='bold'>
+      <Box bg='#000000' color='white' py='8px' textAlign='center' fontSize='14px' fontWeight='bold'>
         <Box
           as='a'
-          href='https://knight.center/'
+          href='/release'
           target='_blank'
           rel='noopener noreferrer'
           px='2'
@@ -175,9 +104,9 @@ const Header = (props: Props) => {
             textDecoration: 'underline'
           }}
         >
-          🎉 Join us to illuminate the possibilities of the future with action. →
+          🎉 Start releasing your XOC and experience the high performance and vast ecosystem of Xone Mainnet. →
         </Box>
-      </Box> */}
+      </Box>
     </Box>
   );
 };

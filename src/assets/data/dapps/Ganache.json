@@ -1,0 +1,8 @@
+{
+    "logo": "https://trufflesuite.com/assets/favicon-32x32.png",
+    "type": ["Infra-and-Tools"],
+    "name": "Ganache",
+    "url": "https://trufflesuite.com/ganache",
+    "description": "A personal blockchain for testing Ethereum contracts.",
+    "state": true
+}

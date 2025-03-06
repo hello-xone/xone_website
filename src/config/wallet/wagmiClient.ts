@@ -2,9 +2,12 @@ import { createWeb3Modal } from '@web3modal/wagmi/react';
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
 import { lineaSepolia, polygonAmoy, sepolia } from 'viem/chains';
 
+import { XoneMainnet } from '../chain/XoneMainnet';
+import { XoneTestnet } from '../chain/XoneTestnet';
+
 const projectId = import.meta.env.VITE_APP_PROJECT_ID;
 
-export const chains = [sepolia, polygonAmoy, lineaSepolia] as const;
+export const chains = [sepolia, polygonAmoy, lineaSepolia, XoneMainnet, XoneTestnet] as const;
 
 // 判断当前是否是支持的chain
 export const isSupportedChain = (chainId: number) => chains.find((chain) => chain.id === chainId);

@@ -19,6 +19,7 @@ export const sleep = (ms: number) => {
     }, ms);
   });
 };
+
 /**
  * 节流函数
  * @param func
@@ -29,7 +30,7 @@ export function throttle<T extends (...args: any[]) => any>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
-  let timeout: number | null = null;
+  let timeout: NodeJS.Timeout | null = null;
   let lastArgs: Parameters<T> | null = null;
 
   const throttled = (...args: Parameters<T>) => {
@@ -50,6 +51,35 @@ export function throttle<T extends (...args: any[]) => any>(
   return throttled;
 }
 
+type DebouncedFunction<T extends (...args: any[]) => any> = {
+  (...args: Parameters<T>): void;
+  cancel: () => void;
+};
+
+export function debounce<T extends (...args: any[]) => any>(
+  func: T,
+  wait: number
+): DebouncedFunction<T> {
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+  const debouncedFn = (...args: Parameters<T>) => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      func(...args);
+    }, wait);
+  };
+
+  debouncedFn.cancel = () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+  };
+
+  return debouncedFn;
+}
+
 // 获取本地文件的url
 export const getLocalFileUrl = (file: File) => {
   return new Promise<string>((res, rej) => {
@@ -64,14 +94,29 @@ export const getLocalFileUrl = (file: File) => {
   });
 };
 
+/**
+ * 是否是外部连接
+ * @param to
+ * @returns
+ */
+export const isExternalLink = (to?: To) => {
+  if (typeof to === 'string') {
+    if (!to.startsWith('/')) {
+      return true;
+    }
+  }
+  return false;
+};
+
 export const getToProps: any = (to?: To) => {
   if (!to) return {};
   if (typeof to === 'string') {
-    if (!to.startsWith('/')) {
+    if (isExternalLink(to)) {
       return {
         as: 'a',
         href: to,
-        target: '_blank'
+        target: '_blank',
+        rel: 'noopener noreferrer'
       };
     }
   }

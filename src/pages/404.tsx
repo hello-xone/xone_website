@@ -1,4 +1,5 @@
-import { Box, Text, Heading, Button, VStack, Link, HStack } from "@chakra-ui/react";
+import { Box, Button, Heading, HStack,Link, Text, VStack } from "@chakra-ui/react";
+
 import { EXTERNAL_LINKS } from '@/lib/external';
 
 export default function NotFoundPage() {

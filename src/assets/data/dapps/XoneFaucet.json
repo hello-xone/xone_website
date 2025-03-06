@@ -1,0 +1,8 @@
+{
+    "logo": "https://faucet.xone.org/favicon.svg",
+    "type": ["Infra-and-Tools"],
+    "name": "Xone Faucet",
+    "url": "https://faucet.xone.org/",
+    "description": "Obtain free test tokens to interact with the Xone Chain test network.",
+    "state": true
+}

@@ -64,6 +64,7 @@ const Grids = (props: Props) => {
               description='Deploy your app on the Xone chain and join one of the fastest-growing EVM ecosystems.'
               bg='#FFF0FD'
               buttonText='Get started'
+              buttonLink={EXTERNAL_LINKS.docs + 'developers/tools'}
             />
           </GridItem>
           <GridItem>

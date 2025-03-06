@@ -1,0 +1,8 @@
+{
+    "logo": "https://cdn.replit.com/dotcom/favicon-196.png",
+    "type": ["Infra-and-Tools"],
+    "name": "Replit",
+    "url": "https://replit.com/",
+    "description": "An online IDE for collaborative coding and rapid testing.",
+    "state": true
+}
