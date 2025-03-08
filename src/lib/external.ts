@@ -18,5 +18,5 @@ export const EXTERNAL_LINKS = {
   RainLink: "https://bridge.xonetest.plus/",
   Discord: "https://discord.gg/Du9y2GHV",
   Suggest_Dapp:
-    "https://github.com/hello-xone/docs/issues/new?template=suggest_dapp.yaml",
+    "https://github.com/hello-xone/official_docs/issues/new?template=suggest_dapp.yaml",
 };
