@@ -4,7 +4,7 @@ export const EXTERNAL_LINKS = {
   TestnetExplorer: "https://testnet.xscscan.com",
   MainExplorer: "https://xscscan.com",
   Events: "https://lu.ma/xone",
-  Github: "https://github.com/huione-labs",
+  Github: "https://github.com/hello-xone/xone_website",
   Twitter: "https://x.com/xone_chain",
   Telegram: "https://t.me/hello_xonechain",
   TelegramDevelopers: "https://t.me/Xone_Developers",
@@ -18,5 +18,5 @@ export const EXTERNAL_LINKS = {
   RainLink: "https://bridge.xonetest.plus/",
   Discord: "https://discord.gg/Du9y2GHV",
   Suggest_Dapp:
-    "https://github.com/huione-labs/docs/issues/new?template=suggest_dapp.yaml",
+    "https://github.com/hello-xone/docs/issues/new?template=suggest_dapp.yaml",
 };
