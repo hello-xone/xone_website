@@ -134,7 +134,7 @@ For any questions or support related to Xone Chian, please reach out to our supp
 
 Thanks goes to these wonderful people 🔥:
 
-<div style="text-align: center;">
+<div align="center">
   <span style="display: inline-block; margin: 5px;">
     <a href="https://github.com/steveliupai">
       <img src="https://avatars.githubusercontent.com/u/3140474?v=4" width="50" height="50" style="border-radius: 50%; border: none;">
