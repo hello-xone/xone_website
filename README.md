@@ -7,6 +7,8 @@
   <p>Xone Chain is a modular Layer 1 blockchain that goes beyond scalability and efficiency. It focuses on ensuring every on-chain action creates tangible, traceable value.</p>
 </div>
 
+<br>
+
 ## 📦 Core Dependencies
 
 | Category             | Technology Selection                                                                     | Version | Description of Purpose                 |
@@ -17,6 +19,8 @@
 | State Management     | [React Query](https://handsonreact.com/docs/react-query) + [Valtio](https://valtio.dev/) | 5.35.1  | Data Flow Management                   |
 | UI Component Library | [Chakra UI](https://chakra-ui.com/)                                                      | 2.10.4  | Customizable Design System             |
 | Animation Library    | [Framer Motion](https://www.framer.com/)                                                 | 11.0.14 | Interactive Animation Implementation   |
+
+<br>
 
 ## 🚀 Quick Start
 
@@ -69,6 +73,8 @@ src/
 └── Home.tsx
 ```
 
+<br>
+
 ## 🤝 Contribution Guidelines
 
 We welcome community contributions to make our Website as comprehensive and useful as possible. If you identify any inaccuracies, want to suggest an improvement, or contribute new content:
@@ -102,6 +108,8 @@ sequenceDiagram
     CI-->>Main: Merge by
 ```
 
+<br>
+
 ## 🌐 Official Channels
 
 For any questions or support related to Xone Chian, please reach out to our support team:
@@ -120,6 +128,8 @@ For any questions or support related to Xone Chian, please reach out to our supp
 
 **News:** [Medium](https://medium.com/@xone_chain)
 
+<br>
+
 ## 🏢 Contributors
 
 Thanks goes to these wonderful people 🔥:
@@ -127,25 +137,27 @@ Thanks goes to these wonderful people 🔥:
 <div style="text-align: center;">
   <span style="display: inline-block; margin: 5px;">
     <a href="https://github.com/steveliupai">
-      <img src="https://avatars.githubusercontent.com/u/3140474?v=4" width="50" height="50" style="border-radius: 50%; object-fit: cover; border: none;">
+      <img src="https://avatars.githubusercontent.com/u/3140474?v=4" width="50" height="50" style="border-radius: 50%; border: none;">
     </a>
   </span>
   <span style="display: inline-block; margin: 5px;">
     <a href="https://github.com/moretimeL">
-      <img src="https://avatars.githubusercontent.com/u/43361848?v=4" width="50" height="50" style="border-radius: 50%; object-fit: cover; border: none;">
+      <img src="https://avatars.githubusercontent.com/u/43361848?v=4" width="50" height="50" style="border-radius: 50%; border: none;">
     </a>
   </span>
   <span style="display: inline-block; margin: 5px;">
     <a href="https://github.com/Mangosagos">
-      <img src="https://avatars.githubusercontent.com/u/111100829?v=4" width="50" height="50" style="border-radius: 50%; object-fit: cover; border: none;">
+      <img src="https://avatars.githubusercontent.com/u/111100829?v=4" width="50" height="50" style="border-radius: 50%; border: none;">
     </a>
   </span>
   <span style="display: inline-block; margin: 5px;">
     <a href="https://github.com/xone-ggbond">
-      <img src="https://avatars.githubusercontent.com/u/200755301?v=4" width="50" height="50" style="border-radius: 50%; object-fit: cover; border: none;">
+      <img src="https://avatars.githubusercontent.com/u/200755301?v=4" width="50" height="50" style="border-radius: 50%; border: none;">
     </a>
   </span>
 </div>
+
+<br>
 
 ## 📜 License Agreement
 
