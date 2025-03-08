@@ -1,12 +1,9 @@
 <!-- 品牌头图区块 -->
 <div align="center">
   <img src="https://xone.org/favicon.svg" width="100" alt="Xone Logo">
-  <h1>Xone Chain</h1>
   <p>Xone Chain is a modular Layer 1 blockchain that goes beyond scalability and efficiency. It focuses on ensuring every on-chain action creates tangible, traceable value.</p>
-
+  <h1>Xone Chain</h1>
 </div>
-
----
 
 ## 📦 Core Dependencies
 
@@ -18,8 +15,6 @@
 | State Management     | [React Query](https://handsonreact.com/docs/react-query) + [Valtio](https://valtio.dev/) | 5.35.1  | Data Flow Management                   |
 | UI Component Library | [Chakra UI](https://chakra-ui.com/)                                                      | 2.10.4  | Customizable Design System             |
 | Animation Library    | [Framer Motion](https://www.framer.com/)                                                 | 11.0.14 | Interactive Animation Implementation   |
-
----
 
 ## 🚀 Quick Start
 
@@ -72,8 +67,6 @@ src/
 └── Home.tsx
 ```
 
----
-
 ## 🤝 Contribution Guidelines
 
 We welcome community contributions to make our Website as comprehensive and useful as possible. If you identify any inaccuracies, want to suggest an improvement, or contribute new content:
@@ -85,10 +78,6 @@ We welcome community contributions to make our Website as comprehensive and usef
 For more information about contributing, please see our [contribution document](https://docs.xone.org/study/contribut).
 
 ### Workflow
-
-<script>
-  mermaid.initialize({ sequence: { showSequenceNumbers: true } });
-</script>
 
 ```mermaid
 ---
@@ -133,62 +122,46 @@ For any questions or support related to Xone Chian, please reach out to our supp
 
 Thanks goes to these wonderful people 🔥:
 
-<style>
-.contributor-table {
+<table cellspacing="5" cellpadding="0"
+  style="
   border: none;
   border-collapse: collapse;
   border-spacing: 0;
-  margin: 0 auto;
-}
-.contributor-table td {
-  padding: 5px !important;
-  border: none !important;
-}
-.contributor-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 0;
-}
-</style>
-
-<table class="contributor-table">
+  margin: 0 auto;"
+  >
   <tbody>
     <tr>
-      <td align="center" valign="top">
+      <td align="center" valign="middle" style="border: none">
         <a href="https://github.com/steveliupai">
           <img src="https://avatars.githubusercontent.com/u/3140474?v=4" 
-               class="contributor-avatar"
-               alt="steveliupai">
+               width="50" 
+               style="border-radius: 50%; object-fit: cover;">
         </a>
       </td>
-      <td align="center" valign="top">
+      <td align="center" valign="middle" style="border: none">
         <a href="https://github.com/moretimeL">
           <img src="https://avatars.githubusercontent.com/u/43361848?v=4" 
-               class="contributor-avatar"
-               alt="moretimeL">
+               width="50" 
+               style="border-radius: 50%; object-fit: cover;">
         </a>
       </td>
-      <td align="center" valign="top">
+      <td align="center" valign="middle" style="border: none">
         <a href="https://github.com/Mangosagos">
           <img src="https://avatars.githubusercontent.com/u/111100829?v=4" 
-               class="contributor-avatar"
-               alt="Mangosagos">
+               width="50" 
+               style="border-radius: 50%; object-fit: cover;">
         </a>
       </td>
-      <td align="center" valign="top">
+      <td align="center" valign="middle" style="border: none">
         <a href="https://github.com/xone-ggbond">
           <img src="https://avatars.githubusercontent.com/u/200755301?v=4" 
-               class="contributor-avatar"
-               alt="xone-ggbond">
+               width="50" 
+               style="border-radius: 50%; object-fit: cover;">
         </a>
       </td>
     </tr>
   </tbody>
 </table>
-
----
 
 ## 📜 License Agreement
 
@@ -207,8 +180,6 @@ This project adopts the **MIT License**, with the following additional terms:
 // Modified by [Your Name] on [YYYY-MM-DD]
 // Changes: [Briefly describe the changes]
 ```
-
----
 
 <div align="center">
   <img src="https://xone.org//imgs/xone-logo-black.png" width="20%" alt="Xone Logo">
