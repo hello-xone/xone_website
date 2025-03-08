@@ -2,12 +2,7 @@
 <div align="center">
   <img src="https://xone.org/favicon.svg" width="100" alt="Xone Logo">
   <p>Xone Chain is a modular Layer 1 blockchain that goes beyond scalability and efficiency. It focuses on ensuring every on-chain action creates tangible, traceable value.</p>
-  <p style="
-    font-weight: bold;
-    font-size: 2.5rem;
-    background: linear-gradient(90deg, rgba(255,4,32,1) 0%, rgba(255,70,0,0.5032387955182073) 47%, rgba(99,15,255,0.6601015406162465) 81%);
-    -webkit-background-clip: text;
-    color: transparent;">
+  <p style="font-weight: bold; font-size: 2.5rem; background: linear-gradient(90deg, rgba(255,4,32,1) 0%, rgba(255,70,0,0.5032387955182073) 47%, rgba(99,15,255,0.6601015406162465) 81%); color: transparent; background-clip: text;">
     Xone Chain
   </p>
 </div>
@@ -129,35 +124,27 @@ For any questions or support related to Xone Chian, please reach out to our supp
 
 Thanks goes to these wonderful people 🔥:
 
-<table style="border: none!important; border-collapse: collapse!important; margin: auto;">
-  <tbody style="border: none!important;">
-    <tr style="border: none!important;">
-      <td style="border: none!important; padding: 2px;">
+<table cellspacing="5" cellpadding="0" style="border-collapse: collapse; margin: 0 auto;">
+  <tbody>
+    <tr>
+      <td align="center" valign="middle">
         <a href="https://github.com/steveliupai">
-          <img src="https://avatars.githubusercontent.com/u/3140474?v=4" 
-               width="50" 
-               style="border-radius: 50%; object-fit: cover;">
+          <img src="https://avatars.githubusercontent.com/u/3140474?v=4" width="50" style="border-radius: 50%; object-fit: cover; border: none;">
         </a>
       </td>
-      <td style="border: none!important; padding: 2px;">
+      <td align="center" valign="middle">
         <a href="https://github.com/moretimeL">
-          <img src="https://avatars.githubusercontent.com/u/43361848?v=4" 
-               width="50" 
-               style="border-radius: 50%; object-fit: cover;">
+          <img src="https://avatars.githubusercontent.com/u/43361848?v=4" width="50" style="border-radius: 50%; object-fit: cover; border: none;">
         </a>
       </td>
-      <td style="border: none!important; padding: 2px;">
+      <td align="center" valign="middle">
         <a href="https://github.com/Mangosagos">
-          <img src="https://avatars.githubusercontent.com/u/111100829?v=4" 
-               width="50" 
-               style="border-radius: 50%; object-fit: cover;">
+          <img src="https://avatars.githubusercontent.com/u/111100829?v=4" width="50" style="border-radius: 50%; object-fit: cover; border: none;">
         </a>
       </td>
-      <td style="border: none!important; padding: 2px;">
+      <td align="center" valign="middle">
         <a href="https://github.com/xone-ggbond">
-          <img src="https://avatars.githubusercontent.com/u/200755301?v=4" 
-               width="50" 
-               style="border-radius: 50%; object-fit: cover;">
+          <img src="https://avatars.githubusercontent.com/u/200755301?v=4" width="50" style="border-radius: 50%; object-fit: cover; border: none;">
         </a>
       </td>
     </tr>
