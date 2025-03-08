@@ -2,7 +2,14 @@
 <div align="center">
   <img src="https://xone.org/favicon.svg" width="100" alt="Xone Logo">
   <p>Xone Chain is a modular Layer 1 blockchain that goes beyond scalability and efficiency. It focuses on ensuring every on-chain action creates tangible, traceable value.</p>
-  <h1>Xone Chain</h1>
+  <div style="
+    font-weight: bold;
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, rgba(255,4,32,1) 0%, rgba(255,70,0,0.5032387955182073) 47%, rgba(99,15,255,0.6601015406162465) 81%);
+    -webkit-background-clip: text;
+    color: transparent;">
+    Xone Chain
+    </p>
 </div>
 
 ## 📦 Core Dependencies
