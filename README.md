@@ -1,8 +1,10 @@
 <!-- 品牌头图区块 -->
 <div align="center">
   <img src="https://xone.org/favicon.svg" width="100" alt="Xone Logo">
-  <p>Xone Chain is a modular Layer 1 blockchain that goes beyond scalability and efficiency. It focuses on ensuring every on-chain action creates tangible, traceable value.</p>
+  <br>
+  <br>
   <img src="./public/imgs/Xone.svg" width="50%" alt="Xone Logo">
+  <p>Xone Chain is a modular Layer 1 blockchain that goes beyond scalability and efficiency. It focuses on ensuring every on-chain action creates tangible, traceable value.</p>
 </div>
 
 ## 📦 Core Dependencies
@@ -122,27 +124,27 @@ For any questions or support related to Xone Chian, please reach out to our supp
 
 Thanks goes to these wonderful people 🔥:
 
-<div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-  <div>
+<div style="text-align: center;">
+  <span style="display: inline-block; margin: 5px;">
     <a href="https://github.com/steveliupai">
-      <img src="https://avatars.githubusercontent.com/u/3140474?v=4" width="50" style="border-radius: 50%; object-fit: cover; border: none;">
+      <img src="https://avatars.githubusercontent.com/u/3140474?v=4" width="50" height="50" style="border-radius: 50%; object-fit: cover; border: none;">
     </a>
-  </div>
-  <div>
+  </span>
+  <span style="display: inline-block; margin: 5px;">
     <a href="https://github.com/moretimeL">
-      <img src="https://avatars.githubusercontent.com/u/43361848?v=4" width="50" style="border-radius: 50%; object-fit: cover; border: none;">
+      <img src="https://avatars.githubusercontent.com/u/43361848?v=4" width="50" height="50" style="border-radius: 50%; object-fit: cover; border: none;">
     </a>
-  </div>
-  <div>
+  </span>
+  <span style="display: inline-block; margin: 5px;">
     <a href="https://github.com/Mangosagos">
-      <img src="https://avatars.githubusercontent.com/u/111100829?v=4" width="50" style="border-radius: 50%; object-fit: cover; border: none;">
+      <img src="https://avatars.githubusercontent.com/u/111100829?v=4" width="50" height="50" style="border-radius: 50%; object-fit: cover; border: none;">
     </a>
-  </div>
-  <div>
+  </span>
+  <span style="display: inline-block; margin: 5px;">
     <a href="https://github.com/xone-ggbond">
-      <img src="https://avatars.githubusercontent.com/u/200755301?v=4" width="50" style="border-radius: 50%; object-fit: cover; border: none;">
+      <img src="https://avatars.githubusercontent.com/u/200755301?v=4" width="50" height="50" style="border-radius: 50%; object-fit: cover; border: none;">
     </a>
-  </div>
+  </span>
 </div>
 
 ## 📜 License Agreement
