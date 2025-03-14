@@ -159,6 +159,12 @@ Thanks goes to these wonderful people 🔥:
 
 <br>
 
+## 👀 Stats
+
+![Alt](https://repobeats.axiom.co/api/embed/dc3f0fdc6756b6f34bd8c11b4b7b1201dda68fdb.svg "Repobeats 分析图像")
+
+<br>
+
 ## 📜 License Agreement
 
 This project adopts the **MIT License**, with the following additional terms:
