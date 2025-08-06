@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+stats.html
 
 # Editor directories and files
 !.vscode/extensions.json
@@ -23,3 +24,6 @@ dist-ssr
 *.sw?
 package-lock.json
 yarn.lock
+
+push.sh
+sync.sh

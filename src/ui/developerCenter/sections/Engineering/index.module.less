@@ -1,0 +1,113 @@
+.wrapper {
+  margin: 180px auto;
+  // background: linear-gradient(90deg, #ff0420 0%, #232323 50%);
+  // border-radius: 32px;
+  // padding: 118px 72px;
+}
+.info {
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // text-align: center;
+}
+.slogon {
+  max-width: 878px;
+}
+.description {
+  max-width: 658px;
+  margin-top: 24px;
+}
+.content {
+  margin-top: 44px;
+  width: 100%;
+}
+.githubsWrapper {
+  width: 1614px;
+  overflow: hidden;
+}
+.gits {
+  display: flex;
+  width: calc(100% + 24px);
+  margin-left: -24px;
+  flex-wrap: wrap;
+}
+.git {
+  position: relative;
+  padding: 24px;
+  background-color: var(--b2);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  overflow: hidden;
+  width: calc(25% - 24px);
+  margin: 24px 0 0 24px;
+}
+.githubIcon {
+  width: 24px;
+  margin-right: 8px;
+  color: #2f2b43;
+}
+.name {
+  color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 12px;
+  font-size: 14px;
+  height: 24px;
+  border-bottom-left-radius: 8px;
+  background-color: black;
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 1660px) {
+  .githubsWrapper {
+    width: 1224px;
+  }
+}
+@media (max-width: 1300px) {
+  .content {
+    margin-top: 38px;
+  }
+  .wrapper {
+    margin: 130px auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .content {
+    margin-top: 36px;
+  }
+}
+
+@media (max-width: 900px) {
+  .wrapper {
+    margin: 100px auto;
+  }
+  .gits {
+    width: calc(100% + 16px);
+    margin-left: -16px;
+  }
+  .git {
+    width: calc(25% - 16px);
+    margin: 16px 0 0 16px;
+  }
+}
+@media (max-width: 680px) {
+  .wrapper {
+    margin: 80px auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    border-radius: 16px;
+  }
+  .content {
+    margin-top: 24px;
+  }
+  .githubsWrapper {
+    width: 1216px;
+  }
+}

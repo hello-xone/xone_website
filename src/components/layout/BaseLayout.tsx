@@ -1,29 +1,39 @@
-import { Box, Center, Spinner } from '@chakra-ui/react';
-import React, { Suspense } from 'react';
-import { Outlet } from 'react-router';
+import { Suspense, useEffect, useMemo } from "react";
+import { Outlet, useLocation } from "react-router";
+import { Footer } from "./Footer/index";
+import Header from "./Header/index";
+import { CircularProgress } from "@mui/material";
 
-import Footer from './Footer';
-import Header from './Header';
+const BaseLayout = () => {
+  const location = useLocation();
 
-type Props = {};
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (location.pathname === "/404") {
+      document.documentElement.style.backgroundColor = "#F8F6F5";
+    } else {
+      document.documentElement.style.backgroundColor = "unset";
+    }
+  }, [location.pathname]);
 
-const BaseLayout = (props: Props) => {
+  useEffect(() => {});
+
   return (
-    <Box>
+    <div>
       <Header />
-      <Box as='main'>
+      <main>
         <Suspense
           fallback={
-            <Center h='400px'>
-              <Spinner boxSize='32px' />
-            </Center>
+            <div className="w-full h-[80vh] flex justify-center items-center">
+              <CircularProgress size="32px" />
+            </div>
           }
         >
           <Outlet />
         </Suspense>
-      </Box>
+      </main>
       <Footer />
-    </Box>
+    </div>
   );
 };
 

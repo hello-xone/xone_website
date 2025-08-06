@@ -1,0 +1,111 @@
+.box {
+  margin: 302px auto;
+  background: linear-gradient(90deg, #ff0420 0%, #232323 50%);
+  border-radius: 32px;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 113px 98px;
+}
+.title {
+  font-size: 96px;
+  color: white;
+}
+.description {
+  margin-top: 32px;
+  max-width: 808px;
+}
+.btnWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 64px;
+}
+.btnIcon {
+  width: 14px;
+  margin-left: 8px;
+}
+@media (max-width: 1660px) {
+  .box {
+    margin: 240px auto;
+  }
+}
+@media (max-width: 1300px) {
+  .title {
+    font-size: 70px;
+  }
+  .box {
+    margin: 190px auto;
+  }
+}
+
+@media (max-width: 1100px) {
+  .box {
+    margin: 160px auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 64px;
+  }
+  .box {
+    padding: 85px 50px;
+  }
+}
+@media (max-width: 900px) {
+  .title {
+    font-size: 54px;
+  }
+}
+@media (max-width: 768px) {
+  .title {
+    font-size: 44px;
+  }
+  .description {
+    margin-top: 24px;
+  }
+  .btnWrapper {
+    margin-top: 54px;
+  }
+  .box {
+    padding: 65px 36px;
+  }
+}
+
+@media (max-width: 680px) {
+  .box {
+    margin: 120px auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 36px;
+  }
+  .btnWrapper {
+    margin-top: 48px;
+  }
+  .box {
+    padding: 48px 24px;
+    border-radius: 9px;
+  }
+}
+@media (max-width: 480px) {
+  .btnWrapper {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+  .btn {
+    width: 247px;
+    display: flex;
+    justify-content: center;
+  }
+  .box {
+    margin: 96px auto;
+  }
+}

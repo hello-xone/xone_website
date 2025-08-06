@@ -1,14 +1,13 @@
-import { To } from 'react-router';
-import { Link } from 'react-router-dom';
+import { To } from "react-router";
+import { Link } from "react-router-dom";
 
 /**
- * 省略字符
  * @param str
  * @returns
  */
 export const truncateString = (str: string, pointLength = 4) => {
   if (!str) return str;
-  const points = '.'.repeat(pointLength);
+  const points = ".".repeat(pointLength);
   return str.replace(/(^.{4})(.*)(.{4}$)/, `$1${points}$3`);
 };
 
@@ -19,9 +18,8 @@ export const sleep = (ms: number) => {
     }, ms);
   });
 };
-
 /**
- * 节流函数
+ *
  * @param func
  * @param wait
  * @returns
@@ -30,13 +28,13 @@ export function throttle<T extends (...args: any[]) => any>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout | null = null;
+  let timeout: number | null = null;
   let lastArgs: Parameters<T> | null = null;
 
   const throttled = (...args: Parameters<T>) => {
     if (timeout === null) {
       func(...args);
-      timeout = setTimeout(() => {
+      timeout = window.setTimeout(() => {
         if (lastArgs !== null) {
           func(...lastArgs);
           lastArgs = null;
@@ -49,35 +47,6 @@ export function throttle<T extends (...args: any[]) => any>(
   };
 
   return throttled;
-}
-
-type DebouncedFunction<T extends (...args: any[]) => any> = {
-  (...args: Parameters<T>): void;
-  cancel: () => void;
-};
-
-export function debounce<T extends (...args: any[]) => any>(
-  func: T,
-  wait: number
-): DebouncedFunction<T> {
-  let timeoutId: ReturnType<typeof setTimeout> | undefined;
-
-  const debouncedFn = (...args: Parameters<T>) => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-    timeoutId = setTimeout(() => {
-      func(...args);
-    }, wait);
-  };
-
-  debouncedFn.cancel = () => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-  };
-
-  return debouncedFn;
 }
 
 // 获取本地文件的url
@@ -94,34 +63,19 @@ export const getLocalFileUrl = (file: File) => {
   });
 };
 
-/**
- * 是否是外部连接
- * @param to
- * @returns
- */
-export const isExternalLink = (to?: To) => {
-  if (typeof to === 'string') {
-    if (!to.startsWith('/')) {
-      return true;
-    }
-  }
-  return false;
-};
-
 export const getToProps: any = (to?: To) => {
   if (!to) return {};
-  if (typeof to === 'string') {
-    if (isExternalLink(to)) {
+  if (typeof to === "string") {
+    if (!to.startsWith("/")) {
       return {
-        as: 'a',
+        as: "a",
         href: to,
-        target: '_blank',
-        rel: 'noopener noreferrer'
+        target: "_blank",
       };
     }
   }
   return {
     as: Link,
-    to
+    to,
   };
 };

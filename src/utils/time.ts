@@ -1,13 +1,12 @@
-import dayjs from 'dayjs';
-import duration from 'dayjs/plugin/duration';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
-import utc from 'dayjs/plugin/utc';
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import utc from "dayjs/plugin/utc";
 
 dayjs.extend(duration);
 dayjs.extend(utc);
 dayjs.extend(localizedFormat);
 
-// 获取时间的差距，并显示 **D **H
 export function getTimeDifference(endTime: TDate) {
   const now = dayjs();
   const end = dayjs(endTime);
@@ -24,7 +23,7 @@ export function getTimeDifference(endTime: TDate) {
       return `${minutes}M ${seconds}S`;
     }
   }
-  return '0M 0S';
+  return "0M 0S";
 }
 export function isEndTimeGreaterThanNow(endTime: TDate) {
   const now = dayjs();

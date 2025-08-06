@@ -1,0 +1,16 @@
+# 后端服务
+VITE_APP_BASE_URL=""
+# NFT scan 后端服务
+VITE_APP_NFT_SCAN_SERVER=""
+# xone 主网 rpc 地址
+VITE_APP_XO_MAIN_NET_RPC=""
+# xone 测试网 rpc 地址
+VITE_APP_XO_TEST_NET_RPC=""
+# 用于查询 xone 主网 epoch 的合约地址
+VITE_APP_XO_RELEASE_MAIN_NET_CONTRACT=""
+# 用于查询 xone 测试网 epoch 的合约地址
+VITE_APP_XO_RELEASE_TEST_NET_CONTRACT=""
+# xone 主网 区块链浏览器接口地址
+VITE_APP_XO_MAIN_NET_SCAN=""
+# xone 测试网 区块链浏览器接口地址
+VITE_APP_XO_TEST_NET_SCAN=""

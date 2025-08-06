@@ -1,58 +1,54 @@
-import { lazy } from 'react';
-import { Navigate, RouteObject } from 'react-router';
-
-import BaseLayout from '@/components/layout/BaseLayout';
-
+import { lazy } from "react";
+import { Navigate, RouteObject } from "react-router";
+import BaseLayout from "@/components/layout/BaseLayout";
+import Home from "@/pages/Home.tsx";
+import DeveloperCenter from "@/pages/DeveloperCenter";
+import Commercial from "@/pages/Commercial";
 export const Routes: RouteObject[] = [
   {
-    path: '/',
+    path: "/",
     Component: BaseLayout,
     children: [
       {
         index: true,
-        Component: lazy(() => import('@/pages/Home.tsx'))
+        Component: Home,
       },
-      {
-        path: 'apps',
-        children: [
-          {
-            index: true,
-            Component: lazy(() => import('@/pages/apps/Apps.tsx'))
-          }
-        ]
-      },
-      {
-        path: 'build',
-        children: [
-          {
-            index: true,
-            Component: lazy(() => import('@/pages/build/Build.tsx'))
-          },
-          {
-            path: 'access',
-            Component: lazy(() => import('@/pages/build/access/Access'))
-          }
-        ]
-      },
-      {
-        path: 'release',
-        children: [
-          {
-            index: true,
-            Component: lazy(() => import('@/pages/release/Release.tsx'))
-          }
-        ]
-      }
-    ]
+    ],
   },
   {
-    path: '404',
-    Component: lazy(() => import('@/pages/404.tsx'))
+    path: "/developer",
+    Component: BaseLayout,
+    children: [
+      {
+        index: true,
+        Component: DeveloperCenter,
+      },
+    ],
   },
   {
-    path: '*',
+    path: "/commercial",
+    Component: BaseLayout,
+    children: [
+      {
+        index: true,
+        Component: Commercial,
+      },
+    ],
+  },
+  {
+    path: "/404",
+    Component: BaseLayout,
+    children: [
+      {
+        index: true,
+        Component: lazy(() => import("@/pages/404")),
+      },
+    ],
+  },
+  {
+    path: "*",
     Component: () => {
-      return <Navigate to={'/404'} replace />;
-    }
-  }
+      return <Navigate to={"/404"} replace />;
+    },
+  },
 ];

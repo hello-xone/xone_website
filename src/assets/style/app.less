@@ -1,176 +1,168 @@
-:root {
-  --app-header-height: 64px;
-  --app-header-alert-height: 0px;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-a:focus,
-input:focus,
-p:focus,
-div:focus {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  // -webkit-user-modify: read-write-plaintext-only;
-}
-
-.pt-header {
-  padding-top: var(--app-header-height);
-}
-
-.nunito-sans {
-  font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
-  font-optical-sizing: auto;
+@font-face {
+  font-family: Figtree;
+  src: url("../fonts/Figtree-Light.ttf") format("truetype");
+  font-weight: 300;
   font-style: normal;
-  font-variation-settings: 'wdth' 100, 'YTLC' 500;
 }
 
-.absolute-center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+@font-face {
+  font-family: Figtree;
+  src: url("../fonts/Figtree-Medium.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Figtree;
+  src: url("../fonts/Figtree-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Figtree;
+  src: url("../fonts/Figtree-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Figtree;
+  src: url("../fonts/Figtree-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Figtree;
+  src: url("../fonts/Figtree-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Figtree;
+  color: var(--t1);
 }
 
 a {
   cursor: pointer;
-
   &:disabled {
     cursor: not-allowed;
   }
+}
+
+#root {
+  * {
+    box-sizing: border-box;
+    font-family: Figtree;
+    line-height: 125%;
+  }
+
+  .__lineHeight150 {
+    line-height: 175%;
+  }
+  .__lineHeight115 {
+    line-height: 130%;
+  }
+}
+#root:lang(en),
+#root:lang(ms),
+#root:lang(vi),
+#root:lang(th) {
+  * {
+    line-height: 100%;
+  }
+  .__lineHeight115 {
+    line-height: 115%;
+  }
+  .__lineHeight150 {
+    line-height: 150%;
+  }
+
+  .MuiAlert-message {
+    line-height: 150%;
+  }
+}
+
+h1,
+h2,
+h3 {
+  color: var(--t1);
+}
+
+h1 {
+  font-weight: 800;
+}
+h2 {
+  font-weight: 700;
+}
+h3 {
+  font-weight: 600;
+}
+p {
+  text-indent: 0;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
 }
 
 .seamlesswrap.swiper > .swiper-wrapper {
   transition-timing-function: linear !important;
 }
 
-.rc-picker {
-  &-dropdown.rc-picker-dropdown-range {
-    box-shadow: none;
-
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0) transparent;
-
-    .rc-picker-footer {
-      background-color: #fff;
-    }
-
-    .rc-picker-range-arrow {
-      &::before,
-      &::after {
-        border-color: #fff;
-      }
-    }
-
-    .rc-picker-header {
-      height: 48px;
-    }
-
-    .rc-picker-date-panel {
-      width: 288px;
-
-      @media (max-width: 768px) {
-        width: 220px;
-      }
-
-      .rc-picker-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        button:hover {
-          color: #ed0000;
-        }
-
-        &-view {
-          button {
-            font-weight: 600;
-            height: 30px;
-            line-height: 30px;
-
-            & + button {
-              margin-left: 8px;
-            }
-          }
-        }
-        & > button {
-          min-width: 20px;
-          font-size: 20px;
-        }
-      }
-
-      .rc-picker-body {
-        padding: 8px 18px;
-
-        @media (max-width: 768px) {
-          padding: 8px 6px;
-        }
-
-        .rc-picker-content {
-          width: 100%;
-        }
-      }
-
-      .rc-picker-cell-today > .rc-picker-cell-inner {
-        border-color: #ed0000;
-      }
-
-      .rc-picker-cell-range-start > .rc-picker-cell-inner,
-      .rc-picker-cell-range-end > .rc-picker-cell-inner,
-      .rc-picker-cell-selected > .rc-picker-cell-inner {
-        background-color: rgba(255, 0, 0, 0.4);
-      }
-
-      .rc-picker-cell-in-range > .rc-picker-cell-inner {
-        background-color: rgba(255, 0, 0, 0.1);
-      }
-    }
-
-    .rc-picker-time-panel {
-      .rc-picker-header-view {
-        line-height: 30px;
-      }
-
-      &-column {
-        scrollbar-width: thin;
-        scrollbar-color: rgba(0, 0, 0, 0.45) transparent;
-
-        @media (max-width: 768px) {
-          width: 48px;
-        }
-
-        > li {
-          height: 28px;
-
-          &:hover {
-            background-color: rgba(255, 0, 0, 0.1);
-          }
-
-          &.rc-picker-time-panel-cell-selected {
-            background-color: rgba(255, 0, 0, 0.5);
-          }
-          .rc-picker-time-panel-cell-inner {
-            width: 48px;
-            height: 28px;
-            line-height: 28px;
-
-            @media (max-width: 768px) {
-              width: 40px;
-              height: 24px;
-              line-height: 24px;
-            }
-          }
-        }
-      }
-
-      .rc-picker-content {
-        max-height: none;
-        height: 228px;
-      }
-    }
+.__hiddenScroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
+:root {
+  --app-header-height: 64px;
+  --app-header-alert-height: 0px;
+
+  --primary: #ff0420;
+  --primary-dark: #d9031b;
+
+  --ghost: rgba(0, 0, 0, 0.2);
+  --ghost-hover: rgba(0, 0, 0, 0.4);
+
+  --white-ghost: rgba(255, 255, 255, 0.2);
+  --white-ghost-hover: rgba(255, 255, 255, 0.4);
+
+  --shadow1: 0 0 4px #dfdfdf;
+
+  --t1: #000000;
+  --t2: #666666;
+  --t3: #ffffff;
+  --t4: #ff0420;
+
+  --b1: #ffffff;
+  --b2: #faf9f9;
+  --b3: #f0efef;
+  --b4: #000000;
+  --b5: #f2f2f2;
+  --border1: #ebebeb;
+
+  --btn-black-bg: #000000;
+  --btn-black-bg-hover: #cc031a;
+}

@@ -1,0 +1,100 @@
+.container {
+  display: none;
+  width: 100%;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.menu {
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  background-color: var(--b1);
+}
+
+.show {
+  .menu {
+    height: 100%;
+  }
+}
+
+.nav {
+  margin-top: 12px;
+}
+
+.arrowIcon {
+  width: 24px;
+  transform: rotateZ(-90deg);
+  color: var(--t2);
+}
+
+.navName {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  margin-top: 24px;
+  cursor: pointer;
+  font-size: 20px;
+
+  &:nth-of-type(1) {
+    margin-top: 0;
+  }
+}
+
+.open {
+  .arrowIcon {
+    transform: rotateZ(0);
+  }
+}
+
+.list {
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.groupInfo {
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+.groupTitle {
+  font-size: 16px;
+}
+
+.groupDescription {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.link {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--t2);
+  font-size: 14px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.linkArrow {
+  width: 10px;
+  margin-right: 7px;
+  transform: rotateZ(45deg);
+}
+
+.infoBox {
+  background-color: var(--b2);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+@media (max-width: 1024px) {
+  .show.container {
+    display: block;
+  }
+}

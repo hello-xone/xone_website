@@ -1,0 +1,276 @@
+.wrapper {
+  margin-top: 240px;
+}
+
+.title {
+  text-align: center;
+}
+.content {
+  margin-top: 64px;
+}
+
+.marqueeWrapper {
+  display: flex;
+  min-width: max-content;
+}
+.cardWrapper {
+  display: flex;
+  flex-direction: column;
+}
+.marqueeWrapper,
+.cardWrapper,
+.marquee {
+  gap: 16px;
+}
+
+.card1,
+.card2 {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card1,
+.card2 {
+  position: relative;
+  border-radius: 24px;
+  background-color: #aaa;
+  height: 480px;
+  overflow: hidden;
+  &:hover {
+    .maskLayer {
+      opacity: 1;
+    }
+  }
+}
+.shadow {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  img {
+    width: 100%;
+  }
+}
+.number,
+.infoDesc {
+  z-index: 1;
+}
+.number {
+  font-weight: 900;
+  font-size: 48px;
+}
+.infoDesc {
+  margin-top: 12px;
+  font-weight: 400;
+  font-size: 16px;
+}
+.maskLayer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+.card1 {
+  width: 390.98px;
+  .maskLayer {
+    padding: 32px;
+  }
+}
+.card2 {
+  width: 808px;
+  .maskLayer {
+    padding: 48px;
+  }
+}
+
+.card1.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: left;
+  background: linear-gradient(180deg, #ff001e 0%, #ffccd2 100%);
+}
+.maskLayerTitle {
+  font-size: 24px;
+  color: white;
+  text-align: left;
+}
+.description {
+  color: white;
+  margin-top: 14px;
+  font-size: 16px;
+  text-align: left;
+}
+@media (max-width: 1660px) {
+  .content {
+    margin-top: 48px;
+  }
+  .marqueeWrapper,
+  .cardWrapper,
+  .marquee {
+    gap: 14px;
+  }
+  .card1 {
+    width: 318.17px;
+  }
+  .card2 {
+    width: 657px;
+  }
+  .card1,
+  .card2 {
+    border-radius: 16px;
+    background-color: #aaa;
+    height: 390px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .wrapper {
+    margin-top: 190px;
+  }
+  .card1 {
+    width: 277.37px;
+  }
+  .card2 {
+    width: 572.77px;
+  }
+  .card1,
+  .card2 {
+    border-radius: 16px;
+    background-color: #aaa;
+    height: 340px;
+  }
+  .card1 {
+    .maskLayer {
+      padding: 24px;
+    }
+  }
+  .card2 {
+    .maskLayer {
+      padding: 32px;
+    }
+  }
+  .maskLayerTitle {
+    font-size: 22px;
+  }
+  .description {
+    font-size: 15px;
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .wrapper {
+    margin-top: 160px;
+  }
+}
+@media (max-width: 900px) {
+  .marqueeWrapper,
+  .cardWrapper,
+  .marquee {
+    gap: 12px;
+  }
+  .card1 {
+    width: 212.11px;
+  }
+  .card2 {
+    width: 438px;
+  }
+  .card1,
+  .card2 {
+    border-radius: 16px;
+    background-color: #aaa;
+    height: 260px;
+  }
+  .number {
+    font-size: 36px;
+  }
+  .infoDesc {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  .card1 {
+    .maskLayer {
+      padding: 16px;
+    }
+  }
+  .card2 {
+    .maskLayer {
+      padding: 24px;
+    }
+  }
+  .maskLayerTitle {
+    font-size: 18px;
+  }
+  .description {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+}
+@media (max-width: 680px) {
+  .wrapper {
+    margin-top: 120px;
+  }
+
+  .marqueeWrapper,
+  .cardWrapper,
+  .marquee {
+    gap: 8px;
+  }
+  .card1 {
+    width: 160px;
+  }
+  .card2 {
+    width: 326.91px;
+  }
+  .card1,
+  .card2 {
+    border-radius: 16px;
+    background-color: #aaa;
+    height: 194px;
+  }
+  .number {
+    font-size: 28px;
+  }
+  .infoDesc {
+    margin-top: 6px;
+    font-size: 13px;
+  }
+  .card1 {
+    .maskLayer {
+      padding: 12px;
+    }
+  }
+  .card2 {
+    .maskLayer {
+      padding: 18px;
+    }
+  }
+  .maskLayerTitle {
+    font-size: 16px;
+  }
+  .description {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+}
+@media (max-width: 480px) {
+  .wrapper {
+    margin-top: 96px;
+  }
+  .content {
+    margin-top: 24px;
+  }
+}

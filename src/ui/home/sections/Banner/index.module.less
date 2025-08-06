@@ -1,0 +1,149 @@
+.banner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+}
+.content {
+  position: absolute;
+  top: 144px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.slogan {
+  font-size: 56px;
+}
+.description {
+  font-size: 16px;
+  margin-top: 12px;
+  max-width: 680px;
+  width: 100%;
+}
+.sendIcon {
+  width: 48px;
+  min-width: 48px;
+  cursor: pointer;
+  color: black;
+  margin-left: 4px;
+  &:hover {
+    color: var(--btn-black-bg-hover);
+  }
+}
+.sendEmailWrapper {
+  position: relative;
+  z-index: 2;
+  margin-top: 19px;
+  display: flex;
+  gap: 14px;
+}
+
+.validEmail {
+  input {
+    background-color: rgb(232, 240, 254);
+  }
+}
+.emailInput {
+  width: 405px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.startBuildBtn {
+  height: 52px;
+}
+.explore {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--t1);
+  font-weight: 600;
+  font-size: 18px;
+}
+.arrowIcon {
+  width: 14px;
+  margin-left: 4px;
+}
+
+.smallBtns {
+  display: none;
+}
+@media (max-width: 1300px) {
+  .content {
+    top: 120px;
+  }
+}
+@media (max-width: 1024px) {
+  .banner {
+    height: unset;
+  }
+  .video {
+    height: unset;
+  }
+  .content {
+    display: block;
+    margin-top: 48px;
+    position: unset;
+    padding: 0 16px;
+    transform: unset;
+    text-align: left;
+  }
+  .slogan {
+    font-size: 40px;
+  }
+  .description {
+    max-width: unset;
+  }
+  .emailInput {
+    width: 100%;
+    max-width: 480px;
+    background-color: var(--b5);
+  }
+  .explore {
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  .description {
+    color: var(--t2);
+  }
+  //
+
+  .explore,
+  .startBuildBtn {
+    display: none;
+  }
+  .smallBtns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    width: 100%;
+  }
+
+  .btn {
+    width: calc(50% - 8px);
+    font-size: 16px;
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .slogan {
+    font-size: 36px;
+  }
+  .content {
+    margin-top: 36px;
+  }
+}
