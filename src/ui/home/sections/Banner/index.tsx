@@ -87,7 +87,7 @@ export const Banner = () => {
         </video>
         <div className={`${styles.content}`}>
           <Animation animationClassName={AnimationType.SLIDE_IN_UP} delay={0.1}>
-            <h1 className={` ${styles.slogan}`}>{t("home:bannerTitle")}</h1>
+            <h1 className={` ${styles.slogan} text-t1`}>{t("home:bannerTitle")}</h1>
           </Animation>
           <Animation animationClassName={AnimationType.SLIDE_IN_UP} delay={0.2}>
             <p className={`${styles.description}`}>
