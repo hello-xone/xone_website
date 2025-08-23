@@ -1,9 +1,12 @@
 import { lazy } from "react";
 import { Navigate, RouteObject } from "react-router";
+
 import BaseLayout from "@/components/layout/BaseLayout";
-import Home from "@/pages/Home.tsx";
-import DeveloperCenter from "@/pages/DeveloperCenter";
 import Commercial from "@/pages/Commercial";
+import DeveloperCenter from "@/pages/DeveloperCenter";
+import Home from "@/pages/Home.tsx";
+import VerificationChannel from "@/pages/VerificationChannel";
+
 export const Routes: RouteObject[] = [
   {
     path: "/",
@@ -32,6 +35,16 @@ export const Routes: RouteObject[] = [
       {
         index: true,
         Component: Commercial,
+      },
+    ],
+  },
+  {
+    path: "/verificationChannel",
+    Component: BaseLayout,
+    children: [
+      {
+        index: true,
+        Component: VerificationChannel,
       },
     ],
   },
