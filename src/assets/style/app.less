@@ -3,44 +3,45 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: Figtree;
-  src: url("../fonts/Figtree-Light.ttf") format("truetype");
+  font-family: Switzer;
+  src: url("../fonts/Switzer-Light.otf") format("opentype");
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
-  font-family: Figtree;
-  src: url("../fonts/Figtree-Medium.ttf") format("truetype");
+  font-family: Switzer;
+  src: url('../fonts/Switzer-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Switzer;
+  src: url("../fonts/Switzer-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: Figtree;
-  src: url("../fonts/Figtree-Medium.ttf") format("truetype");
+  font-family: Switzer;
+  src: url("../fonts/Switzer-Medium.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: Figtree;
-  src: url("../fonts/Figtree-SemiBold.ttf") format("truetype");
+  font-family: Switzer;
+  src: url("../fonts/Switzer-Semibold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: Figtree;
-  src: url("../fonts/Figtree-Bold.ttf") format("truetype");
+  font-family: Switzer;
+  src: url("../fonts/Switzer-Bold.ttf") format("truetype");
   font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Figtree;
-  src: url("../fonts/Figtree-ExtraBold.ttf") format("truetype");
-  font-weight: 800;
   font-style: normal;
 }
 
@@ -50,7 +51,7 @@ body {
   margin: 0;
   font-size: 16px;
   font-weight: 500;
-  font-family: Figtree;
+  font-family: Switzer;
   color: var(--t1);
 }
 
@@ -65,7 +66,7 @@ a {
 #root {
   * {
     box-sizing: border-box;
-    font-family: Figtree;
+    font-family: Switzer;
     line-height: 125%;
   }
 
@@ -75,6 +76,12 @@ a {
 
   .__lineHeight115 {
     line-height: 130%;
+  }
+}
+
+#root:lang(zh-CN) {
+  * {
+    font-family: Notosans;
   }
 }
 
@@ -239,5 +246,33 @@ button {
     --layer4: #303236;
     --layer5: #484B51;
     --layer6: #131516;
+  }
+}
+
+
+.container {
+  width: 100%;
+  padding: 0 16px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    width: 100%;
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    width: 1200px;
+    padding: 0px;
+    margin: 0 auto;
   }
 }
