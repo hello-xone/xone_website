@@ -27,9 +27,11 @@ export default {
         border1: "var(--border1)",
         border2: "var(--border2)",
         border3: "var(--border3)",
-        border4: "var(--border4)"
+        border4: "var(--border4)",
+        primaryButtonBg: "var(--button-bg)",
+        primaryButtonText: "var(--button-text)"
       },
     },
   },
-  plugins: [],
+  plugins: []
 };

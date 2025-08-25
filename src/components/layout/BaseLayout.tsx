@@ -1,8 +1,9 @@
-import { Suspense, useEffect, useMemo } from "react";
-import { Outlet, useLocation } from "react-router";
-import { Footer } from "./Footer/index";
-import Header from "./Header/index";
 import { CircularProgress } from "@mui/material";
+import { Suspense, useEffect } from "react";
+import { Outlet, useLocation } from "react-router";
+
+import Footer from "./Footer";
+import Header from "./Header";
 
 const BaseLayout = () => {
   const location = useLocation();
@@ -16,7 +17,7 @@ const BaseLayout = () => {
     }
   }, [location.pathname]);
 
-  useEffect(() => {});
+  useEffect(() => { });
 
   return (
     <div>

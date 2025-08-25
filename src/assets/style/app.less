@@ -93,9 +93,10 @@ body {
   height: 100%;
   margin: 0;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   font-family: Switzer;
   color: var(--t1);
+  background: fixed var(--b1);
 }
 
 a {
@@ -110,42 +111,12 @@ a {
   * {
     box-sizing: border-box;
     font-family: Switzer;
-    line-height: 125%;
-  }
-
-  .__lineHeight150 {
-    line-height: 175%;
-  }
-
-  .__lineHeight115 {
-    line-height: 130%;
   }
 }
 
 #root:lang(zh-CN) {
   * {
     font-family: NotoSans;
-  }
-}
-
-#root:lang(en),
-#root:lang(ms),
-#root:lang(vi),
-#root:lang(th) {
-  * {
-    line-height: 100%;
-  }
-
-  .__lineHeight115 {
-    line-height: 115%;
-  }
-
-  .__lineHeight150 {
-    line-height: 150%;
-  }
-
-  .MuiAlert-message {
-    line-height: 150%;
   }
 }
 
@@ -235,6 +206,9 @@ button {
     --b8: #F2F3F4;
     --b9: #ffffff;
 
+    --button-bg: #FF0420;
+    --button-text: #FFFFFF;
+
     --border1: rgba(223, 224, 226, 0.65);
     --border2: #F2F3F4;
     --border3: #E9E9EB;
@@ -273,6 +247,10 @@ button {
     --b7: #DFE0E2;
     --b8: #1F2023;
     --b9: #131516;
+
+    --button-bg: #FF0420;
+    --button-text: #FFFFFF;
+
 
     --border1: #1F2023;
     --border2: #18191B;
