@@ -140,7 +140,7 @@ const Channel = () => {
           size="medium"
           onKeyPress={handleKeyPress}
           InputProps={{
-            startAdornment: <SearchIcon className="ml-2" />,
+            startAdornment: <SearchIcon />,
           }}
           sx={{
             "& .MuiOutlinedInput-root": {

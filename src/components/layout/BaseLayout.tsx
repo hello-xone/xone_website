@@ -17,7 +17,7 @@ const BaseLayout = () => {
     }
   }, [location.pathname]);
 
-  useEffect(() => { });
+  useEffect(() => {});
 
   return (
     <div>
