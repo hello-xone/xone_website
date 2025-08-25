@@ -1,31 +1,34 @@
 import { Box } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import SafetyTips1 from "@/assets/imgs/channel/hint_icon1.png";
 import SafetyTips2 from "@/assets/imgs/channel/hint_icon2.png";
 import SafetyTips3 from "@/assets/imgs/channel/hint_icon3.png";
 import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 
-// 安全提示数据
-const safetyTipsData = [
-  {
-    image: SafetyTips1,
-    title: "普遍安全原则",
-    alt: "SafetyTips1",
-  },
-  {
-    image: SafetyTips2,
-    title: "移动设备常见诈骗",
-    alt: "SafetyTips2",
-  },
-  {
-    image: SafetyTips3,
-    title: "什么是网络钓鱼？",
-    alt: "SafetyTips3",
-  },
-];
-
 const SafetyTips = () => {
+  const { t } = useTranslation();
   const { lg } = useTailwindBreakpoint();
+
+  // 安全提示数据
+  const safetyTipsData = [
+    {
+      image: SafetyTips1,
+      title: t("channel:safetyTip1Title"),
+      alt: "SafetyTips1",
+    },
+    {
+      image: SafetyTips2,
+      title: t("channel:safetyTip2Title"),
+      alt: "SafetyTips2",
+    },
+    {
+      image: SafetyTips3,
+      title: t("channel:safetyTip3Title"),
+      alt: "SafetyTips3",
+    },
+  ];
+
   return (
     <Box className={`${lg ? "pb-32" : "pb-16"} ${lg ? null : "mt-10"} w-full`}>
       <Box>
@@ -35,7 +38,7 @@ const SafetyTips = () => {
             fontSize: lg ? "40px" : "24px",
           }}
         >
-          安全提示
+          {t("channel:safetyTipsTitle")}
         </h4>
         <Box
           className={`flex gap-[24px] justify-center ${lg ? "flex-row mt-12" : "flex-col mt-7"}`}

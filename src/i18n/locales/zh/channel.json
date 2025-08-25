@@ -1,0 +1,18 @@
+{
+  "title": "官方验证通道",
+  "description": "远离诈骗，输入网址、邮箱地址、手机号、Telegram或社交媒体账号，检查来源是否经过验证并来自Xone官方。",
+  "facebook": "Facebook",
+  "twitter": "Twitter",
+  "telegram": "Telegram",
+  "website": "Website",
+  "email": "Email",
+  "phone": "Phone",
+  "instagram": "Instagram",
+  "linkedin": "LinkedIn",
+  "searchPlaceholder": "搜索",
+  "searchButton": "查询",
+  "safetyTipsTitle": "安全提示",
+  "safetyTip1Title": "普遍安全原则",
+  "safetyTip2Title": "移动设备常见诈骗",
+  "safetyTip3Title": "什么是网络钓鱼？"
+}

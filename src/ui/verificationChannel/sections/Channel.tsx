@@ -1,25 +1,27 @@
 import { Box, Button, MenuItem, Select, TextField } from "@mui/material";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import ArrowIcon from "@/assets/svg/home/arrow-solid.svg?react";
 import SearchIcon from "@/assets/svg/home/search-solid.svg?react";
 import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 
 const Channel = () => {
+  const { t } = useTranslation();
   const [selectedPlatform, setSelectedPlatform] = useState("facebook");
   const [searchValue, setSearchValue] = useState("");
 
   const { lg } = useTailwindBreakpoint();
 
   const platforms = [
-    { value: "facebook", label: "Facebook" },
-    { value: "twitter", label: "Twitter" },
-    { value: "telegram", label: "Telegram" },
-    { value: "website", label: "Website" },
-    { value: "email", label: "Email" },
-    { value: "phone", label: "Phone" },
-    { value: "instagram", label: "Instagram" },
-    { value: "linkedin", label: "LinkedIn" },
+    { value: "facebook", label: t("channel:facebook") },
+    { value: "twitter", label: t("channel:twitter") },
+    { value: "telegram", label: t("channel:telegram") },
+    { value: "website", label: t("channel:website") },
+    { value: "email", label: t("channel:email") },
+    { value: "phone", label: t("channel:phone") },
+    { value: "instagram", label: t("channel:instagram") },
+    { value: "linkedin", label: t("channel:linkedin") },
   ];
 
   const handleSearch = () => {
@@ -49,7 +51,7 @@ const Channel = () => {
         <Box
           className={`font-black text-center text-[${lg ? "48px" : "32px"}] color-[--t1] ${lg ? "text-[48px]" : "text-[24px]"}`}
         >
-          官方验证通道
+          {t("channel:title")}
         </Box>
       </Box>
 
@@ -60,8 +62,7 @@ const Channel = () => {
           letterSpacing: lg ? undefined : "0.03em",
         }}
       >
-        远离诈骗，输入网址、邮箱地址、手机号、Telegram或社交媒体账号，
-        检查来源是否经过验证并来自Xone官方。
+        {t("channel:description")}
       </h3>
 
       <Box
@@ -70,29 +71,33 @@ const Channel = () => {
         <Select
           value={selectedPlatform}
           onChange={(e) => setSelectedPlatform(e.target.value)}
-          label="Select"
           IconComponent={ArrowIcon}
           MenuProps={{
             PaperProps: {
               sx: {
                 backgroundColor: "var(--b1)",
                 borderRadius: "12px",
-                boxShadow: "none",
-                border: "1px solid var(--b4)",
-                marginTop: "8px",
+                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.08)",
+                border: "1px solid var(--b3)",
+                marginTop: "6px",
+                "& .MuiList-root": {
+                  padding: "0 !important",
+                },
                 "& .MuiMenuItem-root": {
-                  fontSize: "16px",
-                  fontWeight: 500,
-                  color: "var(--t1)",
-                  padding: "16px 20px",
-                  minHeight: "48px",
+                  fontSize: "14px",
+                  fontWeight: 400,
+                  color: "var(--t2)",
+                  padding: "12px 16px",
+                  minHeight: "40px",
+                  lineHeight: "1.4",
                   "&.Mui-selected": {
-                    backgroundColor: "var(--primary)",
-                    color: "var(--b1)",
+                    backgroundColor: "var(--b3) !important",
+                    color: "var(--t1)",
+                    fontWeight: 500,
                   },
                   "&:hover": {
-                    backgroundColor: "var(--primary)",
-                    color: "var(--b1)",
+                    backgroundColor: "var(--b3)",
+                    color: "var(--t1)",
                   },
                 },
               },
@@ -104,8 +109,9 @@ const Channel = () => {
             height: lg ? undefined : "40px",
             backgroundColor: "var(--b3)",
             borderRadius: "8px",
-            color: "var(--t2)",
-            fontWeight: 400,
+            color: "var(--t1)",
+            fontWeight: 500,
+            fontSize: "14px",
             "& .MuiOutlinedInput-notchedOutline": {
               border: "none",
             },
@@ -114,6 +120,9 @@ const Channel = () => {
             },
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
               border: "none",
+            },
+            "& .MuiSelect-select": {
+              color: "var(--t1)",
             },
           }}
         >
@@ -125,7 +134,7 @@ const Channel = () => {
         </Select>
 
         <TextField
-          placeholder="Search"
+          placeholder={t("channel:searchPlaceholder")}
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           size="medium"
@@ -196,7 +205,7 @@ const Channel = () => {
             },
           }}
         >
-          查询
+          {t("channel:searchButton")}
         </Button>
       </Box>
     </Box>

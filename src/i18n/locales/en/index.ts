@@ -1,3 +1,4 @@
+import channel from "./channel.json";
 import commercial from "./commercial.json";
 import developer from "./developer.json";
 import home from "./home.json";
@@ -8,4 +9,5 @@ export default {
   home,
   developer,
   commercial,
+  channel,
 };
