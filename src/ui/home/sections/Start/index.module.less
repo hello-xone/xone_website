@@ -1,111 +1,81 @@
+.start {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 140px;
+  margin-bottom: 100px;
+}
+
 .box {
-  margin: 302px auto;
-  background: linear-gradient(90deg, #ff0420 0%, #232323 50%);
-  border-radius: 32px;
-  color: white;
-  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 113px 98px;
+  align-items: flex-start;
+  width: 850px;
 }
+
 .title {
-  font-size: 96px;
-  color: white;
+  color: var(--b5);
+  line-height: 1.2;
 }
+
 .description {
-  margin-top: 32px;
-  max-width: 808px;
+  color: var(--b5);
+  font-size: 20px;
+  margin-top: 50px;
 }
+
 .btnWrapper {
   display: flex;
   width: 100%;
-  justify-content: center;
-  gap: 24px;
-  margin-top: 64px;
+  justify-content: flex-start;
+  gap: 50px;
+  margin-top: 20px;
 }
+
+.btn {
+  background-color: transparent;
+  color: var(--b5);
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.btn:hover {
+  background-color: transparent;
+  color: var(--b5);
+}
+
 .btnIcon {
   width: 14px;
-  margin-left: 8px;
+  margin-left: 10px;
 }
-@media (max-width: 1660px) {
-  .box {
-    margin: 240px auto;
-  }
+
+.startIcon {
+  display: block;
+  width: 220px;
+  height: 229px;
 }
-@media (max-width: 1300px) {
-  .title {
-    font-size: 70px;
-  }
-  .box {
-    margin: 190px auto;
+
+@media (max-width: 1150px) {
+  .start {
+    gap: 40px;
   }
 }
 
-@media (max-width: 1100px) {
-  .box {
-    margin: 160px auto;
-  }
-}
-
-@media (max-width: 1024px) {
-  .title {
-    font-size: 64px;
-  }
-  .box {
-    padding: 85px 50px;
-  }
-}
-@media (max-width: 900px) {
-  .title {
-    font-size: 54px;
-  }
-}
 @media (max-width: 768px) {
-  .title {
-    font-size: 44px;
+  .start {
+    margin-top: 80px;
+    margin-bottom: 20px;
   }
+
+  .title {
+    font-size: 24px;
+    margin-top: 0;
+  }
+
   .description {
-    margin-top: 24px;
-  }
-  .btnWrapper {
-    margin-top: 54px;
-  }
-  .box {
-    padding: 65px 36px;
-  }
-}
-
-@media (max-width: 680px) {
-  .box {
-    margin: 120px auto;
-  }
-}
-
-@media (max-width: 600px) {
-  .title {
-    font-size: 36px;
-  }
-  .btnWrapper {
-    margin-top: 48px;
-  }
-  .box {
-    padding: 48px 24px;
-    border-radius: 9px;
-  }
-}
-@media (max-width: 480px) {
-  .btnWrapper {
-    flex-direction: column;
-    gap: 24px;
-    align-items: center;
-  }
-  .btn {
-    width: 247px;
-    display: flex;
-    justify-content: center;
-  }
-  .box {
-    margin: 96px auto;
+    font-size: 14px;
+    margin-top: 20px;
   }
 }

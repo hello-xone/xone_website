@@ -1,22 +1,23 @@
-import { Title } from "@/components/comm/title";
-import styles from "./index.module.less";
-import Marquee from "react-fast-marquee";
-import {
-  AnimationName,
-  DelayClassName,
-  useScrollreveal,
-} from "@/hooks/useScrollreveal";
 import { useMemo } from "react";
-import group from "@/assets/imgs/home/group.png";
+import Marquee from "react-fast-marquee";
+import { useTranslation } from "react-i18next";
+
 import footprints from "@/assets/imgs/home/footprints.png";
+import group from "@/assets/imgs/home/group.png";
 import more1 from "@/assets/imgs/home/more1.png";
 import more2 from "@/assets/imgs/home/more2.png";
 import more4 from "@/assets/imgs/home/more4.png";
 import more6 from "@/assets/imgs/home/more6.png";
 import more7 from "@/assets/imgs/home/more7.png";
 import more8 from "@/assets/imgs/home/more8.png";
+import { Title } from "@/components/comm/title";
+import {
+  AnimationName,
+  DelayClassName,
+  useScrollreveal,
+} from "@/hooks/useScrollreveal";
 
-import { useTranslation } from "react-i18next";
+import styles from "./index.module.less";
 
 enum ColumnType {
   NARROW = "narrow",
@@ -26,7 +27,6 @@ enum ColumnType {
 enum CardType {
   img = "img",
   info = "info",
-  // Card3 = 'Card3'
 }
 
 interface Card1 {
@@ -40,9 +40,16 @@ interface Card1 {
 interface Card2 {
   id: string;
   type: CardType;
-  number: string;
+  number: number;
   description: string;
   img: string;
+}
+
+interface LayoutItem {
+  id: string;
+  type: ColumnType;
+  children: (Card1 | Card2)[];
+  columnCount: number; // 新增：竖列数量配置
 }
 
 const MaskLayer = ({
@@ -69,7 +76,7 @@ export const Community = () => {
   const NarrowCardCard1 = (data: Card1 | Card2) => {
     switch (data.type) {
       case CardType.img: {
-        const { img, title, description } = data as Card1;
+        const { img } = data as Card1;
         return (
           <div
             className={styles.card1}
@@ -77,7 +84,7 @@ export const Community = () => {
               backgroundImage: `url(${img})`,
             }}
           >
-            <MaskLayer title={title} description={description}></MaskLayer>
+            {/* <MaskLayer title={title} description={description}></MaskLayer> */}
           </div>
         );
       }
@@ -100,7 +107,7 @@ export const Community = () => {
     }
   };
 
-  const Wide2 = ({ img, title, description }: Card1) => {
+  const Wide2 = ({ img }: Card1) => {
     return (
       <div
         className={styles.card2}
@@ -108,16 +115,18 @@ export const Community = () => {
           backgroundImage: `url(${img})`,
         }}
       >
-        <MaskLayer title={title} description={description}></MaskLayer>
+        {/* <MaskLayer title={title} description={description}></MaskLayer> */}
       </div>
     );
   };
 
+  // 可配置的布局数组，支持配置竖列数量
   const list = useMemo(() => {
     return [
       {
         id: "1",
         type: ColumnType.NARROW,
+        columnCount: 2, // 2列平分高度
         children: [
           {
             id: "1-1",
@@ -138,6 +147,7 @@ export const Community = () => {
       {
         id: "2",
         type: ColumnType.WIDE,
+        columnCount: 1, // 1列占全高
         children: [
           {
             id: "2-1",
@@ -146,18 +156,12 @@ export const Community = () => {
             title: t("home:more2"),
             description: t("home:more2description"),
           },
-          {
-            id: "4-2",
-            type: CardType.img,
-            img: more6,
-            title: t("home:more6"),
-            description: t("home:more6description"),
-          },
         ],
       },
       {
         id: "3",
         type: ColumnType.NARROW,
+        columnCount: 2, // 3列平分高度
         children: [
           {
             id: "3-1",
@@ -176,27 +180,68 @@ export const Community = () => {
         ],
       },
       {
-        id: "5",
-        type: ColumnType.WIDE,
+        id: "4",
+        type: ColumnType.NARROW,
+        columnCount: 2, // 2列平分高度
         children: [
           {
             id: "4-1",
             type: CardType.img,
+            img: more6,
+            title: t("home:more5"),
+            description: t("home:more5description"),
+          },
+          {
+            id: "4-2",
+            type: CardType.img,
+            img: more6,
+            title: t("home:more6"),
+            description: t("home:more6description"),
+          },
+        ],
+      },
+      {
+        id: "5",
+        type: ColumnType.WIDE,
+        columnCount: 2, // 2列平分高度
+        children: [
+          {
+            id: "5-1",
+            type: CardType.img,
             img: more8,
-            title: t("home:more8"),
-            description: t("home:more8description"),
+            title: t("home:more7"),
+            description: t("home:more7description"),
           },
           {
             id: "4-2",
             type: CardType.img,
             img: more7,
-            title: t("home:more7"),
-            description: t("home:more7description"),
+            title: t("home:more8"),
+            description: t("home:more8description"),
           },
         ],
       },
     ];
   }, [i18n.language]);
+
+  // 渲染卡片的函数，根据columnCount自动分配高度
+  const renderCards = (item: LayoutItem) => {
+    const { children, columnCount } = item;
+    const cardHeight = columnCount === 1 ? "100%" : `${100 / columnCount}%`;
+
+    return children.map((card: any, index) => {
+      const Card = item.type === ColumnType.NARROW ? NarrowCardCard1 : Wide2;
+      return (
+        <div
+          key={index}
+          style={{ height: cardHeight }}
+          className={styles.dynamicCard}
+        >
+          <Card {...card} />
+        </div>
+      );
+    });
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -217,13 +262,9 @@ export const Community = () => {
               ...list,
               ...list,
             ].map((item, i) => {
-              const Card =
-                item.type === ColumnType.NARROW ? NarrowCardCard1 : Wide2;
               return (
                 <div className={styles.cardWrapper} key={i}>
-                  {item.children.map((card: any, index) => {
-                    return <Card key={index} {...card}></Card>;
-                  })}
+                  {renderCards(item)}
                 </div>
               );
             })}

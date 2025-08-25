@@ -1,58 +1,69 @@
-import { BaseContainer } from "@/components/layout/BaseContainer";
-import styles from "./index.module.less";
-import { Description } from "@/components/comm/description";
-import { Button } from "@/components/comm/button";
-import ArrowIcon from "@/assets/svg/home/info_arrow.svg?react";
-import { EXTERNAL_LINKS } from "@/constants/external";
+import { useTranslation } from "react-i18next";
 
+import StartIcon from "@/assets/imgs/home/start.png";
+import ArrowIcon from "@/assets/svg/home/arrow-right-line.svg?react";
+import { Button } from "@/components/comm/button";
+import { Description } from "@/components/comm/description";
+import { Title } from "@/components/comm/title";
+import { EXTERNAL_LINKS } from "@/constants/external";
 import {
   AnimationName,
   DelayClassName,
   useScrollreveal,
 } from "@/hooks/useScrollreveal";
-import { useTranslation } from "react-i18next";
+import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
+
+import styles from "./index.module.less";
 
 export const Start = () => {
   const { t, i18n } = useTranslation();
+  const { md } = useTailwindBreakpoint();
+
   useScrollreveal();
   return (
-    <BaseContainer
-      className={`${styles.box} ${AnimationName.SLIDE_IN_FADE} ${DelayClassName.DELAY_2}`}
+    <div
+      className={`container ${styles.start} ${AnimationName.SLIDE_IN_FADE} ${DelayClassName.DELAY_2}`}
     >
-      <h1 className={`${styles.title} ${AnimationName.SLIDE_IN_BOTTOM}`}>
-        {t("home:startTitle")}
-      </h1>
-      <Description
-        className={`${styles.description} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_5}`}
-      >
-        {t("home:startDesc")}
-      </Description>
-      <div
-        className={`${styles.btnWrapper} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_7}`}
-      >
-        <Button
-          type="gradient"
-          className={`${styles.btn} wow animated fadeIn`}
-          data-wow-delay="0.4s"
-          disabled
+      <div className={styles.box}>
+        <Title className={`${styles.title} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+          {t("home:startTitle")}
+        </Title>
+        <Description
+          className={`${styles.description} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_5}`}
         >
-          {t("home:exploreBVI")}{" "}
-          <div className={styles.btnIcon}>
-            <ArrowIcon></ArrowIcon>
-          </div>
-        </Button>
-        <Button
-          type="white"
-          className={`${styles.btn} ${styles.whiteBtn}  wow animated fadeIn`}
-          data-wow-delay="0.7s"
-          onClick={() => window.open(EXTERNAL_LINKS.dashboard + i18n.language + "/community")}
+          {t("home:startDesc")}
+        </Description>
+        <div
+          className={`${styles.btnWrapper} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_7}`}
         >
-          {t("home:joinNow")}{" "}
-          <div className={`${styles.btnIcon} `}>
-            <ArrowIcon></ArrowIcon>
-          </div>
-        </Button>
+          <Button className={styles.btn} disabled>
+            {t("home:exploreBVI")}
+            <div className={styles.btnIcon}>
+              <ArrowIcon></ArrowIcon>
+            </div>
+          </Button>
+          <Button
+            className={styles.btn}
+            onClick={() =>
+              window.open(
+                EXTERNAL_LINKS.dashboard + i18n.language + "/community"
+              )
+            }
+          >
+            {t("home:joinNow")}
+            <div className={`${styles.btnIcon} `}>
+              <ArrowIcon></ArrowIcon>
+            </div>
+          </Button>
+        </div>
       </div>
-    </BaseContainer>
+      {md && (
+        <img
+          src={StartIcon}
+          alt="start"
+          className={`${styles.startIcon} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_5}`}
+        />
+      )}
+    </div>
   );
 };

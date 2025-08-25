@@ -1,22 +1,28 @@
 import { useMemo } from "react";
-import { BaseContainer } from "@/components/layout/BaseContainer";
-import styles from "./index.module.less";
-import { Title } from "@/components/comm/title";
+import Marquee from "react-fast-marquee";
+import { useTranslation } from "react-i18next";
+
+import ArrowIcon from "@/assets/svg/home/arrow-right-line.svg?react";
+import { Button } from "@/components/comm/button";
 import { Description } from "@/components/comm/description";
 import { Link } from "@/components/comm/link";
-import { useTranslation } from "react-i18next";
-import ArrowIcon from "@/assets/svg/home/info_arrow.svg?react";
-import Marquee from "react-fast-marquee";
+import { Title } from "@/components/comm/title";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import {
   AnimationName,
   DelayClassName,
   useScrollreveal,
 } from "@/hooks/useScrollreveal";
+import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
+
+import styles from "./index.module.less";
 
 export const ExploreNature = () => {
   const { t, i18n } = useTranslation();
   useScrollreveal();
+
+  const { md } = useTailwindBreakpoint();
+
   const imageLinks: Record<string, string> = {
     "aleta planet.svg": "https://aletaplanet.com/",
     "color-black.svg": "https://pancakeswap.finance/home",
@@ -56,9 +62,9 @@ export const ExploreNature = () => {
   }, [images]);
 
   return (
-    <BaseContainer className={styles.wrapper}>
+    <div className={`container ${styles.wrapper}`}>
       <div className={`${styles.info} wow animated slideInUp`}>
-        <Title className={`${AnimationName.SLIDE_IN_BOTTOM}`}>
+        <Title className={`${styles.title} ${AnimationName.SLIDE_IN_BOTTOM}`}>
           {t("home:exploreNatureTitle")}
         </Title>
         <Description
@@ -66,15 +72,17 @@ export const ExploreNature = () => {
         >
           {t("home:exploreNatureDesc")}
         </Description>
-        <Link
-          href={EXTERNAL_LINKS.dashboard + i18n.language + "/ecology"}
-          className={`${styles.knowMore} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_2}`}
-        >
-          <h2>{t("common:knowMore")}</h2>
-          <div className={styles.arrowIcon}>
-            <ArrowIcon></ArrowIcon>
-          </div>
-        </Link>
+        {md && (
+          <Link
+            href={EXTERNAL_LINKS.dashboard + i18n.language + "/ecology"}
+            className={`${styles.knowMore} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_2}`}
+          >
+            <h2>{t("common:knowMore")}</h2>
+            <div className={styles.arrowIcon}>
+              <ArrowIcon></ArrowIcon>
+            </div>
+          </Link>
+        )}
       </div>
       <div
         className={`${styles.animationWrapper} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_4}`}
@@ -112,6 +120,19 @@ export const ExploreNature = () => {
           })}
         </div>
       </div>
-    </BaseContainer>
+      {!md && (
+        <Button
+          className={styles.btn}
+          onClick={() =>
+            window.open(EXTERNAL_LINKS.dashboard + i18n.language + "/community")
+          }
+        >
+          {t("common:knowMore")}
+          <div className={`${styles.btnIcon} `}>
+            <ArrowIcon></ArrowIcon>
+          </div>
+        </Button>
+      )}
+    </div>
   );
 };

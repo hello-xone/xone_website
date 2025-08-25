@@ -1,24 +1,28 @@
-import HelloXone from "./sections/HelloXone/index";
-import { XoneChain } from "./sections/XoneChain/index";
-import { ExploreNature } from "./sections/ExploreNature";
-import { Governance } from "./sections/Governance";
-// import { Explore } from "./sections/Explore";
-import { Start } from "./sections/Start";
+import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
+
 import { Banner } from "./sections/Banner/index";
 import { Community } from "./sections/Community";
+import { ExploreNature } from "./sections/ExploreNature";
+import { Governance } from "./sections/Governance";
+import HelloXone from "./sections/HelloXone/index";
+// import { Explore } from "./sections/Explore";
+import { Start } from "./sections/Start";
+import { XoneChain } from "./sections/XoneChain/index";
 
 type Props = {};
 
 const HomePage = (props: Props) => {
+  const { md } = useTailwindBreakpoint();
+
   return (
     <div>
       <Banner />
       <XoneChain></XoneChain>
       <HelloXone />
-      <ExploreNature></ExploreNature>
       <Community></Community>
-      <Governance></Governance>
+      {/* <Governance></Governance> */}
       {/* <Explore></Explore> */}
+      {!md && <ExploreNature></ExploreNature>}
       <Start></Start>
     </div>
   );
