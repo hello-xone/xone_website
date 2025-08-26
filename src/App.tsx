@@ -8,7 +8,7 @@ import "@/assets/style/app.less";
 // import "@/assets/style/animation.less";
 import { NotificationsProvider } from "@toolpad/core/useNotifications";
 import { ChainType, WalletKitProvider } from "@web3jskit/walletkit";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
 
@@ -20,6 +20,9 @@ import { RenderRoutes } from "./routes/router";
 function App() {
   // const { themeConfig } = useThemeConfig();
   // const theme = createTheme(themeConfig);
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
+  }, [])
   return (
     <HelmetProvider>
       <BrowserRouter>
