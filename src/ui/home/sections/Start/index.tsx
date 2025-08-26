@@ -11,13 +11,11 @@ import {
   DelayClassName,
   useScrollreveal,
 } from "@/hooks/useScrollreveal";
-import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 
 import styles from "./index.module.less";
 
 export const Start = () => {
   const { t, i18n } = useTranslation();
-  const { md } = useTailwindBreakpoint();
 
   useScrollreveal();
   return (
@@ -57,13 +55,11 @@ export const Start = () => {
           </Button>
         </div>
       </div>
-      {md && (
-        <img
-          src={StartIcon}
-          alt="start"
-          className={`${styles.startIcon} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_5}`}
-        />
-      )}
+      <img
+        src={StartIcon}
+        alt="start"
+        className={`${styles.startIcon} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_5}`}
+      />
     </div>
   );
 };

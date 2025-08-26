@@ -15,7 +15,7 @@ const HomePage = (props: Props) => {
   const { md } = useTailwindBreakpoint();
 
   return (
-    <div>
+    <div className="relative">
       <Banner />
       <XoneChain></XoneChain>
       <HelloXone />
