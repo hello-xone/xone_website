@@ -8,20 +8,22 @@ import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 
 const Channel = () => {
   const { t } = useTranslation();
-  const [selectedPlatform, setSelectedPlatform] = useState("facebook");
+  const [selectedPlatform, setSelectedPlatform] = useState("website");
   const [searchValue, setSearchValue] = useState("");
 
   const { lg } = useTailwindBreakpoint();
 
   const platforms = [
-    { value: "facebook", label: t("channel:facebook") },
-    { value: "twitter", label: t("channel:twitter") },
-    { value: "telegram", label: t("channel:telegram") },
     { value: "website", label: t("channel:website") },
     { value: "email", label: t("channel:email") },
-    { value: "phone", label: t("channel:phone") },
-    { value: "instagram", label: t("channel:instagram") },
-    { value: "linkedin", label: t("channel:linkedin") },
+    { value: "telegram", label: t("channel:telegram") },
+    { value: "x", label: t("channel:x") },
+    { value: "youtube", label: t("channel:youtube") },
+    { value: "medium", label: t("channel:medium") },
+    { value: "discord", label: t("channel:discord") },
+    { value: "github", label: t("channel:github") },
+    { value: "chatme", label: t("channel:chatme") },
+    { value: "reddit", label: t("channel:reddit") },
   ];
 
   const handleSearch = () => {
