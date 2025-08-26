@@ -1,19 +1,32 @@
-import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
-import clsx from "clsx";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import LogoIcon from "@/assets/imgs/header/logo.png";
 import LogoRedIcon from "@/assets/imgs/header/logo-red.png";
-import MenuIcon from "@/assets/svg/home/menu.svg";
+import { EXTERNAL_LINKS } from "@/constants/external";
 import { menus } from "@/constants/menus";
 
 import CommonButton from "../comm/button/CommonButton";
 import AiStar from "../Icons/AiStar";
-import Arrow from "../Icons/Arrow";
 import Language from "../Icons/Language";
 import Theme from "../Icons/Theme";
+import CommonPopover from "./Popover/CommonPopover";
+import LanguagePopover from "./Popover/LanguagePopover";
+import MenuPopover from "./Popover/MenuPopover";
 
 const Header = () => {
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
+  const { t, i18n } = useTranslation("header");
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light');
+    localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
+  };
+
   return (
     <div className="w-screen bg-b1/50 h-[58px] md:h-[64px] px-4 md:px-[30px] flex items-center justify-between">
       <div className="flex items-center gap-[48px]">
@@ -27,78 +40,42 @@ const Header = () => {
           {menus &&
             menus.map((item) => {
               return (
-                <div key={`header-item-${item.text}`}>
-                  {item.children && item.children.length > 0 ? (
-                    <Popover>
-                      {({ open }) => (
-                        <>
-                          <PopoverButton className="flex items-center gap-1 text-sm font-medium text-t1 focus:outline-none data-active:text-white data-focus:outline data-focus:outline-white data-hover:text-white">
-                            {item.text}
-                            <Arrow
-                              className={clsx("text-t1", open && "rotate-180")}
-                            ></Arrow>
-                          </PopoverButton>
-                          <PopoverPanel
-                            transition
-                            anchor="bottom"
-                            className="divide-y divide-border1 rounded-xl bg-b1 text-t1 text-sm/6 transition duration-200 ease-in-out [--anchor-gap:--spacing(5)] data-closed:-translate-y-1 data-closed:opacity-0"
-                          >
-                            1111111
-                            <div className="p-3">
-                              <a
-                                className="block rounded-lg px-3 py-2 transition hover:bg-t1/5"
-                                href="#"
-                              >
-                                <p className="font-semibold text-white">
-                                  Insights
-                                </p>
-                                <p className="text-t1/50">
-                                  Measure actions your users take
-                                </p>
-                              </a>
-                              <a
-                                className="block rounded-lg px-3 py-2 transition hover:bg-b1/5"
-                                href="#"
-                              >
-                                <p className="font-semibold text-t1">
-                                  Automations
-                                </p>
-                                <p className="text-t1/50">
-                                  Create your own targeted content
-                                </p>
-                              </a>
-                              <a
-                                className="block rounded-lg px-3 py-2 transition hover:bg-b1/5"
-                                href="#"
-                              >
-                                <p className="font-semibold text-white">
-                                  Reports
-                                </p>
-                                <p className="text-t1/50">
-                                  Keep track of your growth
-                                </p>
-                              </a>
+                <div key={`header-item-${item.id}`}>
+                  {item.group && item.group.length > 0 ? (
+                    <CommonPopover text={t(item.name)}>
+                      <div className="flex gap-[24px]">
+                        {item.group.map((cel) => (
+                          <div key={`children-item-${cel.id}`}>
+                            <div className="text-base mb-1 leading-[140%] font-bold text-t1">
+                              {t(cel.title)}
                             </div>
-                            <div className="p-3">
-                              <a
-                                className="block rounded-lg px-3 py-2 transition hover:bg-b1/5"
-                                href="#"
-                              >
-                                <p className="font-semibold text-white">
-                                  Documentation
-                                </p>
-                                <p className="text-t1/50">
-                                  Start integrating products and tools
-                                </p>
-                              </a>
+                            <div className="text-xs font-normal leading-[140%] text-t2">
+                              {t(cel.description)}
                             </div>
-                          </PopoverPanel>
-                        </>
-                      )}
-                    </Popover>
+                            <div className="mt-4 text-[14px] flex flex-col gap-[2px] leading-[140%] text-t2">
+                              {
+                                cel.links &&
+                                cel.links.map((link) => {
+                                  return (
+                                    <Link
+                                      key={`link-item-${link.id}`}
+                                      to={link.link || ""}
+                                      target="_blank"
+                                      className="px-[10px] py-[8px] hover:bg-b3 rounded-[8px] cursor-pointer"
+                                    >
+                                      {t(link.name)}
+                                    </Link>
+                                  );
+                                })
+                              }
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CommonPopover>
                   ) : (
-                    <Link to={"11"} className="text-sm text-t1" target="_blank">
-                      {item.text}
+                    <Link to={item.id === 'Ecology' ? `${EXTERNAL_LINKS.dashboard}${i18n.language}${item.link}` : item.link || ''} className="text-sm text-t1" target="_blank">
+                      {t(item.name)}
                     </Link>
                   )}
                 </div>
@@ -112,14 +89,12 @@ const Header = () => {
           <AiStar className="text-t1 w-4 h-4 md:w-6 md:h-6"></AiStar>
         </CommonButton>
         <CommonButton>Explore Xone</CommonButton>
-        <img
-          alt=""
-          src={MenuIcon}
-          className="w-[18px] text-t1 h-[18px] md:hidden"
-        ></img>
+        <MenuPopover></MenuPopover>
         <div className="hidden md:flex items-center gap-[16px]">
-          <Language className="text-t1"></Language>
-          <Theme className="text-t1"></Theme>
+          <LanguagePopover>
+            <Language className="text-t1"></Language>
+          </LanguagePopover>
+          <Theme onClick={() => toggleTheme()} className="text-t1"></Theme>
         </div>
       </div>
     </div>

@@ -17,6 +17,7 @@ import CommonButton from "../comm/button/CommonButton";
 import Switch from "../comm/Switch";
 import Language from "../Icons/Language";
 import Theme from "../Icons/Theme";
+import LanguagePopover from "./Popover/LanguagePopover";
 
 interface Info {
   name: string;
@@ -177,13 +178,10 @@ const Footer = () => {
     ];
   }, [t]);
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
   const toggleTheme = () => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light');
+    localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
   };
 
 
@@ -238,7 +236,9 @@ const Footer = () => {
         </div>
 
         <div className="flex md:hidden mt-10 items-center justify-end">
-          <Language className="text-t1"></Language>
+          <LanguagePopover>
+            <Language className="text-t1"></Language>
+          </LanguagePopover>
           <Theme className="ml-3 mr-2"></Theme>
           <Switch value={theme === 'light'} onChange={toggleTheme} text={`${theme === 'light' ? 'Light' : 'Dark'} Mode`}></Switch>
         </div>
@@ -253,10 +253,12 @@ const Footer = () => {
               <Link to={''}>Terms</Link>
             </div>
           </div>
-          <div className="hidden md:flex items-center cursor-pointer gap-[8px]">
-            <Language className="text-t1"></Language>
-            <span className="text-t1 text-sm">English</span>
-          </div>
+          <LanguagePopover className="max-md:hidden">
+            <>
+              <Language className="text-t1"></Language>
+              <span className="text-t1 text-sm">English</span>
+            </>
+          </LanguagePopover>
         </div>
 
       </div>

@@ -1,7 +1,8 @@
-export default function Theme({ className }: { className?: string }) {
+export default function Theme({ className, onClick }: { className?: string; onClick?: () => void }) {
   return (
     <svg
       className={className || ""}
+      onClick={() => onClick && onClick()}
       width="24"
       height="24"
       viewBox="0 0 24 24"

@@ -4,6 +4,9 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      data: {
+        open: 'open~="true"',
+      },
       colors: {
         t1: "var(--t1)",
         t2: "var(--t2)",
