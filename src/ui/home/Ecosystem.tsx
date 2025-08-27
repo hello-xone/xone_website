@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import { useMemo } from "react";
 import Marquee from "react-fast-marquee";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import BitgetIcon from "@/assets/imgs/partners/bitget.png";
@@ -138,54 +138,18 @@ const images = [
     ],
 ];
 export const Ecosystem = () => {
+    const { t } = useTranslation("home");
+
     const { isLight } = useApplicationStore();
     useScrollreveal();
-    const imageLinks: Record<string, string> = {
-        "aleta planet.svg": "https://aletaplanet.com/",
-        "color-black.svg": "https://pancakeswap.finance/home",
-        "Fenwick.svg": "/",
-        "HL.svg": "https://hyperfoundation.org/",
-        "Huobi.svg": "https://www.htx.com/",
-        "MateMask.svg": "https://metamask.io/",
-        "Movement.svg": "https://movementlabs.xyz/",
-        "rainlink.svg": "https://rainlink.co/",
-        "Sui.svg": "https://sui.io/",
-        "SunSwap.svg": "https://sun.io/",
-        "SwapX.svg": "https://swapx.exchange/en",
-        "thunes.svg": "https://www.thunes.com/",
-        "TokenUp.svg": "https://tokenup.org/en",
-        "TRON.svg": "https://tron.network/",
-        "Uniswap.svg": "https://app.uniswap.org/",
-        "Xion.svg": "https://xion.burnt.com/",
-    };
-
-    // const images = useMemo(() => {
-    //     return import.meta.glob("@/assets/imgs/partners/*", {
-    //         eager: true,
-    //     }) as Record<string, { default: string }>;
-    // }, []);
-
-    // const imagesArr = useMemo(() => {
-    //     const keys = Object.keys(images);
-    //     const partSize = Math.ceil(keys.length / 4);
-    //     const parts = [];
-    //     for (let i = 0; i < 4; i++) {
-    //         const start = i * partSize;
-    //         const end = start + partSize;
-    //         const part = keys.slice(start, end);
-    //         parts.push(part.map((key) => images[key]));
-    //     }
-    //     return parts;
-    // }, [images]);
 
     return (
-        <div className="py-[80px] gap-[140px] w-full">
-            <div className="text-[48px] text-center leading-[140%] mb-6 font-bold">
-                Explore a vibrant ecosystem
+        <div className="py-[40px] md:py-[80px] md:gap-[140px] w-full">
+            <div className="text-[24px] md:text-[48px] text-center leading-[140%] mb-4 md:mb-6 font-bold">
+                {t("exploreNatureTitle")}
             </div>
-            <div className="text-t2 text-center leading-[140%] text-[20px] mb-10">
-                Discover an ecosystem with a mission — open, adaptable, and committed to
-                advancing the future of blockchain.
+            <div className="text-t2 text-center leading-[140%] text-base md:text-[20px] mb-6 md:mb-10">
+                {t("exploreNatureDesc")}
             </div>
             <div
                 className={`relative flex-grow cursor-grab overflow-hidden w-full ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_4}`}
@@ -214,14 +178,13 @@ export const Ecosystem = () => {
                             return (
                                 <Marquee
                                     key={i}
-                                    speed={100000000000000}
-                                    className={"mt-[64px]"}
+                                    className={"mt-[24px] md:mt-[64px]"}
                                     pauseOnHover
                                     direction={(i + 1) % 2 === 0 ? "left" : "right"}
                                 >
                                     {imgs.map((img, index) => {
                                         return (
-                                            <div className={"mx-[60px] group h-[34px]"} key={index}>
+                                            <div className={"mx-[12px] md:mx-[60px] group h-[34px]"} key={index}>
                                                 <Link to={img.link || ""} target="_blank" className="relative">
                                                     <img
                                                         className="h-full block group-hover:hidden object-contain"

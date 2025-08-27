@@ -8,13 +8,14 @@ import { EXTERNAL_LINKS } from "@/constants/external";
 import { menus, NavigationType } from "@/constants/menus";
 
 import CommonButton from "../comm/button/CommonButton";
+import { SeeMore } from "../comm/link/SeeMore";
 import AiStar from "../Icons/AiStar";
+import Knight from "../Icons/Knight";
 import Language from "../Icons/Language";
 import Theme from "../Icons/Theme";
 import CommonPopover from "./Popover/CommonPopover";
 import LanguagePopover from "./Popover/LanguagePopover";
 import MenuPopover from "./Popover/MenuPopover";
-import Knight from "../Icons/Knight";
 
 const Header = () => {
   const [theme, setTheme] = useState(() => {
@@ -56,10 +57,16 @@ const Header = () => {
                               </div>
                             </div>)}
                           </div>
-                          <div className="w-[480px] flex flex-col items-center justify-center rounded-[8px] bg-b3">
-                            <Knight className='text-t2 shrink-0'></Knight>
-                            <div className="text-t2 font-medium text-sm mt-[7px]">Look forward to it !</div>
+                          <div className="w-[480px]">
+                            <div className="w-full min-h-[164px] flex flex-col items-center justify-center rounded-[8px] bg-b3">
+                              <Knight className='text-t2 shrink-0'></Knight>
+                              <div className="text-t2 font-medium text-sm mt-[7px]">Look forward to it !</div>
+                            </div>
+                            <div className="mt-3 text-t2 text-sm font-bold leading-[140%]">助力Xone未来动向，成就更大发展</div>
+                            <div className="mt-3 text-t2 text-sm leading-[140%]">{`一切工作都是为了帮助 Xone 更好的服务全球企业、组织以及个人。因此，在任何领域，只要你有想法并愿意为此贡献你的独到想法！我们相信，在 Xone 的成长之路上，将无畏即将面对的无数挑战。`}</div>
+                            <SeeMore href="" text="寻找机会" className="mt-3" textClassName="!text-[14px] text-t2"></SeeMore>
                           </div>
+
 
                         </div> : <div className="flex gap-[24px]">
                           {item.group.map((cel) => (
@@ -87,6 +94,9 @@ const Header = () => {
                                   })
                                 }
                               </div>
+                              {
+                                item.id === "Ecology" && <SeeMore href="" text={t("home:seeMore")} className="mt-4 ml-[10px]" textClassName="!text-[14px] font-medium text-t2"></SeeMore>
+                              }
                             </div>
                           ))}
                         </div>
