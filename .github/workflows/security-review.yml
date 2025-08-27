@@ -6,11 +6,11 @@ permissions:
   pull-requests: write    # 在 PR 中写入评论
   actions: read          # 读取 Actions 状态
 
-# 触发条件：只针对 dev 分支的 Pull Request
+# 触发条件：只针对 test 分支的 Pull Request
 on:
   pull_request:
     branches: 
-      - dev
+      - test
     types:
       - opened
       - synchronize
