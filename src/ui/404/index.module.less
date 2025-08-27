@@ -1,97 +1,79 @@
 .wrapper {
   margin-top: 105px;
+  padding-bottom: 160px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 143px;
-}
-.pic {
-  width: 530px;
-  min-width: 530px;
-}
-.title {
-  font-size: 48px;
-}
-.description {
-  margin-top: 24px;
-  max-width: 496px;
-}
-.contactUs {
-  display: flex;
-  align-items: center;
-  margin-top: 49px;
-  font-size: 18px;
-  color: var(--primary);
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  width: max-content;
+  flex-direction: column;
 }
 
-.arrowIcon {
-  width: 14px;
-  transform: rotateZ(45deg);
-  margin-left: 12px;
+.pic {
+  width: 180px;
+  height: 180px;
+  background-color: var(--b2);
+  margin: 0 auto;
 }
+
+.title {
+  font-size: 48px;
+  color: var(--t1);
+  margin-top: 26px;
+}
+
+.description {
+  margin-top: 24px;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 400;
+  color: var(--t2);
+}
+
+.goToContact {
+  padding: 12px 14px;
+  box-sizing: border-box;
+  color: #FFF;
+  border-radius: 10px;
+  background-color: var(--primary);
+  font-size: 18px;
+  margin-top: 32px;
+}
+
+
 .btn {
   color: var(--primary);
   cursor: pointer;
 }
-@media (max-width: 1300px) {
-  .wrapper {
-    margin-top: 80px;
-    gap: 90px;
-  }
-  .pic {
-    width: 470px;
-    min-width: 470px;
-  }
-  .title {
-    font-size: 36px;
-  }
-  .description {
-    margin-top: 18px;
-  }
-}
-@media (max-width: 1024px) {
-  .pic {
-    width: 400px;
-    min-width: 400px;
-  }
-  .wrapper {
-    gap: 0;
-    justify-content: space-between;
-  }
-  .contactUs {
-    margin-top: 36px;
-  }
-}
+
 @media (max-width: 768px) {
+
   .wrapper {
-    flex-wrap: wrap;
-    justify-content: center;
+    margin-top: 60px;
   }
+
   .pic {
-    width: 100%;
-    min-width: 302px;
-    max-width: 530px;
+    width: 180px;
+    height: 180px;
   }
+
+  .title {
+    font-size: 32px;
+    text-align: center;
+  }
+
   .description {
-    margin-top: 12px;
+    font-size: 17px;
+    text-align: left;
   }
-  .left {
+
+  .goToContact {
+    display: block;
     width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 26px;
   }
-  .contactUs {
-    margin-top: 24px;
-  }
-}
-@media (max-width: 370px) {
-  .contactUs {
-    font-size: 16px;
-  }
-  .arrowIcon {
-    width: 11px;
-    margin-left: 8px;
-  }
+
 }
