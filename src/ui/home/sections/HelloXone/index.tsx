@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
+import BgIcon2 from "@/assets/imgs/home/bg-2.png";
+import BgIcon3 from "@/assets/imgs/home/bg-3.png";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import { Title } from "@/components/comm/title";
 import { EXTERNAL_LINKS } from "@/constants/external";
@@ -9,7 +11,7 @@ import { AnimationName } from "@/hooks/useScrollreveal";
 import styles from "./index.module.less";
 
 const HelloXone = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const operations = useMemo(() => {
     return [
@@ -38,10 +40,17 @@ const HelloXone = () => {
         imagePosition: "left", // 图片在左侧
       },
     ];
-  }, [i18n.language]);
+  }, [t]);
 
   return (
-    <div className={`container ${styles.wrapper}`}>
+    <div className={`${styles.wrapper}`}>
+      <img
+        alt=""
+        src={BgIcon2}
+        className="max-md:hidden absolute right-0"
+      ></img>
+      <img alt="" src={BgIcon3} className="max-md:hidden absolute mt-[30%] left-0"></img>
+
       <div className={`${styles.header} ${AnimationName.SLIDE_IN_BOTTOM}`}>
         <Title className={styles.headerTitle}>
           {t("home:hellowXoneTitle")}
@@ -73,8 +82,7 @@ const HelloXone = () => {
                     href={operation.url}
                     text={operation.linkText}
                     target="_blank"
-                  >
-                  </SeeMore>
+                  ></SeeMore>
                 </div>
               </>
             ) : (
@@ -91,8 +99,7 @@ const HelloXone = () => {
                     href={operation.url}
                     text={operation.linkText}
                     target="_blank"
-                  >
-                  </SeeMore>
+                  ></SeeMore>
                 </div>
                 <div className={styles.contentItemImage}></div>
               </>

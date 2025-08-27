@@ -1,20 +1,21 @@
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 import MarketSource2 from "@/assets/imgs/home/market-source-2.png"
 import MarketSource1 from "@/assets/imgs/home/market-source1.png"
-import { useMemo } from 'react';
 
 const BottomMenu = [
     {
-        title: "Current price",
+        title: "currentPrice",
         value: "29.7 M",
     },
     {
-        title: "Transaction value(24h)",
+        title: "transactionValue",
         value: "29.7 M",
     },
     {
-        title: "Transaction count(24h)",
+        title: "transactionCount",
         value: "29.7 M",
     }
 ]
@@ -66,14 +67,16 @@ const data = [
 
 
 const MarketChart = () => {
+    const { t } = useTranslation("home");
+
     const isLight = useMemo(() => {
         return localStorage.getItem('theme') !== 'dark'
     }, [])
     return (
         <div className="py-[40px] md:py-[80px] text-center">
-            <div className="text-[24px] md:text-[48px] font-bold leading-[120%] mb-4 md:mb-6">Growing Steadily Amid Market Expectations </div>
-            <div className="text-base md:text-[20px] font-medium text-t2 mb-6 md:mb-10 leading-[140%]">XOC is rapidly rising in the global market, releasing unlimited potential as its users and ecosystem grow.</div>
-            <div className='flex items-center mb-2 text-t3 font-medium text-[20px]'>Source:
+            <div className="text-[24px] md:text-[48px] font-bold leading-[120%] mb-4 md:mb-6">{t("marketTitle")}</div>
+            <div className="text-base md:text-[20px] font-medium text-t2 mb-6 md:mb-10 leading-[140%]">{t("marketDesc")}</div>
+            <div className='flex items-center mb-2 text-t3 font-medium text-[20px]'>{t("source")}:
                 <div className='flex items-center gap-[6px] ml-[14px]'>
                     <img alt='' src={MarketSource1} className='w-[26px]'></img>
                     <img alt='' src={MarketSource2} className='w-[26px]'></img>
@@ -97,11 +100,11 @@ const MarketChart = () => {
                         <YAxis axisLine={false} tickLine={false} stroke={isLight ? '#C4C7CA' : '#C3C3C7'} className='text-sm' />
                         <Tooltip content={<div className='p-2 text-left text-xs shadow-[0px_10px_32px_0px_#1F1F1F26] rounded bg-b1'>
                             <div className='flex items-center font-medium justify-between'>
-                                <span className='text-[--link1]'>Price: $29.70</span>
+                                <span className='text-[--link1]'>{t("price")}: $29.70</span>
                                 <span className='text-t2'>12</span>
                             </div>
-                            <div className='mt-1 text-t3 leading-[140%]'>Avg price: 440.928515 sats</div>
-                            <div className='mt-1 text-t3 leading-[140%]'>Transaction count: 6.43M</div>
+                            <div className='mt-1 text-t3 leading-[140%]'>{t("avgPrice")}: 440.928515 sats</div>
+                            <div className='mt-1 text-t3 leading-[140%]'>{t("transactionCount1")}: 6.43M</div>
                         </div>} />
                         <defs>
                             <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">
@@ -113,9 +116,9 @@ const MarketChart = () => {
                     </AreaChart>
                 </ResponsiveContainer>
                 <div className='w-full md:w-[262px] shrink-0 py-[36px] md:py-[24px] text-center bg-[--layer2] rounded-[16px]'>
-                    <div className='text-t1 leading-[100%] mb-2'>Total markt cap</div>
+                    <div className='text-t1 leading-[100%] mb-2'>{t("totalMarketCap")}</div>
                     <div className='text-t1 font-bold text-[32px] leading-[100%] mb-12'>1111</div>
-                    <div className='text-t1 leading-[100%] mb-2'>accounts holding COX</div>
+                    <div className='text-t1 leading-[100%] mb-2'>{t("accountsHoldingCOX")}</div>
                     <div className='text-t1 font-bold text-[32px] leading-[100%]'>2222</div>
                 </div>
             </div>
@@ -123,7 +126,7 @@ const MarketChart = () => {
                 {
                     BottomMenu && BottomMenu.map(el => <div key={`market-chart-bottom-${el.title}`} className="w-full py-[12px] rounded-[8px] text-center bg-[--layer2]">
                         <div className="text-[32px] font-bold leading-[100%]">{el.value}</div>
-                        <div className="text-[16px] mt-2 font-normal leading-[100%]">{el.title}</div>
+                        <div className="text-[16px] mt-2 font-normal leading-[100%]">{t(el.title)}</div>
                     </div>)
                 }
             </div>

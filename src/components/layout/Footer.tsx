@@ -209,7 +209,7 @@ const Footer = () => {
                 <div className="text-t2 flex text-sm flex-col gap-[12px] font-normal">
                   {
                     el.infos && el.infos.map(info => {
-                      return <Link className="" to={info.url}>{info.name}</Link>
+                      return <Link className="" target="_blank" to={info.url}>{info.name}</Link>
                     })
                   }
 

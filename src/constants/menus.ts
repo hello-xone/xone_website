@@ -238,9 +238,9 @@ export const menus: Array<MenuModel> = [
     name: "headerNav5",
     group: [
       {
-        id: "learning_Idea",
-        title: "navLearnIdea",
-        description: "navLearnIdeaDesc",
+        id: "onboarding",
+        title: "navOnboarding",
+        description: "navOnboardingDesc",
         links: [
           {
             id: "learning_Idea_1",
@@ -275,9 +275,9 @@ export const menus: Array<MenuModel> = [
         ],
       },
       {
-        id: "learning_Positive",
-        title: "navLearnPositive",
-        description: "navLearnPositiveDesc",
+        id: "launch",
+        title: "navLaunch",
+        description: "navLaunchDesc",
         links: [
           {
             id: "learning_Positive_1",
@@ -292,9 +292,31 @@ export const menus: Array<MenuModel> = [
         ],
       },
       {
-        id: "learning_Resources",
-        title: "navLearnResource",
-        description: "navLearnResourceDesc",
+        id: "vote",
+        title: "navVote",
+        description: "navVoteDesc",
+        links: [
+          {
+            id: "learning_Resources_1",
+            name: "navLearnResourceItem1",
+            link: EXTERNAL_LINKS.docs + "study/media",
+          },
+          {
+            id: "learning_Resources_2",
+            name: "navLearnResourceItem2",
+            link: EXTERNAL_LINKS.docs + "study/contribut",
+          },
+          {
+            id: "learning_Resources_3",
+            name: "navLearnResourceItem3",
+            link: EXTERNAL_LINKS.docs + "study/wiki",
+          },
+        ],
+      },
+      {
+        id: "influence",
+        title: "navInfluence",
+        description: "navInfluenceDesc",
         links: [
           {
             id: "learning_Resources_1",

@@ -198,7 +198,7 @@ export const XoneChain = () => {
                     }
                     duration={2}
                   />
-                  {}
+                  { }
                 </>
               ) : (
                 "--"
