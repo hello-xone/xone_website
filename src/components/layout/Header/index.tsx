@@ -88,9 +88,8 @@ const Header = () => {
         </div>
       )}
       <div
-        className={`${styles.header} ${
-          scrolled || showMobileMenu ? styles.scrolled : ""
-        } ${showMobileMenu ? styles.openMobileMenu : ""} ${pageClass}`}
+        className={`${styles.header} ${scrolled || showMobileMenu ? styles.scrolled : ""
+          } ${showMobileMenu ? styles.openMobileMenu : ""} ${pageClass}`}
         style={scrolled ? {} : colorStyle}
       >
         {!closed && <Notice onClose={closeNotice}></Notice>}

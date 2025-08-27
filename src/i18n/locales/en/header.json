@@ -94,5 +94,14 @@
     "copyright": "Xone Foundation.",
     "gov-inc": "Gov & Inc",
     "proposal-initiation": "Proposal Initiation",
-    "incentives": "Incentives"
+    "incentives": "Incentives",
+    "navEcologyBuild": "基础建设",
+    "navEcologyBuildDesc": "通过Xone的生态建设，畅游Xone",
+    "tokenup": "Tokenup",
+    "bridge": "Bridge",
+    "swap": "Swap",
+    "did": "DID",
+    "nftMarket": "NFT market",
+    "replayProtection": "Replay protection",
+    "payment": "Payment"
 }

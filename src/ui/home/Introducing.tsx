@@ -50,7 +50,7 @@ const Introducing = () => {
       </div>
       <div className="w-full md:w-[32.7%] shrink-0 max-md:mb-[32px]">
         <div className="font-bold text-[24px] md:text-[48px] leading-[120%] mb-4 md:mb-5">Introducing Xone chain</div>
-        <div className="text-t2 leading-[100%]">Discover an ecosystem with a mission — open, adaptable, and committed to advancing the future of blockchain.</div>
+        <div className="text-t2 leading-[140%]">Discover an ecosystem with a mission — open, adaptable, and committed to advancing the future of blockchain.</div>
       </div>
     </div>
   );
