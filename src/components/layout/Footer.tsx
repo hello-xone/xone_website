@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -14,7 +14,6 @@ import YoutubeIcon from "@/assets/svg/home/youtube.svg?react";
 import { EXTERNAL_LINKS } from "@/constants/external";
 
 import CommonButton from "../comm/button/CommonButton";
-import Switch from "../comm/Switch";
 import Language from "../Icons/Language";
 import Theme from "../Icons/Theme";
 import LanguagePopover from "./Popover/LanguagePopover";
@@ -239,8 +238,12 @@ const Footer = () => {
           <LanguagePopover>
             <Language className="text-t1"></Language>
           </LanguagePopover>
-          <Theme className="ml-3 mr-2"></Theme>
-          <Switch value={theme === 'light'} onChange={toggleTheme} text={`${theme === 'light' ? 'Light' : 'Dark'} Mode`}></Switch>
+          <div className="flex h-10 items-center ml-3" onClick={() => toggleTheme()}>
+            <Theme className="w-6 h-6 mr-2"></Theme>
+            <span className="text-t1 text-xs">
+              {theme === "light" ? "Light" : "Dark"} Mode
+            </span>
+          </div>
         </div>
         <div className="mt-3 md:mt-10 py-4 max-md:pt-[21px] border-t-[1px] border-solid border-t3 text-t3 flex justify-between items-center">
           <div className="flex items-center text-xs max-md:justify-between max-md:w-full">

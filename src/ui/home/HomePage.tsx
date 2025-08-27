@@ -24,7 +24,7 @@ const HomePage = () => {
                   <MarketChart></MarketChart>
                   <Governance></Governance>
                   <OnChainIdentity></OnChainIdentity>
-                  {!md && <Ecosystem></Ecosystem>}
+                  {md && <Ecosystem></Ecosystem>}
                   <HelloXone />
                   <Community></Community>
                   {/* <Governance></Governance> */}

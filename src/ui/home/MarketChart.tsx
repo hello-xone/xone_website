@@ -67,7 +67,7 @@ const data = [
 
 const MarketChart = () => {
     const isLight = useMemo(() => {
-        return localStorage.getItem('theme') !== 'light'
+        return localStorage.getItem('theme') !== 'dark'
     }, [])
     return (
         <div className="py-[40px] md:py-[80px] text-center">
@@ -105,11 +105,11 @@ const MarketChart = () => {
                         </div>} />
                         <defs>
                             <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor={localStorage.getItem('theme') === 'light' ? '#FF8082' : '#7d0513'} stopOpacity={1} />
-                                <stop offset="97%" stopColor={localStorage.getItem('theme') === 'light' ? '#FF8082' : '#3E0F14'} stopOpacity={0} />
+                                <stop offset="0%" stopColor={isLight ? '#FF8082' : '#7d0513'} stopOpacity={1} />
+                                <stop offset="97%" stopColor={isLight ? '#FF8082' : '#3E0F14'} stopOpacity={0} />
                             </linearGradient>
                         </defs>
-                        <Area type="monotone" dataKey="pv" stroke={localStorage.getItem('theme') === 'light' ? '#E9E9EB' : '#FF0420'} fill="url(#colorSales)" />
+                        <Area type="monotone" dataKey="pv" stroke={isLight ? '#FF0420' : '#FF0420'} fill="url(#colorSales)" />
                     </AreaChart>
                 </ResponsiveContainer>
                 <div className='w-full md:w-[262px] shrink-0 py-[36px] md:py-[24px] text-center bg-[--layer2] rounded-[16px]'>

@@ -38,7 +38,7 @@ export const menus: Array<MenuModel> = [
   {
     id: "learning",
     type: NavigationType.LINK,
-    name: "common:headerNav1",
+    name: "headerNav1",
     group: [
       {
         id: "learning_Idea",
@@ -121,7 +121,7 @@ export const menus: Array<MenuModel> = [
   {
     id: "building",
     type: NavigationType.LINK,
-    name: "common:headerNav2",
+    name: "headerNav2",
     group: [
       {
         id: "building_build",
@@ -235,7 +235,7 @@ export const menus: Array<MenuModel> = [
   {
     id: "Governance",
     type: NavigationType.LINK,
-    name: "common:headerNav5",
+    name: "headerNav5",
     group: [
       {
         id: "learning_Idea",
@@ -318,13 +318,57 @@ export const menus: Array<MenuModel> = [
   {
     id: "Ecology",
     type: NavigationType.LINK,
-    name: "common:headerNav3",
+    name: "headerNav3",
     link: "/ecology",
+    group: [
+      {
+        id: "ecology_build",
+        title: "navEcologyBuild",
+        description: "navEcologyBuildDesc",
+        links: [
+          {
+            id: "ecology_build_1",
+            name: "tokenup",
+            link: EXTERNAL_LINKS.docs + "developers/rpc",
+          },
+          {
+            id: "ecology_build_2",
+            name: "bridge",
+            link: EXTERNAL_LINKS.docs + "developers/explorers",
+          },
+          {
+            id: "ecology_build_3",
+            name: "swap",
+            link: EXTERNAL_LINKS.docs + "openapi/overview",
+          },
+          {
+            id: "ecology_build_4",
+            name: "did",
+            link: EXTERNAL_LINKS.docs + "developers/architecture/account",
+          },
+          {
+            id: "ecology_build_5",
+            name: "nftMarket",
+            link: EXTERNAL_LINKS.docs + "developers/architecture/transaction",
+          },
+          {
+            id: "building_build_6",
+            name: "replayProtection",
+            link: EXTERNAL_LINKS.docs + "developers/architecture/replay",
+          },
+          {
+            id: "building_build_6",
+            name: "payment",
+            link: EXTERNAL_LINKS.docs + "developers/architecture/replay",
+          },
+        ],
+      }
+    ],
   },
   {
     id: "global",
     type: NavigationType.INFO,
-    name: "common:headerNav4",
+    name: "headerNav4",
     group: [
       {
         id: "global_knight",
