@@ -63,68 +63,21 @@
 }
 
 .btn {
-  background-color: transparent;
-  color: var(--t1);
-  font-size: 14px;
-  font-weight: 500;
-  padding-left: 0;
-  padding-right: 0;
   margin-top: 18px;
 }
 
-.btn:hover {
-  background-color: transparent;
+.btn span {
   color: var(--t1);
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.btnIcon {
-  width: 14px;
-  margin-left: 10px;
+.btn:hover span{
+  color: var(--t1) !important;
 }
 
-.leftBlurImage {
-  position: absolute;
-  left: -1px;
-  bottom: 1480px;
-  width: 340px;
-  height: 540px;
-  background-image: url("@/assets/imgs/home/leftBlur.png");
-  background-size: 340px 540px;
-  background-repeat: no-repeat;
-  background-position: left center;
-}
-
-.rightBlurImage {
-  position: absolute;
-  right: -16px;
-  bottom: 2100px;
-  width: 300px;
-  height: 500px;
-  background-image: url("@/assets/imgs/home/leftBlur.png");
-  background-size: 300px 500px;
-  background-position: right center;
-  background-repeat: no-repeat;
-  transform: rotate(180deg);
-}
-
-@media (max-width: 1440px) {
-  .leftBlurImage {
-    bottom: 1300px;
-  }
-
-  .rightBlurImage {
-    bottom: 1850px;
-  }
-}
-
-@media (max-width: 1278px) {
-  .leftBlurImage {
-    bottom: 1450px;
-  }
-
-  .rightBlurImage {
-    bottom: 2000px;
-  }
+.btn:hover svg{
+  transform: translateX(0) !important;
 }
 
 @media (max-width: 1020px) {
@@ -187,7 +140,7 @@
 
   .contentItemDetailDescription {
     font-size: 14px;
-    margin-top: 6px;
+    margin-top: 8px;
   }
 
   .btn {
@@ -195,7 +148,15 @@
     margin-top: 2px;
   }
 
-  .btnIcon {
-    margin-left: 8px;
+  .btn {
+    margin-top: 12px;
+  }
+  
+  .btn span {
+    font-size: 13px;
+  }
+  
+  .btn svg {
+    margin-left: 0;
   }
 }

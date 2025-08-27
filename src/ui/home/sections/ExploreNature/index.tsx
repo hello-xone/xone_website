@@ -3,9 +3,9 @@ import Marquee from "react-fast-marquee";
 import { useTranslation } from "react-i18next";
 
 import ArrowIcon from "@/assets/svg/home/arrow-right-line.svg?react";
-import { Button } from "@/components/comm/button";
 import { Description } from "@/components/comm/description";
 import { Link } from "@/components/comm/link";
+import { SeeMore } from "@/components/comm/link/SeeMore";
 import { Title } from "@/components/comm/title";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import {
@@ -121,17 +121,13 @@ export const ExploreNature = () => {
         </div>
       </div>
       {!md && (
-        <Button
+        <SeeMore
           className={styles.btn}
-          onClick={() =>
-            window.open(EXTERNAL_LINKS.dashboard + i18n.language + "/community")
-          }
+          href={EXTERNAL_LINKS.dashboard + i18n.language + "/community"}
+          text={t("common:knowMore")}
+          target="_blank"
         >
-          {t("common:knowMore")}
-          <div className={`${styles.btnIcon} `}>
-            <ArrowIcon></ArrowIcon>
-          </div>
-        </Button>
+        </SeeMore>
       )}
     </div>
   );

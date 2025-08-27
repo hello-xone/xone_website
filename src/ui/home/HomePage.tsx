@@ -8,6 +8,7 @@ import MarketChart from "./MarketChart";
 import { OnChainIdentity } from "./OnChainIdentity";
 import { Community } from "./sections/Community";
 import { ExploreNature } from "./sections/ExploreNature";
+import HelloXone from "./sections/HelloXone/index";
 // import { Explore } from "./sections/Explore";
 import { Start } from "./sections/Start";
 import { XoneChain } from "./XoneChain";
@@ -24,7 +25,7 @@ const HomePage = () => {
                   <Governance></Governance>
                   <OnChainIdentity></OnChainIdentity>
                   {!md && <Ecosystem></Ecosystem>}
-                  {/* <HelloXone /> */}
+                  <HelloXone />
                   <Community></Community>
                   {/* <Governance></Governance> */}
                   {/* <Explore></Explore> */}
