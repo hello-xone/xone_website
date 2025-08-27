@@ -1,9 +1,10 @@
-import { Box, Button, MenuItem, Select, TextField } from "@mui/material";
+import { Box, MenuItem, Select, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import ArrowIcon from "@/assets/svg/home/arrow-solid.svg?react";
 import SearchIcon from "@/assets/svg/home/search-solid.svg?react";
+import CommonButton from "@/components/comm/button/CommonButton";
 import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 
 const Channel = () => {
@@ -171,44 +172,13 @@ const Channel = () => {
           }}
         />
 
-        <Button
-          variant="contained"
+        <CommonButton
           onClick={handleSearch}
-          size="large"
-          sx={{
-            marginTop: "1px",
-            marginBottom: "1px",
-            minWidth: lg ? undefined : "100%",
-            minHeight: lg ? undefined : "40px",
-            backgroundColor: "var(--primary) !important",
-            borderRadius: "8px !important",
-            color: "#FFF !important",
-            fontWeight: "400 !important",
-            padding: "0 6px !important",
-            fontSize: "18px !important",
-            cursor: "pointer !important",
-            boxShadow: "none !important",
-            outline: "none !important",
-            border: "none !important",
-            "&:focus": {
-              outline: "none !important",
-              border: "none !important",
-              boxShadow: "none !important",
-            },
-            "&:active": {
-              outline: "none !important",
-              border: "none !important",
-              boxShadow: "none !important",
-            },
-            "&.Mui-focused": {
-              outline: "none !important",
-              border: "none !important",
-              boxShadow: "none !important",
-            },
-          }}
+          type="primary"
+          className={`rounded-[8px] text-[18px] ${lg ? null : "min-w-[100%]"} ${lg ? null : "h-[40px]"}`}
         >
-          {t("channel:searchButton")}
-        </Button>
+          {t("channel:verificationButton")}
+        </CommonButton>
       </Box>
     </Box>
   );

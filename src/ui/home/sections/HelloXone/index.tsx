@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import ArrowRightIcon from "@/assets/svg/home/arrow-right-line.svg?react";
-import { Button } from "@/components/comm/button";
+import { SeeMore } from "@/components/comm/link/SeeMore";
 import { Title } from "@/components/comm/title";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import { AnimationName } from "@/hooks/useScrollreveal";
@@ -69,15 +68,13 @@ const HelloXone = () => {
                   <p className={styles.contentItemDetailDescription}>
                     {operation.description}
                   </p>
-                  <Button
+                  <SeeMore
                     className={styles.btn}
-                    onClick={() => window.open(operation.url, "_blank")}
+                    href={operation.url}
+                    text={operation.linkText}
+                    target="_blank"
                   >
-                    {operation.linkText}
-                    <div className={styles.btnIcon}>
-                      <ArrowRightIcon></ArrowRightIcon>
-                    </div>
-                  </Button>
+                  </SeeMore>
                 </div>
               </>
             ) : (
@@ -89,15 +86,13 @@ const HelloXone = () => {
                   <p className={styles.contentItemDetailDescription}>
                     {operation.description}
                   </p>
-                  <Button
+                  <SeeMore
                     className={styles.btn}
-                    onClick={() => window.open(operation.url, "_blank")}
+                    href={operation.url}
+                    text={operation.linkText}
+                    target="_blank"
                   >
-                    {operation.linkText}
-                    <div className={styles.btnIcon}>
-                      <ArrowRightIcon></ArrowRightIcon>
-                    </div>
-                  </Button>
+                  </SeeMore>
                 </div>
                 <div className={styles.contentItemImage}></div>
               </>
@@ -105,8 +100,6 @@ const HelloXone = () => {
           </div>
         ))}
       </div>
-      <div className={styles.leftBlurImage}></div>
-      <div className={styles.rightBlurImage}></div>
     </div>
   );
 };

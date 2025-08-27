@@ -4,6 +4,7 @@ import StartIcon from "@/assets/imgs/home/start.png";
 import ArrowIcon from "@/assets/svg/home/arrow-right-line.svg?react";
 import { Button } from "@/components/comm/button";
 import { Description } from "@/components/comm/description";
+import { SeeMore } from "@/components/comm/link/SeeMore";
 import { Title } from "@/components/comm/title";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import {
@@ -40,19 +41,13 @@ export const Start = () => {
               <ArrowIcon></ArrowIcon>
             </div>
           </Button>
-          <Button
+          <SeeMore
             className={styles.btn}
-            onClick={() =>
-              window.open(
-                EXTERNAL_LINKS.dashboard + i18n.language + "/community"
-              )
-            }
+            href={ EXTERNAL_LINKS.dashboard + i18n.language + "/community"}
+            text={t("home:joinNow")}
+            target="_blank"
           >
-            {t("home:joinNow")}
-            <div className={`${styles.btnIcon} `}>
-              <ArrowIcon></ArrowIcon>
-            </div>
-          </Button>
+          </SeeMore>
         </div>
       </div>
       <img

@@ -198,23 +198,21 @@
 }
 
 .btn {
-  background-color: transparent;
-  color: var(--b5);
+  margin-top: 24px;
+}
+
+.btn span {
+  color: var(--t1);
   font-size: 16px;
   font-weight: 500;
-  padding-left: 0;
-  padding-right: 0;
-  margin-top: 10px;
 }
 
-.btn:hover {
-  background-color: transparent;
-  color: var(--b5);
+.btn:hover span{
+  color: var(--t1) !important;
 }
 
-.btnIcon {
-  width: 14px;
-  margin-left: 10px;
+.btn:hover svg{
+  transform: translateX(0) !important;
 }
 
 @media (max-width: 900px) {
