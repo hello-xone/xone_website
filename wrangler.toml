@@ -1,4 +1,4 @@
-name = "xone-dev"
+name = "xone"
 compatibility_date = "2025-08-27"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "./dist"
