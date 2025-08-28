@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
+import { addEmail } from "@/api/common";
 import LogoIcon from "@/assets/imgs/header/logo-red.png";
 import DiscardIcon from "@/assets/svg/home/discard.svg?react";
 import GithubIcon from "@/assets/svg/home/github.svg?react";
@@ -12,6 +14,7 @@ import TelegramIcon from "@/assets/svg/home/telegram.svg?react";
 import XIcon from "@/assets/svg/home/x.svg?react";
 import YoutubeIcon from "@/assets/svg/home/youtube.svg?react";
 import { EXTERNAL_LINKS } from "@/constants/external";
+import { isEmail } from "@/utils";
 
 import CommonButton from "../comm/button/CommonButton";
 import Language from "../Icons/Language";
@@ -67,6 +70,7 @@ const contacts = [
 
 const Footer = () => {
   const { t } = useTranslation();
+  const [email, setEmail] = useState("")
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light';
   });
@@ -191,6 +195,13 @@ const Footer = () => {
     localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
   };
 
+  const handleSubmit = async () => {
+    await addEmail({
+      email,
+    });
+    setEmail('');
+    toast.success(t("home:subscriptionSuccessful"));
+  };
 
   return (
     <div className="w-screen pt-[64px]">
@@ -230,8 +241,14 @@ const Footer = () => {
             <div className="font-bold mb-4 text-t1">{t("subscribe")}</div>
             <div className="text-sm text-t2 mb-4">{t("subscribeDesc")}</div>
             <div className="flex">
-              <input className="flex-1 h-[40px] outline-none bg-b3 placeholder:text-t4 text-sm px-[20px] rounded-l-[8px]" placeholder="Enter email address"></input>
-              <CommonButton className="w-[98px] !text-base !font-bold !rounded-r-[8px] !rounded-l-none">{t("join")}</CommonButton>
+              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="flex-1 h-[40px] outline-none bg-b3 placeholder:text-t4 text-sm px-[20px] rounded-l-[8px]" placeholder="Enter email address"></input>
+              <CommonButton onClick={() => {
+                if (email && isEmail(email)) {
+                  handleSubmit()
+                } else {
+                  toast.error(t("header:invalidEmail"))
+                }
+              }} className="w-[98px] !text-base !font-bold !rounded-r-[8px] !rounded-l-none">{t("join")}</CommonButton>
             </div>
           </div>
         </div>

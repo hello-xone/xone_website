@@ -1,14 +1,14 @@
-import { BaseContainer } from "@/components/layout/BaseContainer";
 import { useMemo } from "react";
-import ArrowIcon from "@/assets/svg/home/arrow.svg?react";
-import { Link } from "@/components/comm/link";
 import { useTranslation } from "react-i18next";
+
 import pic1 from "@/assets/imgs/developer/building1.png";
 import pic2 from "@/assets/imgs/developer/building2.png";
 import pic3 from "@/assets/imgs/developer/building3.png";
-import fatherStyles from "../index.module.less";
-import styles from "./index.module.less";
+import { SeeMore } from "@/components/comm/link/SeeMore";
+import { BaseContainer } from "@/components/layout/BaseContainer";
 import { AnimationName, useScrollreveal } from "@/hooks/useScrollreveal";
+
+import styles from "./index.module.less";
 
 export const Building = () => {
   const { t, i18n } = useTranslation();
@@ -35,12 +35,10 @@ export const Building = () => {
   const { delayClassNames } = useScrollreveal();
 
   return (
-    <BaseContainer className={styles.wrapper}>
+    <div className={styles.wrapper}>
       <div>
-        <div className="flex w-full justify-center">
-          <h1
-            className={`${fatherStyles.title} ${styles.title} ${AnimationName.SLIDE_IN_BOTTOM}`}
-          >
+        <div className="flex justify-center w-full">
+          <h1 className={`${styles.title} ${AnimationName.SLIDE_IN_BOTTOM}`}>
             {t("developer:buildingTitle")}
           </h1>
         </div>
@@ -61,21 +59,18 @@ export const Building = () => {
                   >
                     {item.name}
                   </h1>
-                  <Link
+                  <SeeMore
                     href={item.url}
                     className={`${styles.viewDetails} ${AnimationName.SLIDE_IN_BOTTOM} ${delayClassNames[index * 2 + 4]}`}
-                  >
-                    {t("common:viewDetails")}
-                    <div className={styles.arrowIcon}>
-                      <ArrowIcon></ArrowIcon>
-                    </div>
-                  </Link>
+                    text={t("common:viewDetails")}
+                    target="_blank"
+                  ></SeeMore>
                 </div>
               );
             })}
           </div>
         </div>
       </div>
-    </BaseContainer>
+    </div>
   );
 };

@@ -30,4 +30,7 @@ export const EXTERNAL_LINKS = {
   Suggest_Dapp:
     "https://github.com/hello-xone/official_docs/issues/new?template=suggest_dapp.yaml",
   Bvi: "https://bvi.xone.org/zh-CN/ecology",
+  Nft: "https://nft.xone.org/en",
+  Payment: "https://www.payout.plus/",
+  Xid: "https://xid.world/en",
 };

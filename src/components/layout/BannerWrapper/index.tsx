@@ -1,8 +1,10 @@
 import { PropsWithChildren, useState } from "react";
-import styles from "./index.module.less";
+
 import { useStartupLoaded } from "@/hooks/useStartupLoaded";
 import { useWindowResize } from "@/hooks/useWindowResize";
 import { useNoticeStore } from "@/store/noticeStore";
+
+import styles from "./index.module.less";
 
 export const BannerWrapper = ({ children }: PropsWithChildren) => {
   const [bannerAnimationClassName, setBannerAnimationClassName] = useState("");
