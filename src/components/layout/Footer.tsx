@@ -96,6 +96,14 @@ const Footer = () => {
             url: EXTERNAL_LINKS.docs + "study/media",
           },
           {
+            name: t("common:officialVerification"),
+            url: "verification-channel",
+          },
+          {
+            name: t("common:roadmap"),
+            url: EXTERNAL_LINKS.docs + "study/roadmap",
+          },
+          {
             name: t("common:termsOfService"),
             url: EXTERNAL_LINKS.docs + "study/service",
           },
@@ -219,19 +227,18 @@ const Footer = () => {
           }
 
           <div className="w-full md:w-[386px]">
-            <div className="font-bold mb-4 text-t1">Subscribe to Newsletter</div>
-            <div className="text-sm text-t2 mb-4">Xone Chain is a modular Layer 1 blockchain that goes beyond scalability and efficiency. It focuses on ensuring every on-chain action creates tangible, traceable value.</div>
+            <div className="font-bold mb-4 text-t1">{t("subscribe")}</div>
+            <div className="text-sm text-t2 mb-4">{t("subscribeDesc")}</div>
             <div className="flex">
               <input className="flex-1 h-[40px] outline-none bg-b3 placeholder:text-t4 text-sm px-[20px] rounded-l-[8px]" placeholder="Enter email address"></input>
-              <CommonButton className="w-[98px] !text-base !font-bold !rounded-r-[8px] !rounded-l-none">Join</CommonButton>
+              <CommonButton className="w-[98px] !text-base !font-bold !rounded-r-[8px] !rounded-l-none">{t("join")}</CommonButton>
             </div>
           </div>
         </div>
 
         <div className="mt-10 text-xs leading-[140%] text-t3">
-          免责声明：<br></br>
-          Xone 公链作为开放架构的基础设施，允许全球任何团队、开发者、社区在 无需许可 的前提下，自由部署合约、构建应用。这正是 Web3 去中心化精神的体现 ——技术中立、数据透明、人人平等接入。
-          Xone 官方不对任何在链上运行的项目进行“推荐”、“担保”或“合作确认”，这些项目均由其团队 独立开发、独立运作、自负盈亏、风险自担。我们建议用户在参与任何项目（尤其是涉及资金的项目）时，务必秉持 DYOR（Do Your Own Research） 的原则，审慎判断，理性决策。
+          {t("disclaimerTitle")}<br></br>
+          {t("disclaimer")}
         </div>
 
         <div className="flex md:hidden mt-10 items-center justify-end">
@@ -251,9 +258,9 @@ const Footer = () => {
               © 2025 Xone Foundation
             </div>
             <div className="pl-4 ml-4 border-l-[1px] border-t3 leading-[14px] font-medium flex items-center">
-              <Link to={''}>Privacy</Link>
+              <Link to={''}>{t("privacy")}</Link>
               <span className="block w-[2px] h-[2px] rounded-full bg-t3 mx-4"></span>
-              <Link to={''}>Terms</Link>
+              <Link to={''}>{t("terms")}</Link>
             </div>
           </div>
           <LanguagePopover className="max-md:hidden">

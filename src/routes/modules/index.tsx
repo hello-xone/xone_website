@@ -39,7 +39,7 @@ export const Routes: RouteObject[] = [
     ],
   },
   {
-    path: "/verificationChannel",
+    path: "/verification-channel",
     Component: BaseLayout,
     children: [
       {
