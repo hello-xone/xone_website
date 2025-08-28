@@ -1,46 +1,39 @@
 .wrapper {
-  margin-top: 180px;
+  margin-top: 160px;
+}
+
+.title {
+  color: var(--t1);
+  font-size: 40px;
 }
 
 .nav {
   display: flex;
-  margin-top: 24px;
+  margin-top: 15px;
   user-select: none;
 }
+
 .swiper {
   width: 100%;
 }
-.slide {
-  padding-left: 48px;
-  width: max-content;
-  &:nth-of-type(1) {
-    padding-left: 0;
-  }
-}
+
+
 .navItem {
-  position: relative;
-  font-size: 18px;
-  color: var(--t2);
-  padding-bottom: 3px;
+  font-size: 16px;
+  color: var(--t3);
+  font-weight: 500;
   cursor: pointer;
-  font-weight: 700;
   width: max-content;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin-top: 2px;
+  margin-right: 20px;
+  transition: all 0.06s ease;
 }
+
 .selectedTag {
   color: var(--t1);
-  &::after {
-    position: absolute;
-    white-space: nowrap;
-    content: "";
-    width: 10px;
-    height: 2px;
-    background-color: var(--t1);
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-  }
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 0;
 }
 
 .seeMore {
@@ -51,87 +44,130 @@
   padding-left: 16px;
   min-width: max-content;
 }
+
 .arrowIcon {
   width: 24px;
   transform: rotateZ(-90deg);
 }
+
 .contentSpace {
-  margin-top: 57px;
+  margin-top: 10px;
 }
+
 .content {
   width: 100%;
   overflow: hidden;
+  margin-top: 26px;
 }
+
 .cards {
   display: flex;
   flex-wrap: wrap;
-  width: calc(100% + 24px);
-  margin-left: -24px;
+  gap: 24px;
 }
+
 .card {
   background-color: var(--b2);
   padding: 24px;
-  border-radius: 24px;
-  border: 1px solid var(--border1);
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: calc(25% - 24px);
-  margin: 24px 0 0 24px;
 }
+
 .name {
   font-size: 20px;
+  color: var(--t1);
+  font-weight: 700;
 }
+
 .description {
   color: var(--t2);
   font-size: 14px;
-  margin-top: 8px;
+  margin-top: 5px;
 }
+
 .tagBtn {
-  margin-top: 16px;
-  background-color: #fff;
+  gap: 5px;
+  margin-top: 15px;
+  background-color: var(--b3);
   padding: 8px 16px;
-  border: 1px solid var(--border1);
   border-radius: 8px;
   display: flex;
   width: max-content;
   align-items: center;
   font-size: 14px;
 }
-.infoArrowIcon {
-  width: 8px;
-  margin-left: 8px;
-  transform: rotateZ(45deg);
+
+.tagBtn:hover {
+  color: var(--t1);
 }
-.bottom {
-  display: flex;
-  justify-content: center;
-  margin-top: 24px;
-  width: 100%;
+
+.tagBtn span {
+  color: var(--t1);
+  font-size: 14px;
+  font-weight: 500;
 }
-.large {
+
+.tagBtn:hover span {
+  color: var(--t1) !important;
 }
-.small {
-  display: none;
+
+.tagBtn:hover svg {
+  transform: translateX(0) !important;
+}
+
+.seeAll {
+  background-color: transparent;
+  color: var(--t1);
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.seeAll:hover {
+  background-color: transparent;
+  color: var(--t1);
+}
+
+.seeAll:hover span {
+  color: var(--t1) !important;
+}
+
+.seeAll:hover svg {
+  transform: translateX(0) !important;
+}
+
+.seeAllIcon {
+  width: 14px;
+  margin-left: 10px;
 }
 
 @media (max-width: 1300px) {
   .wrapper {
     margin-top: 130px;
   }
+
   .cards {
     width: calc(100% + 16px);
     margin-left: -16px;
   }
+
   .card {
     width: calc(25% - 16px);
     margin: 16px 0 0 16px;
     border-radius: 18px;
     padding: 16px;
   }
+
   .name {
     font-size: 18px;
   }
+
   .contentSpace {
     margin-top: 47px;
   }
@@ -147,15 +183,19 @@
   .wrapper {
     margin-top: 100px;
   }
+
   .contentSpace {
     margin-top: 37px;
   }
+
   .slide {
     padding-left: 32px;
   }
+
   .navItem {
     font-size: 16px;
   }
+
   .sellMore {
     font-size: 16px;
   }
@@ -163,19 +203,16 @@
   .seeMore {
     font-size: 14px;
   }
+
   .arrowIcon {
     width: 16px;
   }
-  .large {
-    display: none;
-  }
-  .small {
-    display: flex;
-  }
+
   .card {
     margin: 0;
     margin-left: 16px;
     width: 288px;
+
     &:nth-of-type(1) {
       margin-left: 0;
     }
@@ -192,6 +229,7 @@
   .nav {
     margin-top: 16px;
   }
+
   .contentSpace {
     margin-top: 28px;
   }

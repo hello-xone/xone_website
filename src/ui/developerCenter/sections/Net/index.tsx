@@ -1,28 +1,29 @@
-import { BaseContainer } from "@/components/layout/BaseContainer";
-import { useEffect, useMemo, useState } from "react";
-import BlockExploreIcon from "@/assets/svg/developer/block_explore.svg?react";
-import WalletIcon from "@/assets/svg/developer/wallet.svg?react";
-import FolderIcon from "@/assets/svg/developer/folder.svg?react";
-import ArrowIcon from "@/assets/svg/home/info_arrow.svg?react";
-import styles from "./index.module.less";
-import { useTranslation } from "react-i18next";
-import { fetchNetCountersByNet } from "@/api/common";
-import { fetchBlockNumber, getXoneEpochByNet } from "@/web3";
-import { fetchStatsByNet } from "@/api/common";
-import { formatDecimal, preciseRound } from "@/utils/number";
+import { Skeleton } from "@mui/material";
+import { useNotifications } from "@toolpad/core/useNotifications";
+import { ChainType, getWalletKit, useWalletKit } from "@web3jskit/walletkit";
 import { utils } from "ethers";
+import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { numberToHex } from "viem";
+
+import { fetchNetCountersByNet, fetchStatsByNet } from "@/api/common";
+import BlockExploreIcon from "@/assets/svg/developer/block_explore.svg?react";
+import FolderIcon from "@/assets/svg/developer/folder.svg?react";
+import WalletIcon from "@/assets/svg/developer/wallet.svg?react";
+import ArrowIcon from "@/assets/svg/home/info_arrow.svg?react";
+import { MyCountUp } from "@/components/comm/myCountUp";
+import { BaseContainer } from "@/components/layout/BaseContainer";
+import { XoneChainId, XoneMainNet, XoneTestNet } from "@/constants/net";
+import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 import {
   AnimationName,
   DelayClassName,
   useScrollreveal,
 } from "@/hooks/useScrollreveal";
-import { Skeleton } from "@mui/material";
-import { XoneChainId, XoneMainNet, XoneTestNet } from "@/constants/net";
-import { numberToHex } from "viem";
-import { useNotifications } from "@toolpad/core/useNotifications";
-import { useWalletKit, getWalletKit, ChainType } from "@web3jskit/walletkit";
-import { useCountdownTimer } from "@/hooks/useCountdownTimer";
-import { MyCountUp } from "@/components/comm/myCountUp";
+import { formatDecimal, preciseRound } from "@/utils/number";
+import { fetchBlockNumber, getXoneEpochByNet } from "@/web3";
+
+import styles from "./index.module.less";
 
 const MainNetRpc = import.meta.env.VITE_APP_XO_MAIN_NET_RPC;
 const TestNetRpc = import.meta.env.VITE_APP_XO_TEST_NET_RPC;
@@ -212,11 +213,6 @@ export const Net = () => {
         label: t("developer:netDataLabel2"),
         value: currentNetData?.gasFee ? (
           <div className="flex items-end">
-            {currentNetData?.gasFee < "0.1" ? (
-              <span className="mr-1 text-t2 font-normal">{"<"}</span>
-            ) : (
-              ""
-            )}
             <MyCountUp
               value={
                 currentNetData?.gasFee < "0.1"
@@ -225,9 +221,6 @@ export const Net = () => {
               }
               duration={1.5}
             />{" "}
-            <div className="ml-1 translate-y-[-3px] text-t2 text-[0.6em] h-min font-[700]">
-              Gwei
-            </div>
           </div>
         ) : (
           "--"
@@ -236,13 +229,10 @@ export const Net = () => {
       {
         label: t("developer:netDataLabel3"),
         value: currentNetData?.blockTime ? (
-          <>
-            <MyCountUp
-              value={Number(preciseRound(currentNetData?.blockTime, 1))}
-              duration={1.5}
-            />
-            <div className="font-normal ml-1 text-t2">s</div>
-          </>
+          <MyCountUp
+            value={Number(preciseRound(currentNetData?.blockTime, 1))}
+            duration={1.5}
+          />
         ) : (
           "--"
         ),
@@ -316,7 +306,7 @@ export const Net = () => {
   }, [i18n.language, selectedNetKey, currentConnector]);
 
   return (
-    <BaseContainer className={styles.wrapper}>
+    <div className={styles.wrapper}>
       <div className="flex justify-center">
         <div className={`${styles.nav} ${AnimationName.SLIDE_IN_BOTTOM}`}>
           {navs.map((item) => {
@@ -368,7 +358,7 @@ export const Net = () => {
             >
               <div className={styles.linkLeft}>
                 <div className={styles.linkIcon}>{item.icon}</div>
-                <div>{item.title}</div>
+                <div className={styles.linkTitle}>{item.title}</div>
               </div>
               <div className={styles.arrowIcon}>
                 <ArrowIcon></ArrowIcon>
@@ -377,6 +367,6 @@ export const Net = () => {
           );
         })}
       </div>
-    </BaseContainer>
+    </div>
   );
 };

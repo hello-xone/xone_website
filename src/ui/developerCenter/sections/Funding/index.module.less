@@ -1,48 +1,76 @@
 .wrapper {
   margin-top: 180px;
   display: flex;
-  align-items: center;
+  align-items: stretch;
 }
+
+.left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .slogon {
-  flex-grow: 1;
+  font-size: 40px;
+  width: 600px;
+  line-height: 1.2;
 }
+
 .right {
-  width: 800px;
-  min-width: 800px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 22px;
-  margin-left: 24px;
+  margin-left: 20px;
 }
+
 .card {
   display: flex;
+  align-items: flex-start;
+  flex-direction: column;
   width: 100%;
-  padding: 34.33px 31.33px;
-  background-color: var(--b2);
-  border: 1px solid var(--border1);
+  padding: 24px;
+  box-sizing: border-box;
   border-radius: 24px;
-  align-items: center;
+  background-color: var(--b2);
 }
 
 .icon {
-  width: 40px;
-  margin-right: 31.33px;
+  display: block;
+  width: 54px;
+  height: 54px;
 }
+
 .name {
-  font-size: 20px;
+  margin-top: 5px;
+  font-size: 26px;
+  color: var(--t1);
 }
+
 .viewDetails {
-  margin-top: 10.5px;
-  display: flex;
-  align-items: center;
+  margin-top: 15px;
   font-size: var(--t2);
   font-size: 16px;
-  cursor: pointer;
 }
-.arrowIcon {
-  width: 22px;
-  margin-left: 4px;
-  transform: rotateZ(-90deg);
+
+.viewDetails:hover {
+  background-color: transparent;
+  color: var(--b5);
+}
+
+.viewDetails span {
+  color: var(--b5);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.viewDetails:hover span {
+  color: var(--t1) !important;
+}
+
+.viewDetails:hover svg {
+  transform: translateX(0) !important;
 }
 
 @media (max-width: 1660px) {
@@ -56,13 +84,16 @@
   .wrapper {
     margin-top: 130px;
   }
+
   .right {
     width: 500px;
     min-width: 500px;
   }
+
   .card {
     padding: 24px 16px;
   }
+
   .icon {
     margin-right: 24px;
   }
@@ -74,21 +105,26 @@
     min-width: 400px;
     margin-left: 16px;
   }
+
   .card {
     padding: 18px 14px;
     border-radius: 16px;
   }
+
   .icon {
     margin-right: 16px;
     width: 32px;
   }
+
   .name {
     font-size: 18px;
   }
+
   .viewDetails {
     font-size: 14px;
     margin-top: 8px;
   }
+
   .arrowIcon {
     width: 18px;
   }
@@ -106,20 +142,25 @@
     min-width: 300px;
     margin-left: 12px;
   }
+
   .card {
     padding: 14px 12px;
     border-radius: 14px;
   }
+
   .icon {
     margin-right: 12px;
     width: 26px;
   }
+
   .name {
     font-size: 16px;
   }
+
   .viewDetails {
     font-size: 13px;
   }
+
   .arrowIcon {
     width: 16px;
   }
@@ -130,9 +171,11 @@
     flex-wrap: wrap;
     margin-top: 80px;
   }
+
   .slogon {
     width: 100%;
   }
+
   .right {
     width: 100%;
     min-width: 100%;

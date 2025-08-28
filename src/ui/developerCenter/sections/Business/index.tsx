@@ -1,16 +1,15 @@
-import { BaseContainer } from "@/components/layout/BaseContainer";
-import fatherStyles from "../index.module.less";
-import { useMemo, useState, useEffect } from "react";
-import i18next from "i18next";
-import ArrowIcon from "@/assets/svg/home/arrow.svg?react";
-import InfoArrowIcon from "@/assets/svg/home/info_arrow.svg?react";
-import styles from "./index.module.less";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode } from "swiper/modules";
-import { Link } from "@/components/comm/link";
-import { useTranslation } from "react-i18next";
-import { AnimationName, DelayClassName } from "@/hooks/useScrollreveal";
 import { Skeleton } from "@mui/material";
+import i18next from "i18next";
+import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import ArrowIcon from "@/assets/svg/home/arrow-right-line.svg?react";
+import { Button } from "@/components/comm/button";
+import { SeeMore } from "@/components/comm/link/SeeMore";
+import { BaseContainer } from "@/components/layout/BaseContainer";
+import { AnimationName, DelayClassName } from "@/hooks/useScrollreveal";
+
+import styles from "./index.module.less";
 
 enum Tag {
   ALL = "All",
@@ -186,14 +185,14 @@ export const Business = () => {
   };
 
   return (
-    <BaseContainer className={styles.wrapper}>
-      <h1 className={`${fatherStyles.title} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+    <div className={styles.wrapper}>
+      <h1 className={`${styles.title} ${AnimationName.SLIDE_IN_BOTTOM}`}>
         {t("developer:businessTitle")}
       </h1>
       <div
         className={`${styles.nav} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_2}`}
       >
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap items-center">
           {navData.map((item) => (
             <div
               key={item.tag}
@@ -224,15 +223,12 @@ export const Business = () => {
                       <div className={styles.name}>{item.name}</div>
                       <p className={styles.description}>{item.description}</p>
                     </div>
-                    <button
-                      className={styles.tagBtn}
-                      onClick={() => window.open(item.url)}
-                    >
-                      {item.tags}
-                      <div className={styles.infoArrowIcon}>
-                        <InfoArrowIcon></InfoArrowIcon>
-                      </div>
-                    </button>
+                    <SeeMore
+                      href={item.url}
+                      className={`${styles.tagBtn}`}
+                      text={item.tags}
+                      target="_blank"
+                    ></SeeMore>
                   </div>
                 );
               })}
@@ -242,73 +238,22 @@ export const Business = () => {
       </div>
 
       <div
-        className={`${styles.contentSpace} ${styles.small} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_4}`}
+        className={`${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_5}`}
       >
-        <Swiper
-          className={styles.swiper}
-          direction="horizontal"
-          freeMode={true}
-          slidesPerView="auto"
-          modules={[FreeMode]}
-          mousewheel={{
-            forceToAxis: true,
-            invert: false,
-          }}
+        <Button
+          className={styles.seeAll}
+          onClick={() =>
+            window.open(
+              "https://github.com/hello-xone/xone_assets/blob/main/tools/ToolList.json"
+            )
+          }
         >
-          {isLoading ? (
-            <>
-              {new Array(4).fill("").map((_, index) => {
-                return (
-                  <SwiperSlide
-                    key={index}
-                    className={`w-max ${index === 0 ? "" : "ml-4"}`}
-                  >
-                    <Skeleton
-                      key={index}
-                      variant="rectangular"
-                      height={160}
-                      className={`${styles.card} `}
-                    ></Skeleton>
-                  </SwiperSlide>
-                );
-              })}
-            </>
-          ) : (
-            <>
-              {filterList.map((item, index) => {
-                return (
-                  <SwiperSlide key={index} className={`${styles.card}`}>
-                    <div>
-                      <div className={styles.name}>{item.name}</div>
-                      <p className={styles.description}>{item.description}</p>
-                    </div>
-                    <button
-                      className={styles.tagBtn}
-                      onClick={() => window.open(item.url)}
-                    >
-                      {item.tags}
-                      <div className={styles.infoArrowIcon}>
-                        <InfoArrowIcon></InfoArrowIcon>
-                      </div>
-                    </button>
-                  </SwiperSlide>
-                );
-              })}
-            </>
-          )}
-        </Swiper>
-      </div>
-
-      <div
-        className={`${styles.small} ${styles.bottom} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_6}`}
-      >
-        <Link href="" className={`${styles.seeMore}`}>
-          {t("common:viewDetails")}
-          <div className={styles.arrowIcon}>
+          {t("common:seeAll")}
+          <div className={styles.seeAllIcon}>
             <ArrowIcon></ArrowIcon>
           </div>
-        </Link>
+        </Button>
       </div>
-    </BaseContainer>
+    </div>
   );
 };

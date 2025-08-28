@@ -5,50 +5,67 @@
 .nav {
   border-radius: 100px;
   padding: 8px;
-  border: 1px solid var(--border1);
-  background-color: white;
   display: flex;
-  gap: 8px;
+  gap: 46px;
 }
 .navItem {
-  color: black;
-  font-size: 20px;
+  position: relative;
+  font-size: 32px;
+  font-weight: 600;
   width: 140px;
   height: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color: var(--t2);
+  transition: all 0.2s ease;
+}
+.navItem::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  margin: 0 auto;
+  width: 80px;
+  height: 4px;
+  border-radius: 32px;
+  background-color: transparent;
 }
 .selectedNav {
-  background-color: black;
-  border-radius: 46px;
-  color: white;
+  color: var(--t1);
 }
+.selectedNav::after {
+  background-color: var(--t1);
+}
+
 .datas {
-  margin-top: 64px;
+  margin-top: 35px;
   display: flex;
   justify-content: space-between;
 }
 .data {
   width: calc(25% - 12px);
-  padding: 29px 16px 64px;
+  padding: 29px 16px 26px;
   text-align: center;
 }
 
 .lable {
-  margin-top: 8px;
+  margin-top: 2px;
   font-size: 20px;
   color: var(--t2);
+  font-weight: 500;
+  font-size: 14px;
 }
 
 .value {
   color: var(--t1);
-  font-size: 48px;
+  font-size: 36px;
+  font-weight: bold;
 }
 
 .links {
-  margin-top: 80px;
   display: flex;
   justify-content: space-between;
 }
@@ -59,19 +76,30 @@
   align-items: center;
   background-color: var(--b2);
   padding: 32px 24px;
-  width: calc(33.33% - 12px);
+  width: calc(33.33% - 18px);
   border-radius: 16px;
+  border: 1px solid transparent;
+}
+.link:hover {
+  border: 1px solid var(--t1);
 }
 .linkLeft {
   display: flex;
   align-items: center;
 }
 .linkIcon {
-  margin-right: 12px;
+  margin-right: 13px;
   width: 24px;
+  height: 24px;
+}
+.linkTitle {
+  color: var(--t1);
+  font-weight: 400;
+  font-size: 20px;
 }
 .arrowIcon {
   width: 16px;
+  height: 16px;
 }
 
 @media (max-width: 1300px) {

@@ -7,7 +7,7 @@
   "exploreXone": "Explore Xone",
   "seeMore": "More",
   "getStarted": "Get Started",
-  "viewDetails": "Details",
+  "viewDetails": "View Details",
   "followUs": "Follow",
   "xoneChain": "Xone Chain",
   "build": "Building",
@@ -94,5 +94,6 @@
   "copyright": "Xone Foundation.",
   "gov-inc": "Gov & Inc",
   "proposal-initiation": "Proposal Initiation",
-  "incentives": "Incentives"
+  "incentives": "Incentives",
+  "seeAll": "See All"
 }

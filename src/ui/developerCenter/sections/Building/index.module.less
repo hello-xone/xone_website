@@ -1,39 +1,66 @@
 .wrapper {
   margin-top: 160px;
 }
+
 .title {
-  max-width: 791px;
+  font-size: 40px;
+  font-weight: 700;
   text-align: center;
 }
+
 .appWrapper {
   width: 100%;
   overflow: hidden;
 }
+
 .apps {
   display: flex;
+  justify-content: space-between;
+  gap: 40px;
   margin-top: 64px;
-  width: calc(100% + 24px);
-  margin-left: -24px;
 }
 
 .app {
-  width: calc(33.33% - 24px);
-  margin-left: 24px;
+  flex: 1;
 }
+
 .img {
   width: 100%;
 }
+
 .appName {
-  margin-top: 12px;
+  margin-top: 20px;
   font-size: 24px;
+  color: var(--t1);
 }
+
 .viewDetails {
-  margin-top: 14px;
+  margin-top: 15px;
   display: flex;
   align-items: center;
   font-size: var(--t2);
   font-size: 16px;
 }
+
+.viewDetails:hover {
+  background-color: transparent;
+  color: var(--b5);
+}
+
+.viewDetails span {
+  color: var(--b5);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.viewDetails:hover span {
+  color: var(--t1) !important;
+}
+
+.viewDetails:hover svg {
+  transform: translateX(0) !important;
+}
+
 .arrowIcon {
   width: 22px;
   margin-left: 4px;
@@ -44,22 +71,27 @@
   .wrapper {
     margin-top: 120px;
   }
+
   .apps {
     margin-top: 50px;
     width: calc(100% + 16px);
     margin-left: -16px;
   }
+
   .app {
     width: calc(33.33% - 16px);
     margin-left: 16px;
   }
+
   .appName {
     font-size: 18px;
   }
+
   .viewDetails {
     margin-top: 10px;
     font-size: 14px;
   }
+
   .arrowIcon {
     width: 18px;
     margin-left: 2px;
@@ -70,75 +102,94 @@
   .wrapper {
     margin-top: 90px;
   }
+
   .apps {
     margin-top: 40px;
   }
+
   .appName {
     font-size: 15px;
   }
+
   .viewDetails {
     margin-top: 8px;
     font-size: 13px;
   }
+
   .arrowIcon {
     width: 16px;
   }
 }
+
 @media (max-width: 768px) {
   .apps {
     width: calc(100% + 24px);
     margin-left: -24px;
     flex-wrap: wrap;
   }
+
   .app {
     width: calc(50% - 24px);
     margin-left: 24px;
+
     &:nth-of-type(3) {
       margin-top: 24px;
     }
   }
+
   .appName {
     font-size: 18px;
   }
+
   .viewDetails {
     margin-top: 10px;
     font-size: 14px;
   }
+
   .arrowIcon {
     width: 18px;
   }
 }
+
 @media (max-width: 680px) {
   .wrapper {
     margin-top: 80px;
   }
+
   .apps {
     margin-top: 36px;
   }
 }
+
 @media (max-width: 600px) {
   .apps {
     width: calc(100% + 16px);
     margin-left: -16px;
   }
+
   .app {
     width: calc(50% - 16px);
     margin-left: 16px;
+
     &:nth-of-type(3) {
       margin-top: 16px;
     }
   }
+
   .appName {
     font-size: 15px;
   }
+
   .viewDetails {
     margin-top: 8px;
     font-size: 13px;
   }
+
   .arrowIcon {
     width: 16px;
   }
 }
+
 @media (max-width: 480px) {
   .title {
     text-align: left;
@@ -148,49 +199,61 @@
     width: calc(100% + 12px);
     margin-left: -12px;
   }
+
   .app {
     width: calc(50% - 12px);
     margin-left: 12px;
   }
+
   .appName {
     font-size: 14px;
   }
+
   .viewDetails {
     margin-top: 8px;
     font-size: 12px;
   }
+
   .arrowIcon {
     width: 14px;
   }
 }
+
 @media (max-width: 400px) {
   .apps {
     width: 100%;
     margin-left: 0;
   }
+
   .app {
     width: 100%;
     margin-left: 0;
     margin-top: 24px;
+
     &:nth-of-type(3) {
       margin-top: 24px;
     }
   }
+
   .appName {
     font-size: 15px;
   }
+
   .viewDetails {
     margin-top: 8px;
     font-size: 13px;
   }
+
   .arrowIcon {
     width: 16px;
   }
 }
+
 @media (max-width: 350px) {
   .appName {
     font-size: 17px;
   }
+
   .viewDetails {
     margin-top: 8px;
   }

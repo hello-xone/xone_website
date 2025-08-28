@@ -1,14 +1,12 @@
-import { BaseContainer } from "@/components/layout/BaseContainer";
 import { useMemo } from "react";
-import FaucetIcon from "@/assets/svg/developer/faucet.svg?react";
-import KnightIcon from "@/assets/svg/home/knight.svg?react";
-import ArrowIcon from "@/assets/svg/home/arrow.svg?react";
 import { useTranslation } from "react-i18next";
 
-import fatherStyles from "../index.module.less";
-import styles from "./index.module.less";
-import { Link } from "@/components/comm/link";
+import FundingIcon from "@/assets/svg/developer/funding.svg?react";
+import { SeeMore } from "@/components/comm/link/SeeMore";
+import { BaseContainer } from "@/components/layout/BaseContainer";
 import { AnimationName, useScrollreveal } from "@/hooks/useScrollreveal";
+
+import styles from "./index.module.less";
 
 export const Funding = () => {
   const { t, i18n } = useTranslation();
@@ -16,12 +14,12 @@ export const Funding = () => {
   const list = useMemo(() => {
     return [
       {
-        icon: <FaucetIcon></FaucetIcon>,
+        icon: <FundingIcon></FundingIcon>,
         title: t("developer:fundingFaucet"),
         url: "https://faucet.xone.org/",
       },
       {
-        icon: <KnightIcon></KnightIcon>,
+        icon: <FundingIcon></FundingIcon>,
         title: t("developer:fundingBountyHunter"),
         url: "https://docs.xone.org/study/bug",
       },
@@ -29,12 +27,26 @@ export const Funding = () => {
   }, [i18n.language]);
 
   return (
-    <BaseContainer className={styles.wrapper}>
-      <h1
-        className={`${styles.slogon} ${fatherStyles.title} ${AnimationName.SLIDE_IN_BOTTOM}`}
-      >
-        {t("developer:fundingTitle")}
-      </h1>
+    <div className={styles.wrapper}>
+      <div className={styles.left}>
+        <h1 className={`${styles.slogon} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+          {t("developer:fundingTitle")}
+        </h1>
+        <div className={`${styles.card} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+          <div className={styles.icon}>
+            <FundingIcon></FundingIcon>
+          </div>
+          <div>
+            <h1 className={styles.name}>{t("developer:fundingGrants")}</h1>
+            <SeeMore
+              href="https://xone.org/grants"
+              className={`${styles.viewDetails}`}
+              text={t("common:viewDetails")}
+              target="_blank"
+            ></SeeMore>
+          </div>
+        </div>
+      </div>
       <div className={styles.right}>
         {list.map((item, index) => {
           return (
@@ -45,17 +57,17 @@ export const Funding = () => {
               <div className={styles.icon}>{item.icon}</div>
               <div>
                 <h1 className={styles.name}>{item.title}</h1>
-                <Link href={item.url} className={styles.viewDetails}>
-                  {t("common:viewDetails")}
-                  <div className={styles.arrowIcon}>
-                    <ArrowIcon></ArrowIcon>
-                  </div>
-                </Link>
+                <SeeMore
+                  href={item.url}
+                  className={`${styles.viewDetails}`}
+                  text={t("common:viewDetails")}
+                  target="_blank"
+                ></SeeMore>
               </div>
             </div>
           );
         })}
       </div>
-    </BaseContainer>
+    </div>
   );
 };

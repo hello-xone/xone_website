@@ -1,4 +1,5 @@
 import "@/assets/style/app.less";
+import "@/assets/style/code-highlight.less";
 
 // import "swiper/css";
 // import "swiper/css/autoplay";

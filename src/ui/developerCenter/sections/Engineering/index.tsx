@@ -1,19 +1,19 @@
-import { BaseContainer } from "@/components/layout/BaseContainer";
-import fatherStyles from "../index.module.less";
-import { Description } from "@/components/comm/description";
 import { useMemo } from "react";
-import GithubIcon from "@/assets/svg/developer/github.svg?react";
-import { Link } from "@/components/comm/link";
 import { useTranslation } from "react-i18next";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import styles from "./index.module.less";
+import GithubIcon from "@/assets/svg/developer/github.svg?react";
+import { Description } from "@/components/comm/description";
+import { Link } from "@/components/comm/link";
+import { BaseContainer } from "@/components/layout/BaseContainer";
 import {
   AnimationName,
   DelayClassName,
   useScrollreveal,
 } from "@/hooks/useScrollreveal";
+
+import styles from "./index.module.less";
 
 export const Engineering = () => {
   const { t, i18n } = useTranslation();
@@ -64,11 +64,9 @@ export const Engineering = () => {
   }, [i18n.language]);
 
   return (
-    <BaseContainer className={styles.wrapper}>
+    <div className={styles.wrapper}>
       <div className={styles.info}>
-        <h1
-          className={`${fatherStyles.title} ${styles.slogon} ${AnimationName.SLIDE_IN_BOTTOM}`}
-        >
+        <h1 className={`${styles.slogon} ${AnimationName.SLIDE_IN_BOTTOM}`}>
           {t("developer:engineeringTitle")}
         </h1>
         <Description
@@ -112,6 +110,6 @@ export const Engineering = () => {
           </SwiperSlide>
         </Swiper>
       </div>
-    </BaseContainer>
+    </div>
   );
 };
