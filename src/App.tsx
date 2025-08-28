@@ -11,6 +11,7 @@ import { NotificationsProvider } from "@toolpad/core/useNotifications";
 import { ChainType, WalletKitProvider } from "@web3jskit/walletkit";
 import { Suspense, useEffect } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Toaster } from 'react-hot-toast';
 import { BrowserRouter } from "react-router-dom";
 
 // import { useThemeConfig } from "@/hooks/useThemeConfig";
@@ -52,6 +53,7 @@ function App() {
               defaultChainType={ChainType.EVM}
             >
               <NotificationsProvider>
+                <Toaster />
                 <RenderRoutes />
               </NotificationsProvider>
             </WalletKitProvider>
