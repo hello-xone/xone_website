@@ -97,7 +97,7 @@ const Footer = () => {
           },
           {
             name: t("common:officialVerification"),
-            url: "verification-channel",
+            url: "/verification-channel",
           },
           {
             name: t("common:roadmap"),
