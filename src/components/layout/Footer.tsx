@@ -80,10 +80,6 @@ const Footer = () => {
             url: EXTERNAL_LINKS.docs + "study/xone",
           },
           {
-            name: t("common:events"),
-            url: EXTERNAL_LINKS.Events,
-          },
-          {
             name: t("common:bountyHunter"),
             url: EXTERNAL_LINKS.docs + "study/bug",
           },
@@ -169,6 +165,10 @@ const Footer = () => {
             name: t("common:commercialPr"),
             internalLink: true,
             url: "/commercial",
+          },
+          {
+            name: t("common:events"),
+            url: EXTERNAL_LINKS.Events,
           },
           {
             name: t("common:knightProject"),
