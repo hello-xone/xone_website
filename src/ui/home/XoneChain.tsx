@@ -1,11 +1,11 @@
+import BigNumber from "bignumber.js";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { fetchNetCountersByNet, fetchNftTotal, fetchStatsByNet } from "@/api/common";
 import { SeeMore } from "@/components/comm/link/SeeMore";
-import { useCountdownTimer } from "@/hooks/useCountdownTimer";
-import BigNumber from "bignumber.js";
 import { EXTERNAL_LINKS } from "@/constants/external";
+import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 
 interface Data {
     totalAddress?: string;

@@ -1,23 +1,23 @@
-import { BaseContainer } from "@/components/layout/BaseContainer";
-import { CircularProgress } from "@mui/material";
-import { useMemo, useRef, useState } from "react";
+import { CircularProgress, Skeleton } from "@mui/material";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { CountUp } from "use-count-up";
+
 import {
   fetchNetCountersByNet,
   fetchNftTotal,
   fetchStatsByNet,
 } from "@/api/common";
-
-import styles from "./index.module.less";
-import { numberIndent } from "@/utils/number";
+import { BaseContainer } from "@/components/layout/BaseContainer";
+import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 import {
   AnimationName,
   DelayClassName,
   useScrollreveal,
 } from "@/hooks/useScrollreveal";
-import { CountUp } from "use-count-up";
-import { Skeleton } from "@mui/material";
-import { useCountdownTimer } from "@/hooks/useCountdownTimer";
+import { numberIndent } from "@/utils/number";
+
+import styles from "./index.module.less";
 
 interface Data {
   totalAddress?: string;
@@ -208,7 +208,7 @@ export const XoneChain = () => {
         },
       },
     ];
-  }, [i18n.language, datas, firstLoading]);
+  }, [t, datas?.totalAddress, datas?.totalArtwork, datas?.totalToken, datas?.averageTransactionCost, loading, firstLoading]);
 
   return (
     <BaseContainer className={styles.wrapper}>
