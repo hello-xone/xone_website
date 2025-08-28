@@ -31,6 +31,7 @@
     "i18next": "^24.2.3",
     "lodash": "^4.17.21",
     "prismjs": "^1.30.0",
+    "puppeteer-core": "^24.17.0",
     "react": "^18.3.1",
     "react-cookie": "^7.2.2",
     "react-dom": "^18.3.1",
