@@ -1,7 +1,7 @@
-import puppeteer from "puppeteer";
-import fs from "fs";
 import { spawn } from "child_process";
+import fs from "fs";
 import portfinder from "portfinder";
+import puppeteer from "puppeteer";
 
 /**
  @param routes 
@@ -26,7 +26,7 @@ const seoPrerender = (routes) => {
       });
 
       const browser = await puppeteer.launch({
-        headless: "new",
+        headless: 'new', 
         args: [
           "--no-sandbox",
           "--disable-setuid-sandbox",
