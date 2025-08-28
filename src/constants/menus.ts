@@ -1,6 +1,7 @@
 import BusinessIcon from "@/assets/svg/home/business.svg?react";
 import KnightIcon from "@/assets/svg/home/knight.svg?react";
-import { EXTERNAL_LINKS } from "@/lib/external";
+
+import { EXTERNAL_LINKS } from "./external";
 
 export interface NavigationLink {
   id: string;
@@ -238,9 +239,9 @@ export const menus: Array<MenuModel> = [
     name: "headerNav5",
     group: [
       {
-        id: "learning_Idea",
-        title: "navLearnIdea",
-        description: "navLearnIdeaDesc",
+        id: "onboarding",
+        title: "navOnboarding",
+        description: "navOnboardingDesc",
         links: [
           {
             id: "learning_Idea_1",
@@ -275,9 +276,9 @@ export const menus: Array<MenuModel> = [
         ],
       },
       {
-        id: "learning_Positive",
-        title: "navLearnPositive",
-        description: "navLearnPositiveDesc",
+        id: "launch",
+        title: "navLaunch",
+        description: "navLaunchDesc",
         links: [
           {
             id: "learning_Positive_1",
@@ -292,9 +293,31 @@ export const menus: Array<MenuModel> = [
         ],
       },
       {
-        id: "learning_Resources",
-        title: "navLearnResource",
-        description: "navLearnResourceDesc",
+        id: "vote",
+        title: "navVote",
+        description: "navVoteDesc",
+        links: [
+          {
+            id: "learning_Resources_1",
+            name: "navLearnResourceItem1",
+            link: EXTERNAL_LINKS.docs + "study/media",
+          },
+          {
+            id: "learning_Resources_2",
+            name: "navLearnResourceItem2",
+            link: EXTERNAL_LINKS.docs + "study/contribut",
+          },
+          {
+            id: "learning_Resources_3",
+            name: "navLearnResourceItem3",
+            link: EXTERNAL_LINKS.docs + "study/wiki",
+          },
+        ],
+      },
+      {
+        id: "influence",
+        title: "navInfluence",
+        description: "navInfluenceDesc",
         links: [
           {
             id: "learning_Resources_1",
@@ -329,17 +352,17 @@ export const menus: Array<MenuModel> = [
           {
             id: "ecology_build_1",
             name: "tokenup",
-            link: EXTERNAL_LINKS.docs + "developers/rpc",
+            link: EXTERNAL_LINKS.TokenUp,
           },
           {
             id: "ecology_build_2",
             name: "bridge",
-            link: EXTERNAL_LINKS.docs + "developers/explorers",
+            link: EXTERNAL_LINKS.Bridge,
           },
           {
             id: "ecology_build_3",
             name: "swap",
-            link: EXTERNAL_LINKS.docs + "openapi/overview",
+            link: EXTERNAL_LINKS.SwapX,
           },
           {
             id: "ecology_build_4",

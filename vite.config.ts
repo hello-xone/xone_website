@@ -1,11 +1,12 @@
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
-import { defineConfig } from "vite";
-import { nodePolyfills } from "vite-plugin-node-polyfills";
-import svgr from "vite-plugin-svgr";
 import copy from "rollup-plugin-copy";
 import tailwindcss from "tailwindcss";
+import { defineConfig } from "vite";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 import { VitePWA } from "vite-plugin-pwa";
+import svgr from "vite-plugin-svgr";
+
 // @ts-ignore
 import seoPrerender from "./prerender.js";
 
@@ -33,25 +34,25 @@ export default defineConfig(({ mode, command }) => {
         output: {
           manualChunks: isProduction
             ? {
-                react: [
-                  "react",
-                  "react-dom",
-                  "react-router-dom",
-                  "react-helmet-async",
-                ],
-                i18next: ["i18next", "react-i18next"],
+              react: [
+                "react",
+                "react-dom",
+                "react-router-dom",
+                "react-helmet-async",
+              ],
+              i18next: ["i18next", "react-i18next"],
 
-                mui: [
-                  "@mui/material",
-                  // "@mui/lab",
-                  "@emotion/react",
-                  "@emotion/styled",
-                ],
-                // ethers: ["ethers"],
-                swiper: ["swiper"],
-                dayjs: ["dayjs"],
-                tailwindcss: ["tailwindcss"],
-              }
+              mui: [
+                "@mui/material",
+                // "@mui/lab",
+                "@emotion/react",
+                "@emotion/styled",
+              ],
+              // ethers: ["ethers"],
+              swiper: ["swiper"],
+              dayjs: ["dayjs"],
+              tailwindcss: ["tailwindcss"],
+            }
             : void 0,
         },
       },

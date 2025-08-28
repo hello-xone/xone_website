@@ -3,23 +3,27 @@ import {
     DisclosureButton,
     DisclosurePanel,
     Popover,
+    PopoverBackdrop,
     PopoverButton,
     PopoverPanel,
 } from "@headlessui/react";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
+import { SeeMore } from "@/components/comm/link/SeeMore";
 import Arrow from "@/components/Icons/Arrow";
 import Close from "@/components/Icons/Close";
+import Knight from "@/components/Icons/Knight";
 import Language from "@/components/Icons/Language";
 import Theme from "@/components/Icons/Theme";
-import { menus } from "@/constants/menus";
+import { menus, NavigationType } from "@/constants/menus";
 
 import LanguagePopover from "./LanguagePopover";
 
 const MenuPopover = () => {
+    const [isOpen, setIsOpen] = useState(false);
     const [theme, setTheme] = useState(() => {
         return localStorage.getItem("theme") || "light";
     });
@@ -33,11 +37,21 @@ const MenuPopover = () => {
         );
         localStorage.setItem("theme", theme === "light" ? "dark" : "light");
     };
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }, [isOpen]);
+
     return (
         <Popover className="md:hidden">
-            {({ open }) => (
+            {({ open, close }) => (
                 <>
                     <PopoverButton
+                        onClick={() => setIsOpen(!isOpen)}
                         className={clsx(
                             `flex items-center px-[8px] gap-1 text-sm font-medium text-t1 h-10 focus:outline-none data-active:text-white data-focus:outline data-focus:outline-white data-hover:text-white`
                         )}
@@ -56,16 +70,20 @@ const MenuPopover = () => {
                             />
                         </svg>
                     </PopoverButton>
+                    <PopoverBackdrop className="fixed overflow-hidden inset-0 bg-black/15" />
                     <PopoverPanel
                         transition
                         anchor="bottom start"
-                        className="p-[27.5px] w-[68vw] right-0 !left-[unset] mt-12 relative z-[9999] shadow-[0px_10px_32px_0px_#1F1F1F26] rounded-[16px] bg-b1 text-t1 transition duration-200 ease-in-out [--anchor-gap:--spacing(5)] data-closed:-translate-y-1 data-closed:opacity-0"
+                        className="p-[27.5px] h-[calc(100vh-98px)] w-[68vw] right-0 !left-[unset] mt-12 relative z-[9999] shadow-[0px_10px_32px_0px_#1F1F1F26] rounded-l-[16px] bg-b1 text-t1 transition duration-200 ease-in-out [--anchor-gap:--spacing(5)] data-closed:-translate-y-1 data-closed:opacity-0"
                     >
                         <div className="">
-                            <div className="flex items-center justify-end h-[24px]">
+                            <div className="flex mb-4 items-center justify-end h-[24px]">
                                 <Close
                                     className="text-[#8E8E92]"
-                                    onClick={() => console.log("1111")}
+                                    onClick={() => {
+                                        setIsOpen(false)
+                                        close()
+                                    }}
                                 ></Close>
                             </div>
                             {menus &&
@@ -88,17 +106,43 @@ const MenuPopover = () => {
                                                         <div className="text-t7 mb-3 text-xs mt-1 leading-[140%]">
                                                             {t(group.description)}
                                                         </div>
-                                                        {group.links &&
-                                                            group.links.map((link) => (
-                                                                <div
-                                                                    className="h-[36px] text-t2 rounded-[8px] pl-[10px] flex items-center cursor-pointer hover:bg-b3"
-                                                                    key={`h5-menu-${item.id}-link-${link.id}`}
-                                                                >
-                                                                    <Link to={link.link || ""} target="_blank">
-                                                                        {t(link.name)}
-                                                                    </Link>
+                                                        {item.type === NavigationType.LINK ? (
+                                                            <>
+                                                                {group.links &&
+                                                                    group.links.map((link) => (
+                                                                        <div
+                                                                            className="h-[36px] text-t2 rounded-[8px] pl-[10px] flex items-center cursor-pointer hover:bg-b3"
+                                                                            key={`h5-menu-${item.id}-link-${link.id}`}
+                                                                        >
+                                                                            <Link
+                                                                                to={link.link || ""}
+                                                                                target="_blank"
+                                                                            >
+                                                                                {t(link.name)}
+                                                                            </Link>
+                                                                        </div>
+                                                                    ))}
+                                                            </>
+                                                        ) : (
+                                                            <div>
+                                                                <div className="w-full min-h-[72px] flex flex-col items-center justify-center rounded-[8px] bg-b3">
+                                                                    <Knight className="text-t2 shrink-0"></Knight>
+                                                                    <div className="text-t2 font-medium text-xs mt-[4px]">
+                                                                        Look forward to it !
+                                                                    </div>
                                                                 </div>
-                                                            ))}
+                                                                <div className="mt-2 text-t2 text-xs font-bold leading-[140%]">
+                                                                    助力Xone未来动向，成就更大发展
+                                                                </div>
+                                                                <div className="mt-2 text-t2 text-xs leading-[140%]">{`一切工作都是为了帮助 Xone 更好的服务全球企业、组织以及个人。因此，在任何领域，只要你有想法并愿意为此贡献你的独到想法！我们相信，在 Xone 的成长之路上，将无畏即将面对的无数挑战。`}</div>
+                                                                <SeeMore
+                                                                    href=""
+                                                                    text="寻找机会"
+                                                                    className="mt-2"
+                                                                    textClassName="!text-xs text-t2"
+                                                                ></SeeMore>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 ))}
                                         </DisclosurePanel>
@@ -142,7 +186,10 @@ const MenuPopover = () => {
                                         <span className="text-t1 font-medium text-sm">English</span>
                                     </>
                                 </LanguagePopover>
-                                <div className="flex h-10 items-center" onClick={() => toggleTheme()}>
+                                <div
+                                    className="flex h-10 items-center"
+                                    onClick={() => toggleTheme()}
+                                >
                                     <Theme className="w-6 h-6 mr-[10px]"></Theme>
                                     <span className="text-t1 font-medium text-sm">
                                         {theme === "light" ? "Light" : "Dark"}

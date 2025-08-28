@@ -21,7 +21,7 @@ export const Start = () => {
   useScrollreveal();
   return (
     <div
-      className={`container ${styles.start} ${AnimationName.SLIDE_IN_FADE} ${DelayClassName.DELAY_2}`}
+      className={`${styles.start} ${AnimationName.SLIDE_IN_FADE} ${DelayClassName.DELAY_2}`}
     >
       <div className={styles.box}>
         <Title className={`${styles.title} ${AnimationName.SLIDE_IN_BOTTOM}`}>
@@ -43,7 +43,7 @@ export const Start = () => {
           </Button>
           <SeeMore
             className={styles.btn}
-            href={ EXTERNAL_LINKS.dashboard + i18n.language + "/community"}
+            href={EXTERNAL_LINKS.dashboard + i18n.language + "/community"}
             text={t("home:joinNow")}
             target="_blank"
           >

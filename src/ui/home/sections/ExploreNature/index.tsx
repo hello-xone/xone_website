@@ -62,7 +62,7 @@ export const ExploreNature = () => {
   }, [images]);
 
   return (
-    <div className={`container ${styles.wrapper}`}>
+    <div className={`${styles.wrapper}`}>
       <div className={`${styles.info} wow animated slideInUp`}>
         <Title className={`${styles.title} ${AnimationName.SLIDE_IN_BOTTOM}`}>
           {t("home:exploreNatureTitle")}
