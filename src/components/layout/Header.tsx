@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import LogoIcon from "@/assets/imgs/header/logo.png";
 import LogoRedIcon from "@/assets/imgs/header/logo-red.png";
@@ -18,6 +18,7 @@ import LanguagePopover from "./Popover/LanguagePopover";
 import MenuPopover from "./Popover/MenuPopover";
 
 const Header = () => {
+  const navigate = useNavigate()
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light';
   });
@@ -31,10 +32,11 @@ const Header = () => {
 
   return (
     <div className="w-screen bg-b1/50 h-[58px] md:h-[64px] px-4 md:px-[30px] flex items-center justify-between">
-      <div className="flex items-center gap-[48px]">
+      <div className="flex items-center z-10 gap-[48px]">
         <img
           src={LogoRedIcon}
           alt="logo"
+          onClick={() => navigate("/")}
           className="w-[100px] h-auto max-md:hidden"
         ></img>
         <img src={LogoIcon} alt="logo" className="w-8 h-8 md:hidden"></img>
@@ -95,7 +97,7 @@ const Header = () => {
                                 }
                               </div>
                               {
-                                item.id === "Ecology" && <SeeMore href="" text={t("home:seeMore")} className="mt-4 ml-[10px]" textClassName="!text-[14px] font-medium text-t2"></SeeMore>
+                                item.id === "Ecology" && <SeeMore href={EXTERNAL_LINKS.Bvi} text={t("home:seeMore")} className="mt-4 ml-[10px]" textClassName="!text-[14px] font-medium text-t2"></SeeMore>
                               }
                             </div>
                           ))}
@@ -117,7 +119,7 @@ const Header = () => {
           Ask AI
           <AiStar className="text-t1 w-4 h-4 md:w-6 md:h-6"></AiStar>
         </CommonButton>
-        <CommonButton>Explore Xone</CommonButton>
+        <CommonButton onClick={() => window.open(EXTERNAL_LINKS.MainExplorer)}>Explore Xone</CommonButton>
         <MenuPopover></MenuPopover>
         <div className="hidden md:flex items-center gap-[16px]">
           <LanguagePopover>

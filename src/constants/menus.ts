@@ -1,6 +1,7 @@
 import BusinessIcon from "@/assets/svg/home/business.svg?react";
 import KnightIcon from "@/assets/svg/home/knight.svg?react";
-import { EXTERNAL_LINKS } from "@/lib/external";
+
+import { EXTERNAL_LINKS } from "./external";
 
 export interface NavigationLink {
   id: string;
@@ -351,17 +352,17 @@ export const menus: Array<MenuModel> = [
           {
             id: "ecology_build_1",
             name: "tokenup",
-            link: EXTERNAL_LINKS.docs + "developers/rpc",
+            link: EXTERNAL_LINKS.TokenUp,
           },
           {
             id: "ecology_build_2",
             name: "bridge",
-            link: EXTERNAL_LINKS.docs + "developers/explorers",
+            link: EXTERNAL_LINKS.Bridge,
           },
           {
             id: "ecology_build_3",
             name: "swap",
-            link: EXTERNAL_LINKS.docs + "openapi/overview",
+            link: EXTERNAL_LINKS.SwapX,
           },
           {
             id: "ecology_build_4",

@@ -13,10 +13,10 @@ export const EXTERNAL_LINKS = {
   Medium: "https://medium.com/@xone_chain",
   Donate: "https://knight.center/",
   DonateDocs: "https://docs.knight.center/",
-  Bridge: "https://bridge.xonetest.plus/",
+  Bridge: "https://rainlink.co",
   TokenUp: "https://tokenup.org/en",
   SwapX: "https://swapx.exchange/en",
-  RainLink: "https://bridge.xonetest.plus/",
+  RainLink: "https://rainlink.co",
   ChatMe: "https://share.chatme.global/share/group/ztgqmws2k?lang=en&mode=light",
   Discord: "https://discord.com/invite/Du9y2GHV",
   Reddit: "https://www.reddit.com/r/XoneChain/",
@@ -29,4 +29,5 @@ export const EXTERNAL_LINKS = {
   Community_Email: "community@xone.org",
   Suggest_Dapp:
     "https://github.com/hello-xone/official_docs/issues/new?template=suggest_dapp.yaml",
+  Bvi: "https://bvi.xone.org/zh-CN/ecology",
 };
