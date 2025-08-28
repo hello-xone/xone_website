@@ -192,7 +192,7 @@ export const Business = () => {
       <div
         className={`${styles.nav} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_2}`}
       >
-        <div className="flex flex-wrap items-center">
+        <div className={`flex flex-wrap items-center ${styles.navWrapper}`}>
           {navData.map((item) => (
             <div
               key={item.tag}
