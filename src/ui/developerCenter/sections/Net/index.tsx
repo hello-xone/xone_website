@@ -12,7 +12,6 @@ import FolderIcon from "@/assets/svg/developer/folder.svg?react";
 import WalletIcon from "@/assets/svg/developer/wallet.svg?react";
 import ArrowIcon from "@/assets/svg/home/info_arrow.svg?react";
 import { MyCountUp } from "@/components/comm/myCountUp";
-import { BaseContainer } from "@/components/layout/BaseContainer";
 import { XoneChainId, XoneMainNet, XoneTestNet } from "@/constants/net";
 import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 import {

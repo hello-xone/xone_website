@@ -4,33 +4,37 @@ import { useTranslation } from "react-i18next";
 import pic1 from "@/assets/imgs/developer/building1.png";
 import pic2 from "@/assets/imgs/developer/building2.png";
 import pic3 from "@/assets/imgs/developer/building3.png";
+import pic4 from "@/assets/imgs/developer/dark/building1.png";
+import pic5 from "@/assets/imgs/developer/dark/building2.png";
+import pic6 from "@/assets/imgs/developer/dark/building3.png";
 import { SeeMore } from "@/components/comm/link/SeeMore";
-import { BaseContainer } from "@/components/layout/BaseContainer";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 import { AnimationName, useScrollreveal } from "@/hooks/useScrollreveal";
 
 import styles from "./index.module.less";
 
 export const Building = () => {
   const { t, i18n } = useTranslation();
+  const { isLight } = useCurrentTheme();
   const apps = useMemo(() => {
     return [
       {
-        img: pic1,
+        img: isLight ? pic1 : pic4,
         name: t("developer:app1"),
         url: "https://docs.xone.org/developers/architecture/account",
       },
       {
-        img: pic2,
+        img: isLight ? pic2 : pic5,
         name: t("developer:app2"),
         url: "https://docs.xone.org/developers/architecture/transaction",
       },
       {
-        img: pic3,
+        img: isLight ? pic3 : pic6,
         name: t("developer:app3"),
         url: "https://docs.xone.org/developers/architecture/replay",
       },
     ];
-  }, [i18n.language]);
+  }, [i18n.language, isLight]);
 
   const { delayClassNames } = useScrollreveal();
 

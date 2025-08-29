@@ -51,7 +51,7 @@ const Introducing = () => {
             <div className="text-[14px] md:text-[16px] text-t2 leading-[140%] md:leading-[100%]">
               {t(el.desc)}
             </div>
-            <SeeMore className="mt-[16px] md:mt-[22px]" href="" text="See more"></SeeMore>
+            <SeeMore className="mt-[16px] md:mt-[22px]" href={el.link} text="See more"></SeeMore>
           </div>)
         }
       </div>

@@ -122,139 +122,26 @@
 }
 
 @media (max-width: 768px) {
-  .apps {
-    width: calc(100% + 24px);
-    margin-left: -24px;
-    flex-wrap: wrap;
-  }
-
-  .app {
-    width: calc(50% - 24px);
-    margin-left: 24px;
-
-    &:nth-of-type(3) {
-      margin-top: 24px;
-    }
-  }
-
-  .appName {
-    font-size: 18px;
-  }
-
-  .viewDetails {
-    margin-top: 10px;
-    font-size: 14px;
-  }
-
-  .arrowIcon {
-    width: 18px;
-  }
-}
-
-@media (max-width: 680px) {
-  .wrapper {
-    margin-top: 80px;
-  }
-
-  .apps {
-    margin-top: 36px;
-  }
-}
-
-@media (max-width: 600px) {
-  .apps {
-    width: calc(100% + 16px);
-    margin-left: -16px;
-  }
-
-  .app {
-    width: calc(50% - 16px);
-    margin-left: 16px;
-
-    &:nth-of-type(3) {
-      margin-top: 16px;
-    }
-  }
-
-  .appName {
-    font-size: 15px;
-  }
-
-  .viewDetails {
-    margin-top: 8px;
-    font-size: 13px;
-  }
-
-  .arrowIcon {
-    width: 16px;
-  }
-}
-
-@media (max-width: 480px) {
   .title {
-    text-align: left;
+    font-size: 24px;
+    font-weight: 700;
   }
 
   .apps {
-    width: calc(100% + 12px);
-    margin-left: -12px;
+    flex-direction: column;
+    margin-left: 0px;
   }
 
   .app {
-    width: calc(50% - 12px);
-    margin-left: 12px;
+    margin-left: 0px;
+    width: 100%;
   }
 
-  .appName {
-    font-size: 14px;
-  }
-
-  .viewDetails {
-    margin-top: 8px;
-    font-size: 12px;
-  }
-
-  .arrowIcon {
-    width: 14px;
-  }
-}
-
-@media (max-width: 400px) {
   .apps {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .app {
-    width: 100%;
-    margin-left: 0;
-    margin-top: 24px;
-
-    &:nth-of-type(3) {
-      margin-top: 24px;
-    }
+    gap: 30px;
   }
 
   .appName {
-    font-size: 15px;
-  }
-
-  .viewDetails {
-    margin-top: 8px;
-    font-size: 13px;
-  }
-
-  .arrowIcon {
-    width: 16px;
-  }
-}
-
-@media (max-width: 350px) {
-  .appName {
-    font-size: 17px;
-  }
-
-  .viewDetails {
-    margin-top: 8px;
+    font-size: 24px;
   }
 }

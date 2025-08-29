@@ -51,7 +51,7 @@
 }
 
 .contentSpace {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .content {
@@ -73,7 +73,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: calc(25% - 24px);
+  width: calc(25% - 18px);
 }
 
 .name {
@@ -147,97 +147,55 @@
   margin-left: 10px;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
   .wrapper {
-    margin-top: 130px;
+    margin-top: 80px;
   }
 
-  .cards {
-    width: calc(100% + 16px);
-    margin-left: -16px;
-  }
-
-  .card {
-    width: calc(25% - 16px);
-    margin: 16px 0 0 16px;
-    border-radius: 18px;
-    padding: 16px;
-  }
-
-  .name {
-    font-size: 18px;
-  }
-
-  .contentSpace {
-    margin-top: 47px;
-  }
-}
-
-@media (max-width: 1024px) {
   .card {
     width: calc(33.33% - 16px);
   }
 }
 
 @media (max-width: 900px) {
-  .wrapper {
-    margin-top: 100px;
-  }
-
-  .contentSpace {
-    margin-top: 37px;
-  }
-
-  .slide {
-    padding-left: 32px;
-  }
-
-  .navItem {
-    font-size: 16px;
-  }
-
-  .sellMore {
-    font-size: 16px;
-  }
-
-  .seeMore {
-    font-size: 14px;
-  }
-
-  .arrowIcon {
-    width: 16px;
+  .cards {
+    gap: 20px;
   }
 
   .card {
     margin: 0;
-    margin-left: 16px;
-    width: 288px;
-
-    &:nth-of-type(1) {
-      margin-left: 0;
-    }
+    width: 48%;
   }
 }
 
-@media (max-width: 680px) {
-  .wrapper {
-    margin-top: 80px;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav {
-    margin-top: 16px;
+@media (max-width: 768px) {
+  .cards {
+    flex-direction: column;
   }
 
-  .contentSpace {
-    margin-top: 28px;
-  }
-}
-
-@media (max-width: 350px) {
   .card {
-    width: 240px;
-    margin-left: 16px;
+    width: 100%;
+  }
+
+  .navWrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+
+    /* IE and Edge */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    scroll-behavior: smooth;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+
+  .title {
+    width: 340px;
+    font-size: 24px;
   }
 }

@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 
 import FundingIcon from "@/assets/svg/developer/funding.svg?react";
 import { SeeMore } from "@/components/comm/link/SeeMore";
-import { BaseContainer } from "@/components/layout/BaseContainer";
 import { AnimationName, useScrollreveal } from "@/hooks/useScrollreveal";
 
 import styles from "./index.module.less";

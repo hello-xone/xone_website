@@ -68,7 +68,7 @@ const Header = () => {
           src={LogoRedIcon}
           alt="logo"
           onClick={() => navigate("/")}
-          className="w-[100px] h-auto max-md:hidden"
+          className="w-[100px] h-auto cursor-pointer max-md:hidden"
         ></img>
         <img src={LogoIcon} alt="logo" className="w-8 h-8 md:hidden"></img>
         <div className="hidden md:flex items-center gap-[40px]">

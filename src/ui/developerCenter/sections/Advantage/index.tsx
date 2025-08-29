@@ -47,7 +47,6 @@ export const Advantage = () => {
 
   // 重新应用代码高亮和动画
   const reapplyHighlighting = () => {
-    console.log(isLight, "isLight");
     if (!codeRef.current) return;
 
     // 销毁之前的 Typed 实例

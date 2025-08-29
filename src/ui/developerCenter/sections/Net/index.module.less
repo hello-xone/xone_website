@@ -8,6 +8,7 @@
   display: flex;
   gap: 46px;
 }
+
 .navItem {
   position: relative;
   font-size: 32px;
@@ -21,6 +22,7 @@
   color: var(--t2);
   transition: all 0.2s ease;
 }
+
 .navItem::after {
   content: "";
   position: absolute;
@@ -33,9 +35,11 @@
   border-radius: 32px;
   background-color: transparent;
 }
+
 .selectedNav {
   color: var(--t1);
 }
+
 .selectedNav::after {
   background-color: var(--t1);
 }
@@ -45,6 +49,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 .data {
   width: calc(25% - 12px);
   padding: 29px 16px 26px;
@@ -69,6 +74,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 .link {
   display: flex;
   font-size: 20px;
@@ -80,164 +86,98 @@
   border-radius: 16px;
   border: 1px solid transparent;
 }
+
 .link:hover {
   border: 1px solid var(--t1);
 }
+
 .linkLeft {
   display: flex;
   align-items: center;
 }
+
 .linkIcon {
   margin-right: 13px;
   width: 24px;
   height: 24px;
 }
+
 .linkTitle {
   color: var(--t1);
   font-weight: 400;
   font-size: 20px;
 }
+
 .arrowIcon {
   width: 16px;
   height: 16px;
 }
 
-@media (max-width: 1300px) {
-  .wrapper {
-    margin-top: 50px;
-  }
-  .datas {
-    margin-top: 56px;
-  }
-  .links {
-    margin-top: 62px;
-  }
-  .value {
-    font-size: 36px;
-  }
-  .lable {
-    font-size: 18px;
-  }
-  .link {
-    padding: 24px 20px;
-    font-size: 16px;
-    width: calc(33.33% - 8px);
-  }
-  .linkIcon {
-    margin-right: 10px;
-    width: 16px;
-  }
-  .arrowIcon {
-    width: 12px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .navItem {
-    font-size: 16px;
-    width: 124px;
-    height: 43px;
-  }
-  .data {
-    padding: 20px 12px 36px;
-  }
-  .value {
-    font-size: 32px;
-  }
-  .lable {
-    font-size: 16px;
-  }
-}
 @media (max-width: 900px) {
+  .navItem {
+    font-size: 28px;
+  }
+
   .value {
     font-size: 28px;
   }
 
-  .link {
-    padding: 18px 16px;
-    font-size: 14px;
-    width: calc(33.33% - 6px);
-  }
-  .linkIcon {
-    margin-right: 8px;
-    width: 14px;
-  }
-  .arrowIcon {
-    width: 10px;
+  .datas {
+    margin-top: 20px;
   }
 
-  .wrapper {
-    margin-top: 40px;
-  }
-  .datas {
-    margin-top: 46px;
-  }
   .links {
-    margin-top: 52px;
+    flex-direction: column;
+    gap: 14px;
   }
+
+  .link {
+    width: 100%;
+    font-size: 14px;
+  }
+
 }
 
 @media (max-width: 768px) {
+  .navItem {
+    font-size: 24px;
+  }
+
   .datas {
     flex-wrap: wrap;
+    margin-top: 35px;
   }
+
+  .data {
+    width: 50%;
+    padding: 0;
+    margin-bottom: 13px;
+  }
+
   .value {
-    font-size: 32px;
-  }
-  .data {
-    width: calc(50% - 4px);
-    padding: 20px 0 36px;
+    font-size: 24px;
   }
 
-  .links {
-    flex-wrap: wrap;
-  }
-
-  .link {
-    padding: 24px 20px;
-    font-size: 16px;
-    width: 100%;
-    margin-top: 24px;
-    &:nth-of-type(1) {
-      margin-top: 0;
-    }
-  }
-  .linkIcon {
-    margin-right: 10px;
-    width: 16px;
-  }
-  .arrowIcon {
-    width: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .data {
-    padding: 16px 0 32px;
-  }
   .lable {
     font-size: 14px;
   }
 
-  .link {
-    padding: 20px 24px;
-    font-size: 14px;
-    border-radius: 10px;
-    margin-top: 12px;
-  }
-  .linkIcon {
-    margin-right: 14px;
-    width: 20px;
-  }
-  .arrowIcon {
-    width: 13px;
-  }
-  .datas,
-  .wrapper,
   .links {
-    margin-top: 36px;
+    gap: 16px;
+    margin-top: 30px;
   }
-  .value {
-    font-size: 28px;
+
+  .link {
+    padding: 12px 24px;
+    border-radius: 16px;
+  }
+
+  .linkTitle {
+    font-weight: 300;
+  }
+
+  .arrowIcon {
+    width: 15px;
+    height: 15px;
   }
 }

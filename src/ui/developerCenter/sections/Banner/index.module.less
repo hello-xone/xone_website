@@ -11,6 +11,7 @@
   background-size: cover;
   background-position: center bottom;
 }
+
 .box {
   position: absolute;
   left: 0;
@@ -31,6 +32,7 @@
   max-width: 800px;
   color: var(--t1);
 }
+
 .description {
   font-weight: 400;
   font-size: 20px;
@@ -41,33 +43,31 @@
   color: var(--t2);
 }
 
-@media (max-width: 1024px) {
-  .bannerImg {
-    height: 566px;
-    background-position: 100% bottom;
-  }
-  .slogon {
-    font-size: 48px;
-  }
-}
-
-@media (max-width: 680px) {
-  .slogon {
-    font-size: 36px;
-  }
-  // .banner {
-  //   overflow: hidden;
-  // }
-  // .bannerImg {
-  //   width: 927px;
-  //   margin-left: -96px;
-  // }
-}
-
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .box {
+    padding-left: 20px;
+    padding-right: 20px;
+    align-items: flex-start;
+  }
+
+  .slogon {
+    width: 300px;
     text-align: left;
-    justify-content: flex-start;
-    padding-top: 112px;
+    font-size: 32px;
+    margin-top: 120px;
+  }
+
+  .description {
+    width: 400px;
+    font-size: 16px;
+    margin-top: 14px;
+    margin-bottom: 120px;
+    text-align: left;
+  }
+}
+
+@media (max-width: 550px) {
+  .slogon {
+    margin-top: 130px;
   }
 }
