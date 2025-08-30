@@ -23,5 +23,10 @@
   "detail": {
     "warningDesc": "Xone is committed to providing equal employment opportunities for everyone. We believe that team members from diverse backgrounds are a key driver of our growth.Before submitting your application, please take a moment to read and confirm your agreement with the Candidate Privacy Statement",
     "applyNow": "Apply now"
+  },
+  "notFound": {
+    "title": "Job not exist",
+    "description": "The job you are looking for does not exist. Please try again later.",
+    "button": "Back to home"
   }
 }

@@ -45,14 +45,16 @@ export const Detail = () => {
         <div className="mt-10 text-center">
           <div className="text-[var(--error)] text-6xl mb-4">⚠️</div>
           <h2 className="text-[var(--t1)] text-2xl font-bold mb-2">
-            职位不存在
+            {t("recruitment:notFound.title")}
           </h2>
-          <p className="text-[var(--t2)] mb-6">{error || "未找到指定的职位"}</p>
+          <p className="text-[var(--t2)] mb-6">
+            {t("recruitment:notFound.description")}
+          </p>
           <button
             onClick={() => navigate("/recruitment")}
             className="px-6 py-3 bg-[var(--primary)] text-white rounded-lg hover:opacity-80 transition-opacity"
           >
-            返回招聘页面
+            {t("recruitment:notFound.button")}
           </button>
         </div>
       </div>
