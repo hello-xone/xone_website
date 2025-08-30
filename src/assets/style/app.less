@@ -99,6 +99,31 @@ body {
   background: fixed var(--b1);
 }
 
+// 自定义滚动条样式
+.custom-select-scrollbar {
+
+  // Webkit 浏览器滚动条样式
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--b4);
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+
+  // Firefox 滚动条样式
+  scrollbar-width: thin;
+  scrollbar-color: var(--b4) transparent;
+}
+
 a {
   cursor: pointer;
 

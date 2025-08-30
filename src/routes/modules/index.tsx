@@ -5,6 +5,8 @@ import BaseLayout from "@/components/layout/BaseLayout";
 import Commercial from "@/pages/Commercial";
 import DeveloperCenter from "@/pages/DeveloperCenter";
 import Home from "@/pages/Home.tsx";
+import Recruitment from "@/pages/Recruitment";
+import RecruitmentDetail from "@/pages/RecruitmentDetail";
 import VerificationChannel from "@/pages/VerificationChannel";
 
 export const Routes: RouteObject[] = [
@@ -45,6 +47,26 @@ export const Routes: RouteObject[] = [
       {
         index: true,
         Component: VerificationChannel,
+      },
+    ],
+  },
+  {
+    path: "/recruitment",
+    Component: BaseLayout,
+    children: [
+      {
+        index: true,
+        Component: Recruitment,
+      },
+    ],
+  },
+  {
+    path: "/recruitment-detail/:id",
+    Component: BaseLayout,
+    children: [
+      {
+        index: true,
+        Component: RecruitmentDetail,
       },
     ],
   },

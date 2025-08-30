@@ -1,0 +1,27 @@
+{
+  "bannerTitle": "How to create value between 'speed' and <br> 'details' in development.",
+  "bannerDesc": "In this era of change and opportunity, Xone is committed to providing exceptional services globally. We believe that attention to detail and efficient execution help us stand out in rapid development. If you're eager to make an impact and face future challenges with us, join Xone — let your talents shine and create real value",
+  "bannerSearchPlaceholder": "Search for vacant job titles and keywords",
+  "bannerSearchButton": "Search",
+  "searchSelectInputPlaceholder": "Please enter",
+  "selectAllProjects": "All Projects",
+  "selectAllPositions": "All Positions",
+  "selectAllLocations": "All Locations",
+  "selectAllOffice": "Form Of Office",
+  "remark1": "At Xone, we firmly believe that diversity and inclusion are the driving forces behind innovation in the Web3 industry. We welcome and value talents from all backgrounds, perspectives, and experiences—regardless of race, color, ancestry, nationality, religion (including religious attire), belief, age, physical or mental disability, gender (including pregnancy, childbirth, breastfeeding, or other related medical conditions), sexual orientation, gender identity, gender expression, medical conditions, genetic information, caregiving and sick leave status, marital status, domestic partnership status, military or veteran status, or any other characteristic protected by law.",
+  "remark2": "We are committed to providing equal employment opportunities for all applicants and employees. We believe that only by bringing together expertise and insights from diverse fields can we shape an open, innovative, and decentralized future. Joining Xone means being part of a passionate and bold team that’s driving the transformation of the Web3 ecosystem and unlocking limitless possibilities.",
+  "remark3": "If you encounter any issues while submitting your application or experience other technical difficulties on this site, please contact:",
+  "showing": "Showing",
+  "jobs": "jobs",
+  "details": "Details",
+  "viewMore": "View More",
+  "noData": "No Data",
+  "breadcrumb": {
+    "recruitment": "Recruitment",
+    "jobDetails": "Job Details"
+  },
+  "detail": {
+    "warningDesc": "Xone is committed to providing equal employment opportunities for everyone. We believe that team members from diverse backgrounds are a key driver of our growth.Before submitting your application, please take a moment to read and confirm your agreement with the Candidate Privacy Statement",
+    "applyNow": "Apply now"
+  }
+}

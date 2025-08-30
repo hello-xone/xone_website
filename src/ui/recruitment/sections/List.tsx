@@ -1,0 +1,95 @@
+import clsx from "clsx";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+
+import ArrowRightLineDarkIcon from "@/assets/svg/recruitment/arrow-right-line-dark.svg?react";
+import ArrowRightLineLightIcon from "@/assets/svg/recruitment/arrow-right-line-light.svg?react";
+import LocationIcon from "@/assets/svg/recruitment/home/location.svg?react";
+import PositionIcon from "@/assets/svg/recruitment/home/position.svg?react";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
+
+export const List = ({ data, onMore }: { data: any; onMore: () => void }) => {
+  const { isLight } = useCurrentTheme();
+  const { t } = useTranslation();
+  return (
+    <div className="mt-8">
+      <p className="text-[20px] md:text-[22px] text-[var(--t1)] font-light">
+        {t("recruitment:showing")}
+        <span className="mx-2 font-bold">{data.totalCount}</span>
+        {t("recruitment:jobs")}
+      </p>
+      <div className="mt-8 flex flex-col gap-y-[24px]">
+        {data.list.map((item: any) => (
+          <div
+            key={item.id}
+            className="flex flex-col md:flex-row md:items-center justify-start md:justify-between bg-[var(--b2)] rounded-[16px] p-[24px]"
+          >
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-x-[24px]">
+              <img
+                src={item.logo}
+                alt={item.title}
+                className="w-[100px] h-[100px] object-scale-down"
+              />
+              <div className="flex flex-col">
+                <p className="mt-2 md:mt-0 text-[var(--t2)] text-[16px]">
+                  {item.publishDate}
+                </p>
+                <h3 className="text-[var(--t1)] text-[24px] font-bold mt-[6px]">
+                  {item.title}
+                </h3>
+                <div className="flex items-center mt-[8px] gap-x-[24px]">
+                  <div className="flex items-center gap-x-[6px]">
+                    <PositionIcon className="w-[18px] h-[18px]" />
+                    <p className="text-[var(--t2)] text-[15px] mt-[1px]">
+                      {item.company}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-x-[5px]">
+                    <LocationIcon className="w-[18px] h-[18px]" />
+                    <p className="text-[var(--t2)] text-[15px] mt-[4px]">
+                      {item.location.join(" - ")}
+                    </p>
+                  </div>
+                </div>
+                <div
+                  className={clsx(
+                    "h-[32px] flex items-center justify-center mt-[14px] px-[8px] py-[5px] rounded-[8px] font-normal text-[12px] w-fit",
+                    "text-[var(--primary)]",
+                    isLight ? "bg-[#FFE7E6]" : "bg-[#201010]",
+                    isLight ? "text-[#FF4D4F]" : "text-[#D90021]"
+                  )}
+                >
+                  {item.workType.join("、")}
+                </div>
+              </div>
+            </div>
+            <Link
+              to={`/recruitment-detail/${item.id}`}
+              className="flex items-center justify-center gap-x-[6px] cursor-pointer mt-5 md:mt-0 w-full md:w-[140px] bg-[var(--t1)] rounded-[8px] px-[16px] py-[8px] text-[14px] text-[var(--b1)]"
+            >
+              {t("recruitment:details")}
+              {isLight ? (
+                <ArrowRightLineLightIcon className="w-[24px] h-[24px]" />
+              ) : (
+                <ArrowRightLineDarkIcon className="w-[24px] h-[24px]" />
+              )}
+            </Link>
+          </div>
+        ))}
+      </div>
+      {data.hasMore && (
+        <p
+          className="text-[var(--t2)] text-[15px] mt-6 text-center mx-auto cursor-pointer w-[80px]"
+          onClick={onMore}
+        >
+          {t("recruitment:viewMore")}
+        </p>
+      )}
+      {!data.hasMore && (
+        <p className="text-[var(--t2)] text-[15px] mt-6 text-center mx-auto w-[80px]">
+          {t("recruitment:noMore")}
+        </p>
+      )}
+    </div>
+  );
+};
