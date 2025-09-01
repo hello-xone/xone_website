@@ -101,3 +101,33 @@ export function preciseRound(value: string | number, decimals = 2) {
 
   return decimals > 0 ? `${intPart}.${paddedDec}` : intPart;
 }
+
+/**
+ * 使用bignumber.js将数字格式化为k/m/b单位
+ * @param {number|string|BigNumber} num - 待格式化的数字
+ * @param {number} [decimalPlaces=2] - 保留的小数位数
+ * @returns {string} 格式化后的字符串（如 1.23k, 4.56m, 7.89b）
+ */
+export function formatNumber(num: string | number, decimalPlaces = 2) {
+  const number = new BigNumber(num);
+
+  if (number.isNaN() || number.isZero()) {
+    return '0';
+  }
+
+  const units = [
+    { threshold: new BigNumber(1e9), symbol: 'B' }, // 十亿
+    { threshold: new BigNumber(1e6), symbol: 'M' }, // 百万
+    { threshold: new BigNumber(1e3), symbol: 'K' }, // 千
+  ];
+
+  for (const { threshold, symbol } of units) {
+    if (number.abs().isGreaterThanOrEqualTo(threshold)) {
+      const formatted = number.dividedBy(threshold).toFixed(decimalPlaces);
+      const trimmed = new BigNumber(formatted).toString();
+      return `${trimmed}${symbol}`;
+    }
+  }
+
+  return number.toFixed(decimalPlaces);
+}

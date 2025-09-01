@@ -1,4 +1,3 @@
-import { CircularProgress } from "@mui/material";
 import { Suspense, useEffect } from "react";
 import { Outlet, useLocation } from "react-router";
 
@@ -23,13 +22,7 @@ const BaseLayout = () => {
     <div>
       <Header />
       <main className="pt-[58px] md:pt-[64px]">
-        <Suspense
-          fallback={
-            <div className="w-full h-[80vh] flex justify-center items-center">
-              <CircularProgress size="32px" />
-            </div>
-          }
-        >
+        <Suspense>
           <Outlet />
         </Suspense>
       </main>

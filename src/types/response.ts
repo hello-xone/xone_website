@@ -17,7 +17,7 @@ export interface Counter {
 }
 
 export interface FetchNetCountersRes {
-  counters: Counter[];
+  data: Counter[];
 }
 
 export interface StatsPrice {
@@ -54,4 +54,18 @@ export interface Stats {
   total_transactions: string;
   transactions_today: string;
   tvl: null;
+}
+
+export interface ChartModel {
+  date: number
+  avg_price: number
+  tx_count: number
+}
+
+export interface ChartRes {
+  prices: Array<ChartModel>
+  total_addresses: number
+  total_nfts: number
+  total_tokens: number
+  average_txn_fee24h: number
 }

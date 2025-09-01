@@ -9,7 +9,7 @@ export const nftScanRequest = axios.create({
 });
 
 export const xoMainScanRequest = axios.create({
-  baseURL: import.meta.env.VITE_APP_XO_MAIN_NET_SCAN,
+  baseURL: import.meta.env.VITE_APP_BASE_URL,
   headers: {
     "updated-gas-oracle": true,
   },

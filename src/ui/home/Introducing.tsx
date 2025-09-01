@@ -8,7 +8,6 @@ import IntroducingIcon4 from "@/assets/imgs/home/introducing-4.png"
 import { SeeMore } from "@/components/comm/link/SeeMore"
 import { EXTERNAL_LINKS } from "@/constants/external"
 
-
 const IntroducingLeft = [
   {
     icon: IntroducingIcon1,

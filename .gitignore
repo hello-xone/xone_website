@@ -12,10 +12,11 @@ dist
 dist-ssr
 *.local
 stats.html
-
+.env.*
 # Editor directories and files
 !.vscode/extensions.json
 .idea
+.vscode
 .DS_Store
 *.suo
 *.ntvs*
