@@ -9,6 +9,7 @@ import MultiChainIcon from "@/assets/svg/home/multi-chain.svg?react"
 import SdkIcon from "@/assets/svg/home/sdk.svg?react"
 import CommonButton from "@/components/comm/button/CommonButton"
 import useApplicationStore from "@/store/applicationStore"
+import { Link } from "react-router-dom"
 
 const tips = [{
     icon: <IdIcon className="text-t1"></IdIcon>,
@@ -27,13 +28,15 @@ const tips = [{
     title: "sdk-api",
 }]
 export const OnChainIdentity = () => {
-    const { t } = useTranslation("home");
+    const { t, i18n } = useTranslation("home");
 
     const { isLight } = useApplicationStore()
     return <div className="flex py-[40px] max-md:flex-col md:py-[80px] gap-[140px] items-center w-full justify-between">
         <div className="flex-1">
             <div className="text-[24px] md:text-[48px] leading-[140%] mb-4 md:mb-6 font-bold">{t("chainIdentityTitle")}</div>
-            <div className="text-t2 leading-[140%] text-base md:text-[20px] mb-6 md:mb-8">{t("chainIdentityDesc")}</div>
+            <div className="text-t2 leading-[140%] text-base md:text-[20px] mb-6 md:mb-8">{t("chainIdentityDesc1")}
+                <Link to={"https://ens.domains/"} className="text-[--link1]" target="_blank" >{t("ENS")}</Link>
+                {t("chainIdentityDesc2")}</div>
             <img alt="" src={isLight ? OnChainIdentityLightIcon : OnChainIdentityIcon} className="shrink-0 mb-6 md:hidden w-full h-auto"></img>
             {
                 tips && tips.map((item, index) => {
@@ -43,7 +46,7 @@ export const OnChainIdentity = () => {
                     </div>
                 })
             }
-            <CommonButton className="mt-8">{t('try')}</CommonButton>
+            <CommonButton onClick={() => window.open(`https://xid.world/${i18n.language}`)} className="mt-8">{t('try')}</CommonButton>
         </div>
         <img alt="" src={isLight ? OnChainIdentityLightIcon : OnChainIdentityIcon} className="shrink-0 max-md:hidden w-[45%] h-auto"></img>
 

@@ -78,8 +78,8 @@ const MarketChart = () => {
             <div className="text-base md:text-[20px] font-medium text-t2 mb-6 md:mb-10 leading-[140%]">{t("marketDesc")}</div>
             <div className='flex items-center mb-2 text-t3 font-medium text-[20px]'>{t("source")}:
                 <div className='flex items-center gap-[6px] ml-[14px]'>
-                    <img alt='' src={MarketSource1} className='w-[26px]'></img>
-                    <img alt='' src={MarketSource2} className='w-[26px]'></img>
+                    <img alt='' onClick={() => window.open("https://www.kexb.com/spot/XOCUSDT?ts=1755508711507")} src={MarketSource1} className='w-[26px] cursor-pointer'></img>
+                    <img alt='' onClick={() => window.open("https://swapx.exchange/en/pool/v2?id=0x865ec1f3c313e2f050933fb264950fac535839f8")} src={MarketSource2} className='w-[26px] cursor-pointer'></img>
                 </div>
             </div>
             <div className='w-full flex max-md:flex-col items-center justify-between gap-[24px] md:h-[364px]' style={{ width: '100%' }}>
