@@ -180,7 +180,7 @@ const Footer = () => {
           },
           {
             name: t("common:events"),
-            url: EXTERNAL_LINKS.Events,
+            url: '/events',
           },
           {
             name: t("common:knightProject"),
