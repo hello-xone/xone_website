@@ -1,4 +1,5 @@
 import i18next from "i18next";
+
 import { LanguageType } from "./settings";
 
 export const changeLanguage = async (type: LanguageType) => {

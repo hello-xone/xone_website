@@ -16,7 +16,7 @@ export const Governance = () => {
         <div className="flex-1">
             <div className="text-[24px] md:text-[48px] leading-[140%] md:leading-[120%] mb-4 md:mb-6 font-bold">{t("governanceTitle")}</div>
             <div className="text-t2 leading-[140%] text-base md:text-[20px] mb-6 md:mb-8">{t("governanceDesc")}</div>
-            <SeeMore className="max-md:hidden" text={t("getStarted")} href=""></SeeMore>
+            <SeeMore className="max-md:hidden" text={t("getStarted")} href="https://xdao123.org"></SeeMore>
         </div>
     </div>
 }

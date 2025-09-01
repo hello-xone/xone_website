@@ -14,7 +14,7 @@ export const Banner = () => {
             <div className="text-[32px] md:text-[64px] leading-[140%] font-bold">{t("bannerTitle")}</div>
             <div className="text-base md:text-[20px] text-t2 md:text-t1 leading-[140%] mt-4 md:mt-6">{t("bannerDescription")}</div>
             <div className="grid max-md:grid-cols-1 md:flex items-center md:gap-[32px] mt-6 md:mt-10">
-                <CommonButton onClick={() => window.open(`https://swapx.exchange/en`)} className="text-base md:text-[18px] rounded-[12px] max-md:h-12 max-md:rounded-[12px] max-md:w-full"><><span className="capitalize">{t('deposit')} / {t('withdrawal')}</span></></CommonButton>
+                <CommonButton onClick={() => window.open(`https://swapx.exchange/en`)} className="text-base z-[1] md:text-[18px] rounded-[12px] max-md:h-12 max-md:rounded-[12px] max-md:w-full"><><span className="capitalize">{t('deposit')} / {t('withdrawal')}</span></></CommonButton>
                 <CommonButton onClick={() => window.open(`${EXTERNAL_LINKS.docs}developers/ready`)} className="!bg-b5 text-base md:text-[18px] text-t5 max-md:h-12 max-md:rounded-[12px] max-md:w-full max-md:mt-4 rounded-[12px]">{t("startBuilding")}</CommonButton>
             </div>
         </div>

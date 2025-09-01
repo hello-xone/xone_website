@@ -1,4 +1,5 @@
 import axios from "axios";
+import clsx from "clsx";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,6 +8,7 @@ import LogoIcon from "@/assets/imgs/header/logo.png";
 import LogoRedIcon from "@/assets/imgs/header/logo-red.png";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import { menus, NavigationType } from "@/constants/menus";
+import useApplicationStore from "@/store/applicationStore";
 
 import CommonButton from "../comm/button/CommonButton";
 import { SeeMore } from "../comm/link/SeeMore";
@@ -20,6 +22,7 @@ import MenuPopover from "./Popover/MenuPopover";
 
 const Header = () => {
   const navigate = useNavigate();
+  const { isLight } = useApplicationStore()
   const [event, setEvent] = useState<any>(null);
   const [detailId, setDetailId] = useState("");
   const [theme, setTheme] = useState(() => {
@@ -62,7 +65,10 @@ const Header = () => {
   }, [event, detailId]);
 
   return (
-    <div className="w-screen bg-b1/50 h-[58px] md:h-[64px] px-4 md:px-[30px] flex items-center justify-between">
+    <div className={clsx(`w-screen fixed backdrop-blur-[5px] z-[10] top-0 left-0 h-[58px] md:h-[64px] px-4 md:px-[30px] flex items-center justify-between`, {
+      'bg-[#ffffff]/50': isLight,
+      'bg-[#070808]/50': !isLight,
+    })} >
       <div className="flex items-center z-10 gap-[48px]">
         <img
           src={LogoRedIcon}
@@ -70,7 +76,7 @@ const Header = () => {
           onClick={() => navigate("/")}
           className="w-[100px] h-auto cursor-pointer max-md:hidden"
         ></img>
-        <img src={LogoIcon} alt="logo" className="w-8 h-8 md:hidden"></img>
+        <img src={LogoIcon} onClick={() => navigate("/")} alt="logo" className="w-8 h-8 md:hidden"></img>
         <div className="hidden md:flex items-center gap-[40px]">
           {menus &&
             menus.map((item) => {

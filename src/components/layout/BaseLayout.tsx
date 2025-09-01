@@ -17,12 +17,12 @@ const BaseLayout = () => {
     }
   }, [location.pathname]);
 
-  useEffect(() => {});
+  useEffect(() => { });
 
   return (
     <div>
       <Header />
-      <main>
+      <main className="pt-[58px] md:pt-[64px]">
         <Suspense
           fallback={
             <div className="w-full h-[80vh] flex justify-center items-center">
