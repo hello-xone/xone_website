@@ -46,6 +46,7 @@ import {
     useScrollreveal,
 } from "@/hooks/useScrollreveal";
 import useApplicationStore from "@/store/applicationStore";
+import { SeeMore } from "@/components/comm/link/SeeMore";
 
 const images = [
     [
@@ -138,7 +139,7 @@ const images = [
     ],
 ];
 export const Ecosystem = () => {
-    const { t } = useTranslation("home");
+    const { t, i18n } = useTranslation("home");
 
     const { isLight } = useApplicationStore();
     useScrollreveal();
@@ -213,6 +214,9 @@ export const Ecosystem = () => {
                             );
                         })}
                 </div>
+            </div>
+            <div className="flex items-center justify-center mt-[56px]">
+                <SeeMore text={t("home:seeMore")} className="mx-auto" href={`https://bvi.xone.org/${i18n.language}/ecology`}></SeeMore>
             </div>
         </div>
     );

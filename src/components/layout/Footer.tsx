@@ -145,6 +145,10 @@ const Footer = () => {
             name: "Github",
             url: EXTERNAL_LINKS.Github,
           },
+          {
+            name: t("header:navGlobalGrants"),
+            url: "/grants",
+          },
         ],
       },
       {
@@ -171,6 +175,10 @@ const Footer = () => {
             url: "/commercial",
           },
           {
+            name: t("common:blog"),
+            url: EXTERNAL_LINKS.docs + "blog",
+          },
+          {
             name: t("common:events"),
             url: EXTERNAL_LINKS.Events,
           },
@@ -181,7 +189,7 @@ const Footer = () => {
           },
           {
             name: t("common:recruitment"),
-            url: "",
+            url: "/recruitment",
             isLater: true,
           },
         ],
@@ -212,7 +220,7 @@ const Footer = () => {
             {contacts &&
               contacts.map((item, index) => {
                 return (
-                  <Link key={index} className="w-6 text-t1 flex items-center justify-center rounded bg-b3 h-6" target="_blank" to={item.url}>
+                  <Link key={`contact-item-${item.url}-${index}`} className="w-6 text-t1 flex items-center justify-center rounded bg-b3 h-6" target="_blank" to={item.url}>
                     {item.icon}
                   </Link>
                 );
@@ -222,13 +230,13 @@ const Footer = () => {
 
         <div className="flex mt-10 w-full item-center justify-between max-md:gap-y-[58px] max-md:flex-wrap">
           {
-            footerLinks && footerLinks.map(el => {
-              return <div className="max-md:w-[50%]" key={`footer-menu-${el.title}`}>
+            footerLinks && footerLinks.map((el, index) => {
+              return <div className="max-md:w-[50%]" key={`footer-menu-${el.title}-${index}`}>
                 <div className="mb-[16px] font-bold text-t1">{el.title}</div>
                 <div className="text-t2 flex text-sm flex-col gap-[12px] font-normal">
                   {
                     el.infos && el.infos.map(info => {
-                      return <Link className="" target="_blank" to={info.url}>{info.name}</Link>
+                      return <Link className="" key={`info-item-${info.name}`} target="_blank" to={info.url}>{info.name}</Link>
                     })
                   }
 

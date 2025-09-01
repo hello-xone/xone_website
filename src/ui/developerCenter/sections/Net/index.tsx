@@ -2,7 +2,7 @@ import { Skeleton } from "@mui/material";
 import { useNotifications } from "@toolpad/core/useNotifications";
 import { ChainType, getWalletKit, useWalletKit } from "@web3jskit/walletkit";
 import { utils } from "ethers";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { numberToHex } from "viem";
 
@@ -35,16 +35,15 @@ interface NetData {
 }
 
 export const Net = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [selectedNetKey, setSelectedNetKey] = useState(XoneChainId.MAIN_NET);
   const [mainNetData, setMainNetData] = useState<NetData>();
   const [testNetData, setTestNetData] = useState<NetData>();
-  const [currentNetData, setCurrentNetData] = useState<NetData>();
   const [loading, setLoading] = useState(true);
   const { delayClassNames } = useScrollreveal();
   const notifications = useNotifications();
   const { connect, provider, currentConnector } = useWalletKit();
-  const addNet = async (connector: any, isConnectAfter?: boolean) => {
+  const addNet = useCallback(async (connector: any, isConnectAfter?: boolean) => {
     try {
       if (!connector) return;
       const chainIdOfHex = numberToHex(selectedNetKey);
@@ -78,8 +77,8 @@ export const Net = () => {
     } catch (err) {
       console.error(err);
     }
-  };
-  console.log("currentNetData", currentNetData);
+  }, [notifications, provider, selectedNetKey])
+
   useEffect(() => {
     const handleDisconnect = () => {
       currentConnector?.disconnect && currentConnector?.disconnect();
@@ -97,15 +96,15 @@ export const Net = () => {
   const navs = useMemo(() => {
     return [
       {
-        name: t("developer:mainnet"),
+        name: "developer:mainnet",
         key: XoneChainId.MAIN_NET,
       },
       {
-        name: t("developer:testnet"),
+        name: "developer:testnet",
         key: XoneChainId.TEST_NET,
       },
     ];
-  }, [i18n.language]);
+  }, []);
 
   const getBlockNumberByNet = async (
     isTestNet?: boolean
@@ -130,8 +129,7 @@ export const Net = () => {
       console.error(err);
     }
   };
-
-  const getMainNetData = async () => {
+  const getMainNetData = useCallback(async () => {
     const data: NetData = {};
     const counters = await fetchNetCountersByNet();
     data.latestBlock = await getBlockNumberByNet();
@@ -143,9 +141,9 @@ export const Net = () => {
     )?.value;
     data.epoch = await getXoneEpochByNet();
     setMainNetData(data);
-  };
+  }, [])
 
-  const getTestNetData = async () => {
+  const getTestNetData = useCallback(async () => {
     const data: NetData = {};
     const counters = await fetchNetCountersByNet(true);
     data.latestBlock = await getBlockNumberByNet(true);
@@ -162,19 +160,24 @@ export const Net = () => {
       data.epoch = undefined;
     }
     setTestNetData(data);
-  };
+  }, [])
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     try {
-      const awaitMainNet = getMainNetData();
-      const awaitTestNet = getTestNetData();
-      await Promise.allSettled([awaitMainNet, awaitTestNet]);
+      if (selectedNetKey === XoneChainId.MAIN_NET) {
+        return getMainNetData()
+      } else {
+        return getTestNetData()
+      }
+      // const awaitMainNet = getMainNetData();
+      // const awaitTestNet = getTestNetData();
+      // await Promise.allSettled([awaitMainNet, awaitTestNet]);
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
     }
-  };
+  }, [getMainNetData, getTestNetData, selectedNetKey])
 
   useCountdownTimer({
     callback: async () => {
@@ -185,15 +188,11 @@ export const Net = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
-  useEffect(() => {
-    window.setTimeout(() => {
-      setCurrentNetData(
-        selectedNetKey === XoneChainId.MAIN_NET ? mainNetData : testNetData
-      );
-    }, 16);
-  }, [mainNetData, testNetData, selectedNetKey]);
+  const currentNetData = useMemo(() => {
+    return selectedNetKey === XoneChainId.MAIN_NET ? mainNetData : testNetData
+  }, [mainNetData, testNetData, selectedNetKey])
 
   const datas = useMemo(() => {
     return [
@@ -248,7 +247,7 @@ export const Net = () => {
         ),
       },
     ];
-  }, [i18n.language, currentNetData, loading]);
+  }, [t, currentNetData?.latestBlock, currentNetData?.gasFee, currentNetData?.blockTime, currentNetData?.epoch]);
 
   const links = useMemo(() => {
     return [
@@ -302,7 +301,7 @@ export const Net = () => {
         },
       },
     ];
-  }, [i18n.language, selectedNetKey, currentConnector]);
+  }, [t, selectedNetKey, currentConnector, connect, addNet]);
 
   return (
     <div className={styles.wrapper}>
@@ -312,12 +311,11 @@ export const Net = () => {
             return (
               <div
                 key={item.key}
-                className={`${styles.navItem} ${
-                  selectedNetKey === item.key ? styles.selectedNav : ""
-                }`}
+                className={`${styles.navItem} ${selectedNetKey === item.key ? styles.selectedNav : ""
+                  }`}
                 onClick={() => setSelectedNetKey(item.key)}
               >
-                {item.name}
+                {t(item.name)}
               </div>
             );
           })}

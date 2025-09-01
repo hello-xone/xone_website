@@ -1,11 +1,12 @@
-import ReleaseAbi from "./abis/XOCRelease.json";
 import { Contract, providers } from "ethers";
+
+import ReleaseAbi from "./abis/XOCRelease.json";
 
 export const getXoneEpochByNet = async (
   isTestNet?: boolean
 ): Promise<string> => {
-  let rpc = import.meta.env.VITE_APP_XO_MAIN_NET_RPC;
-  let contractAddress = import.meta.env.VITE_APP_XO_RELEASE_MAIN_NET_CONTRACT;
+  const rpc = import.meta.env.VITE_APP_XO_MAIN_NET_RPC;
+  const contractAddress = import.meta.env.VITE_APP_XO_RELEASE_MAIN_NET_CONTRACT;
 
   if (isTestNet) {
     const blockNumber = await fetchBlockNumber(

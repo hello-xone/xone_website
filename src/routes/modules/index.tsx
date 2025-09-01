@@ -4,6 +4,7 @@ import { Navigate, RouteObject } from "react-router";
 import BaseLayout from "@/components/layout/BaseLayout";
 import Commercial from "@/pages/Commercial";
 import DeveloperCenter from "@/pages/DeveloperCenter";
+import Events from "@/pages/Events";
 import Grants from "@/pages/Grants";
 import Home from "@/pages/Home.tsx";
 import Recruitment from "@/pages/Recruitment";
@@ -48,6 +49,16 @@ export const Routes: RouteObject[] = [
       {
         index: true,
         Component: VerificationChannel,
+      },
+    ],
+  },
+  {
+    path: "/events",
+    Component: BaseLayout,
+    children: [
+      {
+        index: true,
+        Component: Events,
       },
     ],
   },
