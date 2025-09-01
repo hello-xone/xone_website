@@ -247,7 +247,7 @@ const Footer = () => {
 
           <div className="w-full md:w-[386px]">
             <div className="font-bold mb-4 text-t1">{t("subscribe")}</div>
-            <div className="text-sm text-t2 mb-4">{t("subscribeDesc")}</div>
+            <div className="text-sm text-t2 mb-4">{t("header:subscribeDesc")}</div>
             <div className="flex">
               <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="flex-1 h-[40px] outline-none bg-b3 placeholder:text-t4 text-sm px-[20px] rounded-l-[8px]" placeholder="Enter email address"></input>
               <CommonButton onClick={() => {

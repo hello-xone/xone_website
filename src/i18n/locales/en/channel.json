@@ -11,10 +11,13 @@
   "github": "Github",
   "chatme": "ChatMe",
   "reddit": "Reddit",
-  "searchPlaceholder": "Search",
+  "searchPlaceholder": "Enter the information to be verified",
   "verificationButton": "Verify",
   "safetyTipsTitle": "Safety Tips",
-  "safetyTip1Title": "General Safety Principles",
-  "safetyTip2Title": "Common Mobile Device Scams",
-  "safetyTip3Title": "What is Phishing?"
+  "safetyTip1Title": "Select Type",
+  "safetyTip1Desc": "Choose the type you have concerns about.",
+  "safetyTip2Title": "Enter Information",
+  "safetyTip2Desc": "Fill in the unique identifier such as URL, ID, etc. for the type.",
+  "safetyTip3Title": "Verification Feedback",
+  "safetyTip3Desc": "When the submitted information is not recorded by us, we recommend that you immediately terminate any interaction with the other party."
 }

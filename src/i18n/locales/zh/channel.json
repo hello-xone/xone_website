@@ -12,10 +12,13 @@
   "chatme": "ChatMe",
   "reddit": "Reddit",
   "linkedin": "LinkedIn",
-  "searchPlaceholder": "搜索",
+  "searchPlaceholder": "输入需验证的信息",
   "verificationButton": "验证",
   "safetyTipsTitle": "安全提示",
-  "safetyTip1Title": "普遍安全原则",
-  "safetyTip2Title": "移动设备常见诈骗",
-  "safetyTip3Title": "什么是网络钓鱼？"
+  "safetyTip1Title": "选择类型",
+  "safetyTip1Desc": "选择您抱有顾虑的类型。",
+  "safetyTip2Title": "输入信息",
+  "safetyTip2Desc": "填入类型的 URL、ID 等唯一标识。",
+  "safetyTip3Title": "验证反馈",
+  "safetyTip3Desc": "当提交的信息没有被我们记录，我们建议您立即终止与对方进行任何交互。"
 }

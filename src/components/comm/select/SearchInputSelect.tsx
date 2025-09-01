@@ -197,10 +197,10 @@ export const SearchInputSelect = ({
   };
 
   return (
-    <div className="relative flex-1" ref={dropdownRef}>
+    <div className="relative flex-1 h-full" ref={dropdownRef}>
       <button
         type="button"
-        className="relative w-full cursor-pointer rounded-[8px] bg-[var(--b3)] px-[12px] py-[10px] text-left border border-[transparent] border-solid hover:border-[var(--t1)]"
+        className="relative w-full h-full cursor-pointer rounded-[8px] bg-[var(--b3)] px-[12px] py-[10px] text-left border border-[transparent] border-solid hover:border-[var(--t1)]"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="block text-[15px] truncate text-[var(--t3)]">

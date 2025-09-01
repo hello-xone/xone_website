@@ -1,5 +1,6 @@
 import {
   ApiResponse,
+  ChartRes,
   Counter,
   FetchNetCountersRes,
   FetchNftTotalRes,
@@ -14,7 +15,7 @@ import {
 } from "./request";
 
 export const addEmail = async (data: { email: string }): Promise<null> => {
-  const res: ApiResponse<null> = await request.post("/api/v1/email/add", data);
+  const res: ApiResponse<null> = await request.post("/api/v1/email/subscribe", data);
 
   if (res.code === 0) {
     return res.data;
@@ -24,7 +25,7 @@ export const addEmail = async (data: { email: string }): Promise<null> => {
 
 export const fetchNftTotal = async (): Promise<FetchNftTotalRes> => {
   const res: ApiResponse<FetchNftTotalRes> =
-    await nftScanRequest.get("/api/v1/nft/total");
+    await nftScanRequest.get("/api/v2/nft/total");
   if (res.code === 0) {
     return res.data;
   }
@@ -36,8 +37,8 @@ export const fetchNetCountersByNet = async (
 ): Promise<Counter[]> => {
   const reqInstance = isTestNet ? xoTestScanRequest : xoMainScanRequest;
   try {
-    const res: FetchNetCountersRes = await reqInstance.get(`/api/v1/counters`);
-    return res?.counters || [];
+    const res: FetchNetCountersRes = await reqInstance.get(`/api/v2/counters`);
+    return res?.data || [];
   } catch (err) {
     console.error(err);
     return [];
@@ -48,4 +49,9 @@ export const fetchStatsByNet = async (isTestNet?: boolean) => {
   const reqInstance = isTestNet ? xoTestScanRequest : xoMainScanRequest;
   const res: Stats = await reqInstance.get("/api/v2/stats");
   return res;
+};
+
+export const fetchChart = async () => {
+  const res = await request.get("/api/v2/chart");
+  return res.data as ChartRes;
 };
