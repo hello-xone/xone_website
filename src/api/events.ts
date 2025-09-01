@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import { request } from "./request";
 
+=======
+>>>>>>> b5829df (fix: add event page, add luma api, add header fixed ui)
 export type GuestData = {
     api_id: string;
     avatar_url: string;
@@ -44,6 +47,7 @@ export type EventData = {
     };
 };
 export async function getEvents(): Promise<EventData[]> {
+<<<<<<< HEAD
     const res = await request.get(
         "/api/v2/official-assets?calendar_api_id=cal-SHqvOTSSn2B1gf3&pagination_limit=100&period=past"
     );
@@ -59,6 +63,10 @@ export async function getEvents(): Promise<EventData[]> {
 export async function getEvents1(): Promise<EventData[]> {
     const res = await fetch(
         "https://public-api.luma.com/v1/calendar/list-events",
+=======
+    const res = await fetch(
+        "https://api2.luma.com/calendar/get-items?calendar_api_id=cal-SHqvOTSSn2B1gf3&pagination_limit=100&period=past",
+>>>>>>> b5829df (fix: add event page, add luma api, add header fixed ui)
         {
             method: "GET",
             headers: {

@@ -284,9 +284,8 @@ export const Net = () => {
             return (
               <div
                 key={item.key}
-                className={`${styles.navItem} ${
-                  selectedNetKey === item.key ? styles.selectedNav : ""
-                }`}
+                className={`${styles.navItem} ${selectedNetKey === item.key ? styles.selectedNav : ""
+                  }`}
                 onClick={() => setSelectedNetKey(item.key)}
               >
                 {t(item.name)}

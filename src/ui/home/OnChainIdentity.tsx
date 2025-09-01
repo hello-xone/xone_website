@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 
 import OnChainIdentityIcon from "@/assets/imgs/home/on-chain-identity-right.png"
 import OnChainIdentityLightIcon from "@/assets/imgs/home/on-chain-identity-right-light.png"
@@ -9,7 +10,6 @@ import MultiChainIcon from "@/assets/svg/home/multi-chain.svg?react"
 import SdkIcon from "@/assets/svg/home/sdk.svg?react"
 import CommonButton from "@/components/comm/button/CommonButton"
 import useApplicationStore from "@/store/applicationStore"
-import { Link } from "react-router-dom"
 
 const tips = [{
     icon: <IdIcon className="text-t1"></IdIcon>,

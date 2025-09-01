@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { EventData, getEvents, getEvents1 } from "@/api/events";
+import { EventData, getEvents } from "@/api/events";
 import DotIcon from "@/assets/svg/home/dot.svg?react";
 import MapIcon from "@/assets/svg/home/map.svg?react";
 import ParticipantsIcon from "@/assets/svg/home/participants.svg?react";
