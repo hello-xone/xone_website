@@ -1,10 +1,11 @@
-import { Box, MenuItem, Select, TextField } from "@mui/material";
+import { Input } from "@headlessui/react";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import ArrowIcon from "@/assets/svg/home/arrow-solid.svg?react";
-import SearchIcon from "@/assets/svg/home/search-solid.svg?react";
+import CloseIcon from "@/assets/svg/recruitment/close.svg?react";
+import SearchIcon from "@/assets/svg/recruitment/search-solid.svg?react";
 import CommonButton from "@/components/comm/button/CommonButton";
+import { SearchInputSelect } from "@/components/comm/select/SearchInputSelect";
 import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 
 const Channel = () => {
@@ -48,15 +49,19 @@ const Channel = () => {
     }
   };
 
+  const handleClearSearch = () => {
+    setSearchValue("");
+  };
+
   return (
-    <Box className={`mt-3 ${lg ? "mb-40 h-96" : null}`}>
-      <Box className={`${lg ? "pt-28" : "pt-4"}`}>
-        <Box
+    <div className={`mt-3 ${lg ? "mb-40 h-96" : null}`}>
+      <div className={`${lg ? "pt-28" : "pt-4"}`}>
+        <div
           className={`font-black text-center text-[${lg ? "48px" : "32px"}] color-[--t1] ${lg ? "text-[48px]" : "text-[24px]"}`}
         >
           {t("channel:title")}
-        </Box>
-      </Box>
+        </div>
+      </div>
 
       <h3
         className={`${lg ? "mt-10" : "mt-4"} ${lg ? "text-center" : null} text-[${lg ? "20px" : "14px"}] text-[--t2] font-normal`}
@@ -68,109 +73,36 @@ const Channel = () => {
         {t("channel:description")}
       </h3>
 
-      <Box
+      <div
         className={`flex ${lg ? "flex-row" : "flex-col"} gap-12 justify-center ${lg ? "mt-8" : "mt-4"} ${lg ? "h-12" : "100%"}`}
       >
-        <Select
-          value={selectedPlatform}
-          onChange={(e) => setSelectedPlatform(e.target.value)}
-          IconComponent={ArrowIcon}
-          MenuProps={{
-            PaperProps: {
-              sx: {
-                backgroundColor: "var(--b1)",
-                borderRadius: "12px",
-                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.08)",
-                border: "1px solid var(--b3)",
-                marginTop: "6px",
-                "& .MuiList-root": {
-                  padding: "0 !important",
-                },
-                "& .MuiMenuItem-root": {
-                  fontSize: "14px",
-                  fontWeight: 400,
-                  color: "var(--t2)",
-                  padding: "12px 16px",
-                  minHeight: "40px",
-                  lineHeight: "1.4",
-                  "&.Mui-selected": {
-                    backgroundColor: "var(--b3) !important",
-                    color: "var(--t1)",
-                    fontWeight: 500,
-                  },
-                  "&:hover": {
-                    backgroundColor: "var(--b3)",
-                    color: "var(--t1)",
-                  },
-                },
-              },
-            },
-          }}
-          sx={{
-            minWidth: lg ? 142 : "100%",
-            minHeight: lg ? undefined : "40px",
-            height: lg ? undefined : "40px",
-            backgroundColor: "var(--b3)",
-            borderRadius: "8px",
-            color: "var(--t1)",
-            fontWeight: 500,
-            fontSize: "14px",
-            "& .MuiOutlinedInput-notchedOutline": {
-              border: "none",
-            },
-            "&:hover .MuiOutlinedInput-notchedOutline": {
-              border: "none",
-            },
-            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-              border: "none",
-            },
-            "& .MuiSelect-select": {
-              color: "var(--t1)",
-            },
-          }}
+        <div
+          className={`${lg ? "min-w-[150px]" : "w-full"} ${lg ? "" : "min-h-[40px] h-[40px] font-medium"} bg-[var(--b3)] rounded-[8px] text-[var(--t1)] text-[14px]`}
         >
-          {platforms.map((platform) => (
-            <MenuItem key={platform.value} value={platform.value}>
-              {platform.label}
-            </MenuItem>
-          ))}
-        </Select>
+          <SearchInputSelect
+            options={platforms}
+            defaultValue={platforms[0].value}
+            onSelect={(value, option) => console.log(value, option)}
+            placeholder={t("channel:selectPlaceholder")}
+          />
+        </div>
 
-        <TextField
-          placeholder={t("channel:searchPlaceholder")}
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-          size="medium"
-          onKeyPress={handleKeyPress}
-          InputProps={{
-            startAdornment: <SearchIcon />,
-          }}
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              minWidth: lg ? 460 : "100%",
-              height: lg ? "100%" : "40px",
-              backgroundColor: "var(--b8)",
-              borderRadius: "8px",
-              color: "var(--t2)",
-              fontWeight: 500,
-              "& fieldset": {
-                border: "none",
-              },
-              "&:hover fieldset": {
-                border: "none",
-              },
-              "&.Mui-focused fieldset": {
-                border: "none",
-              },
-            },
-            "& .MuiInputBase-input": {
-              paddingLeft: "5px !important",
-              fontSize: "16px",
-              fontWeight: 400,
-              color: "var(--t2)",
-            },
-          }}
-        />
+        <div className="relative group flex items-center w-full md:w-[460px] py-[0] md:py-[5px] px-[12px] bg-[var(--b3)] rounded-[8px] transition-all duration-100 border border-[transparent] hover:border-[var(--t1)] focus-within:border-[var(--t1)] focus-within:pr-[35px]">
+          <SearchIcon className="w-[20px] h-[20px] text-[#A0A3A7] group-focus-within:text-[var(--t1)] transition-colors duration-100" />
+          <Input
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            placeholder={t("channel:searchPlaceholder")}
+            className="block w-full h-[38px] text-[14px] md:text-[100%] ml-[5px] rounded-lg border-none bg-[transparent] text-[var(--t1)] placeholder:text-[var(--t3)] focus:outline-none focus:ring-0"
+            onKeyPress={handleKeyPress}
+          />
+          <div
+            className="w-[20px] h-[20px] absolute top-px bottom-px right-[10px] m-auto"
+            onClick={handleClearSearch}
+          >
+            <CloseIcon className="w-[20px] h-[20px] hidden group-focus-within:block cursor-pointer" />
+          </div>
+        </div>
 
         <CommonButton
           onClick={handleSearch}
@@ -179,8 +111,8 @@ const Channel = () => {
         >
           {t("channel:verificationButton")}
         </CommonButton>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 
