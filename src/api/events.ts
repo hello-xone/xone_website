@@ -61,3 +61,24 @@ export async function getEvents(): Promise<EventData[]> {
     const data = (await res.json()) as { entries: EventData[] };
     return data.entries;
 }
+
+export async function getEvents1(): Promise<EventData[]> {
+    const res = await fetch(
+        "https://public-api.luma.com/v1/calendar/list-events",
+        {
+            method: "GET",
+            headers: {
+                accept: "application/json",
+                "x-luma-api-key": import.meta.env.VITE_APP_LUMA_KEY as string,
+            },
+        }
+    );
+
+    if (!res.ok) {
+        // This will activate the closest `error.js` Error Boundary
+        throw new Error("Failed to fetch data");
+    }
+
+    const data = (await res.json()) as { entries: EventData[] };
+    return data.entries;
+}
