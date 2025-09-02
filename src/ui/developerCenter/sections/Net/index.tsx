@@ -213,7 +213,14 @@ export const Net = () => {
       {
         label: t("developer:netDataLabel2"),
         value: currentNetData?.gasFee ? (
-          <div className="flex items-end">
+          <div className="flex items-center">
+            {currentNetData?.gasFee < "0.1" ? (
+              <span className="mr-2 mt-1 font-normal text-[24px] text-t2">
+                {"<"}
+              </span>
+            ) : (
+              ""
+            )}
             <MyCountUp
               value={
                 currentNetData?.gasFee < "0.1"
@@ -222,6 +229,9 @@ export const Net = () => {
               }
               duration={1.5}
             />{" "}
+            <div className="ml-2 mt-4 translate-y-[-3px] text-t2 text-[20px] font-[700]">
+              Gwei
+            </div>
           </div>
         ) : (
           "--"
@@ -230,10 +240,13 @@ export const Net = () => {
       {
         label: t("developer:netDataLabel3"),
         value: currentNetData?.blockTime ? (
-          <MyCountUp
-            value={Number(preciseRound(currentNetData?.blockTime, 1))}
-            duration={1.5}
-          />
+          <div>
+            <MyCountUp
+              value={Number(preciseRound(currentNetData?.blockTime, 1))}
+              duration={1.5}
+            />
+            <span className="ml-2 font-[700] text-t2 text-[26px]">s</span>
+          </div>
         ) : (
           "--"
         ),

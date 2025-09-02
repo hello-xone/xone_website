@@ -1,8 +1,6 @@
 import { useTranslation } from "react-i18next";
 
 import StartIcon from "@/assets/imgs/home/start.png";
-import ArrowIcon from "@/assets/svg/home/arrow-right-line.svg?react";
-import { Button } from "@/components/comm/button";
 import { Description } from "@/components/comm/description";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import { Title } from "@/components/comm/title";
@@ -35,19 +33,18 @@ export const Start = () => {
         <div
           className={`${styles.btnWrapper} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_7}`}
         >
-          <Button className={styles.btn} disabled>
-            {t("home:exploreBVI")}
-            <div className={styles.btnIcon}>
-              <ArrowIcon></ArrowIcon>
-            </div>
-          </Button>
+          <SeeMore
+            href=""
+            className={styles.btn}
+            disabled
+            text={t("home:exploreBVI")}
+          ></SeeMore>
           <SeeMore
             className={styles.btn}
             href={EXTERNAL_LINKS.dashboard + i18n.language + "/community"}
             text={t("home:joinNow")}
             target="_blank"
-          >
-          </SeeMore>
+          ></SeeMore>
         </div>
       </div>
       <img

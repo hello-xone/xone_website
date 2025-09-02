@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import ArrowIcon from "@/assets/svg/home/arrow-solid.svg?react";
 import SearchIcon from "@/assets/svg/home/search-solid.svg?react";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
 // 基础选项接口
 interface BaseOption {
@@ -34,6 +35,7 @@ export const SearchInputSelect = ({
 }: Props) => {
   const { t } = useTranslation();
 
+  const { isLight } = useCurrentTheme();
   const [selected, setSelected] = useState(defaultValue);
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -163,7 +165,10 @@ export const SearchInputSelect = ({
                   className={clsx(
                     "relative cursor-pointer rounded-[6px] text-[13px] select-none py-[6px] pl-[20px] mx-2 transition-colors duration-200",
                     subOption.value === selected
-                      ? "bg-[var(--b3)] hover:text-[var(--t1)]"
+                      ? isLight
+                        ? "bg-[var(--b3)]"
+                        : "bg-[var(--b6)] text-[var(--b1)]" +
+                          " hover:text-[var(--b1)]"
                       : "text-[var(--t3)]"
                   )}
                   onClick={() => handleSubOptionSelect(subOption, option)}
@@ -185,7 +190,9 @@ export const SearchInputSelect = ({
           className={clsx(
             "relative cursor-pointer rounded-[6px] text-[13px] select-none py-[8px] px-[13px] transition-colors duration-200",
             option.value === selected
-              ? "bg-[var(--b3)] hover:text-[var(--t1)]"
+              ? isLight
+                ? "bg-[var(--b3)]"
+                : "bg-[var(--b6)] text-[var(--b1)]" + " hover:text-[var(--b1)]"
               : "text-[var(--t3)]"
           )}
           onClick={() => handleOptionSelect(option)}
@@ -216,7 +223,7 @@ export const SearchInputSelect = ({
         </span>
       </button>
       {isOpen && (
-        <div className="absolute z-10 mt-2 md:mt-3 w-full overflow-hidden rounded-[8px] bg-[var(--t5)] p-2 md:p-[10px] text-base shadow-[0px_0px_10px_0px_#00000014]">
+        <div className="absolute z-10 mt-2 md:mt-3 w-full overflow-hidden rounded-[8px] bg-[var(--b9)] p-2 md:p-[10px] text-base shadow-[0px_0px_10px_0px_#00000014]">
           {/* 搜索框 */}
           <div className="sticky top-0 mb-2 md:mb-[10px] rounded-[8px] h-8 md:h-[32px] px-2 md:px-[10px] py-2 md:py-[16px] border-[var(--b3)] flex items-center border-solid border">
             <SearchIcon className="w-4 h-4 md:w-5 md:h-5" />
