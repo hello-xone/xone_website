@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import dayjs from "dayjs";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import {
     Area,
@@ -12,10 +12,9 @@ import {
     YAxis,
 } from "recharts";
 
-import { fetchNetCountersByNet, fetchStatsByNet } from '@/api/common';
 import MarketSource2 from "@/assets/imgs/home/market-source-2.png";
 import MarketSource1 from "@/assets/imgs/home/market-source1.png";
-import { ChartRes, Counter, Stats } from "@/types/response";
+import { ChartRes } from "@/types/response";
 import { formatNumber } from '@/utils/number';
 
 const BottomMenu = [
@@ -202,17 +201,7 @@ const BottomMenu = [
 
 const MarketChart = React.memo(({ chartData }: { chartData: ChartRes | null }) => {
     const { t } = useTranslation("home");
-    const [stats, setStats] = useState<Stats | null>(null)
-    const [counters, setCounters] = useState<Array<Counter>>([])
 
-    useEffect(() => {
-        fetchStatsByNet().then(res => {
-            setStats(res)
-        })
-        fetchNetCountersByNet().then(res => {
-            setCounters(res)
-        })
-    }, [])
     const isLight = useMemo(() => {
         return localStorage.getItem("theme") !== "dark";
     }, []);
@@ -227,12 +216,6 @@ const MarketChart = React.memo(({ chartData }: { chartData: ChartRes | null }) =
         return [];
     }, [chartData]);
 
-    const { newTxns24h, totalAccounts } = useMemo(() => {
-        return {
-            newTxns24h: counters.find(el => el.id === "newTxns24h")?.value || 0,
-            totalAccounts: counters.find(el => el.id === "totalAccounts")?.value || 0,
-        }
-    }, [counters])
     const CustomTooltip = ({ active, payload }: any) => {
         const isVisible = active && payload && payload.length;
         return (
@@ -351,13 +334,13 @@ const MarketChart = React.memo(({ chartData }: { chartData: ChartRes | null }) =
                     {t("totalMarketCap")}
                 </div>
                 <div className="text-t1 font-bold text-[32px] leading-[100%] mb-12">
-                    {formatNumber(stats?.market_cap || "0")}
+                    {formatNumber(chartData?.market_cap || "0")}
                 </div>
                 <div className="text-t1 leading-[100%] mb-2">
                     {t("accountsHoldingCOX")}
                 </div>
                 <div className="text-t1 font-bold text-[32px] leading-[100%]">
-                    {formatNumber(totalAccounts || "0")}
+                    {formatNumber(chartData?.total_tokens || "0")}
                 </div>
             </div>
         </div>
@@ -369,7 +352,7 @@ const MarketChart = React.memo(({ chartData }: { chartData: ChartRes | null }) =
                         className="w-full py-[12px] rounded-[8px] text-center bg-[--layer2]"
                     >
                         <div className="text-[32px] font-bold leading-[100%]">
-                            {el.title === "currentPrice" ? (chartData?.prices[0]?.avg_price || 0) : el.title === "transactionCount" ? formatNumber(newTxns24h || 0) : ""}
+                            {el.title === "currentPrice" ? (chartData?.prices[0]?.avg_price || 0) : el.title === "transactionCount" ? formatNumber(chartData?.transactions_today || 0) : formatNumber(chartData?.transaction_amounts_today || 0)}
                         </div>
                         <div className="text-[16px] mt-2 font-normal leading-[100%]">
                             {t(el.title)}
