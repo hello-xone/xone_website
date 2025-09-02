@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import { ChartRes } from "@/types/response";
+import Price from "@/components/comm/Price";
 
 export const XoneChain = ({ chartData, time }: { chartData: ChartRes | null; time: number }) => {
     const { t } = useTranslation("home");
@@ -44,8 +45,8 @@ export const XoneChain = ({ chartData, time }: { chartData: ChartRes | null; tim
                         </div>
                     </div>
                     <div className="md:px-6 md:py-3">
-                        <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
-                            ≈${new BigNumber(chartData?.average_txn_fee24h || 0).toFixed(6, 1)}
+                        <div className="text-[20px] flex items-center md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
+                            ≈<Price show$ price={chartData?.average_txn_fee24h || 0} className1={""}></Price>
                         </div>
                         <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
                             {t("averageTransactionCost")}

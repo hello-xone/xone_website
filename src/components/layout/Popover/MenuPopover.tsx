@@ -19,6 +19,7 @@ import Knight from "@/components/Icons/Knight";
 import Language from "@/components/Icons/Language";
 import Theme from "@/components/Icons/Theme";
 import { menus, NavigationType } from "@/constants/menus";
+import useApplicationStore from "@/store/applicationStore";
 
 import LanguagePopover from "./LanguagePopover";
 
@@ -27,6 +28,7 @@ const MenuPopover = () => {
     const [theme, setTheme] = useState(() => {
         return localStorage.getItem("theme") || "light";
     });
+    const { changeTheme } = useApplicationStore()
 
     const { t } = useTranslation("header");
     const toggleTheme = () => {
@@ -36,6 +38,7 @@ const MenuPopover = () => {
             theme === "light" ? "dark" : "light"
         );
         localStorage.setItem("theme", theme === "light" ? "dark" : "light");
+        changeTheme()
     };
 
     useEffect(() => {
@@ -47,7 +50,7 @@ const MenuPopover = () => {
     }, [isOpen]);
 
     return (
-        <Popover className="md:hidden">
+        <Popover className="xl:hidden">
             {({ open, close }) => (
                 <>
                     <PopoverButton

@@ -11,7 +11,7 @@ export const Governance = () => {
 
     const { isLight } = useApplicationStore()
     return <div className="flex pt-[40px] max-md:flex-col-reverse md:pt-[80px] gap-[40px] pb-[40px] md:pb-[160px] items-center w-full justify-between">
-        <img alt="" src={BgIcon} className="max-md:hidden absolute left-0"></img>
+        <img alt="" src={BgIcon} className="max-md:hidden absolute left-0 mt-[12%]"></img>
         <img alt="" src={isLight ? GovernanceLightIcon : GovernanceIcon} className="shrink-0 w-full md:w-[48.6%] h-auto"></img>
         <div className="flex-1">
             <div className="text-[24px] md:text-[48px] leading-[140%] md:leading-[120%] mb-4 md:mb-6 font-bold">{t("governanceTitle")}</div>

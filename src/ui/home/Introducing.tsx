@@ -5,30 +5,39 @@ import IntroducingIcon1 from "@/assets/imgs/home/introducing-1.png"
 import IntroducingIcon2 from "@/assets/imgs/home/introducing-2.png"
 import IntroducingIcon3 from "@/assets/imgs/home/introducing-3.png"
 import IntroducingIcon4 from "@/assets/imgs/home/introducing-4.png"
+import IntroducingDarkIcon1 from "@/assets/imgs/home/introducing-dark-1.png"
+import IntroducingDarkIcon2 from "@/assets/imgs/home/introducing-dark-2.png"
+import IntroducingDarkIcon3 from "@/assets/imgs/home/introducing-dark-3.png"
+import IntroducingDarkIcon4 from "@/assets/imgs/home/introducing-dark-4.png"
 import { SeeMore } from "@/components/comm/link/SeeMore"
 import { EXTERNAL_LINKS } from "@/constants/external"
+import useApplicationStore from "@/store/applicationStore"
 
 const IntroducingLeft = [
   {
     icon: IntroducingIcon1,
+    dark: IntroducingDarkIcon1,
     title: "ofInfiniteValue",
     desc: "ofInfiniteValueDesc",
     link: `${EXTERNAL_LINKS.docs}study/xoc`
   },
   {
     icon: IntroducingIcon2,
+    dark: IntroducingDarkIcon2,
     title: "lowGas",
     desc: "lowGasDesc",
     link: `${EXTERNAL_LINKS.docs}study/gas`
   },
   {
     icon: IntroducingIcon3,
+    dark: IntroducingDarkIcon3,
     title: "extensible",
     desc: "extensibleDesc",
     link: `${EXTERNAL_LINKS.docs}study/modules`
   },
   {
     icon: IntroducingIcon4,
+    dark: IntroducingDarkIcon4,
     title: "AheadOfTheTimesPOBVI",
     desc: "AheadOfTheTimesPOBVIDesc",
     link: `${EXTERNAL_LINKS.docs}bvi/readme`
@@ -36,14 +45,15 @@ const IntroducingLeft = [
 ]
 const Introducing = () => {
   const { t } = useTranslation("home");
+  const { isLight } = useApplicationStore()
 
   return (
-    <div className="py-[40px] md:py-[80px] flex max-md:flex-col-reverse justify-between mt-[40px] md:mt-[80px] border-t-[1px] border-b-[1px] border-b4 border-solid">
-      <img alt="" src={BgIcon} className="max-md:hidden absolute right-0"></img>
+    <div className="py-[40px] md:py-[80px] flex max-md:flex-col-reverse justify-between mt-[40px] md:mt-[80px] border-t-[1px] border-b-[1px] border-[--border5] border-solid">
+      <img alt="" src={BgIcon} className="max-md:hidden absolute right-0 mt-[-6%]"></img>
       <div className="w-full md:w-[61%] shrink-0 grid grid-cols-1 md:grid-cols-2 gap-[32px] md:gap-[54px]">
         {
           IntroducingLeft && IntroducingLeft.map(el => <div key={`introducing-left-${el.title}`} className="w-full">
-            <img alt="" src={el.icon} className="w-[40px] h-[40px] md:w-[54px] md:h-[54px]"></img>
+            <img alt="" src={isLight ? el.icon : el.dark} className="w-[40px] h-[40px] md:w-[54px] md:h-[54px]"></img>
             <div className="text-[20px] md:text-[28px] mt-3 mb-1 leading-[140%] font-bold">
               {t(el.title)}
             </div>

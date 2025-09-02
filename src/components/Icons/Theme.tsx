@@ -1,7 +1,7 @@
 export default function Theme({ className, onClick }: { className?: string; onClick?: () => void }) {
   return (
     <svg
-      className={className || ""}
+      className={`cursor-pointer ${className || ""}`}
       onClick={() => onClick && onClick()}
       width="24"
       height="24"

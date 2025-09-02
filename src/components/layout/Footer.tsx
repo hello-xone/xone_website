@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -14,6 +15,7 @@ import TelegramIcon from "@/assets/svg/home/telegram.svg?react";
 import XIcon from "@/assets/svg/home/x.svg?react";
 import YoutubeIcon from "@/assets/svg/home/youtube.svg?react";
 import { EXTERNAL_LINKS } from "@/constants/external";
+import useApplicationStore from "@/store/applicationStore";
 import { isEmail } from "@/utils";
 
 import CommonButton from "../comm/button/CommonButton";
@@ -70,6 +72,7 @@ const contacts = [
 
 const Footer = () => {
   const { t } = useTranslation();
+  const { changeTheme } = useApplicationStore()
   const [email, setEmail] = useState("")
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light';
@@ -103,14 +106,14 @@ const Footer = () => {
             name: t("common:roadmap"),
             url: EXTERNAL_LINKS.docs + "study/roadmap",
           },
-          {
-            name: t("common:termsOfService"),
-            url: EXTERNAL_LINKS.docs + "study/service",
-          },
-          {
-            name: t("common:privacyPolicy"),
-            url: EXTERNAL_LINKS.docs + "study/privacy",
-          },
+          // {
+          //   name: t("common:termsOfService"),
+          //   url: EXTERNAL_LINKS.docs + "study/service",
+          // },
+          // {
+          //   name: t("common:privacyPolicy"),
+          //   url: EXTERNAL_LINKS.docs + "study/privacy",
+          // },
         ],
       },
       {
@@ -201,6 +204,7 @@ const Footer = () => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light');
     localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
+    changeTheme()
   };
 
   const handleSubmit = async () => {
@@ -236,7 +240,22 @@ const Footer = () => {
                 <div className="text-t2 flex text-sm flex-col gap-[12px] font-normal">
                   {
                     el.infos && el.infos.map(info => {
-                      return <Link className="" key={`info-item-${info.name}`} target={info.url.includes("http") ? "_blank" : "_self"} to={info.url}>{info.name}</Link>
+                      return <Link className="hover:text-[#FF0420] group flex items-center gap-[8px]" key={`info-item-${info.name}`} target={info.url.includes("http") ? "_blank" : "_self"} to={info.url}>
+                        {info.name}
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          className={`transition-all duration-200 opacity-0 group-hover:opacity-100`}
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M13.4771 9.16603L9.00707 4.69603L10.1854 3.5177L16.6671 9.99937L10.1854 16.481L9.00707 15.3027L13.4771 10.8327H3.33374V9.16603H13.4771Z"
+                            fill={"#FF0420"}
+                          />
+                        </svg>
+                      </Link>
                     })
                   }
 
@@ -248,15 +267,15 @@ const Footer = () => {
           <div className="w-full md:w-[386px]">
             <div className="font-bold mb-4 text-t1">{t("subscribe")}</div>
             <div className="text-sm text-t2 mb-4">{t("header:subscribeDesc")}</div>
-            <div className="flex">
-              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="flex-1 h-[40px] outline-none bg-b3 placeholder:text-t4 text-sm px-[20px] rounded-l-[8px]" placeholder="Enter email address"></input>
+            <div className="flex border-[1px] border-transparent hover:border-[1px] hover:border-t1 rounded-[8px] p-1 box-content bg-b3">
+              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="flex-1 h-[40px] outline-none bg-transparent placeholder:text-t4 text-sm px-[20px] rounded-[8px]" placeholder="Enter email address"></input>
               <CommonButton onClick={() => {
                 if (email && isEmail(email)) {
                   handleSubmit()
                 } else {
                   toast.error(t("header:invalidEmail"))
                 }
-              }} className="w-[98px] !text-base !font-bold !rounded-r-[8px] !rounded-l-none">{t("join")}</CommonButton>
+              }} className="w-[120px] h-10 !text-base !font-bold !rounded-r-[8px]">{t("join")}</CommonButton>
             </div>
           </div>
         </div>
@@ -280,18 +299,18 @@ const Footer = () => {
         <div className="mt-3 md:mt-10 py-4 max-md:pt-[21px] border-t-[1px] border-solid border-t3 text-t3 flex justify-between items-center">
           <div className="flex items-center text-xs max-md:justify-between max-md:w-full">
             <div className="leading-[14px]">
-              © 2025 Xone Foundation
+              © {dayjs().format("YYYY")} Xone Foundation
             </div>
             <div className="pl-4 ml-4 border-l-[1px] border-t3 leading-[14px] font-medium flex items-center">
-              <Link to={EXTERNAL_LINKS.docs + "study/privacy"} target="_blank">{t("privacy")}</Link>
+              <Link to={EXTERNAL_LINKS.docs + "study/privacy"} target="_blank">{t("header:privacy")}</Link>
               <span className="block w-[2px] h-[2px] rounded-full bg-t3 mx-4"></span>
-              <Link to={EXTERNAL_LINKS.docs + "study/service"} target="_blank">{t("terms")}</Link>
+              <Link to={EXTERNAL_LINKS.docs + "study/service"} target="_blank">{t("header:terms")}</Link>
             </div>
           </div>
-          <LanguagePopover className="max-md:hidden">
+          <LanguagePopover className="max-md:hidden group">
             <>
               <Language className="text-t1"></Language>
-              <span className="text-t1 text-sm">English</span>
+              <span className="text-t1 text-sm group-hover:underline group-hover:decoration-dashed">English</span>
             </>
           </LanguagePopover>
         </div>

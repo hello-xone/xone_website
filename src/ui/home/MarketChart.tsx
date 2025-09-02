@@ -242,10 +242,10 @@ const MarketChart = React.memo(({ chartData }: { chartData: ChartRes | null }) =
         );
     };
     return <div className="py-[40px] md:py-[80px] text-center">
-        <div className="text-[24px] md:text-[48px] font-bold leading-[120%] mb-4 md:mb-6">
+        <div className="text-[24px] md:text-[48px] max-md:text-left font-bold leading-[120%] mb-4 md:mb-6">
             {t("marketTitle")}
         </div>
-        <div className="text-base md:text-[20px] font-medium text-t2 mb-6 md:mb-10 leading-[140%]">
+        <div className="text-base md:text-[20px] max-md:text-left font-medium text-t2 mb-6 md:mb-10 leading-[140%]">
             {t("marketDesc")}
         </div>
         <div className="flex items-center mb-2 text-t3 font-medium text-[20px]">

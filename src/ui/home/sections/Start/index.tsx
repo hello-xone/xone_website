@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 import StartIcon from "@/assets/imgs/home/start.png";
+import StartDarkIcon from "@/assets/imgs/home/start-dark.png";
 import { Description } from "@/components/comm/description";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import { Title } from "@/components/comm/title";
@@ -10,11 +11,13 @@ import {
   DelayClassName,
   useScrollreveal,
 } from "@/hooks/useScrollreveal";
+import useApplicationStore from "@/store/applicationStore";
 
 import styles from "./index.module.less";
 
 export const Start = () => {
   const { t, i18n } = useTranslation();
+  const { isLight } = useApplicationStore()
 
   useScrollreveal();
   return (
@@ -48,7 +51,7 @@ export const Start = () => {
         </div>
       </div>
       <img
-        src={StartIcon}
+        src={isLight ? StartIcon : StartDarkIcon}
         alt="start"
         className={`${styles.startIcon} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_5}`}
       />

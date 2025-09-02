@@ -29,7 +29,7 @@ const LanguagePopover = ({ children, className, buttonClass }: { children: React
                 <>
                     <PopoverButton
                         className={clsx(
-                            `flex items-center px-[8px] gap-1 text-sm font-medium text-t1 h-10 focus:outline-none data-active:text-white data-focus:outline data-focus:outline-white data-hover:text-white ${buttonClass ? buttonClass : ''}`,
+                            `flex items-center px-[8px] rounded-[10px] hover:bg-b2 gap-1 text-sm font-medium text-t1 h-10 focus:outline-none data-active:text-white data-focus:outline data-focus:outline-white data-hover:text-white ${buttonClass ? buttonClass : ''}`,
                             {
                                 "bg-b2 rounded-[8px]": open,
                             }

@@ -22,7 +22,7 @@ import MenuPopover from "./Popover/MenuPopover";
 
 const Header = () => {
   const navigate = useNavigate();
-  const { isLight } = useApplicationStore()
+  const { isLight, changeTheme } = useApplicationStore()
   const [event, setEvent] = useState<any>(null);
   const [detailId, setDetailId] = useState("");
   const [theme, setTheme] = useState(() => {
@@ -37,6 +37,7 @@ const Header = () => {
       theme === "light" ? "dark" : "light"
     );
     localStorage.setItem("theme", theme === "light" ? "dark" : "light");
+    changeTheme()
   };
 
   useEffect(() => {
@@ -86,7 +87,7 @@ const Header = () => {
           className="w-[100px] h-auto cursor-pointer max-md:hidden"
         ></img>
         <img src={LogoIcon} onClick={() => navigate("/")} alt="logo" className="w-8 h-8 md:hidden"></img>
-        <div className="hidden md:flex items-center gap-[40px]">
+        <div className="hidden xl:flex items-center gap-[40px]">
           {menus &&
             menus.map((item) => {
               return (
@@ -167,7 +168,7 @@ const Header = () => {
                                         key={`link-item-${link.id}`}
                                         to={link.link || ""}
                                         target="_blank"
-                                        className="px-[10px] py-[8px] hover:bg-b3 rounded-[8px] cursor-pointer"
+                                        className="px-[10px] py-[8px] hover:bg-b3 hover:text-t1 rounded-[8px] cursor-pointer"
                                       >
                                         {t(link.name)}
                                       </Link>
@@ -208,13 +209,13 @@ const Header = () => {
       <div className="flex items-center gap-[12px] md:gap-[24px]">
         <CommonButton type="outline">
           {t("askAI")}
-          <AiStar className="text-t1 w-4 h-4 md:w-6 md:h-6"></AiStar>
+          <AiStar className="w-4 h-4 md:w-6 md:h-6"></AiStar>
         </CommonButton>
         <CommonButton onClick={() => window.open(EXTERNAL_LINKS.MainExplorer)}>
           {t("exploreXone")}
         </CommonButton>
         <MenuPopover></MenuPopover>
-        <div className="hidden md:flex items-center gap-[16px]">
+        <div className="hidden xl:flex items-center gap-[16px]">
           <LanguagePopover>
             <Language className="text-t1"></Language>
           </LanguagePopover>
