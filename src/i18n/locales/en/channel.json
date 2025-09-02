@@ -19,5 +19,12 @@
   "safetyTip2Title": "Enter Information",
   "safetyTip2Desc": "Fill in the unique identifier such as URL, ID, etc. for the type.",
   "safetyTip3Title": "Verification Feedback",
-  "safetyTip3Desc": "When the submitted information is not recorded by us, we recommend that you immediately terminate any interaction with the other party."
+  "safetyTip3Desc": "When the submitted information is not recorded by us, we recommend that you immediately terminate any interaction with the other party.",
+  "dialog": {
+    "verified": "Verified",
+    "unverified": "Unverified",
+    "verifiedMessage": "This information has been verified!",
+    "unverifiedMessage": "This information is not recorded, please be careful!",
+    "confirmButton": "Confirm"
+  }
 }

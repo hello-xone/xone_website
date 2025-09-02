@@ -19,6 +19,7 @@ import Theme from "../Icons/Theme";
 import CommonPopover from "./Popover/CommonPopover";
 import LanguagePopover from "./Popover/LanguagePopover";
 import MenuPopover from "./Popover/MenuPopover";
+import { request } from "@/api/request";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -40,12 +41,12 @@ const Header = () => {
   };
 
   useEffect(() => {
-    axios
+    request
       .get(
-        "https://api.luma.com/calendar/get-items?calendar_api_id=cal-SHqvOTSSn2B1gf3&pagination_limit=1&period=past"
+        "/api/v2/official-assets?calendar_api_id=cal-SHqvOTSSn2B1gf3&pagination_limit=1&period=past"
       )
       .then((res) => {
-        if (res.status === 200 && res.data && res.data.entries[0]) {
+        if (res.code === 0 && res.data && res.data.entries[0]) {
           setEvent(res.data.entries[0].event);
         }
       });

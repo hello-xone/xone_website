@@ -35,9 +35,9 @@ export const fetchNftTotal = async (): Promise<FetchNftTotalRes> => {
 export const fetchNetCountersByNet = async (
   isTestNet?: boolean
 ): Promise<Counter[]> => {
-  const reqInstance = isTestNet ? xoTestScanRequest : xoMainScanRequest;
+  // const reqInstance = isTestNet ? xoTestScanRequest : xoMainScanRequest;
   try {
-    const res: FetchNetCountersRes = await reqInstance.get(`/api/v2/counters`);
+    const res: FetchNetCountersRes = await request.get(`/api/v2/counters`);
     return res?.data || [];
   } catch (err) {
     console.error(err);
@@ -46,12 +46,14 @@ export const fetchNetCountersByNet = async (
 };
 
 export const fetchStatsByNet = async (isTestNet?: boolean) => {
-  const reqInstance = isTestNet ? xoTestScanRequest : xoMainScanRequest;
-  const res: Stats = await reqInstance.get("/api/v2/stats");
+  // const reqInstance = isTestNet ? xoTestScanRequest : xoMainScanRequest;
+  const res: Stats = await request.get("/api/v2/stats");
   return res;
 };
 
 export const fetchChart = async () => {
+  console.log(import.meta.env.VITE_APP_BASE_URL, "import.meta.env.VITE_APP_BASE_URL")
+  console.log(import.meta, "import.meta.env.VITE_APP_BASE_URL")
   const res = await request.get("/api/v2/chart");
   return res.data as ChartRes;
 };
