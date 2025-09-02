@@ -220,7 +220,7 @@ const Footer = () => {
             {contacts &&
               contacts.map((item, index) => {
                 return (
-                  <Link key={`contact-item-${item.url}-${index}`} className="w-6 text-t1 flex items-center justify-center rounded bg-b3 h-6" target="_blank" to={item.url}>
+                  <Link key={`contact-item-${item.url}-${index}`} className="w-6 text-t1 flex items-center justify-center rounded bg-b3 h-6" target={item.url.includes("http") ? "_blank" : "_self"} to={item.url}>
                     {item.icon}
                   </Link>
                 );
@@ -236,7 +236,7 @@ const Footer = () => {
                 <div className="text-t2 flex text-sm flex-col gap-[12px] font-normal">
                   {
                     el.infos && el.infos.map(info => {
-                      return <Link className="" key={`info-item-${info.name}`} target="_blank" to={info.url}>{info.name}</Link>
+                      return <Link className="" key={`info-item-${info.name}`} target={info.url.includes("http") ? "_blank" : "_self"} to={info.url}>{info.name}</Link>
                     })
                   }
 
@@ -283,9 +283,9 @@ const Footer = () => {
               © 2025 Xone Foundation
             </div>
             <div className="pl-4 ml-4 border-l-[1px] border-t3 leading-[14px] font-medium flex items-center">
-              <Link to={''}>{t("privacy")}</Link>
+              <Link to={EXTERNAL_LINKS.docs + "study/privacy"} target="_blank">{t("privacy")}</Link>
               <span className="block w-[2px] h-[2px] rounded-full bg-t3 mx-4"></span>
-              <Link to={''}>{t("terms")}</Link>
+              <Link to={EXTERNAL_LINKS.docs + "study/service"} target="_blank">{t("terms")}</Link>
             </div>
           </div>
           <LanguagePopover className="max-md:hidden">

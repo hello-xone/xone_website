@@ -1,9 +1,9 @@
-import axios from "axios";
 import clsx from "clsx";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
+import { request } from "@/api/request";
 import LogoIcon from "@/assets/imgs/header/logo.png";
 import LogoRedIcon from "@/assets/imgs/header/logo-red.png";
 import { EXTERNAL_LINKS } from "@/constants/external";
@@ -19,7 +19,6 @@ import Theme from "../Icons/Theme";
 import CommonPopover from "./Popover/CommonPopover";
 import LanguagePopover from "./Popover/LanguagePopover";
 import MenuPopover from "./Popover/MenuPopover";
-import { request } from "@/api/request";
 
 const Header = () => {
   const navigate = useNavigate();
