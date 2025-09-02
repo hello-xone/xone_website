@@ -16,9 +16,6 @@ export const Events = () => {
     const { t } = useTranslation("events");
     const [events, setEvents] = useState<EventData[]>([]);
     useEffect(() => {
-        getEvents1().then((res) => {
-            console.log(res)
-        });
         getEvents().then((res) => {
             setEvents(res || []);
         });
@@ -71,7 +68,7 @@ export const Events = () => {
                             <div className="text-base md:text-[20px] font-semibold leading-[140%] text-t1">
                                 {dayjs(el.event.start_at).format("YYYY-MM-DD")}
                             </div>
-                            <div className="md:mt-[2px] text-base md:text-[14px] leading-[140%] text-t2">
+                            <div className="md:mt-[2px] md:text-right text-base md:text-[14px] leading-[140%] text-t2">
                                 {dayjs(el.event.start_at).format("ddd")}
                             </div>
                         </div>
