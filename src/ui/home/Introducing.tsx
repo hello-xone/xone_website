@@ -48,8 +48,9 @@ const Introducing = () => {
   const { isLight } = useApplicationStore()
 
   return (
-    <div className="py-[40px] md:py-[80px] flex max-md:flex-col-reverse justify-between mt-[40px] md:mt-[80px] border-t-[1px] border-b-[1px] border-[--border5] border-solid">
-      <img alt="" src={BgIcon} className="max-md:hidden absolute right-0 mt-[-6%]"></img>
+    <div className="py-[40px] md:py-[80px] flex max-md:flex-col-reverse justify-between mt-[40px] md:mt-[80px]">
+      <div className="w-screen absolute left-0 mt-[-40px] md:mt-[-80px] h-[1px] bg-[--border5]"></div>
+      <img alt="" src={BgIcon} className="max-md:hidden absolute right-0 ml-[5px] mt-[-6%]"></img>
       <div className="w-full md:w-[61%] shrink-0 grid grid-cols-1 md:grid-cols-2 gap-[32px] md:gap-[54px]">
         {
           IntroducingLeft && IntroducingLeft.map(el => <div key={`introducing-left-${el.title}`} className="w-full">
@@ -60,7 +61,7 @@ const Introducing = () => {
             <div className="text-[14px] md:text-[16px] text-t2 leading-[140%] md:leading-[100%]">
               {t(el.desc)}
             </div>
-            <SeeMore className="mt-[16px] md:mt-[22px]" href={el.link} text="See more"></SeeMore>
+            <SeeMore className="mt-[16px] md:mt-[22px]" textClassName="md:!text-[16px]" href={el.link} text="See more"></SeeMore>
           </div>)
         }
       </div>

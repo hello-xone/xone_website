@@ -46,7 +46,7 @@ export const XoneChain = ({ chartData, time }: { chartData: ChartRes | null; tim
                     </div>
                     <div className="md:px-6 md:py-3">
                         <div className="text-[20px] flex items-center md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
-                            ≈<Price show$ price={chartData?.average_txn_fee24h || 0} className1={""}></Price>
+                            <Price show$ price={chartData?.average_txn_fee24h || 0} className1={""}></Price>
                         </div>
                         <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
                             {t("averageTransactionCost")}

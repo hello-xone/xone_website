@@ -215,11 +215,14 @@ const Header = () => {
           {t("exploreXone")}
         </CommonButton>
         <MenuPopover></MenuPopover>
-        <div className="hidden xl:flex items-center gap-[16px]">
+        <div className="hidden xl:flex items-center gap-[8px]">
           <LanguagePopover>
             <Language className="text-t1"></Language>
           </LanguagePopover>
-          <Theme onClick={() => toggleTheme()} className="text-t1"></Theme>
+          <div className="w-[40px] flex rounded-[10px] hover:bg-b2 items-center justify-center h-[40px]">
+            <Theme onClick={() => toggleTheme()} className="text-t1 w-[24px] h-[24px]"></Theme>
+          </div>
+
         </div>
       </div>
     </div>

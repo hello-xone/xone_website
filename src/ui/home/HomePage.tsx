@@ -35,7 +35,7 @@ const HomePage = () => {
       });
 
       return (
-            <div className="container">
+            <div className="container overflow-x-hidden">
                   <Banner></Banner>
                   <XoneChain time={time} chartData={chartData}></XoneChain>
                   <Introducing></Introducing>
