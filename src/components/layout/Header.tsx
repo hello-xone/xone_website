@@ -13,6 +13,7 @@ import useApplicationStore from "@/store/applicationStore";
 import CommonButton from "../comm/button/CommonButton";
 import { SeeMore } from "../comm/link/SeeMore";
 import AiStar from "../Icons/AiStar";
+import CommonGlobal from "../Icons/CommonGlobal";
 import Knight from "../Icons/Knight";
 import Language from "../Icons/Language";
 import Theme from "../Icons/Theme";
@@ -95,7 +96,7 @@ const Header = () => {
                   {item.group && item.group.length > 0 ? (
                     <CommonPopover text={t(item.name)}>
                       {item.type === NavigationType.INFO ? (
-                        <div className="flex gap-[24px]">
+                        <div className="flex items-stretch gap-[24px]">
                           <div className="w-[372px]">
                             {item.group &&
                               item.group.map((gel) => (
@@ -104,7 +105,9 @@ const Header = () => {
                                   className="px-[10px] group gap-[12px] rounded-[8px] mb-[2px] bg-transparent hover:bg-b3 cursor-pointer py-2 flex items-center"
                                   key={`children-item-${gel.id}`}
                                 >
-                                  <Knight className="text-t2 group-hover:text-t1 shrink-0"></Knight>
+                                  {
+                                    gel.id === "global_knight" ? <Knight className="text-t2 group-hover:text-t1 shrink-0"></Knight> : <CommonGlobal className="text-t2 group-hover:text-t1 shrink-0"></CommonGlobal>
+                                  }
                                   <div className="text-t2 group-hover:text-t1">
                                     <div className="text-sm font-bold leading-[140%] mb-1">
                                       {t(gel.title)}
@@ -116,9 +119,9 @@ const Header = () => {
                                 </div>
                               ))}
                           </div>
-                          <div className="w-[480px]">
+                          <div className="w-[480px] flex-1 flex flex-col">
                             {!globalDetail ? (
-                              <div className="w-full min-h-[164px] flex flex-col items-center justify-center rounded-[8px] bg-b3">
+                              <div className="w-full min-h-[164px] flex-1 flex flex-col items-center justify-center rounded-[8px] bg-b3">
                                 <Knight className="text-t2 shrink-0"></Knight>
                                 <div className="text-t2 font-medium text-sm mt-[7px]">
                                   Look forward to it !
@@ -128,24 +131,24 @@ const Header = () => {
                               <img
                                 src={globalDetail.images}
                                 alt=""
-                                className="w-full h-[164px] rounded-[8px]"
+                                className="w-full aspect-[480/310] object-cover flex-1 rounded-[8px]"
                               ></img>
                             )}
 
-                            <div className="mt-3 text-t2 text-sm font-bold leading-[140%]">
+                            <div className="mt-3 text-t2 shrink-0 text-sm font-bold leading-[140%]">
                               {globalDetail
                                 ? globalDetail.name
                                 : "助力Xone未来动向，成就更大发展"}
                             </div>
                             {!globalDetail && (
-                              <div className="mt-3 text-t2 text-sm leading-[140%]">{`一切工作都是为了帮助 Xone 更好的服务全球企业、组织以及个人。因此，在任何领域，只要你有想法并愿意为此贡献你的独到想法！我们相信，在 Xone 的成长之路上，将无畏即将面对的无数挑战。`}</div>
+                              <div className="mt-3 text-t2 shrink-0 text-sm leading-[140%]">{`一切工作都是为了帮助 Xone 更好的服务全球企业、组织以及个人。因此，在任何领域，只要你有想法并愿意为此贡献你的独到想法！我们相信，在 Xone 的成长之路上，将无畏即将面对的无数挑战。`}</div>
                             )}
                             {
                               group && group.link && <SeeMore
                                 href={group.link}
                                 text={t("home:seeMore")}
                                 className="mt-3"
-                                textClassName="!text-[14px] text-t2"
+                                textClassName="!text-[14px] shrink-0 text-t2"
                               ></SeeMore>
                             }
                           </div>
