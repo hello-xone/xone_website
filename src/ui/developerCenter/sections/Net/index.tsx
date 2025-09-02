@@ -43,41 +43,44 @@ export const Net = () => {
   const { delayClassNames } = useScrollreveal();
   const notifications = useNotifications();
   const { connect, provider, currentConnector } = useWalletKit();
-  const addNet = useCallback(async (connector: any, isConnectAfter?: boolean) => {
-    try {
-      if (!connector) return;
-      const chainIdOfHex = numberToHex(selectedNetKey);
-      const net =
-        selectedNetKey === XoneChainId.MAIN_NET ? XoneMainNet : XoneTestNet;
+  const addNet = useCallback(
+    async (connector: any, isConnectAfter?: boolean) => {
       try {
-        await connector.provider.request({
-          chainType: ChainType.EVM,
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: chainIdOfHex }],
-        });
-      } catch (err: any) {
-        if (err?.code === 4902) {
-          await provider.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                ...net,
-                chainId: chainIdOfHex,
-              },
-            ],
+        if (!connector) return;
+        const chainIdOfHex = numberToHex(selectedNetKey);
+        const net =
+          selectedNetKey === XoneChainId.MAIN_NET ? XoneMainNet : XoneTestNet;
+        try {
+          await connector.provider.request({
+            chainType: ChainType.EVM,
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: chainIdOfHex }],
           });
-        } else {
-          return;
+        } catch (err: any) {
+          if (err?.code === 4902) {
+            await provider.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  ...net,
+                  chainId: chainIdOfHex,
+                },
+              ],
+            });
+          } else {
+            return;
+          }
         }
+        notifications.show("Have been added", {
+          severity: "success",
+          autoHideDuration: 2000,
+        });
+      } catch (err) {
+        console.error(err);
       }
-      notifications.show("Have been added", {
-        severity: "success",
-        autoHideDuration: 2000,
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  }, [notifications, provider, selectedNetKey])
+    },
+    [notifications, provider, selectedNetKey]
+  );
 
   useEffect(() => {
     const handleDisconnect = () => {
@@ -141,7 +144,7 @@ export const Net = () => {
     )?.value;
     data.epoch = await getXoneEpochByNet();
     setMainNetData(data);
-  }, [])
+  }, []);
 
   const getTestNetData = useCallback(async () => {
     const data: NetData = {};
@@ -160,14 +163,14 @@ export const Net = () => {
       data.epoch = undefined;
     }
     setTestNetData(data);
-  }, [])
+  }, []);
 
   const getData = useCallback(async () => {
     try {
       if (selectedNetKey === XoneChainId.MAIN_NET) {
-        return getMainNetData()
+        return getMainNetData();
       } else {
-        return getTestNetData()
+        return getTestNetData();
       }
       // const awaitMainNet = getMainNetData();
       // const awaitTestNet = getTestNetData();
@@ -177,7 +180,7 @@ export const Net = () => {
     } finally {
       setLoading(false);
     }
-  }, [getMainNetData, getTestNetData, selectedNetKey])
+  }, [getMainNetData, getTestNetData, selectedNetKey]);
 
   useCountdownTimer({
     callback: async () => {
@@ -191,8 +194,8 @@ export const Net = () => {
   }, [getData]);
 
   const currentNetData = useMemo(() => {
-    return selectedNetKey === XoneChainId.MAIN_NET ? mainNetData : testNetData
-  }, [mainNetData, testNetData, selectedNetKey])
+    return selectedNetKey === XoneChainId.MAIN_NET ? mainNetData : testNetData;
+  }, [mainNetData, testNetData, selectedNetKey]);
 
   const datas = useMemo(() => {
     return [
@@ -247,7 +250,13 @@ export const Net = () => {
         ),
       },
     ];
-  }, [t, currentNetData?.latestBlock, currentNetData?.gasFee, currentNetData?.blockTime, currentNetData?.epoch]);
+  }, [
+    t,
+    currentNetData?.latestBlock,
+    currentNetData?.gasFee,
+    currentNetData?.blockTime,
+    currentNetData?.epoch,
+  ]);
 
   const links = useMemo(() => {
     return [
@@ -258,7 +267,7 @@ export const Net = () => {
           const href =
             selectedNetKey === XoneChainId.MAIN_NET
               ? "https://xonescan.com/"
-              : "https://testnet.xscscan.com/";
+              : "https://testnet.xonescan.com/";
           window.open(href, "_blank");
         },
       },
@@ -297,7 +306,7 @@ export const Net = () => {
         icon: <FolderIcon></FolderIcon>,
         title: t("developer:linkTitle3"),
         onClick: () => {
-          window.open("https://docs.xone.org/developers/rpc", "_blank");
+          window.open("https://docs.xone.org/openapi/overview", "_blank");
         },
       },
     ];
@@ -311,8 +320,9 @@ export const Net = () => {
             return (
               <div
                 key={item.key}
-                className={`${styles.navItem} ${selectedNetKey === item.key ? styles.selectedNav : ""
-                  }`}
+                className={`${styles.navItem} ${
+                  selectedNetKey === item.key ? styles.selectedNav : ""
+                }`}
                 onClick={() => setSelectedNetKey(item.key)}
               >
                 {t(item.name)}

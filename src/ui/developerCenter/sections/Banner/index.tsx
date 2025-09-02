@@ -22,7 +22,9 @@ export const Banner = () => {
         <div className={styles.box}>
           <Animation animationClassName={AnimationType.SLIDE_IN_UP} delay={0.1}>
             <Title className={`${styles.slogon}`}>
-              {t("developer:bannerTitle")}
+              <span
+                dangerouslySetInnerHTML={{ __html: t("developer:bannerTitle") }}
+              ></span>
             </Title>
           </Animation>
           <Animation animationClassName={AnimationType.SLIDE_IN_UP} delay={0.3}>

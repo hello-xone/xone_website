@@ -19,24 +19,23 @@ const HelloXone = () => {
         id: 1,
         title: t("home:hellowXoneTitle1"),
         description: t("home:hellowXoneDesc1"),
-        linkText: t("home:hellowXoneLinkText"),
-        url: EXTERNAL_LINKS.docs + "developers/ready",
+        linkText: t("home:hellowXoneLinkText5"),
+        url: EXTERNAL_LINKS.docs + "developers/operators/practices",
         imagePosition: "left", // 图片在左侧
       },
       {
         id: 2,
         title: t("home:hellowXoneTitle2"),
         description: t("home:hellowXoneDesc2"),
-        linkText: t("home:hellowXoneLinkText"),
-        url: EXTERNAL_LINKS.docs + "developers/operators/practices",
+        linkText: t("home:hellowXoneLinkText4"),
         imagePosition: "right", // 图片在右侧
       },
       {
         id: 3,
         title: t("home:hellowXoneTitle3"),
         description: t("home:hellowXoneDesc3"),
-        linkText: t("home:hellowXoneLinkText"),
-        url: EXTERNAL_LINKS.docs + "bvi/identity",
+        linkText: t("home:hellowXoneLinkText3"),
+        url: EXTERNAL_LINKS.docs + "developers/tools",
         imagePosition: "left", // 图片在左侧
       },
     ];
@@ -47,9 +46,13 @@ const HelloXone = () => {
       <img
         alt=""
         src={BgIcon2}
-        className="max-md:hidden absolute right-0"
+        className="absolute right-0 max-md:hidden"
       ></img>
-      <img alt="" src={BgIcon3} className="max-md:hidden absolute mt-[30%] left-0"></img>
+      <img
+        alt=""
+        src={BgIcon3}
+        className="max-md:hidden absolute mt-[30%] left-0"
+      ></img>
 
       <div className={`${styles.header} ${AnimationName.SLIDE_IN_BOTTOM}`}>
         <Title className={styles.headerTitle}>
@@ -59,9 +62,13 @@ const HelloXone = () => {
           className={` ${styles.headerDescription} ${AnimationName.SLIDE_IN_BOTTOM}`}
         >
           {t("home:hellowXoneDesc")}
-          <SeeMore href="" className="inline-block" text={t("home:seeMore")}></SeeMore>
+          <SeeMore
+            href={EXTERNAL_LINKS.docs + "developers/guide"}
+            target="_blank"
+            className={`${styles.btn} ${styles.seeMoreBtn}`}
+            text={t("home:hellowXoneLinkText2")}
+          ></SeeMore>
         </p>
-
       </div>
       <div className={styles.content}>
         {operations.map((operation) => (
@@ -81,7 +88,8 @@ const HelloXone = () => {
                   </p>
                   <SeeMore
                     className={styles.btn}
-                    href={operation.url}
+                    href={operation.url ?? ""}
+                    disabled={!operation.url}
                     text={operation.linkText}
                     target="_blank"
                   ></SeeMore>
@@ -98,7 +106,8 @@ const HelloXone = () => {
                   </p>
                   <SeeMore
                     className={styles.btn}
-                    href={operation.url}
+                    href={operation.url ?? ""}
+                    disabled={!operation.url}
                     text={operation.linkText}
                     target="_blank"
                   ></SeeMore>
