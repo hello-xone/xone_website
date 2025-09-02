@@ -68,4 +68,8 @@ export interface ChartRes {
   total_nfts: number
   total_tokens: number
   average_txn_fee24h: number
+  market_cap: number
+  current_price: number
+  transaction_amounts_today: number
+  transactions_today: number
 }
