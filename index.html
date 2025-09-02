@@ -46,10 +46,10 @@
 </head>
 
 <body>
-  <div id="loading-container">
+  <!-- <div id="loading-container">
     <canvas width="120px" height="120px" id="__loading"></canvas>
     <div id="__loading-progress"></div>
-  </div>
+  </div> -->
   <div id="root"></div>
   <script src="https://cdn.jsdelivr.net/npm/libpag@4.2.84/lib/libpag.min.js"></script>
   <script>
@@ -69,14 +69,11 @@
     let timer2 = 0;
     let pagView = null;
     let windowLoaded = false;
-    const loadingContainer = document.getElementById("loading-container");
-    const progressContainer = document.getElementById("__loading-progress");
 
     const finish = () => {
       if (pagView) {
         pagView?.destroy();
       }
-      loadingContainer.parentNode.removeChild(loadingContainer);
       window.__loaded = true;
       window.dispatchEvent(
         new CustomEvent("__loaded", {
