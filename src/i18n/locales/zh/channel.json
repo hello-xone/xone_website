@@ -20,5 +20,12 @@
   "safetyTip2Title": "输入信息",
   "safetyTip2Desc": "填入类型的 URL、ID 等唯一标识。",
   "safetyTip3Title": "验证反馈",
-  "safetyTip3Desc": "当提交的信息没有被我们记录，我们建议您立即终止与对方进行任何交互。"
+  "safetyTip3Desc": "当提交的信息没有被我们记录，我们建议您立即终止与对方进行任何交互。",
+  "dialog": {
+    "verified": "已验证",
+    "unverified": "未验证",
+    "verifiedMessage": "此信息已被查验！",
+    "unverifiedMessage": "此信息未被收录，请注意！",
+    "confirmButton": "确定"
+  }
 }

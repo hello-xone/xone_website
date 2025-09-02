@@ -1,7 +1,14 @@
-import { Input } from "@headlessui/react";
+import {
+  Description,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Input,
+} from "@headlessui/react";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Api_Verification } from "@/api/verification";
 import CloseIcon from "@/assets/svg/recruitment/close.svg?react";
 import SearchIcon from "@/assets/svg/recruitment/search-solid.svg?react";
 import CommonButton from "@/components/comm/button/CommonButton";
@@ -12,6 +19,13 @@ const Channel = () => {
   const { t } = useTranslation();
   const [selectedPlatform, setSelectedPlatform] = useState("website");
   const [searchValue, setSearchValue] = useState("");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [verifiedInfo, setVerifiedInfo] = useState({
+    title: "",
+    message: "",
+    verified: false,
+  });
+  const [isLoading, setIsLoading] = useState(false);
 
   const { lg } = useTailwindBreakpoint();
 
@@ -28,19 +42,28 @@ const Channel = () => {
     { value: "reddit", label: t("channel:reddit") },
   ];
 
-  const handleSearch = () => {
-    if (!searchValue.trim()) {
+  const handleSearch = async () => {
+    if (!searchValue.trim() || isLoading) {
       return;
     }
-
-    // TODO: 实现验证逻辑
-    console.log("验证查询:", {
-      platform: selectedPlatform,
+    setIsLoading(true);
+    const { data } = await Api_Verification.verify({
+      category: selectedPlatform,
       value: searchValue,
+    }).finally(() => {
+      setIsLoading(false);
     });
-
-    // 这里可以调用API进行验证
-    // 显示验证结果
+    const verified = data.verified;
+    setIsDialogOpen(true);
+    setVerifiedInfo({
+      title: verified
+        ? t("channel:dialog.verified")
+        : t("channel:dialog.unverified"),
+      message: verified
+        ? t("channel:dialog.verifiedMessage")
+        : t("channel:dialog.unverifiedMessage"),
+      verified,
+    });
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
@@ -51,6 +74,18 @@ const Channel = () => {
 
   const handleClearSearch = () => {
     setSearchValue("");
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    const n = setTimeout(() => {
+      setVerifiedInfo({
+        title: "",
+        message: "",
+        verified: false,
+      });
+      clearTimeout(n);
+    }, 1000);
   };
 
   return (
@@ -77,12 +112,12 @@ const Channel = () => {
         className={`flex ${lg ? "flex-row" : "flex-col"} gap-12 justify-center ${lg ? "mt-8" : "mt-4"} ${lg ? "h-12" : "100%"}`}
       >
         <div
-          className={`${lg ? "min-w-[150px]" : "w-full"} ${lg ? "" : "min-h-[40px] h-[40px] font-medium"} bg-[var(--b3)] rounded-[8px] text-[var(--t1)] text-[14px]`}
+          className={`${lg ? "min-w-[150px]" : "w-full"} ${lg ? "":"min-h-[40px] h-[40px] font-medium"} bg-[var(--b3)] rounded-[8px] text-[var(--t1)] text-[14px]`}
         >
           <SearchInputSelect
             options={platforms}
             defaultValue={platforms[0].value}
-            onSelect={(value, option) => console.log(value, option)}
+            onSelect={(value) => setSelectedPlatform(value)}
             placeholder={t("channel:selectPlaceholder")}
           />
         </div>
@@ -107,11 +142,79 @@ const Channel = () => {
         <CommonButton
           onClick={handleSearch}
           type="primary"
-          className={`rounded-[8px] text-[18px] ${lg ? null : "min-w-[100%]"} ${lg ? null : "h-[40px]"}`}
+          className={`rounded-[8px] text-[18px] ${lg ? null : "min-w-[100%]"} ${lg ? null : "h-[40px]"} ${isLoading ? "cursor-not-allowed" : ""}`}
         >
           {t("channel:verificationButton")}
         </CommonButton>
       </div>
+
+      <Dialog
+        open={isDialogOpen}
+        onClose={handleCloseDialog}
+        transition
+        className="flex fixed inset-0 z-50 justify-center items-center p-4 w-screen backdrop-blur-sm transition duration-300 ease-out bg-black/50 data-closed:opacity-0"
+      >
+        <DialogPanel className="relative p-8 mx-4 space-y-6 w-full max-w-md rounded-2xl border shadow-2xl transition-all duration-300 ease-out transform bg-b1 border-border1 data-closed:scale-95 data-closed:opacity-0">
+          <button
+            onClick={handleCloseDialog}
+            className="absolute top-4 right-4 p-2 rounded-full transition-all duration-200 text-t3 hover:text-t1 hover:bg-b3 active:scale-95"
+          >
+            <CloseIcon className="w-5 h-5" />
+          </button>
+
+          <div className="flex justify-center">
+            <div
+              className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
+                verifiedInfo.verified
+                  ? "bg-t10/10 border-2 border-[var(--t10)]"
+                  : "bg-t8/10 border-2 border-[var(--t8)]"
+              }`}
+            >
+              {verifiedInfo.verified ? (
+                <svg
+                  className="w-8 h-8 text-t10"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2.5}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="w-8 h-8 text-t8"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2.5}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              )}
+            </div>
+          </div>
+
+          <DialogTitle
+            className={`text-center text-xl font-bold transition-colors duration-300 ${
+              verifiedInfo.verified ? "text-t10" : "text-t8"
+            }`}
+          >
+            {verifiedInfo.title}
+          </DialogTitle>
+
+          <Description className="text-base leading-relaxed text-center text-t2">
+            {verifiedInfo.message}
+          </Description>
+        </DialogPanel>
+      </Dialog>
     </div>
   );
 };
