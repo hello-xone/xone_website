@@ -297,7 +297,8 @@ const Footer = () => {
         </div>
 
       </div>
-      {JSON.stringify(import.meta.env)}
+      a:{JSON.stringify(import.meta.env)}
+      b:{JSON.stringify(process.env)}
 
     </div>
   );
