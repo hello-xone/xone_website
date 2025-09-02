@@ -30,6 +30,7 @@ interface MenuModel {
     title: string;
     icon?: any;
     menuId?: InfoMenuId;
+    link?: string;
     description: string;
     links?: Array<NavigationLink>;
   }>;
@@ -404,6 +405,7 @@ export const menus: Array<MenuModel> = [
         id: "global_business",
         title: "navGlobalBusiness",
         icon: BusinessIcon,
+        link: "/commercial",
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalBusinessDesc",
       },
@@ -411,6 +413,7 @@ export const menus: Array<MenuModel> = [
         id: "global_recruitment",
         title: "navGlobalRecruitment",
         icon: BusinessIcon,
+        link: "/recruitment",
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalRecruitmentDesc",
       },
@@ -418,6 +421,7 @@ export const menus: Array<MenuModel> = [
         id: "global_blog",
         title: "navGlobalBlog",
         icon: BusinessIcon,
+        link: EXTERNAL_LINKS.docs + "blog",
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalBlogDesc",
       },
@@ -425,6 +429,7 @@ export const menus: Array<MenuModel> = [
         id: "global_active",
         title: "navGlobalActive",
         icon: BusinessIcon,
+        link: EXTERNAL_LINKS.Events,
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalActiveDesc",
       },
@@ -432,6 +437,7 @@ export const menus: Array<MenuModel> = [
         id: "global_grants",
         title: "navGlobalGrants",
         icon: BusinessIcon,
+        link: "/grants",
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalGrantsDesc",
       },

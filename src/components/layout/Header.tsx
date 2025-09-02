@@ -64,6 +64,15 @@ const Header = () => {
     return null;
   }, [event, detailId]);
 
+
+  const group = useMemo(() => {
+    if (detailId) {
+      const groups = menus.find((item) => item.id === "global")?.group;
+      if (groups) {
+        return groups.find((item) => item.id === detailId);
+      }
+    }
+  }, [detailId])
   return (
     <div className={clsx(`w-screen fixed backdrop-blur-[5px] z-[10] top-0 left-0 h-[58px] md:h-[64px] px-4 md:px-[30px] flex items-center justify-between`, {
       'bg-[#ffffff]/50': isLight,
@@ -130,12 +139,14 @@ const Header = () => {
                             {!globalDetail && (
                               <div className="mt-3 text-t2 text-sm leading-[140%]">{`一切工作都是为了帮助 Xone 更好的服务全球企业、组织以及个人。因此，在任何领域，只要你有想法并愿意为此贡献你的独到想法！我们相信，在 Xone 的成长之路上，将无畏即将面对的无数挑战。`}</div>
                             )}
-                            <SeeMore
-                              href=""
-                              text={t("home:seeMore")}
-                              className="mt-3"
-                              textClassName="!text-[14px] text-t2"
-                            ></SeeMore>
+                            {
+                              group && group.link && <SeeMore
+                                href={group.link}
+                                text={t("home:seeMore")}
+                                className="mt-3"
+                                textClassName="!text-[14px] text-t2"
+                              ></SeeMore>
+                            }
                           </div>
                         </div>
                       ) : (
@@ -196,11 +207,11 @@ const Header = () => {
       </div>
       <div className="flex items-center gap-[12px] md:gap-[24px]">
         <CommonButton type="outline">
-          Ask AI
+          {t("askAI")}
           <AiStar className="text-t1 w-4 h-4 md:w-6 md:h-6"></AiStar>
         </CommonButton>
         <CommonButton onClick={() => window.open(EXTERNAL_LINKS.MainExplorer)}>
-          Explore Xone
+          {t("exploreXone")}
         </CommonButton>
         <MenuPopover></MenuPopover>
         <div className="hidden md:flex items-center gap-[16px]">
