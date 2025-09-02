@@ -279,7 +279,7 @@ const MarketChart = React.memo(({ chartData }: { chartData: ChartRes | null }) =
                 className={"max-md:h-[364px] max-md:min-h-[364px]"}
             >
                 <AreaChart
-                    data={data}
+                    data={data.reverse()}
                     syncId="anyId"
                     height={364}
                     margin={{
