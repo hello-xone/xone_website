@@ -297,6 +297,8 @@ const Footer = () => {
         </div>
 
       </div>
+      {JSON.stringify(import.meta.env)}
+
     </div>
   );
 };

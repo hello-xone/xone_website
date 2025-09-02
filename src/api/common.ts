@@ -52,8 +52,6 @@ export const fetchStatsByNet = async (isTestNet?: boolean) => {
 };
 
 export const fetchChart = async () => {
-  console.log(import.meta.env.VITE_APP_BASE_URL, "import.meta.env.VITE_APP_BASE_URL")
-  console.log(import.meta, "import.meta.env.VITE_APP_BASE_URL")
   const res = await request.get("/api/v2/chart");
   return res.data as ChartRes;
 };
