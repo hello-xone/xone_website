@@ -144,11 +144,7 @@ const Footer = () => {
           {
             name: "Github",
             url: EXTERNAL_LINKS.Github,
-          },
-          {
-            name: t("header:navGlobalGrants"),
-            url: "/grants",
-          },
+          }
         ],
       },
       {
@@ -183,13 +179,17 @@ const Footer = () => {
             url: '/events',
           },
           {
-            name: t("common:knightProject"),
-            url: "",
+            name: t("common:recruitment"),
+            url: "/recruitment",
             isLater: true,
           },
           {
-            name: t("common:recruitment"),
-            url: "/recruitment",
+            name: t("header:navGlobalGrants"),
+            url: "/grants",
+          },
+          {
+            name: t("common:knightProject"),
+            url: "",
             isLater: true,
           },
         ],
@@ -262,8 +262,8 @@ const Footer = () => {
         </div>
 
         <div className="mt-10 text-xs leading-[140%] text-t3">
-          {t("disclaimerTitle")}<br></br>
-          {t("disclaimer")}
+          {t("header:disclaimerTitle")}<br></br>
+          {t("header:disclaimer")}
         </div>
 
         <div className="flex md:hidden mt-10 items-center justify-end">
