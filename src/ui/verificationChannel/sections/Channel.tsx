@@ -92,7 +92,7 @@ const Channel = () => {
     <div className={`mt-3 ${lg ? "mb-40 h-96" : null}`}>
       <div className={`${lg ? "pt-28" : "pt-4"}`}>
         <div
-          className={`font-black text-center text-[${lg ? "48px" : "32px"}] color-[--t1] ${lg ? "text-[48px]" : "text-[24px]"}`}
+          className={`font-bold text-center text-[${lg ? "48px" : "32px"}] color-[--t1] ${lg ? "text-[48px]" : "text-[24px]"}`}
         >
           {t("channel:title")}
         </div>
@@ -112,13 +112,14 @@ const Channel = () => {
         className={`flex ${lg ? "flex-row" : "flex-col"} gap-12 justify-center ${lg ? "mt-8" : "mt-4"} ${lg ? "h-12" : "100%"}`}
       >
         <div
-          className={`${lg ? "min-w-[150px]" : "w-full"} ${lg ? "":"min-h-[40px] h-[40px] font-medium"} bg-[var(--b3)] rounded-[8px] text-[var(--t1)] text-[14px]`}
+          className={`${lg ? "min-w-[150px]" : "w-full"} ${lg ? "" : "min-h-[40px] h-[40px] font-medium"} bg-[var(--b3)] rounded-[8px] text-[var(--t1)] text-[14px]`}
         >
           <SearchInputSelect
             options={platforms}
             defaultValue={platforms[0].value}
             onSelect={(value) => setSelectedPlatform(value)}
             placeholder={t("channel:selectPlaceholder")}
+            maxOpentions={4}
           />
         </div>
 

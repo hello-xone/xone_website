@@ -25,6 +25,7 @@ interface Props {
   placeholder?: string;
   onSelect?: (value: string, option: BaseOption | GroupOption) => void;
   defaultValue?: string;
+  maxOpentions?: number | null;
 }
 
 export const SearchInputSelect = ({
@@ -32,6 +33,7 @@ export const SearchInputSelect = ({
   placeholder,
   onSelect,
   defaultValue = "all",
+  maxOpentions = null,
 }: Props) => {
   const { t } = useTranslation();
 
@@ -135,6 +137,65 @@ export const SearchInputSelect = ({
       .filter(Boolean);
   };
 
+  // 计算选项数量
+  const getOptionCount = () => {
+    const filteredOptions = getFilteredOptions();
+    let count = 0;
+
+    for (const option of filteredOptions) {
+      if (option && "group" in option) {
+        // 分组选项：计算分组标题 + 子选项数量
+        count += 1 + option.options.length;
+      } else if (option) {
+        // 基础选项
+        count += 1;
+      }
+    }
+
+    return count;
+  };
+
+  // 动态获取元素高度
+  const getElementHeight = (element: HTMLElement | null): number => {
+    if (!element) return 0;
+    const rect = element.getBoundingClientRect();
+    return rect.height;
+  };
+
+  // 计算动态最大高度样式
+  const getMaxHeightStyle = () => {
+    if (maxOpentions === null || maxOpentions <= 0) {
+      return {
+        maxHeight: "300px",
+        "@media (min-width: 768px)": {
+          maxHeight: "500px",
+        },
+      };
+    }
+
+    const optionCount = getOptionCount();
+    if (optionCount <= maxOpentions) {
+      return {
+        maxHeight: "300px",
+        "@media (min-width: 768px)": {
+          maxHeight: "500px",
+        },
+      };
+    }
+
+    const firstOptionElement = dropdownRef.current?.querySelector(
+      ".option-item-select"
+    ) as HTMLElement;
+
+    const optionHeight = getElementHeight(firstOptionElement) || 40;
+
+    const maxHeight = maxOpentions * optionHeight;
+
+    return {
+      maxHeight: `${Math.min(maxHeight, 500)}px`,
+    };
+  };
+
   // 渲染选项
   const renderOption = (option: BaseOption | GroupOption, index: number) => {
     if ("group" in option) {
@@ -188,7 +249,7 @@ export const SearchInputSelect = ({
         <div
           key={option.value}
           className={clsx(
-            "relative cursor-pointer rounded-[6px] text-[13px] select-none py-[8px] px-[13px] transition-colors duration-200",
+            "option-item-select relative cursor-pointer rounded-[6px] text-[13px] select-none py-[8px] px-[13px] transition-colors duration-200",
             option.value === selected
               ? isLight
                 ? "bg-[var(--b3)]"
@@ -223,9 +284,9 @@ export const SearchInputSelect = ({
         </span>
       </button>
       {isOpen && (
-        <div className="absolute z-10 mt-2 md:mt-3 w-full overflow-hidden rounded-[8px] bg-[var(--b9)] p-2 md:p-[10px] text-base shadow-[0px_0px_10px_0px_#00000014]">
+        <div className="dropdown-container absolute z-10 mt-2 md:mt-3 w-full overflow-hidden rounded-[8px] bg-[var(--b9)] p-2 md:p-[10px] text-base shadow-[0px_0px_10px_0px_#00000014]">
           {/* 搜索框 */}
-          <div className="sticky top-0 mb-2 md:mb-[10px] rounded-[8px] h-8 md:h-[32px] px-2 md:px-[10px] py-2 md:py-[16px] border-[var(--b3)] flex items-center border-solid border">
+          <div className="search-box sticky top-0 mb-2 md:mb-[10px] rounded-[8px] h-8 md:h-[32px] px-2 md:px-[10px] py-2 md:py-[16px] border-[var(--b3)] flex items-center border-solid border">
             <SearchIcon className="w-4 h-4 md:w-5 md:h-5" />
             <input
               type="text"
@@ -237,7 +298,10 @@ export const SearchInputSelect = ({
           </div>
 
           {/* 选项列表 */}
-          <div className="max-h-[300px] md:max-h-[500px] overflow-y-auto custom-select-scrollbar">
+          <div
+            className="overflow-y-auto custom-select-scrollbar"
+            style={getMaxHeightStyle()}
+          >
             {getFilteredOptions().map(
               (option, index) => option && renderOption(option, index)
             )}

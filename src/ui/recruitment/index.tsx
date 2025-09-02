@@ -362,6 +362,7 @@ export const Recruitment = () => {
           <SearchInputSelect
             options={selectPositions}
             placeholder={t("recruitment:selectPosition")}
+            maxOpentions={5}
             onSelect={(value, option) =>
               handleSelectChange("position", value, option)
             }

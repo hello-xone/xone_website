@@ -52,14 +52,14 @@ const SafetyTips = () => {
             <div className="flex flex-col items-center">
               <img
                 src={tip.image}
-                className="w-[54px] h-[54px]"
+                className="w-[160px] h-[160px]"
                 alt={tip.alt}
               />
               <h5 className="font-black text-center text-[24px] text-[var(--t1)] mt-[16px] md:mt-[20px]">
                 {tip.title}
               </h5>
             </div>
-            <p className="text-center text-[16px] text-[var(--t2)] mt-[15px] leading-[1.5] flex-1 flex items-start">
+            <p className="text-center text-[16px] text-[var(--t2)] mt-[12px] leading-[1.5] flex-1 flex items-start">
               {tip.desc}
             </p>
           </div>
