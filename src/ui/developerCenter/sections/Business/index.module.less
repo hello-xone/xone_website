@@ -134,6 +134,38 @@
   font-weight: 500;
 }
 
+
+.navWrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-behavior: smooth;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  padding-bottom: 4px;
+
+  // Webkit 浏览器滚动条样式
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--b4);
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+
+  // Firefox 滚动条样式
+  scrollbar-width: thin;
+  scrollbar-color: var(--b4) transparent;
+}
+
 @media (max-width: 1200px) {
   .wrapper {
     margin-top: 80px;
@@ -162,23 +194,6 @@
 
   .card {
     width: 100%;
-  }
-
-  .navWrapper {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    /* Firefox */
-    -ms-overflow-style: none;
-
-    /* IE and Edge */
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    scroll-behavior: smooth;
-    flex-wrap: nowrap;
-    white-space: nowrap;
   }
 
   .title {

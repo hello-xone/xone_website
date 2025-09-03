@@ -121,9 +121,9 @@ export const Grants = () => {
             list={card02List}
             isMobileTow={true}
           />
-          <div className="mt-10 w-[90px] md:block hidden mx-auto">
+          <div className="mt-10 md:block">
             <SeeMore
-              className={styles.seeMore}
+              className={`${styles.seeMore} flex justify-center`}
               href="https://docs.xone.org/study/grants"
               text={t("grants:seeAllButton")}
               target="_blank"

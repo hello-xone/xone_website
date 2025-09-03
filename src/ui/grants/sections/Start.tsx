@@ -1,12 +1,15 @@
 import { useTranslation } from "react-i18next";
 
 import StartIcon from "@/assets/imgs/home/start.png";
+import StartDarkIcon from "@/assets/imgs/home/start-dark.png";
 import { SeeMore } from "@/components/comm/link/SeeMore";
+import useApplicationStore from "@/store/applicationStore";
 
 import styles from "../index.module.less";
 
 export const Start = () => {
   const { t } = useTranslation();
+  const { isLight } = useApplicationStore();
 
   return (
     <div
@@ -14,22 +17,22 @@ export const Start = () => {
     >
       <div className="flex flex-col items-start md:w-[850px] w-full">
         <h2
-          className={`text-[var(--b5)] color-[var(--b1)] md:text-[48px] text-[24px] leading-[1.2]`}
+          className={`text-[var(--b5)] color-[var(--b1)] mb-[28px] md:text-[48px] text-[24px] leading-[1.2]`}
         >
           {t("grants:startTitle")}
         </h2>
         <p
-          className={`w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px] md:mt-[40px] mt-[16px]`}
+          className={`w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px]`}
         >
           {t("grants:startDesc")}
         </p>
         <p
-          className={`w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px] md:mt-[40px] mt-[16px]`}
+          className={`w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px]`}
         >
           {t("grants:startDesc1")}
         </p>
         <p
-          className={`w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px] md:mt-[40px] mt-[16px]`}
+          className={`w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px]`}
         >
           {t("grants:startDesc2")}
         </p>
@@ -51,7 +54,7 @@ export const Start = () => {
         </div>
       </div>
       <img
-        src={StartIcon}
+        src={isLight ? StartIcon : StartDarkIcon}
         alt="start"
         className={`block md:w-[220px] md:h-[229px] w-[88px] h-[88px]`}
       />

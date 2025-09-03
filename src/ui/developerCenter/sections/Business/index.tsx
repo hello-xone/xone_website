@@ -3,10 +3,7 @@ import i18next from "i18next";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import ArrowIcon from "@/assets/svg/home/arrow-right-line.svg?react";
-import { Button } from "@/components/comm/button";
 import { SeeMore } from "@/components/comm/link/SeeMore";
-import { BaseContainer } from "@/components/layout/BaseContainer";
 import { AnimationName, DelayClassName } from "@/hooks/useScrollreveal";
 
 import styles from "./index.module.less";
@@ -192,7 +189,7 @@ export const Business = () => {
       <div
         className={`${styles.nav} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_2}`}
       >
-        <div className={`flex flex-wrap items-center ${styles.navWrapper}`}>
+        <div className={`flex items-center ${styles.navWrapper}`}>
           {navData.map((item) => (
             <div
               key={item.tag}

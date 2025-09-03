@@ -37,7 +37,7 @@ export const List = ({ data, onMore }: { data: any; onMore: () => void }) => {
                 <h3 className="text-[var(--t1)] text-[24px] font-bold mt-[6px]">
                   {item.title}
                 </h3>
-                <div className="flex items-center mt-[8px] gap-x-[24px]">
+                <div className="flex md:items-center items-start md:flex-row flex-col mt-[6px] md:mt-[8px] gap-x-[24px] gap-y-[4px] md:gap-y-[8px]">
                   <div className="flex items-center gap-x-[6px]">
                     <PositionIcon className="w-[18px] h-[18px]" />
                     <p className="text-[var(--t2)] text-[15px] mt-[1px]">

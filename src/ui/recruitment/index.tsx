@@ -504,36 +504,45 @@ export const Recruitment = () => {
     <>
       <Banner onSearch={handleSearchChange} onClear={handleClearAll} />
       <div className="container">
-        <div className="grid grid-cols-1 gap-12 pt-8 md:grid-cols-2 lg:grid-cols-4 md:gap-6 md:pt-16">
-          <SearchInputSelect
-            options={selectProjects}
-            placeholder={t("recruitment:selectProject")}
-            onSelect={(value, option) =>
-              handleSelectChange("project", value, option)
-            }
-          />
-          <SearchInputSelect
-            options={selectPositions}
-            placeholder={t("recruitment:selectPosition")}
-            maxOpentions={5}
-            onSelect={(value, option) =>
-              handleSelectChange("position", value, option)
-            }
-          />
-          <SearchInputSelect
-            options={selectLocations}
-            placeholder={t("recruitment:selectLocation")}
-            onSelect={(value, option) =>
-              handleSelectChange("location", value, option)
-            }
-          />
-          <SearchInputSelect
-            options={selectOffice}
-            placeholder={t("recruitment:selectOffice")}
-            onSelect={(value, option) =>
-              handleSelectChange("office", value, option)
-            }
-          />
+        <div className="pt-8 md:pt-16">
+          <div className="w-full flex overflow-x-auto md:overflow-x-visible gap-[18px] md:gap-4">
+            <div className="min-w-[180px] md:min-w-[24%]">
+              <SearchInputSelect
+                options={selectProjects}
+                placeholder={t("recruitment:selectProject")}
+                onSelect={(value, option) =>
+                  handleSelectChange("project", value, option)
+                }
+              />
+            </div>
+            <div className="min-w-[180px] md:min-w-[24%]">
+              <SearchInputSelect
+                options={selectPositions}
+                placeholder={t("recruitment:selectPosition")}
+                onSelect={(value, option) =>
+                  handleSelectChange("position", value, option)
+                }
+              />
+            </div>
+            <div className="min-w-[180px] md:min-w-[24%]">
+              <SearchInputSelect
+                options={selectLocations}
+                placeholder={t("recruitment:selectLocation")}
+                onSelect={(value, option) =>
+                  handleSelectChange("location", value, option)
+                }
+              />
+            </div>
+            <div className="min-w-[180px] md:min-w-[24%]">
+              <SearchInputSelect
+                options={selectOffice}
+                placeholder={t("recruitment:selectOffice")}
+                onSelect={(value, option) =>
+                  handleSelectChange("office", value, option)
+                }
+              />
+            </div>
+          </div>
         </div>
         <List
           data={{

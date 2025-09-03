@@ -128,12 +128,12 @@ export const Detail = () => {
         <a
           href="mailto:job@xone.org"
           target="_blank"
-          className="w-[140px] block text-center mt-10 px-[20px] py-[16px] rounded-[12px] bg-[var(--t1)] text-[var(--b1)] text-[18px] font-medium hover:opacity-80 transition-opacity"
+          className="inline-block text-center mt-10 px-[20px] py-[16px] rounded-[12px] bg-[var(--t1)] text-[var(--b1)] text-[18px] font-medium hover:bg-[var(--b10)]"
         >
           {t("recruitment:detail.applyNow")}
         </a>
 
-        <div className="mt-10 mb-[120px]">
+        <div className="mt-14 mb-[120px]">
           <div className="max-w-none text-[var(--t1)]">
             <div
               dangerouslySetInnerHTML={{ __html: job.content }}
