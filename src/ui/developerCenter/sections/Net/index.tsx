@@ -138,6 +138,7 @@ export const Net = () => {
       await getData();
     },
     countdown: 5,
+    dependency: [selectedNetKey],
   });
 
   useEffect(() => {

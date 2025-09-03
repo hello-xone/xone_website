@@ -5,7 +5,7 @@ import {
   DialogTitle,
   Input,
 } from "@headlessui/react";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Api_Verification } from "@/api/verification";
@@ -26,6 +26,7 @@ const Channel = () => {
     verified: false,
   });
   const [isLoading, setIsLoading] = useState(false);
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const { lg } = useTailwindBreakpoint();
 
@@ -42,29 +43,51 @@ const Channel = () => {
     { value: "reddit", label: t("channel:reddit") },
   ];
 
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     if (!searchValue.trim() || isLoading) {
       return;
     }
-    setIsLoading(true);
-    const { data } = await Api_Verification.verify({
-      category: selectedPlatform,
-      value: searchValue,
-    }).finally(() => {
-      setIsLoading(false);
-    });
-    const verified = data.verified;
-    setIsDialogOpen(true);
-    setVerifiedInfo({
-      title: verified
-        ? t("channel:dialog.verified")
-        : t("channel:dialog.unverified"),
-      message: verified
-        ? t("channel:dialog.verifiedMessage")
-        : t("channel:dialog.unverifiedMessage"),
-      verified,
-    });
-  };
+
+    // 清除之前的定时器
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+
+    // 设置防抖定时器，500ms 内只能执行一次
+    debounceTimerRef.current = setTimeout(async () => {
+      setIsLoading(true);
+      try {
+        const { data } = await Api_Verification.verify({
+          category: selectedPlatform,
+          value: searchValue,
+        });
+        const verified = data.verified;
+        setIsDialogOpen(true);
+        setVerifiedInfo({
+          title: verified
+            ? t("channel:dialog.verified")
+            : t("channel:dialog.unverified"),
+          message: verified
+            ? t("channel:dialog.verifiedMessage")
+            : t("channel:dialog.unverifiedMessage"),
+          verified,
+        });
+      } catch (error) {
+        console.error("Verification failed:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }, 200);
+  }, [searchValue, selectedPlatform, isLoading, t]);
+
+  // 清理定时器
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
