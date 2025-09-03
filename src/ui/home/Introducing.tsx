@@ -18,6 +18,7 @@ const IntroducingLeft = [
     icon: IntroducingIcon1,
     dark: IntroducingDarkIcon1,
     title: "ofInfiniteValue",
+    check: "seeMore",
     desc: "ofInfiniteValueDesc",
     link: `${EXTERNAL_LINKS.docs}study/xoc`
   },
@@ -25,6 +26,7 @@ const IntroducingLeft = [
     icon: IntroducingIcon2,
     dark: IntroducingDarkIcon2,
     title: "lowGas",
+    check: "seeMore",
     desc: "lowGasDesc",
     link: `${EXTERNAL_LINKS.docs}study/gas`
   },
@@ -32,6 +34,7 @@ const IntroducingLeft = [
     icon: IntroducingIcon3,
     dark: IntroducingDarkIcon3,
     title: "extensible",
+    check: "seeMore",
     desc: "extensibleDesc",
     link: `${EXTERNAL_LINKS.docs}study/modules`
   },
@@ -39,6 +42,7 @@ const IntroducingLeft = [
     icon: IntroducingIcon4,
     dark: IntroducingDarkIcon4,
     title: "AheadOfTheTimesPOBVI",
+    check: "seeMore",
     desc: "AheadOfTheTimesPOBVIDesc",
     link: `${EXTERNAL_LINKS.docs}bvi/readme`
   }
@@ -61,7 +65,7 @@ const Introducing = () => {
             <div className="text-[14px] md:text-[16px] text-t2 leading-[140%] md:leading-[100%]">
               {t(el.desc)}
             </div>
-            <SeeMore className="mt-[16px] md:mt-[22px]" textClassName="md:!text-[16px]" href={el.link} text="See more"></SeeMore>
+            <SeeMore className="mt-[16px] md:mt-[22px]" textClassName="md:!text-[16px]" href={el.link} text={t(el.check)}></SeeMore>
           </div>)
         }
       </div>

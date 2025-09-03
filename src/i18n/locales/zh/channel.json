@@ -1,5 +1,5 @@
 {
-  "title": "官方验证通道",
+  "title": "信任，从验证开始",
   "description": "无论是一串地址、一通来电，还是一条消息，先让我们替你确认它的真身。安心，是投资路上最好的伙伴。",
   "website": "Website",
   "email": "Email",
@@ -26,6 +26,6 @@
     "unverified": "未验证",
     "verifiedMessage": "此信息已被查验！",
     "unverifiedMessage": "此信息未被收录，请注意！",
-    "confirmButton": "确定"
+    "confirmButton": "我已知晓"
   }
 }

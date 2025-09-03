@@ -37,10 +37,10 @@ export const Start = () => {
           className={`${styles.btnWrapper} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_7}`}
         >
           <SeeMore
-            href=""
-            className={styles.disabledBtn}
-            disabled
+            href={EXTERNAL_LINKS.dashboard + i18n.language}
+            className={styles.btn}
             text={t("home:exploreBVI")}
+            target="_blank"
           ></SeeMore>
           <SeeMore
             className={styles.btn}

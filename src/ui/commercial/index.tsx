@@ -7,7 +7,7 @@ import { Title } from "@/components/comm/title";
 import { useCopy } from "@/hooks/useCopy";
 
 const businessEmail = "business@xone.org";
-const labEmail = "Lab@Xone.org";
+const labEmail = "labs@Xone.org";
 export const Commercial = () => {
   const { copy } = useCopy();
 

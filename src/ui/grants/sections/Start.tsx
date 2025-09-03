@@ -23,6 +23,16 @@ export const Start = () => {
         >
           {t("grants:startDesc")}
         </p>
+        <p
+          className={`w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px] md:mt-[40px] mt-[16px]`}
+        >
+          {t("grants:startDesc1")}
+        </p>
+        <p
+          className={`w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px] md:mt-[40px] mt-[16px]`}
+        >
+          {t("grants:startDesc2")}
+        </p>
         <div
           className={`flex justify-start w-full gap-[50px] mt-[30px] md:mt-[34px]`}
         >

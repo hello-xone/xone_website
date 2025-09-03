@@ -1,0 +1,31 @@
+{
+  "title": "신뢰는 검증에서 시작됩니다",
+  "description": "주소·통화·메시지—먼저 진위를 우리가 확인합니다. 안심은 투자 여정의 최고의 동반자입니다.",
+  "website": "웹사이트",
+  "email": "이메일",
+  "telegram": "Telegram",
+  "x": "X",
+  "youtube": "YouTube",
+  "medium": "Medium",
+  "discord": "Discord",
+  "github": "GitHub",
+  "chatme": "ChatMe",
+  "reddit": "Reddit",
+  "linkedin": "LinkedIn",
+  "searchPlaceholder": "검증할 정보를 입력",
+  "verificationButton": "검증",
+  "safetyTipsTitle": "안전 안내",
+  "safetyTip1Title": "유형 선택",
+  "safetyTip1Desc": "의심되는 유형을 선택하세요.",
+  "safetyTip2Title": "정보 입력",
+  "safetyTip2Desc": "URL, ID 등 고유 식별자를 입력하세요.",
+  "safetyTip3Title": "검증 결과",
+  "safetyTip3Desc": "기록에 없으면 즉시 모든 상호작용을 중단하세요.",
+  "dialog": {
+    "verified": "검증됨",
+    "unverified": "미검증",
+    "verifiedMessage": "이 정보는 확인되었습니다!",
+    "unverifiedMessage": "이 정보는 수록되어 있지 않습니다. 주의하세요!",
+    "confirmButton": "확인"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "title": "ความไว้วางใจเริ่มต้นที่การยืนยัน",
+  "description": "ไม่ว่าที่อยู่ สายโทร หรือข้อความ ให้เราช่วยตรวจสอบตัวจริงก่อน ความอุ่นใจคือเพื่อนที่ดีที่สุดบนเส้นทางการลงทุน",
+  "website": "เว็บไซต์",
+  "email": "อีเมล",
+  "telegram": "Telegram",
+  "x": "X",
+  "youtube": "YouTube",
+  "medium": "Medium",
+  "discord": "Discord",
+  "github": "GitHub",
+  "chatme": "ChatMe",
+  "reddit": "Reddit",
+  "linkedin": "LinkedIn",
+  "searchPlaceholder": "กรอกข้อมูลที่ต้องการยืนยัน",
+  "verificationButton": "ยืนยัน",
+  "safetyTipsTitle": "คำแนะนำด้านความปลอดภัย",
+  "safetyTip1Title": "เลือกประเภท",
+  "safetyTip1Desc": "เลือกประเภทที่คุณกังวล",
+  "safetyTip2Title": "กรอกข้อมูล",
+  "safetyTip2Desc": "ระบุ ID เฉพาะ เช่น URL หรือ ID",
+  "safetyTip3Title": "ผลการตรวจสอบ",
+  "safetyTip3Desc": "หากไม่พบในฐานข้อมูล แนะนำให้หยุดติดต่อทันที",
+  "dialog": {
+    "verified": "ยืนยันแล้ว",
+    "unverified": "ยังไม่ยืนยัน",
+    "verifiedMessage": "ข้อมูลนี้ผ่านการตรวจสอบแล้ว!",
+    "unverifiedMessage": "ไม่พบข้อมูลนี้ โปรดระมัดระวัง!",
+    "confirmButton": "รับทราบ"
+  }
+}
