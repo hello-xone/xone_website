@@ -1,8 +1,9 @@
-import { PropsWithChildren, useEffect, useState } from "react";
 import i18next from "i18next";
-import { initReactI18next } from "react-i18next/initReactI18next";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { getOptions, cookieName, LanguageType, fallbackLng } from "./settings";
+import { initReactI18next } from "react-i18next/initReactI18next";
+
+import { cookieName, fallbackLng,getOptions, LanguageType } from "./settings";
 
 export const I18nProvider = ({ children }: PropsWithChildren) => {
   const [cookies, setCookies] = useCookies([cookieName]);
