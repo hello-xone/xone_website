@@ -84,6 +84,28 @@ export const menus: Array<MenuModel> = [
         ],
       },
       {
+        id: "learning_Power",
+        title: "navLearnPower",
+        description: "navLearnPowerDesc",
+        links: [
+          {
+            id: "learning_Power_1",
+            name: "navLearnPowerItem1",
+            link: EXTERNAL_LINKS.docs + "bvi/readme",
+          },
+          {
+            id: "learning_Power_2",
+            name: "navLearnPowerItem2",
+            link: EXTERNAL_LINKS.docs + "bvi/identity",
+          },
+          {
+            id: "learning_Power_3",
+            name: "navLearnPowerItem3",
+            link: EXTERNAL_LINKS.docs + "bvi/season",
+          },
+        ],
+      },
+      {
         id: "learning_Positive",
         title: "navLearnPositive",
         description: "navLearnPositiveDesc",
@@ -123,6 +145,11 @@ export const menus: Array<MenuModel> = [
           {
             id: "learning_Resources_4",
             name: "navLearnResourceItem4",
+            link: EXTERNAL_LINKS.docs + "roadmap",
+          },
+          {
+            id: "learning_Resources_5",
+            name: "navLearnResourceItem5",
             link: "/verification-channel",
           },
         ],
@@ -246,7 +273,7 @@ export const menus: Array<MenuModel> = [
   {
     id: "Governance",
     type: NavigationType.LINK,
-    name: "headerNav5",
+    name: "headerNav3",
     group: [
       {
         id: "onboarding",
@@ -351,7 +378,7 @@ export const menus: Array<MenuModel> = [
   {
     id: "Ecology",
     type: NavigationType.LINK,
-    name: "headerNav3",
+    name: "headerNav4",
     link: "/ecology",
     group: [
       {
@@ -396,7 +423,7 @@ export const menus: Array<MenuModel> = [
   {
     id: "global",
     type: NavigationType.INFO,
-    name: "headerNav4",
+    name: "headerNav5",
     group: [
       {
         id: "global_knight",

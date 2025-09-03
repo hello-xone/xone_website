@@ -87,6 +87,28 @@ export const useNavigationData = () => {
             ],
           },
           {
+            id: "learning_Power",
+            title: t("navLearnPower"),
+            description: t("navLearnPowerDesc"),
+            links: [
+              {
+                id: "learning_Power_1",
+                name: t("navLearnPowerItem1"),
+                link: EXTERNAL_LINKS.docs + "bvi/readme",
+              },
+              {
+                id: "learning_Power_2",
+                name: t("navLearnPowerItem2"),
+                link: EXTERNAL_LINKS.docs + "bvi/identity",
+              },
+              {
+                id: "learning_Power_3",
+                name: t("navLearnPowerItem3"),
+                link: EXTERNAL_LINKS.docs + "bvi/season",
+              },
+            ],
+          },
+          {
             id: "learning_Positive",
             title: t("navLearnPositive"),
             description: t("navLearnPositiveDesc"),
