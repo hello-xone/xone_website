@@ -1,11 +1,12 @@
 import { Input } from "@headlessui/react";
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import CloseIcon from "@/assets/svg/recruitment/close.svg?react";
 import SearchIcon from "@/assets/svg/recruitment/search-solid.svg?react";
 import { Animation, AnimationType } from "@/components/comm/animation";
 import CommonButton from "@/components/comm/button/CommonButton";
+import { debounce, throttle } from "@/utils/helper";
 
 interface BannerProps {
   onSearch?: (value: string) => void;
@@ -16,24 +17,81 @@ export const Banner = ({ onSearch, onClear }: BannerProps) => {
   const { t } = useTranslation();
   const [searchValue, setSearchValue] = useState("");
 
-  // 处理搜索
-  const handleSearch = async () => {
+  // 使用 debounce 进行实时搜索，延迟 300ms
+  const debouncedSearch = useMemo(
+    () =>
+      debounce((value: string) => {
+        if (value.trim()) {
+          onSearch?.(value);
+        }
+      }, 300),
+    [onSearch]
+  );
+
+  // 使用 throttle 限制搜索按钮点击频率，间隔 500ms
+  const throttledSearch = useMemo(
+    () =>
+      throttle((value: string) => {
+        if (value.trim()) {
+          onSearch?.(value);
+        }
+      }, 500),
+    [onSearch]
+  );
+
+  // 处理输入变化 - 实时搜索
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setSearchValue(value);
+
+      // 如果输入框为空，立即清空搜索结果
+      if (!value.trim()) {
+        onClear?.();
+      } else {
+        // 使用 debounce 进行实时搜索
+        debouncedSearch(value);
+      }
+    },
+    [debouncedSearch, onClear]
+  );
+
+  // 处理搜索按钮点击
+  const handleSearch = useCallback(async () => {
     if (!searchValue.trim()) {
       return;
     }
 
     try {
-      onSearch?.(searchValue);
+      // 使用 throttle 限制搜索频率
+      throttledSearch(searchValue);
     } catch (error) {
       console.error("搜索失败:", error);
     }
-  };
+  }, [searchValue, throttledSearch]);
 
   // 处理清空搜索
-  const handleClearSearch = () => {
+  const handleClearSearch = useCallback(() => {
     setSearchValue("");
     onClear?.();
-  };
+  }, [onClear]);
+
+  // 处理回车键搜索
+  const handleKeyPress = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    },
+    [handleSearch]
+  );
+
+  // 组件卸载时清理 debounce
+  useEffect(() => {
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [debouncedSearch]);
 
   return (
     <div className="md:h-[90vh]">
@@ -57,7 +115,8 @@ export const Banner = ({ onSearch, onClear }: BannerProps) => {
                 <SearchIcon className="w-[20px] h-[20px] text-[#A0A3A7] group-focus-within:text-[var(--t1)] transition-colors duration-100" />
                 <Input
                   value={searchValue}
-                  onChange={(e) => setSearchValue(e.target.value)}
+                  onChange={handleInputChange}
+                  onKeyPress={handleKeyPress}
                   placeholder={t("recruitment:bannerSearchPlaceholder")}
                   className="block w-full h-[38px] text-[14px] md:text-[100%] ml-[5px] rounded-lg border-none bg-[transparent] text-[var(--t1)] placeholder:text-[var(--t3)] focus:outline-none focus:ring-0"
                 />

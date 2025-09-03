@@ -49,6 +49,39 @@ export function throttle<T extends (...args: any[]) => any>(
   return throttled;
 }
 
+/**
+ * 防抖函数
+ * @param func 要防抖的函数
+ * @param wait 等待时间（毫秒）
+ * @returns 防抖后的函数
+ */
+export function debounce<T extends (...args: any[]) => any>(
+  func: T,
+  wait: number
+): ((...args: Parameters<T>) => void) & { cancel: () => void } {
+  let timeout: number | null = null;
+
+  const debounced = (...args: Parameters<T>) => {
+    if (timeout !== null) {
+      clearTimeout(timeout);
+    }
+    timeout = window.setTimeout(() => {
+      func(...args);
+      timeout = null;
+    }, wait);
+  };
+
+  // 添加 cancel 方法
+  debounced.cancel = () => {
+    if (timeout !== null) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+
+  return debounced;
+}
+
 // 获取本地文件的url
 export const getLocalFileUrl = (file: File) => {
   return new Promise<string>((res, rej) => {

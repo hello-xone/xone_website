@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2025/8/30 15:57:41",
+  "generatedAt": "2025/9/3 13:39:26",
   "totalCount": 3,
   "sourceDirectory": "src/assets/job",
   "jobPosts": [
     {
       "id": "product-manager-blockchain",
       "title": "Product Manager - Blockchain Direction",
-      "logo": "/src/assets/imgs/header/logo-red.png",
+      "logo": "/job/logo-red.png",
       "position": "Product Manager",
       "subType": [
         "Blockchain Direction"
@@ -26,7 +26,7 @@
     {
       "id": "leading-web3",
       "title": "Senior Frontend Developer - Web3",
-      "logo": "/src/assets/imgs/header/logo-red.png",
+      "logo": "/job/logo-red.png",
       "position": "Senior Frontend Developer",
       "subType": [
         "React",
@@ -50,7 +50,7 @@
     {
       "id": "senior-backend-engineer",
       "title": "Senior Backend Engineer - Web3 Infrastructure",
-      "logo": "/src/assets/imgs/header/logo-red.png",
+      "logo": "/job/logo-red.png",
       "position": "Senior Backend Engineer",
       "subType": [
         "Node.js",

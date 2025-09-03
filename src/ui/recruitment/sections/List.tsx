@@ -51,15 +51,20 @@ export const List = ({ data, onMore }: { data: any; onMore: () => void }) => {
                     </p>
                   </div>
                 </div>
-                <div
-                  className={clsx(
-                    "h-[32px] flex items-center justify-center mt-[14px] px-[8px] py-[5px] rounded-[8px] font-normal text-[12px] w-fit",
-                    "text-[var(--primary)]",
-                    isLight ? "bg-[#FFE7E6]" : "bg-[#201010]",
-                    isLight ? "text-[#FF4D4F]" : "text-[#D90021]"
-                  )}
-                >
-                  {item.workType.join("、")}
+                <div className="flex items-center gap-x-[8px] mt-[14px]">
+                  {item.workType.map((type: string, index: number) => (
+                    <div
+                      key={index}
+                      className={clsx(
+                        "h-[32px] flex items-center justify-center px-[8px] py-[5px] rounded-[8px] font-normal text-[12px] w-fit",
+                        "text-[var(--primary)]",
+                        isLight ? "bg-[#FFE7E6]" : "bg-[#201010]",
+                        isLight ? "text-[#FF4D4F]" : "text-[#D90021]"
+                      )}
+                    >
+                      {type}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
