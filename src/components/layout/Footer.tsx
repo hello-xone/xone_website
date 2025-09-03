@@ -297,7 +297,7 @@ const Footer = () => {
         <div className="mt-3 md:mt-10 py-4 max-md:pt-[21px] border-t-[1px] border-solid border-[--border3] text-t3 flex justify-between items-center">
           <div className="flex items-center text-xs max-md:justify-between max-md:w-full">
             <div className="leading-[14px]">
-              © {dayjs().format("YYYY")} Xone Foundation
+              © {dayjs().format("YYYY")} {t("common:copyright")}
             </div>
             <div className="pl-4 ml-4 border-l-[1px] border-t3 leading-[14px] flex items-center">
               <Link to={EXTERNAL_LINKS.docs + "study/privacy"} target="_blank">{t("header:privacy")}</Link>
