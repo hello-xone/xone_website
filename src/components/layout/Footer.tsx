@@ -265,10 +265,10 @@ const Footer = () => {
           }
 
           <div className="w-full md:w-[386px]">
-            <div className="font-bold mb-4 text-t1">{t("subscribe")}</div>
+            <div className="font-bold mb-4 text-t1">{t("header:subscribe")}</div>
             <div className="text-sm text-t2 mb-4">{t("header:subscribeDesc")}</div>
             <div className="flex border-[1px] border-transparent hover:border-[1px] hover:border-t1 rounded-[8px] p-1 box-content bg-b3">
-              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="flex-1 h-[40px] outline-none bg-transparent placeholder:text-t4 text-sm px-[20px] rounded-[8px]" placeholder="Enter email address"></input>
+              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="flex-1 h-[40px] outline-none bg-transparent placeholder:text-t4 text-sm px-[20px] rounded-[8px]" placeholder={t("common:enterEmail")}></input>
               <CommonButton onClick={() => {
                 if (email && isEmail(email)) {
                   handleSubmit()
