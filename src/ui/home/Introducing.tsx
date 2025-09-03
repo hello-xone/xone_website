@@ -53,7 +53,7 @@ const Introducing = () => {
 
   return (
     <div className="py-[40px] md:py-[80px] flex max-md:flex-col-reverse justify-between mt-[40px] md:mt-[80px]">
-      <div className="w-screen absolute left-0 mt-[-40px] md:mt-[-80px] h-[1px] bg-[--border5]"></div>
+      <div className="w-screen max-md:hidden absolute left-0 mt-[-40px] md:mt-[-80px] h-[1px] bg-[--border5]"></div>
       <img alt="" src={BgIcon} className="max-md:hidden absolute right-0 ml-[5px] mt-[-6%]"></img>
       <div className="w-full md:w-[61%] shrink-0 grid grid-cols-1 md:grid-cols-2 gap-[32px] md:gap-[54px]">
         {
@@ -69,7 +69,9 @@ const Introducing = () => {
           </div>)
         }
       </div>
+
       <div className="w-full md:w-[32.7%] shrink-0 max-md:mb-[32px]">
+        <div className="w-screen md:hidden absolute left-0 mt-[-40px] md:mt-[-80px] h-[1px] bg-[--border5]"></div>
         <div className="font-bold text-[24px] md:text-[48px] leading-[120%] mb-4 md:mb-5">{t("introducingTitle")}</div>
         <div className="text-t2 leading-[140%]">{t("introducingDesc")}</div>
       </div>

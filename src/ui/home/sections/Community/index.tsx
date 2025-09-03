@@ -49,7 +49,7 @@ interface LayoutItem {
   id: string;
   type: ColumnType;
   children: (Card1 | Card2)[];
-  columnCount: number; // 新增：竖列数量配置
+  columnCount?: number; // 新增：竖列数量配置
 }
 
 const MaskLayer = ({
@@ -233,12 +233,12 @@ export const Community = () => {
         ],
       },
     ];
-  }, [i18n.language]);
+  }, [t]);
 
   // 渲染卡片的函数，根据columnCount自动分配高度
   const renderCards = (item: LayoutItem) => {
     const { children, columnCount } = item;
-    const cardHeight = columnCount === 1 ? "100%" : `${100 / columnCount}%`;
+    const cardHeight = columnCount === 1 ? "100%" : `${100 / (columnCount || 0)}%`;
 
     return children.map((card: any, index) => {
       const Card = item.type === ColumnType.NARROW ? NarrowCardCard1 : Wide2;

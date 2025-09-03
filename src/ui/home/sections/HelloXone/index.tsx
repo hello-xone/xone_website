@@ -1,18 +1,26 @@
+import Lottie from "lottie-react";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import BgIcon2 from "@/assets/imgs/home/bg-2.png";
 import BgIcon3 from "@/assets/imgs/home/bg-3.png";
+import DeployingDappsJson from "@/assets/lottie/deploying-dapps.json";
+import DeployingDappsDarkJson from "@/assets/lottie/deploying-dapps-dark.json";
+import FinancialSystemJson from "@/assets/lottie/financial-system.json";
+import FinancialSystemDarkJson from "@/assets/lottie/financial-system-dark.json";
+import StartNodeJson from "@/assets/lottie/start-node.json";
+import StartNodeDarkJson from "@/assets/lottie/start-node-dark.json";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import { Title } from "@/components/comm/title";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import { AnimationName } from "@/hooks/useScrollreveal";
 
 import styles from "./index.module.less";
+import useApplicationStore from "@/store/applicationStore";
 
 const HelloXone = () => {
   const { t } = useTranslation();
-
+  const { isLight } = useApplicationStore()
   const operations = useMemo(() => {
     return [
       {
@@ -78,7 +86,8 @@ const HelloXone = () => {
           >
             {operation.imagePosition === "left" ? (
               <>
-                <div className={styles.contentItemImage}></div>
+                {/* <div className={styles.contentItemImage}></div> */}
+                <Lottie animationData={operation.id === 1 ? (isLight ? StartNodeJson : StartNodeDarkJson) : (isLight ? DeployingDappsJson : DeployingDappsDarkJson)} loop={true} ></Lottie>
                 <div className={styles.contentItemDetail}>
                   <h3 className={styles.contentItemDetailTitle}>
                     {operation.title}
@@ -112,7 +121,7 @@ const HelloXone = () => {
                     target="_blank"
                   ></SeeMore>
                 </div>
-                <div className={styles.contentItemImage}></div>
+                <Lottie animationData={isLight ? FinancialSystemJson : FinancialSystemDarkJson} loop={true} ></Lottie>
               </>
             )}
           </div>

@@ -13,7 +13,6 @@ import useApplicationStore from "@/store/applicationStore";
 import CommonButton from "../comm/button/CommonButton";
 import { SeeMore } from "../comm/link/SeeMore";
 import AiStar from "../Icons/AiStar";
-import CommonGlobal from "../Icons/CommonGlobal";
 import Knight from "../Icons/Knight";
 import Language from "../Icons/Language";
 import Theme from "../Icons/Theme";

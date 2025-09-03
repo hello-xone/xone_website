@@ -73,11 +73,11 @@ const MenuPopover = () => {
                             />
                         </svg>
                     </PopoverButton>
-                    <PopoverBackdrop className="fixed overflow-hidden inset-0 bg-black/15" />
+                    <PopoverBackdrop className="fixed inset-0 bg-b1 opacity-70 backdrop-blur-[10px] z-[2] w-screen h-screen" />
                     <PopoverPanel
                         transition
                         anchor="bottom start"
-                        className="p-[27.5px] h-[calc(100vh-98px)] w-[68vw] right-0 !left-[unset] mt-12 relative z-[9999] shadow-[0px_10px_32px_0px_#1F1F1F26] rounded-l-[16px] bg-b1 text-t1 transition duration-200 ease-in-out [--anchor-gap:--spacing(5)] data-closed:-translate-y-1 data-closed:opacity-0"
+                        className="p-[20px] h-screen w-[68vw] !max-h-screen right-0 !top-0 !left-[unset] relative z-[9999] shadow-[0px_10px_32px_0px_#1F1F1F26] rounded-l-[16px] bg-b1 text-t1 transition duration-200 ease-in-out [--anchor-gap:--spacing(5)] data-closed:-translate-y-1 data-closed:opacity-0"
                     >
                         <div className="">
                             <div className="flex mb-4 items-center justify-end h-[24px]">

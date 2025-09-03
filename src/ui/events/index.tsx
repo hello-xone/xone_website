@@ -10,10 +10,13 @@ import ParticipantsIcon from "@/assets/svg/home/participants.svg?react";
 import CommonButton from "@/components/comm/button/CommonButton";
 import { Title } from "@/components/comm/title";
 import { Card } from "@/components/Events/Card";
+import useApplicationStore from "@/store/applicationStore";
 import { isTimeRangeValid } from "@/utils/time";
+import Empty from "@/components/comm/Empty";
 
 export const Events = () => {
     const { t } = useTranslation("events");
+    const { isLight } = useApplicationStore()
     const [events, setEvents] = useState<EventData[]>([]);
     useEffect(() => {
         getEvents().then((res) => {
@@ -29,6 +32,40 @@ export const Events = () => {
         }
         return [];
     }, [events]);
+
+    const colors = useMemo(() => {
+        if (isLight) {
+            return {
+                red: {
+                    text: "#FF0420",
+                    bg: "#FFE7E6",
+                },
+                orange: {
+                    text: "#FF9142",
+                    bg: "#FFF5E8",
+                },
+                normal: {
+                    text: "#070808",
+                    bg: "#F2F3F4",
+                }
+            }
+        } else {
+            return {
+                red: {
+                    text: "#D90021",
+                    bg: "#352025",
+                },
+                orange: {
+                    text: "#FFA963",
+                    bg: "#3E1D11",
+                },
+                normal: {
+                    text: "#FFFFFF",
+                    bg: "#1F2023"
+                }
+            }
+        }
+    }, [isLight])
     return (
         <div className="container text-center !pb-[80px] md:!pb-[120px]">
             <Title className="mt-[42px] md:mt-[120px]">{t("title")}</Title>
@@ -38,14 +75,15 @@ export const Events = () => {
             <CommonButton
                 onClick={() => window.open("https://luma.com/xone")}
                 type="black"
-                className="max-md:w-full max-md:h-[48px] md:text-[18px] mx-auto !rounded-[12px]"
+                className="max-md:w-full max-md:h-[48px] h-[56px] md:w-[140px] md:text-[18px] mx-auto !rounded-[12px]"
             >
                 {t("joinUs")}
             </CommonButton>
+            <Title className="mt-[80px] md:mt-[264px] !mb-4 md:!mb-5 !text-left">
+                {t("inProgress")}
+            </Title>
             {
-                progressEvents && progressEvents.length > 0 && <><Title className="mt-[80px] md:mt-[264px] !mb-4 md:!mb-5 !text-left">
-                    {t("inProgress")}
-                </Title>
+                progressEvents && progressEvents.length > 0 ? <>
                     <div className="text-base !text-left text-t2 leading-[140%] mb-8 md:mb-10">
                         {t("inProgressDesc")}
                     </div>
@@ -54,7 +92,7 @@ export const Events = () => {
                             progressEvents.map((el) => (
                                 <Card key={`event-card-${el.api_id}`} data={el}></Card>
                             ))}
-                    </div></>
+                    </div></> : <Empty></Empty>
             }
             <Title className="mt-[80px] md:mt-[264px] !text-left">
                 {t("pastEvents")}
@@ -75,7 +113,7 @@ export const Events = () => {
                         </div>
                         <div className="shrink-0 hidden md:flex justify-center items-center flex-col w-[16px]">
                             <DotIcon></DotIcon>
-                            <div className="mt-1 bg-[#F2F3F4] w-[1px] h-[calc(100%-12px)]"></div>
+                            <div className="mt-1 bg-[--border2] w-[1px] h-[calc(100%-12px)]"></div>
                         </div>
                         <div className="flex-1">
                             <div className="w-full flex items-center gap-[24px] bg-b2 px-[24px] py-[13.5px] rounded-[16px]">
@@ -91,21 +129,22 @@ export const Events = () => {
                                     </div>
                                     <div className="flex items-center text-base text-t3 mb-2 leading-[24px] gap-[8px]">
                                         <MapIcon className="text-t3"></MapIcon>
-                                        <span>{el.event.geo_address_info?.address || ""}</span>
+                                        <span className="text-left">{el.event.geo_address_info?.address || ""}</span>
                                     </div>
                                     <div className="flex items-center text-base text-t3 mb-4 leading-[24px] gap-[8px]">
                                         <ParticipantsIcon className="text-t3"></ParticipantsIcon>
-                                        <span>{el?.hosts && el?.hosts.length > 0 ? el?.hosts[0]?.name : ''}</span>
+                                        <span className="text-left">{el?.hosts && el?.hosts.length > 0 ? el?.hosts[0]?.name : ''}</span>
                                     </div>
                                     {el.tags && el.tags.length > 0 && (
                                         <div className="flex gap-[8px] items-center">
-                                            {el.tags.map((el) => (
+                                            {el.tags.map((el, index) => (
                                                 <div
                                                     key={`tag-item-${el.name}`}
                                                     style={{
-                                                        color: el.color || "#FF9142",
+                                                        color: el.name.toLocaleLowerCase() === 'xone' ? colors.red.text : index % 2 === 0 ? colors.normal.text : colors.orange.text,
+                                                        backgroundColor: el.name.toLocaleLowerCase() === 'xone' ? colors.red.bg : index % 2 === 0 ? colors.normal.bg : colors.orange.bg,
                                                     }}
-                                                    className="px-[8px] py-[3.5px] md:py-[7.5px] bg-[#FFF5E8] rounded text-xs"
+                                                    className="px-[8px] py-[3.5px] md:py-[7.5px] rounded text-xs"
                                                 >
                                                     {el.name}
                                                 </div>
@@ -128,7 +167,7 @@ export const Events = () => {
                                             </div>
                                         ))}
                                         {
-                                            el.guest_count > 5 && <div className="w-[32px] h-[32px] bg-b3 z-[1] border-[1px] border-[#E9E9EB] rounded-full text-t3 ml-[-11px] text-[12px] font-medium flex items-center justify-center">
+                                            el.guest_count > 5 && <div className="w-[32px] h-[32px] bg-b3 z-[1] border-[1px] border-[--border3] rounded-full text-t3 ml-[-11px] text-[12px] font-medium flex items-center justify-center">
                                                 +{el.guest_count - 5}
                                             </div>
                                         }

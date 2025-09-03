@@ -14,8 +14,8 @@ export const Commercial = () => {
   const { t } = useTranslation("commercial")
   return (
     <div className="container !pb-[80px] md:!pb-[120px] text-center">
-      <Title className="mt-[40px] md:mt-[116px] max-md:t!ext-[32px] !leading-[38px] !font-bold md:!leading-[63px] !mb-0">{t("bannerTitle1")}</Title>
-      <Title className="!leading-[38px] md:!leading-[63px] max-md:t!ext-[32px] !font-bold">{t("bannerTitle2")}</Title>
+      <Title className="mt-[40px] md:mt-[116px] max-md:!text-[32px] !leading-[38px] !font-bold md:!leading-[63px] !mb-0">{t("bannerTitle1")}</Title>
+      <Title className="!leading-[38px] md:!leading-[63px] max-md:!text-[32px] !font-bold">{t("bannerTitle2")}</Title>
       <div className="text-t2 text-base md:text-xl leading-[140%] mb-8">{t("bannerDesc")}</div>
       <div className="flex max-md:flex-col items-center text-t2 text-base leading-[22px] justify-center gap-[16px]">
         <Link to={`mailto:${businessEmail}`} className="bg-b3 p-[12px] cursor-pointer flex gap-[8px] items-center w-full md:w-[349px] rounded-[8px] relative">
