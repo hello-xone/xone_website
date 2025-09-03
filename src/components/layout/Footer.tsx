@@ -301,13 +301,13 @@ const Footer = () => {
             <div className="leading-[14px]">
               © {dayjs().format("YYYY")} Xone Foundation
             </div>
-            <div className="pl-4 ml-4 border-l-[1px] border-t3 leading-[14px] font-medium flex items-center">
+            <div className="pl-4 ml-4 border-l-[1px] border-t3 leading-[14px] flex items-center">
               <Link to={EXTERNAL_LINKS.docs + "study/privacy"} target="_blank">{t("header:privacy")}</Link>
               <span className="block w-[2px] h-[2px] rounded-full bg-t3 mx-4"></span>
               <Link to={EXTERNAL_LINKS.docs + "study/service"} target="_blank">{t("header:terms")}</Link>
             </div>
           </div>
-          <LanguagePopover className="max-md:hidden group">
+          <LanguagePopover noHoverBg className="max-md:hidden group">
             <>
               <Language className="text-t1"></Language>
               <span className="text-t1 text-sm group-hover:underline group-hover:decoration-dashed">English</span>
