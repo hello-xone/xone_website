@@ -55,14 +55,26 @@ interface LayoutItem {
 const MaskLayer = ({
   title,
   description,
+  columnType,
 }: {
   title: string;
   description: string;
+  columnType: ColumnType;
 }) => {
+  const isNarrow = columnType === ColumnType.NARROW;
+
   return (
-    <div className={styles.maskLayer}>
-      <h2 className={styles.maskLayerTitle}>{title}</h2>
-      <div className={`__lineHeight115 ${styles.description}`}>
+    <div
+      className={`${styles.maskLayer} ${isNarrow ? styles.maskLayerNarrow : styles.maskLayerWide}`}
+    >
+      <h2
+        className={`${styles.maskLayerTitle} ${isNarrow ? styles.maskLayerTitleNarrow : styles.maskLayerTitleWide}`}
+      >
+        {title}
+      </h2>
+      <div
+        className={`__lineHeight115 ${styles.description} ${isNarrow ? styles.descriptionNarrow : styles.descriptionWide}`}
+      >
         {description}
       </div>
     </div>
@@ -76,7 +88,7 @@ export const Community = () => {
   const NarrowCardCard1 = (data: Card1 | Card2) => {
     switch (data.type) {
       case CardType.img: {
-        const { img } = data as Card1;
+        const { img, title, description } = data as Card1;
         return (
           <div
             className={styles.card1}
@@ -84,7 +96,11 @@ export const Community = () => {
               backgroundImage: `url(${img})`,
             }}
           >
-            {/* <MaskLayer title={title} description={description}></MaskLayer> */}
+            <MaskLayer
+              title={title}
+              description={description}
+              columnType={ColumnType.NARROW}
+            ></MaskLayer>
           </div>
         );
       }
@@ -107,7 +123,7 @@ export const Community = () => {
     }
   };
 
-  const Wide2 = ({ img }: Card1) => {
+  const Wide2 = ({ img, title, description }: Card1) => {
     return (
       <div
         className={styles.card2}
@@ -115,7 +131,11 @@ export const Community = () => {
           backgroundImage: `url(${img})`,
         }}
       >
-        {/* <MaskLayer title={title} description={description}></MaskLayer> */}
+        <MaskLayer
+          title={title}
+          description={description}
+          columnType={ColumnType.WIDE}
+        ></MaskLayer>
       </div>
     );
   };
@@ -126,7 +146,7 @@ export const Community = () => {
       {
         id: "1",
         type: ColumnType.NARROW,
-        columnCount: 2, // 2列平分高度
+        columnCount: 2,
         children: [
           {
             id: "1-1",
@@ -147,7 +167,7 @@ export const Community = () => {
       {
         id: "2",
         type: ColumnType.WIDE,
-        columnCount: 1, // 1列占全高
+        columnCount: 1,
         children: [
           {
             id: "2-1",
@@ -161,7 +181,6 @@ export const Community = () => {
       {
         id: "3",
         type: ColumnType.NARROW,
-        columnCount: 2, // 3列平分高度
         children: [
           {
             id: "3-1",
@@ -181,16 +200,9 @@ export const Community = () => {
       },
       {
         id: "4",
-        type: ColumnType.NARROW,
-        columnCount: 2, // 2列平分高度
+        type: ColumnType.WIDE,
+        columnCount: 1,
         children: [
-          {
-            id: "4-1",
-            type: CardType.img,
-            img: more6,
-            title: t("home:more5"),
-            description: t("home:more5description"),
-          },
           {
             id: "4-2",
             type: CardType.img,
@@ -203,21 +215,20 @@ export const Community = () => {
       {
         id: "5",
         type: ColumnType.WIDE,
-        columnCount: 2, // 2列平分高度
         children: [
           {
-            id: "5-1",
+            id: "4-1",
             type: CardType.img,
             img: more8,
-            title: t("home:more7"),
-            description: t("home:more7description"),
+            title: t("home:more8"),
+            description: t("home:more8description"),
           },
           {
             id: "4-2",
             type: CardType.img,
             img: more7,
-            title: t("home:more8"),
-            description: t("home:more8description"),
+            title: t("home:more7"),
+            description: t("home:more7description"),
           },
         ],
       },
