@@ -47,8 +47,8 @@ export const fetchNetCountersByNet = async (
 
 export const fetchStatsByNet = async (isTestNet?: boolean) => {
   // const reqInstance = isTestNet ? xoTestScanRequest : xoMainScanRequest;
-  const res: Stats = await request.get("/api/v2/stats");
-  return res;
+  const res = await request.get("/api/v2/stats");
+  return res.data;
 };
 
 export const fetchChart = async () => {

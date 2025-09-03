@@ -9,7 +9,7 @@ export const Banner = () => {
     const { t } = useTranslation("home");
 
     return <div className="flex items-center max-md:flex-col-reverse w-full max-md:gap-[20px] justify-between">
-        <img alt="" src={BgIcon} className="max-md:hidden absolute left-0"></img>
+        <img alt="" src={BgIcon} className="max-md:hidden absolute left-0 ml-[-5px]"></img>
         <div className="w-full md:w-[57.25%] shrink-0 text-t1">
             <div className="text-[32px] md:text-[64px] leading-[140%] relative z-[2] font-bold">{t("bannerTitle")}</div>
             <div className="text-base md:text-[20px] relative z-[2] text-t2 md:text-t1 leading-[140%] mt-4 md:mt-6">{t("bannerDescription")}</div>

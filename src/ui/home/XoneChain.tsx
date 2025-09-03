@@ -1,13 +1,29 @@
-import BigNumber from "bignumber.js";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { fetchStatsByNet } from "@/api/common";
 import { SeeMore } from "@/components/comm/link/SeeMore";
-import { EXTERNAL_LINKS } from "@/constants/external";
-import { ChartRes } from "@/types/response";
 import Price from "@/components/comm/Price";
+import { EXTERNAL_LINKS } from "@/constants/external";
+import { useCountdownTimer } from "@/hooks/useCountdownTimer";
+import { Stats } from "@/types/response";
 
-export const XoneChain = ({ chartData, time }: { chartData: ChartRes | null; time: number }) => {
+export const XoneChain = () => {
     const { t } = useTranslation("home");
+    const [statsData, setStatsData] = useState<Stats | null>(null)
+    const getMainNetData = async () => {
+        const data = await fetchStatsByNet();
+        if (data) {
+            setStatsData(data)
+        }
+    };
+
+    const { time } = useCountdownTimer({
+        callback: async () => {
+            await getMainNetData();
+        },
+        dependency: [],
+    });
     return (
         <div className="flex w-full max-md:flex-col justify-between mt-10 md:mt-[162px]">
             <div className="shrink-0 text-t1 max-md:flex max-md:items-center max-md:justify-between">
@@ -22,7 +38,7 @@ export const XoneChain = ({ chartData, time }: { chartData: ChartRes | null; tim
                 <div className="grid grid-cols-2 gap-[16px] md:gap-[24px]">
                     <div className="md:px-6 md:py-3">
                         <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
-                            {chartData?.total_addresses || '--'}
+                            {statsData?.mainnet?.total_addresses || '--'}
                         </div>
                         <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
                             {t("addressAdd")}
@@ -30,7 +46,7 @@ export const XoneChain = ({ chartData, time }: { chartData: ChartRes | null; tim
                     </div>
                     <div className="md:px-6 md:py-3">
                         <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
-                            {chartData?.total_nfts || '--'}
+                            {statsData?.mainnet?.total_nfts || '--'}
                         </div>
                         <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
                             {t("artworkIsCast")}
@@ -38,7 +54,7 @@ export const XoneChain = ({ chartData, time }: { chartData: ChartRes | null; tim
                     </div>
                     <div className="md:px-6 md:py-3">
                         <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
-                            {chartData?.total_tokens || '--'}
+                            {statsData?.mainnet?.total_tokens || '--'}
                         </div>
                         <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
                             {t("tokenMinting")}
@@ -46,7 +62,7 @@ export const XoneChain = ({ chartData, time }: { chartData: ChartRes | null; tim
                     </div>
                     <div className="md:px-6 md:py-3">
                         <div className="text-[20px] flex items-center md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
-                            <Price show$ price={chartData?.average_txn_fee24h || 0} className1={""}></Price>
+                            <Price show$ price={statsData?.mainnet?.average_txn_fee24h || 0} className1={""}></Price>
                         </div>
                         <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
                             {t("averageTransactionCost")}
