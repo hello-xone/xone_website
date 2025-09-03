@@ -110,18 +110,18 @@ export const Net = () => {
       if (selectedNetKey === XoneChainId.MAIN_NET) {
         const { mainnet } = result;
         const data: NetData = {
-          latestBlock: mainnet.total_addresses,
-          gasFee: mainnet.average_txn_fee24h,
-          blockTime: mainnet.block_time,
+          latestBlock: mainnet.block_number,
+          gasFee: mainnet.gas_fee,
+          blockTime: (mainnet.block_time / 1000).toFixed(3),
           epoch: mainnet.current_epoch,
         };
         setMainNetData(data);
       } else {
         const { testnet } = result;
         const data: NetData = {
-          latestBlock: testnet.total_addresses,
-          gasFee: testnet.average_txn_fee24h,
-          blockTime: testnet.block_time,
+          latestBlock: testnet.block_number,
+          gasFee: testnet.gas_fee,
+          blockTime: (testnet.block_time / 1000).toFixed(3),
           epoch: testnet.current_epoch,
         };
         setTestNetData(data);
@@ -284,8 +284,9 @@ export const Net = () => {
             return (
               <div
                 key={item.key}
-                className={`${styles.navItem} ${selectedNetKey === item.key ? styles.selectedNav : ""
-                  }`}
+                className={`${styles.navItem} ${
+                  selectedNetKey === item.key ? styles.selectedNav : ""
+                }`}
                 onClick={() => setSelectedNetKey(item.key)}
               >
                 {t(item.name)}

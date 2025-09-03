@@ -52,7 +52,7 @@ const SafetyTips = () => {
             <div className="flex flex-col items-center">
               <img
                 src={tip.image}
-                className="w-[160px] h-[160px]"
+                className="md:w-[160px] md:h-[160px] w-[100px] h-[100px]"
                 alt={tip.alt}
               />
               <h5 className="font-black text-center text-[24px] text-[var(--t1)] mt-[16px] md:mt-[20px]">

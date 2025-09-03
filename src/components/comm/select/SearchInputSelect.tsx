@@ -271,7 +271,7 @@ export const SearchInputSelect = ({
         className="relative w-full h-full cursor-pointer rounded-[8px] bg-[var(--b3)] px-[12px] py-[10px] text-left border border-[transparent] border-solid hover:border-[var(--t1)]"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="block text-[15px] truncate text-[var(--t3)]">
+        <span className="block font-normal text-[14px] md:text-[15px] truncate text-[var(--t3)]">
           {getSelectedLabel()}
         </span>
         <span className="flex absolute inset-y-0 right-0 items-center pr-2 pointer-events-none">

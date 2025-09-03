@@ -31,7 +31,8 @@
   margin-top: 20px;
 }
 
-.btn {
+.btn,
+.disabledBtn {
   background-color: transparent;
   color: var(--b5);
   font-size: 16px;
@@ -45,17 +46,14 @@
   color: var(--b5);
 }
 
-.btn span {
+.btn span,
+.disabledBtn span {
   color: var(--b5);
   font-size: 16px;
   font-weight: 500;
 }
 
-.btn:hover span {
-  color: var(--t1) !important;
-}
-
-.btn:hover svg {
+.disabledBtn:hover svg {
   transform: translateX(0) !important;
 }
 
@@ -92,6 +90,7 @@
   .title {
     font-size: 24px;
     margin-top: 0;
+    text-align: left;
   }
 
   .description {

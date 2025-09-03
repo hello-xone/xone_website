@@ -17,7 +17,7 @@ import styles from "./index.module.less";
 
 export const Start = () => {
   const { t, i18n } = useTranslation();
-  const { isLight } = useApplicationStore()
+  const { isLight } = useApplicationStore();
 
   useScrollreveal();
   return (
@@ -38,7 +38,7 @@ export const Start = () => {
         >
           <SeeMore
             href=""
-            className={styles.btn}
+            className={styles.disabledBtn}
             disabled
             text={t("home:exploreBVI")}
           ></SeeMore>

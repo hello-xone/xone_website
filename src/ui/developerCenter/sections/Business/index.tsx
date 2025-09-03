@@ -240,19 +240,12 @@ export const Business = () => {
       <div
         className={`${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_5}`}
       >
-        <Button
+        <SeeMore
           className={styles.seeAll}
-          onClick={() =>
-            window.open(
-              "https://github.com/hello-xone/xone_assets/blob/main/tools/ToolList.json"
-            )
-          }
-        >
-          {t("common:seeAll")}
-          <div className={styles.seeAllIcon}>
-            <ArrowIcon></ArrowIcon>
-          </div>
-        </Button>
+          href="https://github.com/hello-xone/xone_assets/blob/main/tools/ToolList.json"
+          target="_blank"
+          text={t("common:seeAll")}
+        ></SeeMore>
       </div>
     </div>
   );

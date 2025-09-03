@@ -90,11 +90,6 @@ export const List = ({ data, onMore }: { data: any; onMore: () => void }) => {
           {t("recruitment:viewMore")}
         </p>
       )}
-      {!data.hasMore && (
-        <p className="text-[var(--t2)] text-[15px] mt-6 text-center mx-auto w-[80px]">
-          {t("recruitment:noMore")}
-        </p>
-      )}
     </div>
   );
 };

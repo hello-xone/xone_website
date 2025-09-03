@@ -62,9 +62,13 @@ const HelloXone = () => {
           className={` ${styles.headerDescription} ${AnimationName.SLIDE_IN_BOTTOM}`}
         >
           {t("home:hellowXoneDesc")}
-          <SeeMore href="" className="inline-block" text={t("home:seeMore")}></SeeMore>
+          <SeeMore
+            href={EXTERNAL_LINKS.docs + "developers/guide"}
+            target="_blank"
+            className={`${styles.btn} ${styles.seeMoreBtn}`}
+            text={t("home:hellowXoneLinkText2")}
+          ></SeeMore>
         </p>
-
       </div>
       <div className={styles.content}>
         {operations.map((operation) => (

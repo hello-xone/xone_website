@@ -94,13 +94,13 @@ export const Banner = ({ onSearch, onClear }: BannerProps) => {
   }, [debouncedSearch]);
 
   return (
-    <div className="md:h-[90vh]">
+    <div className="md:h-[700px]">
       <div className="relative w-full h-full">
         <div className="w-full h-full bg-cover bg-[center_bottom] hidden md:block"></div>
         <div className="flex flex-col mt-[20px] md:mt-0 p-4 text-left md:items-center md:justify-center md:text-center md:p-16 md:pb-30 md:absolute md:top-0 md:right-0 md:bottom-0 md:left-0">
           <Animation animationClassName={AnimationType.SLIDE_IN_UP} delay={0.1}>
             <h1
-              className="font-bold leading-[1.4] text-[32px] text-[var(--t1)] md:text-[56px]"
+              className="font-bold leading-[140%] text-[32px] text-[var(--t1)] md:text-[56px]"
               dangerouslySetInnerHTML={{ __html: t("recruitment:bannerTitle") }}
             />
           </Animation>
@@ -110,7 +110,7 @@ export const Banner = ({ onSearch, onClear }: BannerProps) => {
             </p>
           </Animation>
           <Animation animationClassName={AnimationType.SLIDE_IN_UP} delay={0.5}>
-            <div className="flex flex-col gap-y-4 justify-center items-center mt-6 md:gap-x-4 md:flex-row md:mt-12 lg:mb-[140px]">
+            <div className="flex flex-col gap-y-4 justify-center items-center mt-6 md:gap-x-4 md:flex-row md:mt-12 lg:mb-[80px]">
               <div className="relative group flex items-center w-full md:w-[460px] py-[0] md:py-[5px] px-[12px] bg-[var(--b3)] rounded-[8px] transition-all duration-100 border border-[transparent] hover:border-[var(--t1)] focus-within:border-[var(--t1)] focus-within:pr-[35px]">
                 <SearchIcon className="w-[20px] h-[20px] text-[#A0A3A7] group-focus-within:text-[var(--t1)] transition-colors duration-100" />
                 <Input
@@ -131,7 +131,7 @@ export const Banner = ({ onSearch, onClear }: BannerProps) => {
                 className="rounded-[8px] w-full md:w-[140px] h-[40px] md:h-[45px]"
                 onClick={handleSearch}
               >
-                <span className="px-[24px] py-[3px] text-[var(--t5)] text-[18px] font-light text-white">
+                <span className="px-[24px] py-[3px] text-[var(--t5)] text-[18px] font-medium text-white">
                   {t("recruitment:bannerSearchButton")}
                 </span>
               </CommonButton>
