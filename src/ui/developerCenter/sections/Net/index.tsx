@@ -1,12 +1,11 @@
 import { Skeleton } from "@mui/material";
 import { useNotifications } from "@toolpad/core/useNotifications";
 import { ChainType, getWalletKit, useWalletKit } from "@web3jskit/walletkit";
-import { utils } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { numberToHex } from "viem";
 
-import { fetchNetCountersByNet, fetchStatsByNet } from "@/api/common";
+import { fetchStatsByNet } from "@/api/common";
 import BlockExploreIcon from "@/assets/svg/developer/block_explore.svg?react";
 import FolderIcon from "@/assets/svg/developer/folder.svg?react";
 import WalletIcon from "@/assets/svg/developer/wallet.svg?react";
@@ -19,13 +18,9 @@ import {
   DelayClassName,
   useScrollreveal,
 } from "@/hooks/useScrollreveal";
-import { formatDecimal, preciseRound } from "@/utils/number";
-import { fetchBlockNumber, getXoneEpochByNet } from "@/web3";
+import { preciseRound } from "@/utils/number";
 
 import styles from "./index.module.less";
-
-const MainNetRpc = import.meta.env.VITE_APP_XO_MAIN_NET_RPC;
-const TestNetRpc = import.meta.env.VITE_APP_XO_TEST_NET_RPC;
 
 interface NetData {
   latestBlock?: number;
@@ -109,78 +104,34 @@ export const Net = () => {
     ];
   }, []);
 
-  const getBlockNumberByNet = async (
-    isTestNet?: boolean
-  ): Promise<number | undefined> => {
-    try {
-      const rpc = isTestNet ? TestNetRpc : MainNetRpc;
-      return await fetchBlockNumber(rpc);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const getGasFee = async (isTestNet?: boolean) => {
-    try {
-      const stats = await fetchStatsByNet(isTestNet);
-      const wei = stats.gas_prices.average.wei;
-      if (Number(wei) === 0) return "0.00";
-      return stats.gas_prices.average.wei
-        ? formatDecimal(utils.formatUnits(parseInt(wei), 9).toString())
-        : undefined;
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  const getMainNetData = useCallback(async () => {
-    const data: NetData = {};
-    const counters = await fetchNetCountersByNet();
-    data.latestBlock = await getBlockNumberByNet();
-    if (data.latestBlock) {
-      data.gasFee = await getGasFee();
-    }
-    data.blockTime = counters.find(
-      (item) => item.id === "averageBlockTime"
-    )?.value;
-    data.epoch = await getXoneEpochByNet();
-    setMainNetData(data);
-  }, []);
-
-  const getTestNetData = useCallback(async () => {
-    const data: NetData = {};
-    const counters = await fetchNetCountersByNet(true);
-    data.latestBlock = await getBlockNumberByNet(true);
-    if (data.latestBlock) {
-      data.gasFee = await getGasFee(true);
-    }
-    data.blockTime = counters.find(
-      (item) => item.id === "averageBlockTime"
-    )?.value;
-    try {
-      data.epoch = await getXoneEpochByNet(true);
-    } catch (err) {
-      console.error(err);
-      data.epoch = undefined;
-    }
-    setTestNetData(data);
-  }, []);
-
   const getData = useCallback(async () => {
     try {
+      const result = (await fetchStatsByNet()) as any;
       if (selectedNetKey === XoneChainId.MAIN_NET) {
-        return getMainNetData();
+        const { mainnet } = result;
+        const data: NetData = {
+          latestBlock: mainnet.total_addresses,
+          gasFee: mainnet.average_txn_fee24h,
+          blockTime: mainnet.block_time,
+          epoch: mainnet.current_epoch,
+        };
+        setMainNetData(data);
       } else {
-        return getTestNetData();
+        const { testnet } = result;
+        const data: NetData = {
+          latestBlock: testnet.total_addresses,
+          gasFee: testnet.average_txn_fee24h,
+          blockTime: testnet.block_time,
+          epoch: testnet.current_epoch,
+        };
+        setTestNetData(data);
       }
-      // const awaitMainNet = getMainNetData();
-      // const awaitTestNet = getTestNetData();
-      // await Promise.allSettled([awaitMainNet, awaitTestNet]);
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
     }
-  }, [getMainNetData, getTestNetData, selectedNetKey]);
+  }, [selectedNetKey]);
 
   useCountdownTimer({
     callback: async () => {
