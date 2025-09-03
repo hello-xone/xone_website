@@ -1,5 +1,9 @@
-import BusinessIcon from "@/assets/svg/home/business.svg?react";
-import KnightIcon from "@/assets/svg/home/knight.svg?react";
+import ActiveIcon from "@/assets/svg/header/active.svg?react";
+import BlogIcon from "@/assets/svg/header/blog.svg?react";
+import BusinessIcon from "@/assets/svg/header/business.svg?react";
+import GrantsIcon from "@/assets/svg/header/grants.svg?react";
+import KnightIcon from "@/assets/svg/header/knight.svg?react";
+import RecruitmentIcon from "@/assets/svg/header/recruitment.svg?react";
 
 import { EXTERNAL_LINKS } from "./external";
 
@@ -412,7 +416,7 @@ export const menus: Array<MenuModel> = [
       {
         id: "global_recruitment",
         title: "navGlobalRecruitment",
-        icon: BusinessIcon,
+        icon: RecruitmentIcon,
         link: "/recruitment",
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalRecruitmentDesc",
@@ -420,7 +424,7 @@ export const menus: Array<MenuModel> = [
       {
         id: "global_blog",
         title: "navGlobalBlog",
-        icon: BusinessIcon,
+        icon: BlogIcon,
         link: EXTERNAL_LINKS.docs + "blog",
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalBlogDesc",
@@ -428,7 +432,7 @@ export const menus: Array<MenuModel> = [
       {
         id: "global_active",
         title: "navGlobalActive",
-        icon: BusinessIcon,
+        icon: ActiveIcon,
         link: EXTERNAL_LINKS.Events,
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalActiveDesc",
@@ -436,7 +440,7 @@ export const menus: Array<MenuModel> = [
       {
         id: "global_grants",
         title: "navGlobalGrants",
-        icon: BusinessIcon,
+        icon: GrantsIcon,
         link: "/grants",
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalGrantsDesc",

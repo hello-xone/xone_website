@@ -105,9 +105,7 @@ const Header = () => {
                                   className="px-[10px] group gap-[12px] rounded-[8px] mb-[2px] bg-transparent hover:bg-b3 cursor-pointer py-2 flex items-center"
                                   key={`children-item-${gel.id}`}
                                 >
-                                  {
-                                    gel.id === "global_knight" ? <Knight className="text-t2 group-hover:text-t1 shrink-0"></Knight> : <CommonGlobal className="text-t2 group-hover:text-t1 shrink-0"></CommonGlobal>
-                                  }
+                                  <gel.icon className="text-t2 group-hover:text-t1 shrink-0"></gel.icon>
                                   <div className="text-t2 group-hover:text-t1">
                                     <div className="text-sm font-bold leading-[140%] mb-1">
                                       {t(gel.title)}
