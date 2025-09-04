@@ -59,7 +59,7 @@ const CommonPopover = forwardRef(({
                 <PopoverPanel
                     transition
                     anchor="bottom start"
-                    className="p-[24px] mt-6 relative z-[9999] rounded-[16px] bg-b2 text-t1 transition duration-200 ease-in-out [--anchor-gap:--spacing(5)] data-closed:-translate-y-1 data-closed:opacity-0"
+                    className="p-[24px] mt-6 shadow-[0px_10px_32px_0px_#1F1F1F1A]  relative z-[9999] rounded-[16px] bg-b2 text-t1 transition duration-200 ease-in-out [--anchor-gap:--spacing(5)] data-closed:-translate-y-1 data-closed:opacity-0"
                 >
                     {children}
                 </PopoverPanel>

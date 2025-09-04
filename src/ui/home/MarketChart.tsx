@@ -178,18 +178,17 @@ export const MarketChart = () => {
                 </AreaChart>
             </ResponsiveContainer>
             <div className="w-full md:w-[262px] shrink-0 py-[36px] md:py-[24px] text-center bg-[--layer2] rounded-[16px]">
-                <div className="text-t1 leading-[100%] mb-2">
+                <div className="text-t1 leading-[21px] mb-2">
                     {t("totalMarketCap")}
                 </div>
-                <div className="text-t1 font-bold text-[32px] leading-[100%] mb-12">
+                <div className="text-t1 font-bold text-[32px] leading-[42px] mb-12">
                     <NumberCounter value={chartData?.market_cap || 0}></NumberCounter>
                 </div>
-                <div className="text-t1 leading-[100%] mb-2">
+                <div className="text-t1 leading-[21px] mb-2">
                     {t("accountsHoldingCOX")}
                 </div>
-                <div className="text-t1 font-bold text-[32px] leading-[100%]">
+                <div className="text-t1 font-bold text-[32px] leading-[42px]">
                     <NumberCounter value={chartData?.total_accounts || 0}></NumberCounter>
-
                 </div>
             </div>
         </div>
@@ -200,10 +199,10 @@ export const MarketChart = () => {
                         key={`market-chart-bottom-${el.title}`}
                         className="w-full py-[12px] rounded-[8px] text-center bg-[--layer2]"
                     >
-                        <div className="text-[32px] font-bold leading-[100%]">
+                        <div className="text-[32px] font-bold leading-[42px]">
                             <NumberCounter value={el.title === "currentPrice" ? (chartData?.current_price || 0) : el.title === "transactionCount" ? (chartData?.transactions_today || 0) : (chartData?.transaction_amounts_today || 0)}></NumberCounter>
                         </div>
-                        <div className="text-[16px] mt-2 font-normal leading-[100%]">
+                        <div className="text-[16px] mt-2 font-normal leading-[21px]">
                             {t(el.title)}
                         </div>
                     </div>

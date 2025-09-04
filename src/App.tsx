@@ -9,6 +9,7 @@ import "@/assets/style/code-highlight.less";
 // import "@/assets/style/animation.less";
 import { NotificationsProvider } from "@toolpad/core/useNotifications";
 import { ChainType, WalletKitProvider } from "@web3jskit/walletkit";
+import { AnimatePresence, motion } from "framer-motion";
 import { Suspense, useEffect } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Toaster } from 'react-hot-toast';
@@ -19,9 +20,29 @@ import { I18nProvider } from "@/i18n/provider";
 
 import { RenderRoutes } from "./routes/router";
 
+// 动画配置 - 可根据需要修改
+const pageVariants = {
+  initial: {
+    opacity: 0,
+    y: -50,
+    scale: 1
+  },
+  in: {
+    opacity: 1,
+    y: 0,
+    scale: 1
+  },
+  out: {
+    opacity: 0,
+    y: 50,
+    scale: 1
+  }
+};
+
 function App() {
   // const { themeConfig } = useThemeConfig();
   // const theme = createTheme(themeConfig);
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
   }, [])
@@ -56,7 +77,22 @@ function App() {
                 <Toaster toastOptions={{
                   className: "common-toast"
                 }} />
-                <RenderRoutes />
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="in"
+                    exit="out"
+                    transition={{
+                      type: 'spring',
+                      ease: 'easeOut',
+                      duration: 0.6
+                    }}
+                    className="page-container"
+                  >
+                    <RenderRoutes />
+                  </motion.div>
+                </AnimatePresence>
               </NotificationsProvider>
             </WalletKitProvider>
           </I18nProvider>

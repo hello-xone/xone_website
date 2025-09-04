@@ -173,7 +173,7 @@ const Header = () => {
                       ) : (
                         <div className="flex gap-[24px]">
                           {item.group.map((cel) => (
-                            <div key={`children-item-${cel.id}`}>
+                            <div key={`children-item-${cel.id}`} className="w-[200px]">
                               <div className="text-base mb-1 leading-[140%] font-bold text-t1">
                                 {t(cel.title)}
                               </div>

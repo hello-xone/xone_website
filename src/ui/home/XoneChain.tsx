@@ -41,36 +41,36 @@ export const XoneChain = () => {
             <div className="shrink-0 max-md:mt-3 w-full md:w-[57%]">
                 <div className="grid grid-cols-2 gap-[16px] md:gap-[24px]">
                     <div className="md:px-6 md:py-3">
-                        <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
+                        <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[140%] md:leading-[140%] font-bold">
                             <NumberCounter value={statsData?.mainnet?.total_addresses || 0}></NumberCounter>
                         </div>
-                        <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
+                        <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[140%]">
                             {t("addressAdd")}
                         </div>
                     </div>
                     <div className="md:px-6 md:py-3">
-                        <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
+                        <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[140%] md:leading-[140%] font-bold">
                             <NumberCounter value={statsData?.mainnet?.total_nfts || 0}></NumberCounter>
                         </div>
                         <div onClick={() => {
                             setValue(value + 10)
-                        }} className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
+                        }} className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[140%]">
                             {t("artworkIsCast")}
                         </div>
                     </div>
                     <div className="md:px-6 md:py-3">
-                        <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
+                        <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[140%] md:leading-[140%] font-bold">
                             <NumberCounter value={statsData?.mainnet?.total_tokens || 0}></NumberCounter>
                         </div>
-                        <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
+                        <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[140%]">
                             {t("tokenMinting")}
                         </div>
                     </div>
                     <div className="md:px-6 md:py-3">
-                        <div className="text-[20px] flex items-center md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
+                        <div className="text-[20px] flex items-center md:text-[64px] mb-[6px] md:mb-2 leading-[140%] md:leading-[140%] font-bold">
                             <Price show$ price={statsData?.mainnet?.average_txn_fee24h || 0} className1={""}></Price>
                         </div>
-                        <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
+                        <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[140%]">
                             {t("averageTransactionCost")}
                         </div>
                     </div>

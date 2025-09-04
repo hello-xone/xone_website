@@ -239,7 +239,6 @@ const Footer = () => {
   const generateOptions = (input: string) => {
     if (!input) return [];
     const [prefix] = input.split("@");
-    console.log(domains.map((domain) => `${prefix}${domain}`))
     return domains.map((domain) => `${prefix}${domain}`);
   };
 
