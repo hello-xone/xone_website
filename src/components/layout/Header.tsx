@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -16,11 +16,13 @@ import AiStar from "../Icons/AiStar";
 import Knight from "../Icons/Knight";
 import Language from "../Icons/Language";
 import Theme from "../Icons/Theme";
+import BusinessCard from "./Header/components/businessCard";
 import CommonPopover from "./Popover/CommonPopover";
 import LanguagePopover from "./Popover/LanguagePopover";
 import MenuPopover from "./Popover/MenuPopover";
 
 const Header = () => {
+  const popoverRef = useRef<any>(null);
   const navigate = useNavigate();
   const { isLight, changeTheme } = useApplicationStore()
   const [event, setEvent] = useState<any>(null);
@@ -61,6 +63,13 @@ const Header = () => {
             name: event.name || '',
           };
       }
+      switch (detailId) {
+        case "global_active":
+          return {
+            images: event.cover_url || '',
+            name: event.name || '',
+          };
+      }
     }
     return null;
   }, [event, detailId]);
@@ -74,6 +83,12 @@ const Header = () => {
       }
     }
   }, [detailId])
+
+  const handleCallChild = () => {
+    if (popoverRef.current) {
+      popoverRef.current.close();
+    }
+  };
   return (
     <div className={clsx(`w-screen fixed backdrop-blur-[5px] z-[10] top-0 left-0 h-[58px] md:h-[64px] px-4 md:px-[30px] flex items-center justify-between`, {
       'bg-[#ffffff]/50': isLight,
@@ -87,13 +102,13 @@ const Header = () => {
           className="w-[100px] h-auto cursor-pointer max-md:hidden"
         ></img>
         <img src={LogoIcon} onClick={() => navigate("/")} alt="logo" className="w-8 h-8 md:hidden"></img>
-        <div className="hidden xl:flex items-center gap-[40px]">
+        <div className="hidden lg:flex items-center gap-[40px]">
           {menus &&
             menus.map((item) => {
               return (
                 <div key={`header-item-${item.id}`}>
                   {item.group && item.group.length > 0 ? (
-                    <CommonPopover text={t(item.name)}>
+                    <CommonPopover ref={popoverRef} text={t(item.name)}>
                       {item.type === NavigationType.INFO ? (
                         <div className="flex items-stretch gap-[24px]">
                           <div className="w-[372px]">
@@ -117,32 +132,37 @@ const Header = () => {
                               ))}
                           </div>
                           <div className="w-[480px] flex-1 flex flex-col">
-                            {!globalDetail ? (
-                              <div className="w-full min-h-[164px] flex-1 flex flex-col items-center justify-center rounded-[8px] bg-b3">
-                                <Knight className="text-t2 shrink-0"></Knight>
-                                <div className="text-t2 font-medium text-sm mt-[7px]">
-                                  Look forward to it !
-                                </div>
-                              </div>
-                            ) : (
-                              <img
-                                src={globalDetail.images}
-                                alt=""
-                                className="w-full aspect-[480/310] object-cover flex-1 rounded-[8px]"
-                              ></img>
-                            )}
+                            {
+                              group?.id === "global_business" ? <BusinessCard></BusinessCard> : <>
+                                {!globalDetail ? (
+                                  <div className="w-full min-h-[164px] flex-1 flex flex-col items-center justify-center rounded-[8px] bg-b3">
+                                    <Knight className="text-t2 shrink-0"></Knight>
+                                    <div className="text-t2 font-medium text-sm mt-[7px]">
+                                      Look forward to it !
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <img
+                                    src={globalDetail.images}
+                                    alt=""
+                                    className="w-full aspect-[480/310] object-cover flex-1 rounded-[8px]"
+                                  ></img>
+                                )}
 
-                            <div className="mt-3 text-t2 shrink-0 text-sm font-bold leading-[140%]">
-                              {globalDetail
-                                ? globalDetail.name
-                                : "助力Xone未来动向，成就更大发展"}
-                            </div>
-                            {!globalDetail && (
-                              <div className="mt-3 text-t2 shrink-0 text-sm leading-[140%]">{`一切工作都是为了帮助 Xone 更好的服务全球企业、组织以及个人。因此，在任何领域，只要你有想法并愿意为此贡献你的独到想法！我们相信，在 Xone 的成长之路上，将无畏即将面对的无数挑战。`}</div>
-                            )}
+                                <div className="mt-3 text-t2 shrink-0 text-sm font-bold leading-[140%]">
+                                  {globalDetail
+                                    ? globalDetail.name
+                                    : group?.title ? t(group?.title) : ""}
+                                </div>
+                                {!globalDetail && (
+                                  <div className="mt-3 text-t2 shrink-0 text-sm leading-[140%]">{group?.description ? t(group?.description) : ""}</div>
+                                )}
+                              </>
+                            }
                             {
                               group && group.link && <SeeMore
                                 href={group.link}
+                                target={group.link.includes("http") ? "_blank" : "_self"}
                                 text={t("home:seeMore")}
                                 className="mt-3"
                                 textClassName="!text-[14px] shrink-0 text-t2"
@@ -167,7 +187,8 @@ const Header = () => {
                                       <Link
                                         key={`link-item-${link.id}`}
                                         to={link.link || ""}
-                                        target="_blank"
+                                        onClick={() => handleCallChild()}
+                                        target={link.link.includes("http") ? "_blank" : "_self"}
                                         className="px-[10px] py-[8px] hover:bg-b3 hover:text-t1 rounded-[8px] cursor-pointer"
                                       >
                                         {t(link.name)}
@@ -178,6 +199,7 @@ const Header = () => {
                               {item.id === "Ecology" && (
                                 <SeeMore
                                   href={EXTERNAL_LINKS.Bvi}
+                                  onClick={() => handleCallChild()}
                                   text={t("home:seeMore")}
                                   className="mt-4 ml-[10px]"
                                   textClassName="!text-[14px] font-medium text-t2"
@@ -207,15 +229,15 @@ const Header = () => {
         </div>
       </div>
       <div className="flex items-center gap-[12px] md:gap-[24px]">
-        <CommonButton type="outline">
+        {/* <CommonButton type="outline">
           {t("askAI")}
           <AiStar className="w-4 h-4 md:w-6 md:h-6"></AiStar>
-        </CommonButton>
-        <CommonButton onClick={() => window.open(EXTERNAL_LINKS.MainExplorer)}>
+        </CommonButton> */}
+        <CommonButton onClick={() => window.open(EXTERNAL_LINKS.Bvi)}>
           {t("exploreXone")}
         </CommonButton>
         <MenuPopover></MenuPopover>
-        <div className="hidden xl:flex items-center gap-[8px]">
+        <div className="hidden lg:flex items-center gap-[8px]">
           <LanguagePopover>
             <Language className="text-t1"></Language>
           </LanguagePopover>

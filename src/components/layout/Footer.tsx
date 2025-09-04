@@ -1,5 +1,7 @@
+import { Autocomplete, TextField } from "@mui/material";
 import dayjs from "dayjs";
-import { useMemo, useState } from "react";
+import { FormikProvider, useFormik } from "formik";
+import { useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -14,7 +16,9 @@ import RedditIcon from "@/assets/svg/home/reddit.svg?react";
 import TelegramIcon from "@/assets/svg/home/telegram.svg?react";
 import XIcon from "@/assets/svg/home/x.svg?react";
 import YoutubeIcon from "@/assets/svg/home/youtube.svg?react";
+import { domains } from "@/constants/domains";
 import { EXTERNAL_LINKS } from "@/constants/external";
+import { langs, LanguageType } from "@/i18n/settings";
 import useApplicationStore from "@/store/applicationStore";
 import { isEmail } from "@/utils";
 
@@ -73,10 +77,27 @@ const contacts = [
 const Footer = () => {
   const { t } = useTranslation();
   const { changeTheme } = useApplicationStore()
-  const [email, setEmail] = useState("")
+  const { i18n } = useTranslation()
+  const inputRef = useRef<HTMLInputElement>(null);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    onSubmit: () => { },
+  });
+  const { values, getFieldProps, setFieldValue } = formik;
+
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light';
   });
+  const currentLanguage = useMemo(() => {
+    const fallback = langs.find((item) => item.type === LanguageType.en);
+    return (
+      langs.find((item) => {
+        return item.type === i18n.language;
+      }) || fallback
+    );
+  }, [i18n.language]);
   const footerLinks: Classification[] = useMemo(() => {
     return [
       {
@@ -209,10 +230,17 @@ const Footer = () => {
 
   const handleSubmit = async () => {
     await addEmail({
-      email,
+      email: values.email,
     });
-    setEmail('');
+    setFieldValue('email', "");
     toast.success(t("home:subscriptionSuccessful"));
+  };
+
+  const generateOptions = (input: string) => {
+    if (!input) return [];
+    const [prefix] = input.split("@");
+    console.log(domains.map((domain) => `${prefix}${domain}`))
+    return domains.map((domain) => `${prefix}${domain}`);
   };
 
   return (
@@ -267,16 +295,46 @@ const Footer = () => {
           <div className="w-full md:w-[386px]">
             <div className="font-bold mb-4 text-t1">{t("header:subscribe")}</div>
             <div className="text-sm text-t2 mb-4">{t("header:subscribeDesc")}</div>
-            <div className="flex border-[1px] border-transparent hover:border-[1px] hover:border-t1 rounded-[8px] p-1 box-content bg-b3">
-              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="flex-1 h-[40px] outline-none bg-transparent placeholder:text-t4 text-sm px-[20px] rounded-[8px]" placeholder={t("common:enterEmail")}></input>
-              <CommonButton onClick={() => {
-                if (email && isEmail(email)) {
-                  handleSubmit()
-                } else {
-                  toast.error(t("header:invalidEmail"))
-                }
-              }} className="w-[120px] h-10 !text-base !font-bold !rounded-r-[8px]">{t("join")}</CommonButton>
-            </div>
+            {/* <div className="flex border-[1px] border-transparent hover:border-[1px] hover:border-t1 rounded-[8px] p-1 box-content bg-b3"> */}
+            <FormikProvider value={formik}>
+              <Autocomplete
+                disablePortal
+                freeSolo
+                inputValue={values.email}
+                className="!border-transparent border-[1px] hover:!border-[1px] hover:!border-t1 !rounded-[8px] !p-1 !box-content !bg-b3"
+                options={generateOptions(values.email)}
+                onChange={(_, newValue) => {
+                  setFieldValue("email", newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    {...getFieldProps("email")}
+                    placeholder={t("common:enterEmail")}
+                    variant="filled"
+                    className="auto-complete-input !p-0 !bg-b3"
+                    InputProps={{
+                      ...params.InputProps,
+                      inputRef: inputRef,
+                      endAdornment: (
+                        <CommonButton onClick={() => {
+                          if (values.email && isEmail(values.email)) {
+                            handleSubmit()
+                          } else {
+                            toast.error(t("header:invalidEmail"))
+                          }
+                        }} className="w-[120px] h-10 !text-base !font-bold !rounded-r-[8px]">{t("join")}</CommonButton>
+                      ),
+                      className: "",
+                    }}
+                  ></TextField>
+                  // <input {...params} type="email" className="flex-1 h-[40px] outline-none bg-transparent placeholder:text-t4 text-sm px-[20px] rounded-[8px]" placeholder={t("common:enterEmail")}></input>
+                )}
+              ></Autocomplete>
+            </FormikProvider>
+
+
+            {/* </div> */}
           </div>
         </div>
 
@@ -308,7 +366,7 @@ const Footer = () => {
           <LanguagePopover noHoverBg className="max-md:hidden group">
             <>
               <Language className="text-t1"></Language>
-              <span className="text-t1 text-sm group-hover:underline group-hover:decoration-dashed">English</span>
+              <span className="text-t1 text-sm group-hover:underline group-hover:decoration-dashed">{currentLanguage?.name || "English"}</span>
             </>
           </LanguagePopover>
         </div>

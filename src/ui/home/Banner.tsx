@@ -4,10 +4,11 @@ import BannerIcon from "@/assets/imgs/home/banner-right.png"
 import BgIcon from "@/assets/imgs/home/bg-1.png"
 import CommonButton from "@/components/comm/button/CommonButton"
 import { EXTERNAL_LINKS } from "@/constants/external";
+import { useScrollreveal } from "@/hooks/useScrollreveal";
 
 export const Banner = () => {
     const { t } = useTranslation("home");
-
+    useScrollreveal();
     return <div className="flex items-center max-md:flex-col-reverse w-full max-md:gap-[20px] justify-between">
         <img alt="" src={BgIcon} className="max-md:hidden absolute scale-90 left-0 ml-[-5%]"></img>
         <div className="w-full md:w-[57.25%] shrink-0 text-t1">

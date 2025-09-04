@@ -1,18 +1,18 @@
 import clsx from "clsx";
 import dayjs from "dayjs";
 import { useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { EventData, getEvents } from "@/api/events";
 import DotIcon from "@/assets/svg/home/dot.svg?react";
 import MapIcon from "@/assets/svg/home/map.svg?react";
 import ParticipantsIcon from "@/assets/svg/home/participants.svg?react";
 import CommonButton from "@/components/comm/button/CommonButton";
+import Empty from "@/components/comm/Empty";
 import { Title } from "@/components/comm/title";
 import { Card } from "@/components/Events/Card";
 import useApplicationStore from "@/store/applicationStore";
 import { isTimeRangeValid } from "@/utils/time";
-import Empty from "@/components/comm/Empty";
 
 export const Events = () => {
     const { t } = useTranslation("events");
@@ -68,14 +68,16 @@ export const Events = () => {
     }, [isLight])
     return (
         <div className="container text-center !pb-[80px] md:!pb-[120px]">
-            <Title className="mt-[42px] md:mt-[120px]">{t("title")}</Title>
+            <Title className="mt-[42px] md:mt-[120px]">
+                <Trans i18nKey="events:title" />
+            </Title>
             <div className="text-base md:text-xl leading-[140%] mb-6 md:mb-10">
                 {t("desc")}
             </div>
             <CommonButton
                 onClick={() => window.open("https://luma.com/xone")}
                 type="black"
-                className="max-md:w-full max-md:h-[48px] h-[56px] md:w-[140px] md:text-[18px] mx-auto !rounded-[12px]"
+                className="max-md:w-full !text-[16px] max-md:h-[48px] h-[56px] md:w-[140px] md:!text-[18px] mx-auto !rounded-[12px]"
             >
                 {t("joinUs")}
             </CommonButton>
@@ -116,12 +118,14 @@ export const Events = () => {
                             <div className="mt-1 bg-[--border2] w-[1px] h-[calc(100%-12px)]"></div>
                         </div>
                         <div className="flex-1">
-                            <div className="w-full flex items-center gap-[24px] bg-b2 px-[24px] py-[13.5px] rounded-[16px]">
+                            <div onClick={() => {
+                                window.open(el.event.url)
+                            }} className="w-full flex items-center border-[1px] border-transparent border-solid hover:border-t1 cursor-pointer gap-[24px] bg-b2 px-[24px] py-[13.5px] rounded-[16px]">
                                 <div className="flex-1">
                                     <img
                                         alt=""
                                         src={el.event.cover_url || ""}
-                                        className="w-full aspect-[311/186] mb-[22px] md:hidden rounded-[6px]"
+                                        className="w-full aspect-[311/186] object-cover mb-[22px] md:hidden rounded-[6px]"
                                     ></img>
                                     <div className="text-t2 mb-3 md:mb-2 text-base md:text-[20px] leading-[21px] md:leading-[30px]"></div>
                                     <div className="font-bold text-[20px] md:text-[24px] leading-[26px] md:leading-[34px]  line-clamp-2 mb-3 md:mb-4 text-left">
@@ -178,7 +182,7 @@ export const Events = () => {
                                     <img
                                         alt=""
                                         src={el.event.cover_url || ""}
-                                        className="w-full h-full rounded-[12px]"
+                                        className="w-full h-full object-cover rounded-[12px]"
                                     ></img>
                                 </div>
                             </div>

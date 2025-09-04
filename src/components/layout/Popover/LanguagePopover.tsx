@@ -1,31 +1,34 @@
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import clsx from "clsx";
-import i18next from "i18next";
 import { ReactNode, useMemo } from "react";
 import { useCookies } from "react-cookie";
+import { useTranslation } from "react-i18next";
 
 import { changeLanguage } from "@/i18n";
 import { cookieName, langs, LanguageType } from "@/i18n/settings";
 
-const LanguagePopover = ({ children, className, buttonClass, noHoverBg }: { children: ReactNode; className?: string; buttonClass?: string; noHoverBg?: boolean }) => {
+const LanguagePopover = ({ children, handleChange, className, buttonClass, noHoverBg }: { children: ReactNode; className?: string; buttonClass?: string; noHoverBg?: boolean; handleChange?: () => void }) => {
     const [_, setCookies] = useCookies();
-
+    const { i18n } = useTranslation()
     const handleChangeLanguage = async (type: LanguageType) => {
         await changeLanguage(type);
         setCookies(cookieName, type);
+        if (handleChange) {
+            handleChange()
+        }
     };
 
     const currentLanguage = useMemo(() => {
         const fallback = langs.find((item) => item.type === LanguageType.en);
         return (
             langs.find((item) => {
-                return item.type === i18next.language;
+                return item.type === i18n.language;
             }) || fallback
         );
-    }, []);
+    }, [i18n.language]);
     return (
         <Popover className={className ? className : ''}>
-            {({ open }) => (
+            {({ open, close }) => (
                 <>
                     <PopoverButton
                         className={clsx(
@@ -47,7 +50,10 @@ const LanguagePopover = ({ children, className, buttonClass, noHoverBg }: { chil
                             {langs &&
                                 langs.map((el) => (
                                     <div
-                                        onClick={() => handleChangeLanguage(el.type)}
+                                        onClick={() => {
+                                            handleChangeLanguage(el.type);
+                                            close();
+                                        }}
                                         className={clsx(`px-[10px] py-[8px] hover:text-t1 hover:bg-b3 rounded-[8px] cursor-pointer`, {
                                             'bg-b3 text-t1': currentLanguage?.type === el.type,
                                         })}

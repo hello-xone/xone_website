@@ -15,7 +15,10 @@ import {
 import { fetchChart } from '@/api/common';
 import MarketSource2 from "@/assets/imgs/home/market-source-2.png";
 import MarketSource1 from "@/assets/imgs/home/market-source1.png";
+import NumberCounter from '@/components/comm/animation/NumberCounter';
 import { useCountdownTimer } from '@/hooks/useCountdownTimer';
+import { useScrollreveal } from '@/hooks/useScrollreveal';
+import useApplicationStore from '@/store/applicationStore';
 import { ChartRes } from "@/types/response";
 import { formatNumber } from '@/utils/number';
 
@@ -34,6 +37,8 @@ const BottomMenu = [
 export const MarketChart = () => {
     const { t } = useTranslation("home");
     const [chartData, setChartData] = useState<ChartRes | null>(null)
+    useScrollreveal();
+    const { isLight } = useApplicationStore()
     const getMainNetData = async () => {
         const data = await fetchChart();
         if (data) {
@@ -48,15 +53,12 @@ export const MarketChart = () => {
         dependency: [],
     });
 
-    const isLight = useMemo(() => {
-        return localStorage.getItem("theme") !== "dark";
-    }, []);
-
     const data = useMemo(() => {
         if (chartData && chartData.prices.length > 0) {
             return chartData.prices.map((el) => ({
                 ...el,
                 date: dayjs(el.date * 1000).format("YYYY-MM-DD"),
+                xLabel: dayjs(el.date * 1000).format("MM-DD"),
             })).reverse();
         }
         return [];
@@ -67,14 +69,14 @@ export const MarketChart = () => {
             <>
                 {isVisible ? (
                     <div className="p-2 text-left text-xs shadow-[0px_10px_32px_0px_#1F1F1F26] rounded bg-b1">
-                        <div className="flex items-center font-medium justify-between">
+                        <div className="flex items-center font-medium gap-[32px] justify-between">
                             <span className="text-[--link1]">
-                                {t("price")}: ${new BigNumber(payload[0].payload.avg_price).toFixed(6, 1)}
+                                {t("price")}: ${new BigNumber(payload[0].payload.avg_price).toFixed(4, 1)}
                             </span>
-                            <span className="text-t2">{dayjs(payload[0].payload.date).format("DD/MM")}</span>
+                            <span className="text-t2">{payload[0].payload.date}</span>
                         </div>
                         <div className="mt-1 text-t3 leading-[140%]">
-                            {t("avgPrice")}: {new BigNumber(payload[0].payload.avg_price).toFixed(6, 1)}
+                            {t("avgPrice")}: {new BigNumber(payload[0].payload.avg_price).toFixed(4, 1)}
                         </div>
                         <div className="mt-1 text-t3 leading-[140%]">
                             {t("transactionCount1")}: {formatNumber(payload[0].payload.tx_count)}
@@ -141,7 +143,7 @@ export const MarketChart = () => {
                         stroke={isLight ? "#EAEAED" : "#373737"}
                     />
                     <XAxis
-                        dataKey="date"
+                        dataKey="xLabel"
                         tickLine={false}
                         stroke={isLight ? "#C4C7CA" : "#C3C3C7"}
                         className="text-sm"
@@ -180,13 +182,14 @@ export const MarketChart = () => {
                     {t("totalMarketCap")}
                 </div>
                 <div className="text-t1 font-bold text-[32px] leading-[100%] mb-12">
-                    {formatNumber(chartData?.market_cap || "0")}
+                    <NumberCounter value={chartData?.market_cap || 0}></NumberCounter>
                 </div>
                 <div className="text-t1 leading-[100%] mb-2">
                     {t("accountsHoldingCOX")}
                 </div>
                 <div className="text-t1 font-bold text-[32px] leading-[100%]">
-                    {formatNumber(chartData?.total_accounts || "0")}
+                    <NumberCounter value={chartData?.total_accounts || 0}></NumberCounter>
+
                 </div>
             </div>
         </div>
@@ -198,7 +201,7 @@ export const MarketChart = () => {
                         className="w-full py-[12px] rounded-[8px] text-center bg-[--layer2]"
                     >
                         <div className="text-[32px] font-bold leading-[100%]">
-                            {el.title === "currentPrice" ? (chartData?.current_price || 0) : el.title === "transactionCount" ? formatNumber(chartData?.transactions_today || 0) : formatNumber(chartData?.transaction_amounts_today || 0)}
+                            <NumberCounter value={el.title === "currentPrice" ? (chartData?.current_price || 0) : el.title === "transactionCount" ? (chartData?.transactions_today || 0) : (chartData?.transaction_amounts_today || 0)}></NumberCounter>
                         </div>
                         <div className="text-[16px] mt-2 font-normal leading-[100%]">
                             {t(el.title)}

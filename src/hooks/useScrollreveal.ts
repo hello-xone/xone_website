@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import ScrollReveal from "scrollreveal";
+
 import { useStartupLoaded } from "./useStartupLoaded";
 
 export enum AnimationName {

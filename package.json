@@ -29,6 +29,7 @@
     "dayjs": "^1.11.13",
     "ethers": "^5.8.0",
     "formik": "^2.4.6",
+    "framer-motion": "^12.23.12",
     "gray-matter": "^4.0.3",
     "i18next": "^24.2.3",
     "lodash": "^4.17.21",

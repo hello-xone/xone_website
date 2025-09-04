@@ -14,9 +14,9 @@ import { SeeMore } from "@/components/comm/link/SeeMore";
 import { Title } from "@/components/comm/title";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import { AnimationName } from "@/hooks/useScrollreveal";
+import useApplicationStore from "@/store/applicationStore";
 
 import styles from "./index.module.less";
-import useApplicationStore from "@/store/applicationStore";
 
 const HelloXone = () => {
   const { t } = useTranslation();
@@ -70,12 +70,12 @@ const HelloXone = () => {
           className={` ${styles.headerDescription} ${AnimationName.SLIDE_IN_BOTTOM}`}
         >
           {t("home:hellowXoneDesc")}
-          <SeeMore
+          {/* <SeeMore
             href={EXTERNAL_LINKS.docs + "developers/guide"}
             target="_blank"
             className={`${styles.btn} ${styles.seeMoreBtn}`}
             text={t("home:hellowXoneLinkText2")}
-          ></SeeMore>
+          ></SeeMore> */}
         </p>
       </div>
       <div className={styles.content}>

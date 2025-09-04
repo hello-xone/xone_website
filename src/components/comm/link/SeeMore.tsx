@@ -6,6 +6,7 @@ export const SeeMore = ({
   className,
   textClassName,
   text,
+  onClick,
   disabled = false,
   target = "_blank",
 }: PropsWithChildren<{
@@ -15,22 +16,25 @@ export const SeeMore = ({
   textClassName?: string;
   target?: string;
   disabled?: boolean;
+  onClick?: () => void;
 }>) => {
   const handleClick = (e: React.MouseEvent) => {
     if (disabled) {
       e.preventDefault();
       e.stopPropagation();
     }
+    if (onClick) {
+      onClick()
+    }
   };
 
   const linkContent = (
     <>
       <span
-        className={`text-[14px] md:text-[20px] font-medium leading-[100%] transition-colors duration-200 ${
-          disabled
-            ? "!text-t3 cursor-not-allowed"
-            : "group-hover:text-[--link1]"
-        } ${textClassName ? textClassName : ""}`}
+        className={`text-[14px] md:text-[20px] font-medium leading-[100%] transition-colors duration-200 ${disabled
+          ? "!text-t3 cursor-not-allowed"
+          : "group-hover:text-[--link1]"
+          } ${textClassName ? textClassName : ""}`}
       >
         {text}
       </span>
@@ -38,9 +42,8 @@ export const SeeMore = ({
         width="20"
         height="20"
         viewBox="0 0 20 20"
-        className={`transition-all duration-200 ${
-          disabled ? "cursor-not-allowed" : "group-hover:translate-x-[6px]"
-        }`}
+        className={`transition-all duration-200 ${disabled ? "cursor-not-allowed" : "group-hover:translate-x-[6px]"
+          }`}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >

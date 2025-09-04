@@ -8,7 +8,7 @@ import {
     PopoverPanel,
 } from "@headlessui/react";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -19,6 +19,7 @@ import Knight from "@/components/Icons/Knight";
 import Language from "@/components/Icons/Language";
 import Theme from "@/components/Icons/Theme";
 import { menus, NavigationType } from "@/constants/menus";
+import { langs, LanguageType } from "@/i18n/settings";
 import useApplicationStore from "@/store/applicationStore";
 
 import LanguagePopover from "./LanguagePopover";
@@ -30,7 +31,7 @@ const MenuPopover = () => {
     });
     const { changeTheme } = useApplicationStore()
 
-    const { t } = useTranslation("header");
+    const { t, i18n } = useTranslation("header");
     const toggleTheme = () => {
         setTheme((prev) => (prev === "light" ? "dark" : "light"));
         document.documentElement.setAttribute(
@@ -48,6 +49,15 @@ const MenuPopover = () => {
             document.body.style.overflow = '';
         }
     }, [isOpen]);
+
+    const currentLanguage = useMemo(() => {
+        const fallback = langs.find((item) => item.type === LanguageType.en);
+        return (
+            langs.find((item) => {
+                return item.type === i18n.language;
+            }) || fallback
+        );
+    }, [i18n.language]);
 
     return (
         <Popover className="xl:hidden">
@@ -75,6 +85,7 @@ const MenuPopover = () => {
                     </PopoverButton>
                     <PopoverBackdrop className="fixed inset-0 bg-b1 opacity-70 backdrop-blur-[10px] z-[2] w-screen h-screen" />
                     <PopoverPanel
+                        modal
                         transition
                         anchor="bottom start"
                         className="p-[20px] h-screen w-[68vw] !max-h-screen right-0 !top-0 !left-[unset] relative z-[9999] shadow-[0px_10px_32px_0px_#1F1F1F26] rounded-l-[16px] bg-b1 text-t1 transition duration-200 ease-in-out [--anchor-gap:--spacing(5)] data-closed:-translate-y-1 data-closed:opacity-0"
@@ -183,15 +194,20 @@ const MenuPopover = () => {
                                     // </div>
                                 ))}
                             <div className="mt-4 pt-4 border-t-[1px] border-solid border-border3">
-                                <LanguagePopover buttonClass="!px-0 !gap-[10px]">
+                                <LanguagePopover handleChange={() => {
+                                    close();
+                                }} buttonClass="!px-0 !gap-[10px]">
                                     <>
                                         <Language className="text-t1 w-6 h-6"></Language>
-                                        <span className="text-t1 font-medium text-sm">English</span>
+                                        <span className="text-t1 font-medium text-sm">{currentLanguage?.name || "English"}</span>
                                     </>
                                 </LanguagePopover>
                                 <div
                                     className="flex h-10 items-center"
-                                    onClick={() => toggleTheme()}
+                                    onClick={() => {
+                                        toggleTheme();
+                                        close()
+                                    }}
                                 >
                                     <Theme className="w-6 h-6 mr-[10px]"></Theme>
                                     <span className="text-t1 font-medium text-sm">

@@ -270,111 +270,111 @@ export const menus: Array<MenuModel> = [
       },
     ],
   },
-  {
-    id: "Governance",
-    type: NavigationType.LINK,
-    name: "headerNav3",
-    group: [
-      {
-        id: "onboarding",
-        title: "navOnboarding",
-        description: "navOnboardingDesc",
-        links: [
-          {
-            id: "learning_Idea_1",
-            name: "navLearnIdeaItem1",
-            link: EXTERNAL_LINKS.docs + "study/account",
-          },
-          {
-            id: "learning_Idea_2",
-            name: "navLearnIdeaItem2",
-            link: EXTERNAL_LINKS.docs + "study/xoc",
-          },
-          {
-            id: "learning_Idea_3",
-            name: "navLearnIdeaItem3",
-            link: EXTERNAL_LINKS.docs + "study/gas",
-          },
-          {
-            id: "learning_Idea_4",
-            name: "navLearnIdeaItem4",
-            link: EXTERNAL_LINKS.docs + "study/nodes",
-          },
-          {
-            id: "learning_Idea_5",
-            name: "navLearnIdeaItem5",
-            link: EXTERNAL_LINKS.docs + "study/modules",
-          },
-          {
-            id: "learning_Idea_6",
-            name: "navLearnIdeaItem6",
-            link: EXTERNAL_LINKS.docs + "study/epoch",
-          },
-        ],
-      },
-      {
-        id: "launch",
-        title: "navLaunch",
-        description: "navLaunchDesc",
-        links: [
-          {
-            id: "learning_Positive_1",
-            name: "navLearnPositiveItem1",
-            link: EXTERNAL_LINKS.docs + "study/donate",
-          },
-          {
-            id: "learning_Positive_2",
-            name: "navLearnPositiveItem2",
-            link: EXTERNAL_LINKS.docs + "study/release",
-          },
-        ],
-      },
-      {
-        id: "vote",
-        title: "navVote",
-        description: "navVoteDesc",
-        links: [
-          {
-            id: "learning_Resources_1",
-            name: "navLearnResourceItem1",
-            link: EXTERNAL_LINKS.docs + "study/media",
-          },
-          {
-            id: "learning_Resources_2",
-            name: "navLearnResourceItem2",
-            link: EXTERNAL_LINKS.docs + "study/contribut",
-          },
-          {
-            id: "learning_Resources_3",
-            name: "navLearnResourceItem3",
-            link: EXTERNAL_LINKS.docs + "study/wiki",
-          },
-        ],
-      },
-      {
-        id: "influence",
-        title: "navInfluence",
-        description: "navInfluenceDesc",
-        links: [
-          {
-            id: "learning_Resources_1",
-            name: "navLearnResourceItem1",
-            link: EXTERNAL_LINKS.docs + "study/media",
-          },
-          {
-            id: "learning_Resources_2",
-            name: "navLearnResourceItem2",
-            link: EXTERNAL_LINKS.docs + "study/contribut",
-          },
-          {
-            id: "learning_Resources_3",
-            name: "navLearnResourceItem3",
-            link: EXTERNAL_LINKS.docs + "study/wiki",
-          },
-        ],
-      },
-    ],
-  },
+  // {
+  //   id: "Governance",
+  //   type: NavigationType.LINK,
+  //   name: "headerNav3",
+  //   group: [
+  //     {
+  //       id: "onboarding",
+  //       title: "navOnboarding",
+  //       description: "navOnboardingDesc",
+  //       links: [
+  //         {
+  //           id: "learning_Idea_1",
+  //           name: "navLearnIdeaItem1",
+  //           link: EXTERNAL_LINKS.docs + "study/account",
+  //         },
+  //         {
+  //           id: "learning_Idea_2",
+  //           name: "navLearnIdeaItem2",
+  //           link: EXTERNAL_LINKS.docs + "study/xoc",
+  //         },
+  //         {
+  //           id: "learning_Idea_3",
+  //           name: "navLearnIdeaItem3",
+  //           link: EXTERNAL_LINKS.docs + "study/gas",
+  //         },
+  //         {
+  //           id: "learning_Idea_4",
+  //           name: "navLearnIdeaItem4",
+  //           link: EXTERNAL_LINKS.docs + "study/nodes",
+  //         },
+  //         {
+  //           id: "learning_Idea_5",
+  //           name: "navLearnIdeaItem5",
+  //           link: EXTERNAL_LINKS.docs + "study/modules",
+  //         },
+  //         {
+  //           id: "learning_Idea_6",
+  //           name: "navLearnIdeaItem6",
+  //           link: EXTERNAL_LINKS.docs + "study/epoch",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       id: "launch",
+  //       title: "navLaunch",
+  //       description: "navLaunchDesc",
+  //       links: [
+  //         {
+  //           id: "learning_Positive_1",
+  //           name: "navLearnPositiveItem1",
+  //           link: EXTERNAL_LINKS.docs + "study/donate",
+  //         },
+  //         {
+  //           id: "learning_Positive_2",
+  //           name: "navLearnPositiveItem2",
+  //           link: EXTERNAL_LINKS.docs + "study/release",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       id: "vote",
+  //       title: "navVote",
+  //       description: "navVoteDesc",
+  //       links: [
+  //         {
+  //           id: "learning_Resources_1",
+  //           name: "navLearnResourceItem1",
+  //           link: EXTERNAL_LINKS.docs + "study/media",
+  //         },
+  //         {
+  //           id: "learning_Resources_2",
+  //           name: "navLearnResourceItem2",
+  //           link: EXTERNAL_LINKS.docs + "study/contribut",
+  //         },
+  //         {
+  //           id: "learning_Resources_3",
+  //           name: "navLearnResourceItem3",
+  //           link: EXTERNAL_LINKS.docs + "study/wiki",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       id: "influence",
+  //       title: "navInfluence",
+  //       description: "navInfluenceDesc",
+  //       links: [
+  //         {
+  //           id: "learning_Resources_1",
+  //           name: "navLearnResourceItem1",
+  //           link: EXTERNAL_LINKS.docs + "study/media",
+  //         },
+  //         {
+  //           id: "learning_Resources_2",
+  //           name: "navLearnResourceItem2",
+  //           link: EXTERNAL_LINKS.docs + "study/contribut",
+  //         },
+  //         {
+  //           id: "learning_Resources_3",
+  //           name: "navLearnResourceItem3",
+  //           link: EXTERNAL_LINKS.docs + "study/wiki",
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
   {
     id: "Ecology",
     type: NavigationType.LINK,

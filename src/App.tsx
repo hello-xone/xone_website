@@ -53,7 +53,9 @@ function App() {
               defaultChainType={ChainType.EVM}
             >
               <NotificationsProvider>
-                <Toaster />
+                <Toaster toastOptions={{
+                  className: "common-toast"
+                }} />
                 <RenderRoutes />
               </NotificationsProvider>
             </WalletKitProvider>

@@ -2,14 +2,18 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { fetchStatsByNet } from "@/api/common";
+import NumberCounter from "@/components/comm/animation/NumberCounter";
 import { SeeMore } from "@/components/comm/link/SeeMore";
+import { MyCountUp } from "@/components/comm/myCountUp";
 import Price from "@/components/comm/Price";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 import { Stats } from "@/types/response";
+import { formatNumber } from "@/utils/number";
 
 export const XoneChain = () => {
     const { t } = useTranslation("home");
+    const [value, setValue] = useState<number>(10)
     const [statsData, setStatsData] = useState<Stats | null>(null)
     const getMainNetData = async () => {
         const data = await fetchStatsByNet();
@@ -38,7 +42,7 @@ export const XoneChain = () => {
                 <div className="grid grid-cols-2 gap-[16px] md:gap-[24px]">
                     <div className="md:px-6 md:py-3">
                         <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
-                            {statsData?.mainnet?.total_addresses || '--'}
+                            <NumberCounter value={statsData?.mainnet?.total_addresses || 0}></NumberCounter>
                         </div>
                         <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
                             {t("addressAdd")}
@@ -46,15 +50,17 @@ export const XoneChain = () => {
                     </div>
                     <div className="md:px-6 md:py-3">
                         <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
-                            {statsData?.mainnet?.total_nfts || '--'}
+                            <NumberCounter value={statsData?.mainnet?.total_nfts || 0}></NumberCounter>
                         </div>
-                        <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
+                        <div onClick={() => {
+                            setValue(value + 10)
+                        }} className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
                             {t("artworkIsCast")}
                         </div>
                     </div>
                     <div className="md:px-6 md:py-3">
                         <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[100%] md:leading-[140%] font-bold">
-                            {statsData?.mainnet?.total_tokens || '--'}
+                            <NumberCounter value={statsData?.mainnet?.total_tokens || 0}></NumberCounter>
                         </div>
                         <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[100%]">
                             {t("tokenMinting")}

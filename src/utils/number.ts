@@ -121,11 +121,14 @@ export function formatNumber(num: string | number, decimalPlaces = 2) {
     { threshold: new BigNumber(1e3), symbol: 'K' }, // 千
   ];
 
+  if (number.lt(10000)) {
+    return number.toString();
+  }
   for (const { threshold, symbol } of units) {
     if (number.abs().isGreaterThanOrEqualTo(threshold)) {
       const formatted = number.dividedBy(threshold).toFixed(decimalPlaces);
       const trimmed = new BigNumber(formatted).toString();
-      return `${trimmed}${symbol}`;
+      return `${trimmed} ${symbol}`;
     }
   }
 

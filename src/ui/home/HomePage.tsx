@@ -1,3 +1,4 @@
+import { MotionScrollReveal } from "@/components/comm/animation/ScrollReveal";
 import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 
 import { Banner } from "./Banner";
@@ -17,19 +18,37 @@ const HomePage = () => {
 
       return (
             <div className="container overflow-x-hidden">
-                  <Banner></Banner>
-                  <XoneChain></XoneChain>
-                  <Introducing></Introducing>
-                  <MarketChart></MarketChart>
-                  <Governance></Governance>
-                  <OnChainIdentity></OnChainIdentity>
-                  {md && <Ecosystem></Ecosystem>}
-                  <HelloXone />
-                  <Community></Community>
+                  <MotionScrollReveal delay={0}>
+                        <Banner></Banner>
+                  </MotionScrollReveal>
+                  <MotionScrollReveal>
+                        <XoneChain></XoneChain>
+                  </MotionScrollReveal>
+                  <MotionScrollReveal>
+                        <Introducing></Introducing>
+                  </MotionScrollReveal>
+                  <MotionScrollReveal>
+                        <MarketChart></MarketChart>
+                  </MotionScrollReveal>
+                  <MotionScrollReveal>
+                        <Governance></Governance>
+                  </MotionScrollReveal>
+                  <MotionScrollReveal>
+                        <OnChainIdentity></OnChainIdentity>
+                  </MotionScrollReveal>
+                  {md && <MotionScrollReveal><Ecosystem></Ecosystem></MotionScrollReveal>}
+                  <MotionScrollReveal>
+                        <HelloXone />
+                  </MotionScrollReveal>
+                  <MotionScrollReveal>
+                        <Community></Community>
+                  </MotionScrollReveal>
                   {/* <Governance></Governance> */}
                   {/* <Explore></Explore> */}
-                  {!md && <Ecosystem></Ecosystem>}
-                  <Start></Start>
+                  {!md && <MotionScrollReveal><Ecosystem></Ecosystem> </MotionScrollReveal>}
+                  <MotionScrollReveal>
+                        <Start></Start>
+                  </MotionScrollReveal>
             </div>
       );
 };

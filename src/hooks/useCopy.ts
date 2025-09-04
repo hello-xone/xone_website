@@ -1,27 +1,19 @@
 import copyToClipboard from "copy-to-clipboard";
-import { useNotifications } from "@toolpad/core/useNotifications";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
 export const useCopy = () => {
-  const notifications = useNotifications();
   const { t } = useTranslation();
 
   const copy = (value: string) => {
     try {
       copyToClipboard(value);
-      notifications.show(t("common:copiedSuccessfully"), {
-        severity: "success",
-        autoHideDuration: 2000,
-      });
+      toast.success(t("common:copiedSuccessfully"));
     } catch (err) {
       console.error(err);
-      notifications.show(t("common:copyFailed"), {
-        severity: "error",
-        autoHideDuration: 4000,
-      });
+      toast.error(t("common:copyFailed"));
     }
   };
-
   return {
     copy,
   };
