@@ -1,9 +1,10 @@
+import BigNumber from "bignumber.js";
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { useCallback, useEffect, useRef } from "react";
 
 import { formatNumber } from "@/utils/number";
 
-export default function AnimatedNumber({ value }: { value: number }) {
+export default function AnimatedNumber({ value, decimalPlaces = 0 }: { value: number; decimalPlaces?: number }) {
     const count = useMotionValue(0);
     // 记录上一次的目标值
     const lastValue = useRef(0);
@@ -45,7 +46,7 @@ export default function AnimatedNumber({ value }: { value: number }) {
     }, [animateToValue, value]);
 
     const formattedNumber = useTransform(count, (value) => {
-        const roundedValue = Math.round(value);
+        const roundedValue = new BigNumber(value).toFixed(decimalPlaces, 1);
         return formatNumber(roundedValue);
     });
     return <motion.div>{formattedNumber}</motion.div>;
