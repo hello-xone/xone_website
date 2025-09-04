@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import IconSvgDark1 from "@/assets/imgs/grants/dark/icon_13.png";
@@ -21,7 +21,9 @@ import styles from "../index.module.less";
 export const SupportProvided = () => {
   const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
   const { isLight } = useCurrentTheme();
+  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const list = useMemo(() => {
     return [
@@ -63,6 +65,36 @@ export const SupportProvided = () => {
     return list[activeIndex];
   }, [list, activeIndex]);
 
+  // 进度条自动切换逻辑
+  useEffect(() => {
+    // 清除之前的定时器
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
+    }
+
+    // 重置进度
+    setProgress(0);
+
+    // 开始新的进度条
+    progressIntervalRef.current = setInterval(() => {
+      setProgress((prevProgress) => {
+        if (prevProgress >= 100) {
+          // 进度条满了，切换到下一个卡片
+          setActiveIndex((prevIndex) => (prevIndex + 1) % list.length);
+          return 0; // 重置进度
+        }
+        return prevProgress + 2; // 每50ms增加2%，总共5秒完成
+      });
+    }, 120);
+
+    // 清理函数
+    return () => {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+    };
+  }, [activeIndex, list.length]);
+
   return (
     <div className="mt-[80px] md:mt-[180px]">
       <h2 className="text-[var(--t1)] text-[24px] md:text-[48px] font-bold">
@@ -71,13 +103,13 @@ export const SupportProvided = () => {
       <p className="text-[var(--t2)] text-[15px] md:text-[16px] mt-2 md:mt-1">
         {t("grants:supportProvidedDesc")}
       </p>
-      <div className="mt-10 flex gap-x-[24px] items-center justify-between">
+      <div className="mt-10 flex gap-x-[80px] items-stretch justify-between">
         <div className="w-full md:w-auto flex flex-col gap-y-[26px]">
           {list.map((item, index) => (
             <>
               <div
                 className={clsx(
-                  "border-l-[4px] md:pl-[20px] pl-[20px] cursor-pointer flex flex-col items-start gap-[10px] md:gap-[16px]",
+                  "border-l-[4px] md:pl-[20px] pl-[20px] cursor-pointer flex flex-col items-start gap-[10px] md:gap-[16px] hover:border-l-[var(--primary)] [&>h3]:hover:text-[var(--primary)] [&>h3]:hover:text-[32px] [&>img]:hover:w-[54px] [&>img]:hover:h-[54px]",
                   activeIndex === index
                     ? "border-l-[var(--primary)]"
                     : "border-l-[transparent]"
@@ -117,21 +149,41 @@ export const SupportProvided = () => {
                     text={detail.button}
                     target="_blank"
                   ></SeeMore>
+
+                  <div className="mt-[15px] w-full">
+                    <div className="w-full h-[4px] bg-[var(--b3)] rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-[var(--primary)] rounded-full transition-all duration-100 ease-linear"
+                        style={{ width: `${progress}%` }}
+                      />
+                    </div>
+                  </div>
                 </div>
               )}
             </>
           ))}
         </div>
         {detail && (
-          <div className="hidden md:block w-[752px]">
-            <div className="w-full h-[445px] bg-[var(--layer2)] rounded-[28px]"></div>
-            <p className="text-[var(--t2)] mt-12 text-[17px]">{detail.desc}</p>
-            <SeeMore
-              className={`mt-6 ${styles.seeMore} ${styles.seeMoreSupport}`}
-              href="https://docs.xone.org/study/grants"
-              text={detail.button}
-              target="_blank"
-            ></SeeMore>
+          <div className="hidden flex-col justify-between md:flex md:flex-1">
+            <div className="w-full h-[460px] bg-[var(--layer2)] rounded-[28px]"></div>
+            <p className="text-[var(--t2)] mt-2 text-[17px]">{detail.desc}</p>
+            <div className="mt-6">
+              <SeeMore
+                className={`${styles.seeMore} ${styles.seeMoreSupport}`}
+                href="https://docs.xone.org/study/grants"
+                text={detail.button}
+                target="_blank"
+              ></SeeMore>
+
+              <div className="mt-5 w-full">
+                <div className="w-full h-[4px] bg-[var(--b3)] rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-[var(--primary)] rounded-full transition-all duration-100 ease-linear"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
