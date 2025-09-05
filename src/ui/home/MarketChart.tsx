@@ -242,7 +242,6 @@ export const MarketChart = () => {
 
     return (
         <div className="py-[40px] md:py-[80px] text-center">
-            <div className="w-screen absolute left-0 mt-[-40px] md:mt-[-80px] h-[1px] bg-[--border5]"></div>
             <div className="text-[24px] md:text-[48px] max-md:text-left font-bold leading-[120%] mb-4 md:mb-6">
                 {t("marketTitle")}
             </div>

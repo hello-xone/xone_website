@@ -14,47 +14,57 @@ import { Start } from "./sections/Start";
 import { XoneChain } from "./XoneChain";
 
 const HomePage = () => {
-      const { md } = useTailwindBreakpoint();
+  const { md } = useTailwindBreakpoint();
 
-      return (
-            <>
-                  <div className="container overflow-x-hidden">
-                        <MotionScrollReveal delay={0}>
-                              <Banner></Banner>
-                        </MotionScrollReveal>
-                        <MotionScrollReveal>
-                              <XoneChain></XoneChain>
-                        </MotionScrollReveal>
-                        <MotionScrollReveal>
-                              <Introducing></Introducing>
-                        </MotionScrollReveal>
-                        <MotionScrollReveal>
-                              <MarketChart></MarketChart>
-                        </MotionScrollReveal>
-                        <MotionScrollReveal>
-                              <Governance></Governance>
-                        </MotionScrollReveal>
-                        <MotionScrollReveal>
-                              <OnChainIdentity></OnChainIdentity>
-                        </MotionScrollReveal>
-                        {md && <MotionScrollReveal><Ecosystem></Ecosystem></MotionScrollReveal>}
-                        <MotionScrollReveal>
-                              <HelloXone />
-                        </MotionScrollReveal>
-                  </div>
-                  <MotionScrollReveal>
-                        <Community></Community>
-                  </MotionScrollReveal>
-                  <div className="container overflow-x-hidden">
-                        {/* <Governance></Governance> */}
-                        {/* <Explore></Explore> */}
-                        {!md && <MotionScrollReveal><Ecosystem></Ecosystem> </MotionScrollReveal>}
-                        <MotionScrollReveal>
-                              <Start></Start>
-                        </MotionScrollReveal>
-                  </div>
-            </>
-      );
+  return (
+    <>
+      <div className="container overflow-x-hidden">
+        <MotionScrollReveal delay={0}>
+          <Banner></Banner>
+        </MotionScrollReveal>
+        <MotionScrollReveal>
+          <XoneChain></XoneChain>
+        </MotionScrollReveal>
+      </div>
+      <MotionScrollReveal>
+        <Introducing></Introducing>
+      </MotionScrollReveal>
+      <div className="container overflow-x-hidden">
+        <MotionScrollReveal>
+          <MarketChart></MarketChart>
+        </MotionScrollReveal>
+        <MotionScrollReveal>
+          <Governance></Governance>
+        </MotionScrollReveal>
+        <MotionScrollReveal>
+          <OnChainIdentity></OnChainIdentity>
+        </MotionScrollReveal>
+        {md && (
+          <MotionScrollReveal>
+            <Ecosystem></Ecosystem>
+          </MotionScrollReveal>
+        )}
+        <MotionScrollReveal>
+          <HelloXone />
+        </MotionScrollReveal>
+      </div>
+      <MotionScrollReveal>
+        <Community></Community>
+      </MotionScrollReveal>
+      <div className="container overflow-x-hidden">
+        {/* <Governance></Governance> */}
+        {/* <Explore></Explore> */}
+        {!md && (
+          <MotionScrollReveal>
+            <Ecosystem></Ecosystem>{" "}
+          </MotionScrollReveal>
+        )}
+        <MotionScrollReveal>
+          <Start></Start>
+        </MotionScrollReveal>
+      </div>
+    </>
+  );
 };
 
 export default HomePage;

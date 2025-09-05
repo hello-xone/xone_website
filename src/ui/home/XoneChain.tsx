@@ -4,12 +4,10 @@ import { useTranslation } from "react-i18next";
 import { fetchStatsByNet } from "@/api/common";
 import NumberCounter from "@/components/comm/animation/NumberCounter";
 import { SeeMore } from "@/components/comm/link/SeeMore";
-import { MyCountUp } from "@/components/comm/myCountUp";
 import Price from "@/components/comm/Price";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 import { Stats } from "@/types/response";
-import { formatNumber } from "@/utils/number";
 
 export const XoneChain = () => {
     const { t } = useTranslation("home");
@@ -29,7 +27,7 @@ export const XoneChain = () => {
         dependency: [],
     });
     return (
-        <div className="flex w-full max-md:flex-col justify-between mt-10 md:mt-[162px]">
+        <div className="flex w-full md:pb-[12px] max-md:flex-col justify-between mt-10 md:mt-[162px]">
             <div className="shrink-0 text-t1 max-md:flex max-md:items-center max-md:justify-between">
                 <div className="text-[24px] md:text-[48px] leading-[140%] font-bold">
                     {t("xoneMainNet")}
@@ -41,7 +39,7 @@ export const XoneChain = () => {
             <div className="shrink-0 max-md:mt-3 w-full md:w-[57%]">
                 <div className="grid grid-cols-2 gap-[16px] md:gap-[24px]">
                     <div className="md:px-6 md:py-3">
-                        <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[140%] md:leading-[140%] font-bold">
+                        <div className="text-[20px] md:h-[100px] md:text-[64px] mb-[6px] md:mb-2 leading-[140%] md:leading-[140%] font-bold">
                             <NumberCounter value={statsData?.mainnet?.total_addresses || 0}></NumberCounter>
                         </div>
                         <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[140%]">
@@ -49,7 +47,7 @@ export const XoneChain = () => {
                         </div>
                     </div>
                     <div className="md:px-6 md:py-3">
-                        <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[140%] md:leading-[140%] font-bold">
+                        <div className="text-[20px] md:h-[100px] md:text-[64px] mb-[6px] md:mb-2 leading-[140%] md:leading-[140%] font-bold">
                             <NumberCounter value={statsData?.mainnet?.total_nfts || 0}></NumberCounter>
                         </div>
                         <div onClick={() => {
@@ -59,7 +57,7 @@ export const XoneChain = () => {
                         </div>
                     </div>
                     <div className="md:px-6 md:py-3">
-                        <div className="text-[20px] md:text-[64px] mb-[6px] md:mb-2 leading-[140%] md:leading-[140%] font-bold">
+                        <div className="text-[20px] md:h-[100px] md:text-[64px] mb-[6px] md:mb-2 leading-[140%] md:leading-[140%] font-bold">
                             <NumberCounter value={statsData?.mainnet?.total_tokens || 0}></NumberCounter>
                         </div>
                         <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[140%]">
@@ -67,7 +65,7 @@ export const XoneChain = () => {
                         </div>
                     </div>
                     <div className="md:px-6 md:py-3">
-                        <div className="text-[20px] flex items-center md:text-[64px] mb-[6px] md:mb-2 leading-[140%] md:leading-[140%] font-bold">
+                        <div className="text-[20px] md:h-[100px] flex items-center md:text-[64px] mb-[6px] md:mb-2 leading-[140%] md:leading-[140%] font-bold">
                             <Price show$ price={statsData?.mainnet?.average_txn_fee24h || 0} className1={""}></Price>
                         </div>
                         <div className="text-[12px] md:text-[20px] text-t2 leading-[140%] md:leading-[140%]">

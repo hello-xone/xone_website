@@ -85,7 +85,7 @@ const Header = () => {
     }
   };
   return (
-    <div className={clsx(`w-screen fixed backdrop-blur-[5px] z-[10] top-0 left-0 h-[58px] md:h-[64px] px-4 md:px-[30px] flex items-center justify-between`, {
+    <div className={clsx(`w-full fixed backdrop-blur-[5px] z-[10] top-0 left-0 h-[58px] md:h-[64px] px-4 md:px-[30px] flex items-center justify-between`, {
       'bg-[#ffffff]/50': isLight,
       'bg-[#070808]/50': !isLight,
     })} >
@@ -237,7 +237,7 @@ const Header = () => {
             <Language className="text-t1"></Language>
           </LanguagePopover>
           <div className="w-[40px] flex rounded-[10px] hover:bg-b2 items-center justify-center h-[40px]">
-            <Theme onClick={() => toggleTheme()} className="text-t1 w-[24px] h-[24px]"></Theme>
+            <Theme isLight={isLight} onClick={() => toggleTheme()} className="text-t1 w-[24px] h-[24px]"></Theme>
           </div>
 
         </div>

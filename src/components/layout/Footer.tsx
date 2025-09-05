@@ -387,7 +387,7 @@ const Footer = () => {
             className="flex h-10 items-center ml-3"
             onClick={() => toggleTheme()}
           >
-            <Theme className="w-6 h-6 mr-2"></Theme>
+            <Theme isLight={isLight} className="w-6 h-6 mr-2"></Theme>
           </div>
         </div>
         <div className="mt-3 md:mt-10 py-4 max-md:pt-[21px] border-t-[1px] border-solid border-[--border3] text-t3 flex justify-between items-center">

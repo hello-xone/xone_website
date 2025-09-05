@@ -225,7 +225,7 @@ const MenuPopover = () => {
                                                 close()
                                             }}
                                         >
-                                            <Theme className="w-6 h-6 mr-[10px]"></Theme>
+                                            <Theme isLight={isLight} className="w-6 h-6 mr-[10px]"></Theme>
                                             <span className="text-t1 font-medium text-sm">
                                                 {isLight ? "Light" : "Dark"}
                                             </span>
