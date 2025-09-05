@@ -2,55 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: Switzer;
-  src: url("../fonts/Switzer-Light.otf") format("opentype");
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Switzer;
-  src: url('../fonts/Switzer-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: Switzer;
-  src: url("../fonts/Switzer-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Switzer;
-  src: url("../fonts/Switzer-Medium.otf") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Switzer;
-  src: url("../fonts/Switzer-Semibold.otf") format("opentype");
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Switzer;
-  src: url("../fonts/Switzer-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-
 
 @font-face {
   font-family: NotoSans;
-  src: url("../fonts/NotoSans-Light.ttf") format("truetype");
+  src: url("../fonts/Switzer-Italic.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -58,6 +16,7 @@
   src: url("../fonts/NotoSans-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -65,6 +24,7 @@
   src: url("../fonts/NotoSans-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -72,6 +32,7 @@
   src: url("../fonts/NotoSans-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -79,6 +40,7 @@
   src: url("../fonts/NotoSans-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -86,6 +48,7 @@
   src: url("../fonts/NotoSans-ExtraBold.ttf") format("truetype");
   font-weight: 800;
   font-style: normal;
+  font-display: swap;
 }
 
 html,
@@ -94,7 +57,7 @@ body {
   margin: 0;
   font-size: 16px;
   font-weight: 400;
-  font-family: Switzer NotoSans;
+  font-family: "Switzer" "NotoSans";
   color: var(--t1);
   background: fixed var(--b1);
 }
@@ -135,13 +98,13 @@ a {
 #root {
   * {
     box-sizing: border-box;
-    font-family: Switzer NotoSans;
+    font-family: "Switzer" "NotoSans";
   }
 }
 
 #root:lang(zh-CN) {
   * {
-    font-family: NotoSans;
+    font-family: "NotoSans";
   }
 }
 
@@ -339,6 +302,11 @@ button {
 .auto-complete-input .MuiInputBase-root {
   padding: 0 !important;
   background-color: var(--b3) !important;
+  color: var(--t1) !important;
+}
+
+.auto-complete-input .MuiInputBase-root::placeholder {
+  color: var(--t4) !important;
 }
 
 .auto-complete-input .MuiInputBase-root::after,
@@ -348,6 +316,8 @@ button {
 
 .MuiAutocomplete-paper {
   border-radius: 8px !important;
+  margin-top: 12px !important;
+  background-color: transparent !important;
 }
 
 .MuiAutocomplete-listbox {

@@ -362,7 +362,7 @@ const Footer = () => {
               <Link to={EXTERNAL_LINKS.docs + "study/service"} target="_blank">{t("header:terms")}</Link>
             </div>
           </div>
-          <LanguagePopover noHoverBg className="max-md:hidden group">
+          <LanguagePopover noHoverBg panelClass="mt-0" className="max-md:hidden group">
             <>
               <Language className="text-t1"></Language>
               <span className="text-t1 text-sm group-hover:underline group-hover:decoration-dashed">{currentLanguage?.name || "English"}</span>

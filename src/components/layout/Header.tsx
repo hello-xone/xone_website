@@ -12,7 +12,6 @@ import useApplicationStore from "@/store/applicationStore";
 
 import CommonButton from "../comm/button/CommonButton";
 import { SeeMore } from "../comm/link/SeeMore";
-import AiStar from "../Icons/AiStar";
 import Knight from "../Icons/Knight";
 import Language from "../Icons/Language";
 import Theme from "../Icons/Theme";
@@ -145,17 +144,17 @@ const Header = () => {
                                   <img
                                     src={globalDetail.images}
                                     alt=""
-                                    className="w-full aspect-[480/310] object-cover flex-1 rounded-[8px]"
+                                    className="w-full aspect-[480/296] object-cover flex-1 rounded-[8px]"
                                   ></img>
                                 )}
 
                                 <div className="mt-3 text-t2 shrink-0 text-sm font-bold leading-[140%]">
                                   {globalDetail
                                     ? globalDetail.name
-                                    : group?.title ? t(group?.title) : ""}
+                                    : group?.detailTitle ? t(group?.detailTitle) : ""}
                                 </div>
                                 {!globalDetail && (
-                                  <div className="mt-3 text-t2 shrink-0 text-sm leading-[140%]">{group?.description ? t(group?.description) : ""}</div>
+                                  <div className="mt-3 text-t2 shrink-0 text-sm leading-[140%]">{group?.detailDesc ? t(group?.detailDesc) : ""}</div>
                                 )}
                               </>
                             }

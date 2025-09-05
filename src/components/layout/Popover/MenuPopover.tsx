@@ -107,7 +107,7 @@ const MenuPopover = () => {
                             <PopoverBackdrop className="fixed inset-0 bg-b1 opacity-70 backdrop-blur-[10px] z-[2] w-screen h-screen" />
                             <PopoverPanel
                                 transition
-                                className="p-[20px] h-screen w-[68vw] !max-h-screen fixed right-0 !top-0 !left-[unset] z-[9999] shadow-[0px_10px_32px_0px_#1F1F1F26] rounded-l-[16px] bg-b1 text-t1 transition duration-200 ease-in-out [--anchor-gap:--spacing(5)] data-closed:-translate-y-1 data-closed:opacity-0"
+                                className="p-[20px] h-screen w-[68vw] !max-h-screen fixed overflow-y-auto right-0 !top-0 !left-[unset] z-[9999] shadow-[0px_10px_32px_0px_#1F1F1F26] rounded-l-[16px] bg-b1 text-t1 transition duration-200 ease-in-out [--anchor-gap:--spacing(5)] data-closed:-translate-y-1 data-closed:opacity-0"
                             >
                                 <div className="">
                                     <div className="flex mb-4 items-center justify-end h-[24px]">

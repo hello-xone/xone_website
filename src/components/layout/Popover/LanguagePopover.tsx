@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { changeLanguage } from "@/i18n";
 import { cookieName, langs, LanguageType } from "@/i18n/settings";
 
-const LanguagePopover = ({ children, handleChange, className, buttonClass, noHoverBg }: { children: ReactNode; className?: string; buttonClass?: string; noHoverBg?: boolean; handleChange?: () => void }) => {
+const LanguagePopover = ({ children, handleChange, className, buttonClass, panelClass, noHoverBg }: { children: ReactNode; className?: string; buttonClass?: string; panelClass?: string; noHoverBg?: boolean; handleChange?: () => void }) => {
     const [_, setCookies] = useCookies();
     const { i18n } = useTranslation()
     const handleChangeLanguage = async (type: LanguageType) => {
@@ -45,7 +45,7 @@ const LanguagePopover = ({ children, handleChange, className, buttonClass, noHov
                         <PopoverPanel
                             transition
                             anchor="bottom"
-                            className="p-[24px] mt-6 relative z-[9999] rounded-[16px] bg-b2 text-t2 transition duration-200 ease-in-out [--anchor-gap:--spacing(5)] data-closed:-translate-y-1 data-closed:opacity-0"
+                            className={`p-[24px] mt-6 relative z-[9999] rounded-[16px] bg-b2 text-t2 transition duration-200 ease-in-out [--anchor-gap:--spacing(5)] data-closed:-translate-y-1 data-closed:opacity-0 ${panelClass ? panelClass : ''}`}
                         >
                             <div>
                                 {langs &&

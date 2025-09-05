@@ -1,12 +1,13 @@
 import "@/assets/style/app.less";
 import "@/assets/style/code-highlight.less";
-
 // import "swiper/css";
 // import "swiper/css/autoplay";
 // import "swiper/css/free-mode";
 // import "prismjs/themes/prism-tomorrow.css";
 // import "prismjs/components/prism-solidity";
 // import "@/assets/style/animation.less";
+import "@/assets/style/font.css";
+
 import { NotificationsProvider } from "@toolpad/core/useNotifications";
 import { ChainType, WalletKitProvider } from "@web3jskit/walletkit";
 import { AnimatePresence, motion } from "framer-motion";

@@ -46,7 +46,7 @@ export const OnChainIdentity = () => {
                     </div>
                 })
             }
-            <CommonButton onClick={() => window.open(`https://xid.world/${i18n.language}`)} className="mt-8 w-[148px] !rounded-[12px] h-[48px]">{t('try')}</CommonButton>
+            <CommonButton onClick={() => window.open(`https://xid.world/${i18n.language}`)} className="mt-6 md:mt-8 w-[148px] max-md:!w-full max-md:!h-[40px] max-md:!text-[16px] !rounded-[12px] h-[48px]">{t('try')}</CommonButton>
         </div>
         <img alt="" src={isLight ? OnChainIdentityLightIcon : OnChainIdentityIcon} className="shrink-0 max-md:hidden w-[45%] h-auto"></img>
 
