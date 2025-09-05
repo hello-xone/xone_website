@@ -86,6 +86,12 @@
   color: var(--t2);
   font-size: 14px;
   margin-top: 5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
 }
 
 .tagBtn {
@@ -128,12 +134,18 @@
   color: var(--t1);
 }
 
-.seeAll span {
+.seeAll span,
+.showMore span {
   color: var(--b5);
   font-size: 16px;
   font-weight: 500;
 }
 
+.showMore {
+  margin-top: 2px;
+  margin-left: 5px;
+  margin-right: 10px;
+}
 
 .navWrapper {
   overflow-x: auto;

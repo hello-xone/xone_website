@@ -1,8 +1,8 @@
 import { Skeleton } from "@mui/material";
-import i18next from "i18next";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import ArrowBottomInline from "@/assets/svg/home/arrow-bottom-line.svg?react";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import { AnimationName, DelayClassName } from "@/hooks/useScrollreveal";
 
@@ -38,6 +38,7 @@ export const Business = () => {
   const [selectedTag, setSelectedTag] = useState<Tag>(Tag.ALL);
   const [toolList, setToolList] = useState<Record<string, any>>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [displayCount, setDisplayCount] = useState(8);
   // const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -150,7 +151,7 @@ export const Business = () => {
         name: t("developer:businessTag22"),
       },
     ];
-  }, [i18next.language]);
+  }, [t]);
 
   const list = useMemo(
     () =>
@@ -167,6 +168,39 @@ export const Business = () => {
     if (selectedTag === Tag.ALL) return list;
     return list.filter((item) => item.tags.includes(selectedTag));
   }, [selectedTag, list]);
+
+  // 获取当前显示的项目列表
+  const displayList = useMemo(() => {
+    return filterList.slice(0, displayCount);
+  }, [filterList, displayCount]);
+
+  // 检查是否还有更多数据
+  const hasMoreData = useMemo(() => {
+    return filterList.length > displayCount;
+  }, [filterList, displayCount]);
+
+  // 检查是否应该显示查看更多按钮
+  const shouldShowMoreButton = useMemo(() => {
+    // 如果数据还在加载中，不显示按钮
+    if (isLoading) return false;
+
+    // 如果没有更多数据，不显示按钮
+    if (!hasMoreData) return false;
+
+    // 根据tab类型决定是否显示按钮
+    // 这里可以根据具体需求调整条件
+    return true;
+  }, [isLoading, hasMoreData]);
+
+  // 处理查看更多按钮点击
+  const handleViewMore = () => {
+    setDisplayCount((prev) => prev + 8);
+  };
+
+  // 当切换tab时重置显示数量
+  useEffect(() => {
+    setDisplayCount(8);
+  }, [selectedTag]);
 
   const skeletons = () => {
     return new Array(8).fill("").map((_, index) => {
@@ -199,7 +233,22 @@ export const Business = () => {
               {item.name}
             </div>
           ))}
+          <SeeMore
+            className={`${styles.showMore} md:flex hidden`}
+            href="https://github.com/hello-xone/xone_assets/blob/main/tools/ToolList.json"
+            target="_blank"
+            text={t("common:showMore")}
+          ></SeeMore>
         </div>
+      </div>
+
+      <div className="block mt-2 md:hidden">
+        <SeeMore
+          className={`${styles.showMore}`}
+          href="https://github.com/hello-xone/xone_assets/blob/main/tools/ToolList.json"
+          target="_blank"
+          text={t("common:showMore")}
+        ></SeeMore>
       </div>
 
       <div
@@ -210,7 +259,7 @@ export const Business = () => {
             skeletons()
           ) : (
             <>
-              {filterList.map((item, index) => {
+              {displayList.map((item, index) => {
                 return (
                   <div
                     key={index}
@@ -234,16 +283,21 @@ export const Business = () => {
         </div>
       </div>
 
-      <div
-        className={`${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_5}`}
-      >
-        <SeeMore
-          className={styles.seeAll}
-          href="https://github.com/hello-xone/xone_assets/blob/main/tools/ToolList.json"
-          target="_blank"
-          text={t("common:seeAll")}
-        ></SeeMore>
-      </div>
+      {shouldShowMoreButton && (
+        <div
+          className={`${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_5}`}
+        >
+          <div
+            className="cursor-pointer flex items-center justify-center gap-x-[5px] mt-8"
+            onClick={handleViewMore}
+          >
+            <span className="text-[var(--t1)] text-[16px] font-medium">
+              {t("common:viewMore")}
+            </span>
+            <ArrowBottomInline className="w-[24px] h-[24px]" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

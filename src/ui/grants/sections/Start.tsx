@@ -22,35 +22,35 @@ export const Start = () => {
           {t("grants:startTitle")}
         </h2>
         <p
-          className={`w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px]`}
+          className={`mt-2 w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px]`}
         >
           {t("grants:startDesc")}
         </p>
         <p
-          className={`w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px]`}
+          className={`mt-2 w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px]`}
         >
           {t("grants:startDesc1")}
         </p>
         <p
-          className={`w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px]`}
+          className={`mt-2 w-full md:w-[800px] text-[var(--t1)] md:text-[18px] text-[15px]`}
         >
           {t("grants:startDesc2")}
         </p>
         <div
-          className={`flex justify-start w-full gap-[50px] mt-[30px] md:mt-[34px]`}
+          className={`flex justify-start w-full gap-[24px] mt-[30px] md:mt-[34px]`}
         >
-          <SeeMore
-            className={styles.seeMore}
-            href={"https://forms.gle/U7yatCsQzY7LS1NY7"}
-            text={t("grants:startButton1")}
-            target="_blank"
-          ></SeeMore>
-          <SeeMore
-            className={styles.seeMore}
-            href={"https://docs.xone.org/study/grants"}
-            text={t("grants:startButton2")}
-            target="_blank"
-          ></SeeMore>
+          <div
+            className="py-[12px] px-[16px] bg-[var(--t1)] rounded-[8px] text-[var(--t5)] text-[14px] hover:bg-[var(--b10)] cursor-pointer"
+            onClick={() => window.open("https://forms.gle/U7yatCsQzY7LS1NY7")}
+          >
+            {t("grants:startButton1")}
+          </div>
+          <div
+            className="py-[12px] px-[16px] bg-[var(--b3)] rounded-[8px] text-[var(--t1)] text-[14px] cursor-pointer"
+            onClick={() => window.open("https://docs.xone.org/study/grants")}
+          >
+            {t("grants:startButton2")}
+          </div>
         </div>
       </div>
       <img
