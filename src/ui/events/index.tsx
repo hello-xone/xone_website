@@ -84,7 +84,7 @@ export const Events = () => {
                 {t("joinUs")}
             </CommonButton>
             <div className="pt-[80px] md:pt-[264px]">
-                <img alt="" src={isLight ? EventBg : EventDarkBg} className="w-[100vw] absolute left-0 top-[538px] h-auto"></img>
+                <img alt="" src={isLight ? EventBg : EventDarkBg} className="w-[100vw] max-md:hidden absolute left-0 top-[538px] h-auto"></img>
                 <Title className=" !mb-4 md:!mb-5 !text-left">
                     {t("inProgress")}
                 </Title>
