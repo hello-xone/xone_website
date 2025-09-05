@@ -1,7 +1,8 @@
 import { Autocomplete, TextField } from "@mui/material";
+import clsx from "clsx";
 import dayjs from "dayjs";
 import { FormikProvider, useFormik } from "formik";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -76,14 +77,14 @@ const contacts = [
 
 const Footer = () => {
   const { t } = useTranslation();
-  const { changeTheme, isLight } = useApplicationStore()
-  const { i18n } = useTranslation()
+  const { changeTheme, isLight } = useApplicationStore();
+  const { i18n } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const formik = useFormik({
     initialValues: {
       email: "",
     },
-    onSubmit: () => { },
+    onSubmit: () => {},
   });
   const { values, getFieldProps, setFieldValue } = formik;
 
@@ -165,7 +166,7 @@ const Footer = () => {
           {
             name: "Github",
             url: EXTERNAL_LINKS.Github,
-          }
+          },
         ],
       },
       {
@@ -180,7 +181,7 @@ const Footer = () => {
             name: t("common:incentives"),
             url: "",
             isLater: true,
-          }
+          },
         ],
       },
       {
@@ -197,12 +198,11 @@ const Footer = () => {
           },
           {
             name: t("common:events"),
-            url: '/events',
+            url: "/events",
           },
           {
             name: t("common:recruitment"),
             url: "/recruitment",
-            isLater: true,
           },
           {
             name: t("header:navGlobalGrants"),
@@ -224,14 +224,14 @@ const Footer = () => {
       isLight ? "dark" : "light"
     );
     localStorage.setItem("theme", isLight ? "dark" : "light");
-    changeTheme()
+    changeTheme();
   };
 
   const handleSubmit = async () => {
     await addEmail({
       email: values.email,
     });
-    setFieldValue('email', "");
+    setFieldValue("email", "");
     toast.success(t("home:subscriptionSuccessful"));
   };
 
@@ -250,7 +250,12 @@ const Footer = () => {
             {contacts &&
               contacts.map((item, index) => {
                 return (
-                  <Link key={`contact-item-${item.url}-${index}`} className="w-6 text-t1 flex items-center justify-center rounded bg-b3 h-6" target={item.url.includes("http") ? "_blank" : "_self"} to={item.url}>
+                  <Link
+                    key={`contact-item-${item.url}-${index}`}
+                    className="w-6 text-t1 flex items-center justify-center rounded bg-b3 h-6"
+                    target={item.url.includes("http") ? "_blank" : "_self"}
+                    to={item.url}
+                  >
                     {item.icon}
                   </Link>
                 );
@@ -259,40 +264,68 @@ const Footer = () => {
         </div>
 
         <div className="flex mt-10 w-full item-center justify-between max-md:gap-y-[58px] max-md:flex-wrap">
-          {
-            footerLinks && footerLinks.map((el, index) => {
-              return <div className="max-md:w-[50%]" key={`footer-menu-${el.title}-${index}`}>
-                <div className="mb-[16px] font-bold text-t1">{el.title}</div>
-                <div className="text-t2 flex text-sm flex-col gap-[12px] font-normal">
-                  {
-                    el.infos && el.infos.map(info => {
-                      return <Link className="hover:text-[#FF0420] group flex items-center gap-[8px]" key={`info-item-${info.name}`} target={info.url.includes("http") ? "_blank" : "_self"} to={info.url}>
-                        {info.name}
-                        <svg
-                          width="20"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          className={`transition-all duration-200 opacity-0 group-hover:opacity-100`}
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.4771 9.16603L9.00707 4.69603L10.1854 3.5177L16.6671 9.99937L10.1854 16.481L9.00707 15.3027L13.4771 10.8327H3.33374V9.16603H13.4771Z"
-                            fill={"#FF0420"}
-                          />
-                        </svg>
-                      </Link>
-                    })
-                  }
-
+          {footerLinks &&
+            footerLinks.map((el, index) => {
+              return (
+                <div
+                  className="max-md:w-[50%]"
+                  key={`footer-menu-${el.title}-${index}`}
+                >
+                  <div className="mb-[16px] font-bold text-t1">{el.title}</div>
+                  <div className="text-t2 flex text-sm flex-col gap-[12px] font-normal">
+                    {el.infos &&
+                      el.infos.map((info) => {
+                        return (
+                          <Link
+                            className={clsx(
+                              "flex items-center gap-[8px]",
+                              {
+                                "hover:text-[#FF0420] group": !info.isLater,
+                                "cursor-not-allowed": info.isLater,
+                              }
+                            )}
+                            key={`info-item-${info.name}`}
+                            target={
+                              info.url.includes("http") ? "_blank" : "_self"
+                            }
+                            to={info.url}
+                          >
+                            {info.name}
+                            {info.isLater && (
+                              <span className="w-[52px] h-[24px] rounded-[4px] flex items-center justify-center bg-b2 text-t1 text-xs">
+                                {t("common:later")}
+                              </span>
+                            )}
+                            {!info.isLater && (
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                className={`transition-all duration-200 opacity-0 group-hover:opacity-100`}
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M13.4771 9.16603L9.00707 4.69603L10.1854 3.5177L16.6671 9.99937L10.1854 16.481L9.00707 15.3027L13.4771 10.8327H3.33374V9.16603H13.4771Z"
+                                  fill={"#FF0420"}
+                                />
+                              </svg>
+                            )}
+                          </Link>
+                        );
+                      })}
+                  </div>
                 </div>
-              </div>
-            })
-          }
+              );
+            })}
 
           <div className="w-full md:w-[386px]">
-            <div className="font-bold mb-4 text-t1">{t("header:subscribe")}</div>
-            <div className="text-sm text-t2 mb-4">{t("header:subscribeDesc")}</div>
+            <div className="font-bold mb-4 text-t1">
+              {t("header:subscribe")}
+            </div>
+            <div className="text-sm text-t2 mb-4">
+              {t("header:subscribeDesc")}
+            </div>
             {/* <div className="flex border-[1px] border-transparent hover:border-[1px] hover:border-t1 rounded-[8px] p-1 box-content bg-b3"> */}
             <FormikProvider value={formik}>
               <Autocomplete
@@ -315,13 +348,18 @@ const Footer = () => {
                       ...params.InputProps,
                       inputRef: inputRef,
                       endAdornment: (
-                        <CommonButton onClick={() => {
-                          if (values.email && isEmail(values.email)) {
-                            handleSubmit()
-                          } else {
-                            toast.error(t("header:invalidEmail"))
-                          }
-                        }} className="w-[120px] h-10 !text-base !font-bold !rounded-r-[8px]">{t("join")}</CommonButton>
+                        <CommonButton
+                          onClick={() => {
+                            if (values.email && isEmail(values.email)) {
+                              handleSubmit();
+                            } else {
+                              toast.error(t("header:invalidEmail"));
+                            }
+                          }}
+                          className="w-[120px] h-10 !text-base !font-bold !rounded-r-[8px]"
+                        >
+                          {t("join")}
+                        </CommonButton>
                       ),
                       className: "",
                     }}
@@ -331,13 +369,13 @@ const Footer = () => {
               ></Autocomplete>
             </FormikProvider>
 
-
             {/* </div> */}
           </div>
         </div>
 
         <div className="mt-10 text-xs leading-[140%] text-t3">
-          {t("header:disclaimerTitle")}<br></br>
+          {t("header:disclaimerTitle")}
+          <br></br>
           {t("header:disclaimer")}
         </div>
 
@@ -345,9 +383,11 @@ const Footer = () => {
           <LanguagePopover>
             <Language className="text-t1"></Language>
           </LanguagePopover>
-          <div className="flex h-10 items-center ml-3" onClick={() => toggleTheme()}>
+          <div
+            className="flex h-10 items-center ml-3"
+            onClick={() => toggleTheme()}
+          >
             <Theme className="w-6 h-6 mr-2"></Theme>
-
           </div>
         </div>
         <div className="mt-3 md:mt-10 py-4 max-md:pt-[21px] border-t-[1px] border-solid border-[--border3] text-t3 flex justify-between items-center">
@@ -356,19 +396,28 @@ const Footer = () => {
               © {dayjs().format("YYYY")} {t("common:copyright")}
             </div>
             <div className="pl-4 ml-4 border-l-[1px] border-t3 leading-[14px] flex items-center">
-              <Link to={EXTERNAL_LINKS.docs + "study/privacy"} target="_blank">{t("header:privacy")}</Link>
+              <Link to={EXTERNAL_LINKS.docs + "study/privacy"} target="_blank">
+                {t("header:privacy")}
+              </Link>
               <span className="block w-[2px] h-[2px] rounded-full bg-t3 mx-4"></span>
-              <Link to={EXTERNAL_LINKS.docs + "study/service"} target="_blank">{t("header:terms")}</Link>
+              <Link to={EXTERNAL_LINKS.docs + "study/service"} target="_blank">
+                {t("header:terms")}
+              </Link>
             </div>
           </div>
-          <LanguagePopover noHoverBg panelClass="mt-0" className="max-md:hidden group">
+          <LanguagePopover
+            noHoverBg
+            panelClass="mt-0"
+            className="max-md:hidden group"
+          >
             <>
               <Language className="text-t1"></Language>
-              <span className="text-t1 text-sm group-hover:underline group-hover:decoration-dashed">{currentLanguage?.name || "English"}</span>
+              <span className="text-t1 text-sm group-hover:underline group-hover:decoration-dashed">
+                {currentLanguage?.name || "English"}
+              </span>
             </>
           </LanguagePopover>
         </div>
-
       </div>
     </div>
   );
