@@ -46,8 +46,10 @@ export const Business = () => {
 
   useEffect(() => {
     const checkMobile = () => {
-      if (typeof window === 'undefined') return false;
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      if (typeof window === "undefined") return false;
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
     };
 
     // 初始检测
@@ -58,10 +60,10 @@ export const Business = () => {
       setIsMobile(checkMobile());
     };
 
-    window.addEventListener('resize', handleResize);
-    
+    window.addEventListener("resize", handleResize);
+
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -238,12 +240,8 @@ export const Business = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h1 className={`${styles.title}`}>
-        {t("developer:businessTitle")}
-      </h1>
-      <div
-        className={`${styles.nav}`}
-      >
+      <h1 className={`${styles.title}`}>{t("developer:businessTitle")}</h1>
+      <div className={`${styles.nav}`}>
         <div className={`flex flex-1 items-center ${styles.navWrapper}`}>
           {navData.map((item) => (
             <div
@@ -257,7 +255,7 @@ export const Business = () => {
         </div>
         <div className={`hidden w-[135px] pl-[15px] md:flex`}>
           <SeeMore
-            className={`${styles.showMore} ${isMobile ? styles.showMoreMobile : ''}`}
+            className={`${styles.showMore} ${isMobile ? styles.showMoreMobile : ""}`}
             href="https://github.com/hello-xone/xone_assets/blob/main/tools/ToolList.json"
             target="_blank"
             text={t("common:showMore")}
@@ -267,7 +265,7 @@ export const Business = () => {
 
       <div className="block mt-2 md:hidden">
         <SeeMore
-          className={`${styles.showMore} ${isMobile ? styles.showMoreMobile : ''}`}
+          className={`${styles.showMore} ${isMobile ? styles.showMoreMobile : ""}`}
           href="https://github.com/hello-xone/xone_assets/blob/main/tools/ToolList.json"
           target="_blank"
           text={t("common:showMore")}
@@ -284,10 +282,7 @@ export const Business = () => {
             <>
               {displayList.map((item, index) => {
                 return (
-                  <div
-                    key={index}
-                    className={`${styles.card}`}
-                  >
+                  <div key={index} className={`${styles.card}`}>
                     <div>
                       <div className={styles.name}>{item.name}</div>
                       <p className={styles.description}>{item.description}</p>
@@ -307,9 +302,7 @@ export const Business = () => {
       </div>
 
       {shouldShowToggleButton && (
-        <div
-          className={`${styles.toggleButton}`}
-        >
+        <div className={`${styles.toggleButton}`}>
           <div
             className="cursor-pointer flex items-center justify-center gap-x-[5px] mt-8"
             onClick={handleToggle}
@@ -317,9 +310,9 @@ export const Business = () => {
             <span className="text-[var(--t1)] text-[16px] font-medium">
               {isExpanded ? t("common:viewLess") : t("common:viewMore")}
             </span>
-            <ArrowBottomInline 
+            <ArrowBottomInline
               className={`w-[24px] h-[24px] transition-transform duration-200 ${
-                isExpanded ? 'rotate-180' : ''}`} 
+                isExpanded ? "rotate-180" : ""}`}
             />
           </div>
         </div>

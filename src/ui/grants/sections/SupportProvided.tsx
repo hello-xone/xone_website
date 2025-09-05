@@ -14,6 +14,7 @@ import IconSvgLight4 from "@/assets/imgs/grants/light/icon_16.png";
 import IconSvgLight5 from "@/assets/imgs/grants/light/icon_17.png";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
+import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 
 import styles from "../index.module.less";
 
@@ -21,8 +22,13 @@ export const SupportProvided = () => {
   const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   const { isLight } = useCurrentTheme();
+  const breakpoints = useTailwindBreakpoint();
   const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // 判断是否为移动端（小于md断点，即768px）
+  const isMobile = !breakpoints.md;
 
   const list = useMemo(() => {
     return [
@@ -64,27 +70,15 @@ export const SupportProvided = () => {
     return list[activeIndex];
   }, [list, activeIndex]);
 
-  // 进度条自动切换逻辑
+  // 进度条自动切换逻辑 - 只在activeIndex变化时重置进度
   useEffect(() => {
     // 清除之前的定时器
     if (progressIntervalRef.current) {
       clearInterval(progressIntervalRef.current);
     }
 
-    // 重置进度
+    // 切换卡片时重置进度
     setProgress(0);
-
-    // 开始新的进度条
-    progressIntervalRef.current = setInterval(() => {
-      setProgress((prevProgress) => {
-        if (prevProgress >= 100) {
-          // 进度条满了，切换到下一个卡片
-          setActiveIndex((prevIndex) => (prevIndex + 1) % list.length);
-          return 0; // 重置进度
-        }
-        return prevProgress + 2; // 每50ms增加2%，总共5秒完成
-      });
-    }, 120);
 
     // 清理函数
     return () => {
@@ -93,6 +87,55 @@ export const SupportProvided = () => {
       }
     };
   }, [activeIndex, list.length]);
+
+  // 单独的useEffect来处理hover状态变化和进度条启动
+  useEffect(() => {
+    // 移动端不应用hover限制，直接启动进度条
+    if (isMobile) {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+
+      progressIntervalRef.current = setInterval(() => {
+        setProgress((prevProgress) => {
+          if (prevProgress >= 100) {
+            setActiveIndex((prevIndex) => (prevIndex + 1) % list.length);
+            return 0;
+          }
+          return prevProgress + 2;
+        });
+      }, 120);
+    } else {
+      // 桌面端应用hover逻辑
+      if (isHovered) {
+        // hover时清除定时器，保持当前进度值
+        if (progressIntervalRef.current) {
+          clearInterval(progressIntervalRef.current);
+        }
+      } else {
+        // 非hover状态时启动进度条
+        if (progressIntervalRef.current) {
+          clearInterval(progressIntervalRef.current);
+        }
+
+        progressIntervalRef.current = setInterval(() => {
+          setProgress((prevProgress) => {
+            if (prevProgress >= 100) {
+              setActiveIndex((prevIndex) => (prevIndex + 1) % list.length);
+              return 0;
+            }
+            return prevProgress + 2;
+          });
+        }, 120);
+      }
+    }
+
+    return () => {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+    };
+  }, [isHovered, activeIndex, list.length, isMobile]);
 
   return (
     <div className="mt-[80px] md:mt-[180px]">
@@ -103,7 +146,11 @@ export const SupportProvided = () => {
         {t("grants:supportProvidedDesc")}
       </p>
       <div className="mt-10 flex gap-x-[10px] items-stretch justify-between">
-        <div className="md:w-[410px] w-full flex flex-col gap-y-[26px]">
+        <div
+          className="md:w-[410px] w-full flex flex-col gap-y-[26px]"
+          onMouseEnter={() => !isMobile && setIsHovered(true)}
+          onMouseLeave={() => !isMobile && setIsHovered(false)}
+        >
           {list.map((item, index) => (
             <Fragment key={index}>
               <div

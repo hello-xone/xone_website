@@ -46,7 +46,7 @@ export const Start = () => {
             {t("grants:startButton1")}
           </div>
           <div
-            className="py-[12px] px-[16px] bg-[var(--b3)] rounded-[8px] text-[var(--t1)] text-[14px] cursor-pointer"
+            className="py-[12px] px-[16px] bg-[var(--b3)] rounded-[8px] text-[var(--t1)] text-[14px] hover:bg-[var(--layer4)] cursor-pointer"
             onClick={() => window.open("https://docs.xone.org/study/grants")}
           >
             {t("grants:startButton2")}
