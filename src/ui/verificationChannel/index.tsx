@@ -1,5 +1,7 @@
 import { Box } from "@mui/material";
 
+import { MotionScrollReveal } from "@/components/comm/animation/ScrollReveal";
+
 import Channel from "./sections/Channel";
 import SafetyTips from "./sections/SafetyTips";
 
@@ -29,8 +31,12 @@ export const VerificationChannel = () => {
           },
         }}
       >
-        <Channel />
-        <SafetyTips />
+        <MotionScrollReveal delay={0}>
+          <Channel />
+        </MotionScrollReveal>
+        <MotionScrollReveal delay={0.2}>
+          <SafetyTips />
+        </MotionScrollReveal>
       </Box>
     </Box>
   );

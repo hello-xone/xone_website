@@ -9,13 +9,11 @@ import FundingIcon02Light from "@/assets/imgs/developer/funding2.png";
 import FundingIcon03Light from "@/assets/imgs/developer/funding3.png";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
-import { AnimationName, useScrollreveal } from "@/hooks/useScrollreveal";
 
 import styles from "./index.module.less";
 
 export const Funding = () => {
   const { t, i18n } = useTranslation();
-  const { delayClassNames } = useScrollreveal();
   const { isLight } = useCurrentTheme();
 
   const list = useMemo(() => {
@@ -36,10 +34,10 @@ export const Funding = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
-        <h1 className={`${styles.slogon} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+        <h1 className={`${styles.slogon}`}>
           {t("developer:fundingTitle")}
         </h1>
-        <div className={`${styles.card} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+        <div className={`${styles.card}`}>
           <div className={styles.icon}>
             <img
               className="w-full h-full"
@@ -61,7 +59,7 @@ export const Funding = () => {
           return (
             <div
               key={index}
-              className={`${styles.card} ${AnimationName.SLIDE_IN_BOTTOM} ${delayClassNames[index * 2] || ""}`}
+              className={`${styles.card}`}
             >
               <div className={styles.icon}>
                 <img

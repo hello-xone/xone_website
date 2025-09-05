@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 
 import ArrowBottomInline from "@/assets/svg/home/arrow-bottom-line.svg?react";
 import { SeeMore } from "@/components/comm/link/SeeMore";
-import { AnimationName, DelayClassName } from "@/hooks/useScrollreveal";
 
 import styles from "./index.module.less";
 
@@ -231,7 +230,7 @@ export const Business = () => {
           key={index}
           variant="rectangular"
           height={160}
-          className={`${styles.card} ${AnimationName.SLIDE_IN_BOTTOM}`}
+          className={`${styles.card}`}
         ></Skeleton>
       );
     });
@@ -239,11 +238,11 @@ export const Business = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h1 className={`${styles.title} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+      <h1 className={`${styles.title}`}>
         {t("developer:businessTitle")}
       </h1>
       <div
-        className={`${styles.nav} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_2}`}
+        className={`${styles.nav}`}
       >
         <div className={`flex flex-1 items-center ${styles.navWrapper}`}>
           {navData.map((item) => (
@@ -276,7 +275,7 @@ export const Business = () => {
       </div>
 
       <div
-        className={`${styles.content} ${styles.contentSpace} ${styles.large} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_4}`}
+        className={`${styles.content} ${styles.contentSpace} ${styles.large}`}
       >
         <div className={styles.cards}>
           {isLoading ? (
@@ -287,7 +286,7 @@ export const Business = () => {
                 return (
                   <div
                     key={index}
-                    className={`${styles.card} ${AnimationName.SLIDE_IN_BOTTOM}`}
+                    className={`${styles.card}`}
                   >
                     <div>
                       <div className={styles.name}>{item.name}</div>
@@ -309,7 +308,7 @@ export const Business = () => {
 
       {shouldShowToggleButton && (
         <div
-          className={`${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_5}`}
+          className={`${styles.toggleButton}`}
         >
           <div
             className="cursor-pointer flex items-center justify-center gap-x-[5px] mt-8"

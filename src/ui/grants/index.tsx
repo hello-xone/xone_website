@@ -25,6 +25,7 @@ import IconSvgLight9 from "@/assets/imgs/grants/light/icon_9.png";
 import IconSvgLight10 from "@/assets/imgs/grants/light/icon_10.png";
 import IconSvgLight11 from "@/assets/imgs/grants/light/icon_11.png";
 import IconSvgLight12 from "@/assets/imgs/grants/light/icon_12.png";
+import { MotionScrollReveal } from "@/components/comm/animation/ScrollReveal";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
@@ -105,34 +106,46 @@ export const Grants = () => {
 
   return (
     <>
-      <Header />
+      <MotionScrollReveal delay={0}>
+        <Header />
+      </MotionScrollReveal>
       <div className="container">
-        <div className="pt-[20px]">
-          <CardList
-            title={t("grants:cardTitle01")}
-            description={t("grants:cardDesc01")}
-            list={card01List}
-          />
-        </div>
-        <div className="mt-[80px] md:mt-[150px]">
-          <CardList
-            title={t("grants:cardTitle02")}
-            description={t("grants:cardDesc02")}
-            list={card02List}
-            isMobileTow={true}
-          />
-          <div className="mt-10 md:block">
-            <SeeMore
-              className={`${styles.seeMore} flex justify-center`}
-              href="https://docs.xone.org/study/grants"
-              text={t("grants:seeAllButton")}
-              target="_blank"
-            ></SeeMore>
+        <MotionScrollReveal delay={0.2}>
+          <div className="pt-[20px]">
+            <CardList
+              title={t("grants:cardTitle01")}
+              description={t("grants:cardDesc01")}
+              list={card01List}
+            />
           </div>
-        </div>
-        <SupportProvided />
-        <CommonProblem />
-        <Start />
+        </MotionScrollReveal>
+        <MotionScrollReveal delay={0.4}>
+          <div className="mt-[80px] md:mt-[150px]">
+            <CardList
+              title={t("grants:cardTitle02")}
+              description={t("grants:cardDesc02")}
+              list={card02List}
+              isMobileTow={true}
+            />
+            <div className="mt-10 md:block">
+              <SeeMore
+                className={`${styles.seeMore} flex justify-center`}
+                href="https://docs.xone.org/study/grants"
+                text={t("grants:seeAllButton")}
+                target="_blank"
+              ></SeeMore>
+            </div>
+          </div>
+        </MotionScrollReveal>
+        <MotionScrollReveal delay={0.3}>
+          <SupportProvided />
+        </MotionScrollReveal>
+        <MotionScrollReveal delay={0.3}>
+          <CommonProblem />
+        </MotionScrollReveal>
+        <MotionScrollReveal delay={0.4} animation="slide">
+          <Start />
+        </MotionScrollReveal>
       </div>
     </>
   );

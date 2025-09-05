@@ -13,11 +13,6 @@ import ArrowIcon from "@/assets/svg/home/info_arrow.svg?react";
 import { MyCountUp } from "@/components/comm/myCountUp";
 import { XoneChainId, XoneMainNet, XoneTestNet } from "@/constants/net";
 import { useCountdownTimer } from "@/hooks/useCountdownTimer";
-import {
-  AnimationName,
-  DelayClassName,
-  useScrollreveal,
-} from "@/hooks/useScrollreveal";
 import { preciseRound } from "@/utils/number";
 
 import styles from "./index.module.less";
@@ -35,7 +30,6 @@ export const Net = () => {
   const [mainNetData, setMainNetData] = useState<NetData>();
   const [testNetData, setTestNetData] = useState<NetData>();
   const [loading, setLoading] = useState(true);
-  const { delayClassNames } = useScrollreveal();
   const notifications = useNotifications();
   const { connect, provider, currentConnector } = useWalletKit();
   const addNet = useCallback(
@@ -280,7 +274,7 @@ export const Net = () => {
   return (
     <div className={styles.wrapper}>
       <div className="flex justify-center">
-        <div className={`${styles.nav} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+        <div className={`${styles.nav}`}>
           {navs.map((item) => {
             return (
               <div
@@ -301,7 +295,7 @@ export const Net = () => {
           return (
             <div key={index} className={`${styles.data} `}>
               <h1
-                className={`${styles.value} flex justify-center ${AnimationName.SLIDE_IN_BOTTOM} ${delayClassNames[index * 2]}`}
+                className={`${styles.value} flex justify-center`}
               >
                 {loading ? (
                   <Skeleton variant="text" className="w-[2em]"></Skeleton>
@@ -310,7 +304,7 @@ export const Net = () => {
                 )}
               </h1>
               <div
-                className={`${styles.lable} ${AnimationName.SLIDE_IN_BOTTOM} ${delayClassNames[index + index + 2]}`}
+                className={`${styles.lable}`}
               >
                 {item.label}
               </div>
@@ -319,14 +313,14 @@ export const Net = () => {
         })}
       </div>
       <div
-        className={`${styles.links} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_4}`}
+        className={`${styles.links}`}
       >
         {links.map((item, index) => {
           return (
             <div
               key={index}
               onClick={() => item.onClick()}
-              className={`cursor-pointer ${styles.link} ${AnimationName.SLIDE_IN_BOTTOM} ${delayClassNames[index * 3]}`}
+              className={`cursor-pointer ${styles.link}`}
             >
               <div className={styles.linkLeft}>
                 <div className={styles.linkIcon}>{item.icon}</div>

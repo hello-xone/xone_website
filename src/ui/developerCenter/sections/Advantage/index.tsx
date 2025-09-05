@@ -3,15 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Typed from "typed.js";
 
-import { BaseContainer } from "@/components/layout/BaseContainer";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
-import {
-  AnimationName,
-  DelayClassName,
-  useScrollreveal,
-} from "@/hooks/useScrollreveal";
 
-import fatherStyles from "../index.module.less";
 import styles from "./index.module.less";
 
 const solidityCode = `// SPDX-License-Identifier: MIT
@@ -35,8 +28,6 @@ export const Advantage = () => {
   const typedInstanceRef = useRef<Typed | null>(null);
 
   const { isLight } = useCurrentTheme();
-
-  useScrollreveal();
 
   const computeHeight = () => {
     const hiddenEl = hiddenElRef.current;
@@ -102,7 +93,7 @@ export const Advantage = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={`${styles.left} ${AnimationName.SLIDE_IN_FADE}`}>
+      <div className={`${styles.left}`}>
         <div
           className={`${styles.codeWrapper} ${styles.hidden}`}
           ref={hiddenElRef}
@@ -127,7 +118,7 @@ export const Advantage = () => {
         </div>
       </div>
       <div
-        className={`${styles.right} ${AnimationName.SLIDE_IN_FADE} ${DelayClassName.DELAY_3}`}
+        className={`${styles.right}`}
       >
         <h1 className={`${styles.slogon}`}>{t("developer:advantageTitle")}</h1>
       </div>

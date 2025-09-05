@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import jobPosts from "@/assets/job/jobPosts.json";
+import { MotionScrollReveal } from "@/components/comm/animation/ScrollReveal";
 
 import { SearchInputSelect } from "../../components/comm/select/SearchInputSelect";
 import { Banner } from "./sections/Banner";
@@ -502,60 +503,68 @@ export const Recruitment = () => {
 
   return (
     <>
-      <Banner onSearch={handleSearchChange} onClear={handleClearAll} />
+      <MotionScrollReveal delay={0}>
+        <Banner onSearch={handleSearchChange} onClear={handleClearAll} />
+      </MotionScrollReveal>
       <div className="container">
-        <div className="pt-8 md:pt-16">
-          <div className="w-full flex overflow-x-auto md:overflow-x-visible gap-[18px] md:gap-4">
-            <div className="min-w-[180px] md:min-w-[24%]">
-              <SearchInputSelect
-                options={selectProjects}
-                placeholder={t("recruitment:selectProject")}
-                onSelect={(value, option) =>
-                  handleSelectChange("project", value, option)
-                }
-              />
-            </div>
-            <div className="min-w-[180px] md:min-w-[24%]">
-              <SearchInputSelect
-                options={selectPositions}
-                placeholder={t("recruitment:selectPosition")}
-                onSelect={(value, option) =>
-                  handleSelectChange("position", value, option)
-                }
-              />
-            </div>
-            <div className="min-w-[180px] md:min-w-[24%]">
-              <SearchInputSelect
-                options={selectLocations}
-                placeholder={t("recruitment:selectLocation")}
-                onSelect={(value, option) =>
-                  handleSelectChange("location", value, option)
-                }
-              />
-            </div>
-            <div className="min-w-[180px] md:min-w-[24%]">
-              <SearchInputSelect
-                options={selectOffice}
-                placeholder={t("recruitment:selectOffice")}
-                onSelect={(value, option) =>
-                  handleSelectChange("office", value, option)
-                }
-              />
+        <MotionScrollReveal delay={0.2}>
+          <div className="pt-8 md:pt-16">
+            <div className="w-full flex overflow-x-auto md:overflow-x-visible gap-[18px] md:gap-4">
+              <div className="min-w-[180px] md:min-w-[24%]">
+                <SearchInputSelect
+                  options={selectProjects}
+                  placeholder={t("recruitment:selectProject")}
+                  onSelect={(value, option) =>
+                    handleSelectChange("project", value, option)
+                  }
+                />
+              </div>
+              <div className="min-w-[180px] md:min-w-[24%]">
+                <SearchInputSelect
+                  options={selectPositions}
+                  placeholder={t("recruitment:selectPosition")}
+                  onSelect={(value, option) =>
+                    handleSelectChange("position", value, option)
+                  }
+                />
+              </div>
+              <div className="min-w-[180px] md:min-w-[24%]">
+                <SearchInputSelect
+                  options={selectLocations}
+                  placeholder={t("recruitment:selectLocation")}
+                  onSelect={(value, option) =>
+                    handleSelectChange("location", value, option)
+                  }
+                />
+              </div>
+              <div className="min-w-[180px] md:min-w-[24%]">
+                <SearchInputSelect
+                  options={selectOffice}
+                  placeholder={t("recruitment:selectOffice")}
+                  onSelect={(value, option) =>
+                    handleSelectChange("office", value, option)
+                  }
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <List
-          data={{
-            list: allDisplayedData,
-            totalCount: filteredData.totalCount,
-            currentPage,
-            totalPages: Math.ceil(filteredData.totalCount / pageSize),
-            hasMore:
-              currentPage < Math.ceil(filteredData.totalCount / pageSize),
-          }}
-          onMore={handleLoadMore}
-        />
-        <Remark />
+        </MotionScrollReveal>
+        <MotionScrollReveal delay={0.2}>
+          <List
+            data={{
+              list: allDisplayedData,
+              totalCount: filteredData.totalCount,
+              currentPage,
+              totalPages: Math.ceil(filteredData.totalCount / pageSize),
+              hasMore:
+                currentPage < Math.ceil(filteredData.totalCount / pageSize),
+            }}
+            onMore={handleLoadMore}
+          />
+        </MotionScrollReveal>
+        <MotionScrollReveal delay={0.2} animation="slide">
+          <Remark />
+        </MotionScrollReveal>
       </div>
     </>
   );
