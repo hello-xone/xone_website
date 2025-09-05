@@ -62,7 +62,7 @@ const Introducing = () => {
             <div className="text-[20px] md:text-[28px] mt-3 mb-1 leading-[140%] font-bold">
               {t(el.title)}
             </div>
-            <div className="text-[14px] md:text-[16px] text-t2 leading-[140%] md:leading-[140%]">
+            <div className="text-[14px] md:text-[16px] text-t2 leading-[140%] md:leading-[140%] md:h-[44px]">
               {t(el.desc)}
             </div>
             <SeeMore className="mt-[16px] md:mt-[22px]" textClassName="md:!text-[16px]" href={el.link} text={t(el.check)}></SeeMore>

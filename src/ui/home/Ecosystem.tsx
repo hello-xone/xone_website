@@ -40,13 +40,13 @@ import UniswapLightIcon from "@/assets/imgs/partners/Uniswap-light.png";
 import XionIcon from "@/assets/imgs/partners/xion.png";
 import XionDarkIcon from "@/assets/imgs/partners/xion-dark.png";
 import XionLightIcon from "@/assets/imgs/partners/xion-light.png";
+import { SeeMore } from "@/components/comm/link/SeeMore";
 import {
     AnimationName,
     DelayClassName,
     useScrollreveal,
 } from "@/hooks/useScrollreveal";
 import useApplicationStore from "@/store/applicationStore";
-import { SeeMore } from "@/components/comm/link/SeeMore";
 
 const images = [
     [
@@ -149,7 +149,7 @@ export const Ecosystem = () => {
             <div className="text-[24px] md:text-[48px] text-center leading-[140%] mb-4 md:mb-6 font-bold">
                 {t("exploreNatureTitle")}
             </div>
-            <div className="text-t2 text-center leading-[140%] text-base md:text-[20px] mb-6 md:mb-10">
+            <div className="text-t2 text-center leading-[140%] text-base md:text-[20px] mb-1 md:mb-2">
                 {t("exploreNatureDesc")}
             </div>
             <div
@@ -215,7 +215,7 @@ export const Ecosystem = () => {
                         })}
                 </div>
             </div>
-            <div className="flex items-center justify-center mt-[56px]">
+            <div className="flex items-center justify-center mt-[72px]">
                 <SeeMore text={t("home:seeMore")} className="mx-auto" href={`https://bvi.xone.org/${i18n.language}/ecology`}></SeeMore>
             </div>
         </div>

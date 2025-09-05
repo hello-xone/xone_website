@@ -242,7 +242,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="w-screen pt-[64px] bg-b1 max-w-[100vw] overflow-x-hidden">
+    <div className="w-full pt-[64px] bg-b1 overflow-x-hidden">
       <div className="container">
         <div className="flex items-center justify-between max-md:flex-col max-md:items-start max-md:gap-[16px]">
           <img alt="logo" src={LogoIcon} className="w-[104px] h-auto"></img>
