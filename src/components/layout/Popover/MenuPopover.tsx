@@ -29,20 +29,18 @@ const MenuPopover = () => {
     const [isOpen, setIsOpen] = useState(false);
     const latestOpenRef = useRef(isOpen);
     const needsUpdateRef = useRef(false);
-    const [theme, setTheme] = useState(() => {
-        return localStorage.getItem("theme") || "light";
-    });
-    const { changeTheme } = useApplicationStore()
+    const { changeTheme, isLight } = useApplicationStore()
 
     const { t, i18n } = useTranslation("header");
     const toggleTheme = () => {
-        setTheme((prev) => (prev === "light" ? "dark" : "light"));
+
         document.documentElement.setAttribute(
             "data-theme",
-            theme === "light" ? "dark" : "light"
+            isLight ? "dark" : "light"
         );
-        localStorage.setItem("theme", theme === "light" ? "dark" : "light");
-        changeTheme(theme !== 'light')
+        localStorage.setItem("theme", isLight ? "dark" : "light");
+        changeTheme()
+
     };
     useEffect(() => {
         if (isOpen) {
@@ -229,7 +227,7 @@ const MenuPopover = () => {
                                         >
                                             <Theme className="w-6 h-6 mr-[10px]"></Theme>
                                             <span className="text-t1 font-medium text-sm">
-                                                {theme === "light" ? "Light" : "Dark"}
+                                                {isLight ? "Light" : "Dark"}
                                             </span>
                                         </div>
                                     </div>

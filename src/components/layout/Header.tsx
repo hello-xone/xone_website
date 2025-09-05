@@ -26,19 +26,15 @@ const Header = () => {
   const { isLight, changeTheme } = useApplicationStore()
   const [event, setEvent] = useState<any>(null);
   const [detailId, setDetailId] = useState("");
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") || "light";
-  });
   const { t, i18n } = useTranslation("header");
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
     document.documentElement.setAttribute(
       "data-theme",
-      theme === "light" ? "dark" : "light"
+      isLight ? "dark" : "light"
     );
-    localStorage.setItem("theme", theme === "light" ? "dark" : "light");
-    changeTheme(theme !== 'light')
+    localStorage.setItem("theme", isLight ? "dark" : "light");
+    changeTheme()
   };
 
   useEffect(() => {
@@ -232,7 +228,7 @@ const Header = () => {
           {t("askAI")}
           <AiStar className="w-4 h-4 md:w-6 md:h-6"></AiStar>
         </CommonButton> */}
-        <CommonButton onClick={() => window.open(EXTERNAL_LINKS.Bvi)}>
+        <CommonButton className="max-md:text-xs" onClick={() => window.open(EXTERNAL_LINKS.Bvi)}>
           {t("exploreXone")}
         </CommonButton>
         <MenuPopover></MenuPopover>

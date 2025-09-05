@@ -76,7 +76,7 @@ const contacts = [
 
 const Footer = () => {
   const { t } = useTranslation();
-  const { changeTheme } = useApplicationStore()
+  const { changeTheme, isLight } = useApplicationStore()
   const { i18n } = useTranslation()
   const inputRef = useRef<HTMLInputElement>(null);
   const formik = useFormik({
@@ -87,9 +87,6 @@ const Footer = () => {
   });
   const { values, getFieldProps, setFieldValue } = formik;
 
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'light';
-  });
   const currentLanguage = useMemo(() => {
     const fallback = langs.find((item) => item.type === LanguageType.en);
     return (
@@ -222,10 +219,12 @@ const Footer = () => {
   }, [t]);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light');
-    localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
-    changeTheme(theme !== 'light')
+    document.documentElement.setAttribute(
+      "data-theme",
+      isLight ? "dark" : "light"
+    );
+    localStorage.setItem("theme", isLight ? "dark" : "light");
+    changeTheme()
   };
 
   const handleSubmit = async () => {
