@@ -225,7 +225,7 @@ const Footer = () => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light');
     localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
-    changeTheme()
+    changeTheme(theme !== 'light')
   };
 
   const handleSubmit = async () => {

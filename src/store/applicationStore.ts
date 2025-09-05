@@ -2,12 +2,11 @@ import { create } from "zustand";
 
 interface StoreState {
   isLight: boolean;
-  changeTheme: () => void;
+  changeTheme: (flag: boolean) => void;
 }
 
 const useApplicationStore = create<StoreState>((set) => ({
   isLight: localStorage.getItem("theme") !== "dark",
-
-  changeTheme: () => set((state) => ({ isLight: !state.isLight })),
+  changeTheme: (flag: boolean) => set(() => ({ isLight: flag })),
 }));
 export default useApplicationStore;

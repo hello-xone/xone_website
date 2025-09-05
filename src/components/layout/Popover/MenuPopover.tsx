@@ -22,7 +22,6 @@ import { menus, NavigationType } from "@/constants/menus";
 import { langs, LanguageType } from "@/i18n/settings";
 import useApplicationStore from "@/store/applicationStore";
 
-import LanguagePopover from "./LanguagePopover";
 import MobileLanguagePopover from "./MobileLanguagePopover";
 
 const MenuPopover = () => {
@@ -43,7 +42,7 @@ const MenuPopover = () => {
             theme === "light" ? "dark" : "light"
         );
         localStorage.setItem("theme", theme === "light" ? "dark" : "light");
-        changeTheme()
+        changeTheme(theme !== 'light')
     };
     useEffect(() => {
         if (isOpen) {

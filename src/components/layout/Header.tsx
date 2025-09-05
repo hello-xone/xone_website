@@ -38,7 +38,7 @@ const Header = () => {
       theme === "light" ? "dark" : "light"
     );
     localStorage.setItem("theme", theme === "light" ? "dark" : "light");
-    changeTheme()
+    changeTheme(theme !== 'light')
   };
 
   useEffect(() => {
