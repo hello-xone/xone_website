@@ -100,7 +100,7 @@ export const Banner = ({ onSearch, onClear }: BannerProps) => {
         <div className="flex flex-col mt-[20px] md:mt-0 p-4 text-left md:items-center md:justify-center md:text-center md:p-16 md:pb-30 md:absolute md:top-0 md:right-0 md:bottom-0 md:left-0">
           <Animation animationClassName={AnimationType.SLIDE_IN_UP} delay={0.1}>
             <h1
-              className="font-bold leading-[140%] text-[32px] text-[var(--t1)] md:text-[56px]"
+              className="font-bold leading-[140%] text-[32px] text-[var(--t1)] md:text-[56px] [&_br]:hidden md:[&_br]:block"
               dangerouslySetInnerHTML={{ __html: t("recruitment:bannerTitle") }}
             />
           </Animation>

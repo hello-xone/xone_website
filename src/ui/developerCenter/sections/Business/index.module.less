@@ -29,6 +29,10 @@
   transition: all 0.06s ease;
 }
 
+.navItem:last-child {
+  margin-right: 10px;
+}
+
 .selectedTag {
   color: var(--t1);
   font-size: 24px;
@@ -142,9 +146,12 @@
 }
 
 .showMore {
-  margin-top: 2px;
-  margin-left: 5px;
-  margin-right: 10px;
+  padding-bottom: 12px;
+  box-sizing: border-box;
+}
+
+.showMoreMobile {
+  padding-bottom: 0;
 }
 
 .navWrapper {

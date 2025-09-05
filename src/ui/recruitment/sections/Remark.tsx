@@ -4,7 +4,7 @@ export const Remark = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="mt-16 mb-[110px] flex flex-col gap-y-[24px]">
+    <div className="mt-16 mb-[110px] flex flex-col gap-y-[24px] bg-[var(--b2)] rounded-[16px] p-[16px]">
       <p className="text-[var(--t6)] text-[14px] font-normal leading-[1.6]">
         {t("recruitment:remark1")}
       </p>

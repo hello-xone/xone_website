@@ -39,7 +39,32 @@ export const Business = () => {
   const [toolList, setToolList] = useState<Record<string, any>>({});
   const [isLoading, setIsLoading] = useState(true);
   const [displayCount, setDisplayCount] = useState(8);
+  const [isExpanded, setIsExpanded] = useState(false);
   // const [error, setError] = useState<string | null>(null);
+
+  // 检测是否为移动设备
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      if (typeof window === 'undefined') return false;
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    };
+
+    // 初始检测
+    setIsMobile(checkMobile());
+
+    // 监听窗口大小变化
+    const handleResize = () => {
+      setIsMobile(checkMobile());
+    };
+
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     fetch(
@@ -171,35 +196,32 @@ export const Business = () => {
 
   // 获取当前显示的项目列表
   const displayList = useMemo(() => {
-    return filterList.slice(0, displayCount);
-  }, [filterList, displayCount]);
+    if (isExpanded) {
+      return filterList; // 展开时显示所有项目
+    }
+    return filterList.slice(0, displayCount); // 收起时只显示指定数量
+  }, [filterList, displayCount, isExpanded]);
 
-  // 检查是否还有更多数据
-  const hasMoreData = useMemo(() => {
-    return filterList.length > displayCount;
-  }, [filterList, displayCount]);
-
-  // 检查是否应该显示查看更多按钮
-  const shouldShowMoreButton = useMemo(() => {
+  // 检查是否应该显示展开/收起按钮
+  const shouldShowToggleButton = useMemo(() => {
     // 如果数据还在加载中，不显示按钮
     if (isLoading) return false;
 
-    // 如果没有更多数据，不显示按钮
-    if (!hasMoreData) return false;
+    // 如果数据总数少于等于初始显示数量，不显示按钮
+    if (filterList.length <= displayCount) return false;
 
-    // 根据tab类型决定是否显示按钮
-    // 这里可以根据具体需求调整条件
     return true;
-  }, [isLoading, hasMoreData]);
+  }, [isLoading, filterList.length, displayCount]);
 
-  // 处理查看更多按钮点击
-  const handleViewMore = () => {
-    setDisplayCount((prev) => prev + 8);
+  // 处理展开/收起按钮点击
+  const handleToggle = () => {
+    setIsExpanded((prev) => !prev);
   };
 
-  // 当切换tab时重置显示数量
+  // 当切换tab时重置显示数量和展开状态
   useEffect(() => {
     setDisplayCount(8);
+    setIsExpanded(false);
   }, [selectedTag]);
 
   const skeletons = () => {
@@ -223,7 +245,7 @@ export const Business = () => {
       <div
         className={`${styles.nav} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_2}`}
       >
-        <div className={`flex items-center ${styles.navWrapper}`}>
+        <div className={`flex flex-1 items-center ${styles.navWrapper}`}>
           {navData.map((item) => (
             <div
               key={item.tag}
@@ -233,8 +255,10 @@ export const Business = () => {
               {item.name}
             </div>
           ))}
+        </div>
+        <div className={`hidden w-[135px] pl-[15px] md:flex`}>
           <SeeMore
-            className={`${styles.showMore} md:flex hidden`}
+            className={`${styles.showMore} ${isMobile ? styles.showMoreMobile : ''}`}
             href="https://github.com/hello-xone/xone_assets/blob/main/tools/ToolList.json"
             target="_blank"
             text={t("common:showMore")}
@@ -244,7 +268,7 @@ export const Business = () => {
 
       <div className="block mt-2 md:hidden">
         <SeeMore
-          className={`${styles.showMore}`}
+          className={`${styles.showMore} ${isMobile ? styles.showMoreMobile : ''}`}
           href="https://github.com/hello-xone/xone_assets/blob/main/tools/ToolList.json"
           target="_blank"
           text={t("common:showMore")}
@@ -283,18 +307,21 @@ export const Business = () => {
         </div>
       </div>
 
-      {shouldShowMoreButton && (
+      {shouldShowToggleButton && (
         <div
           className={`${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_5}`}
         >
           <div
             className="cursor-pointer flex items-center justify-center gap-x-[5px] mt-8"
-            onClick={handleViewMore}
+            onClick={handleToggle}
           >
             <span className="text-[var(--t1)] text-[16px] font-medium">
-              {t("common:viewMore")}
+              {isExpanded ? t("common:viewLess") : t("common:viewMore")}
             </span>
-            <ArrowBottomInline className="w-[24px] h-[24px]" />
+            <ArrowBottomInline 
+              className={`w-[24px] h-[24px] transition-transform duration-200 ${
+                isExpanded ? 'rotate-180' : ''}`} 
+            />
           </div>
         </div>
       )}

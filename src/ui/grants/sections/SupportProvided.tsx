@@ -102,8 +102,8 @@ export const SupportProvided = () => {
       <p className="text-[var(--t2)] text-[15px] md:text-[16px] mt-2 md:mt-1">
         {t("grants:supportProvidedDesc")}
       </p>
-      <div className="mt-10 flex gap-x-[80px] items-stretch justify-between">
-        <div className="w-full md:w-auto flex flex-col gap-y-[26px]">
+      <div className="mt-10 flex gap-x-[10px] items-stretch justify-between">
+        <div className="md:w-[410px] w-full flex flex-col gap-y-[26px]">
           {list.map((item, index) => (
             <Fragment key={index}>
               <div
@@ -139,7 +139,7 @@ export const SupportProvided = () => {
               {detail?.title === item.title && (
                 <div className="block md:hidden w-full md:w-[752px]">
                   <div className="w-full h-[210px] md:h-[445px] bg-[var(--layer2)] md:rounded-[28px] rounded-[8px]"></div>
-                  <p className="text-[var(--t2)] mt-4 md:mt-12 text-[16px] md:text-[17px]">
+                  <p className="text-[var(--t2)] mt-4 md:mt-12 text-[16px] md:text-[17px] line-clamp-3">
                     {detail.desc}
                   </p>
                   <SeeMore
@@ -165,7 +165,9 @@ export const SupportProvided = () => {
         {detail && (
           <div className="hidden flex-col justify-between md:flex md:flex-1">
             <div className="w-full h-[460px] bg-[var(--layer2)] rounded-[28px]"></div>
-            <p className="text-[var(--t2)] mt-2 text-[17px]">{detail.desc}</p>
+            <p className="text-[var(--t2)] mt-2 text-[17px] line-clamp-3">
+              {detail.desc}
+            </p>
             <div className="mt-6">
               <SeeMore
                 className={`${styles.seeMore} ${styles.seeMoreSupport}`}

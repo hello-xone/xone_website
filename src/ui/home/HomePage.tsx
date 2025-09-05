@@ -17,39 +17,43 @@ const HomePage = () => {
       const { md } = useTailwindBreakpoint();
 
       return (
-            <div className="container overflow-x-hidden">
-                  <MotionScrollReveal delay={0}>
-                        <Banner></Banner>
-                  </MotionScrollReveal>
-                  <MotionScrollReveal>
-                        <XoneChain></XoneChain>
-                  </MotionScrollReveal>
-                  <MotionScrollReveal>
-                        <Introducing></Introducing>
-                  </MotionScrollReveal>
-                  <MotionScrollReveal>
-                        <MarketChart></MarketChart>
-                  </MotionScrollReveal>
-                  <MotionScrollReveal>
-                        <Governance></Governance>
-                  </MotionScrollReveal>
-                  <MotionScrollReveal>
-                        <OnChainIdentity></OnChainIdentity>
-                  </MotionScrollReveal>
-                  {md && <MotionScrollReveal><Ecosystem></Ecosystem></MotionScrollReveal>}
-                  <MotionScrollReveal>
-                        <HelloXone />
-                  </MotionScrollReveal>
+            <>
+                  <div className="container overflow-x-hidden">
+                        <MotionScrollReveal delay={0}>
+                              <Banner></Banner>
+                        </MotionScrollReveal>
+                        <MotionScrollReveal>
+                              <XoneChain></XoneChain>
+                        </MotionScrollReveal>
+                        <MotionScrollReveal>
+                              <Introducing></Introducing>
+                        </MotionScrollReveal>
+                        <MotionScrollReveal>
+                              <MarketChart></MarketChart>
+                        </MotionScrollReveal>
+                        <MotionScrollReveal>
+                              <Governance></Governance>
+                        </MotionScrollReveal>
+                        <MotionScrollReveal>
+                              <OnChainIdentity></OnChainIdentity>
+                        </MotionScrollReveal>
+                        {md && <MotionScrollReveal><Ecosystem></Ecosystem></MotionScrollReveal>}
+                        <MotionScrollReveal>
+                              <HelloXone />
+                        </MotionScrollReveal>
+                  </div>
                   <MotionScrollReveal>
                         <Community></Community>
                   </MotionScrollReveal>
-                  {/* <Governance></Governance> */}
-                  {/* <Explore></Explore> */}
-                  {!md && <MotionScrollReveal><Ecosystem></Ecosystem> </MotionScrollReveal>}
-                  <MotionScrollReveal>
-                        <Start></Start>
-                  </MotionScrollReveal>
-            </div>
+                  <div className="container overflow-x-hidden">
+                        {/* <Governance></Governance> */}
+                        {/* <Explore></Explore> */}
+                        {!md && <MotionScrollReveal><Ecosystem></Ecosystem> </MotionScrollReveal>}
+                        <MotionScrollReveal>
+                              <Start></Start>
+                        </MotionScrollReveal>
+                  </div>
+            </>
       );
 };
 
