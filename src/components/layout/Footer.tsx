@@ -319,7 +319,7 @@ const Footer = () => {
               );
             })}
 
-          <div className="w-full md:w-[386px]">
+          <div className="w-full md:w-[386px] relative">
             <div className="font-bold mb-4 text-t1">
               {t("header:subscribe")}
             </div>
@@ -332,7 +332,7 @@ const Footer = () => {
                 disablePortal
                 freeSolo
                 inputValue={values.email}
-                className="!border-transparent border-[1px] hover:!border-[1px] hover:!border-t1 !rounded-[8px] !p-1 !box-content !bg-b3"
+                className="!border-transparent w-full border-[1px] hover:!border-[1px] hover:!border-t1 !rounded-[8px] !bg-b3"
                 options={generateOptions(values.email)}
                 onChange={(_, newValue) => {
                   setFieldValue("email", newValue);
