@@ -13,6 +13,8 @@ import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 import useApplicationStore from "@/store/applicationStore";
 import { ChartRes } from "@/types/response";
 import { formatNumber } from "@/utils/number";
+import { AnimatedTitle } from "@/components/comm/title/AnimatedTitle";
+import AnimatedTitles from "@/components/comm/title/AnimatedTitles";
 
 const DATA_ZOOM_MIN_VALUE_SPAN = 3600 * 1000;
 const BottomMenu = [
@@ -242,9 +244,7 @@ export const MarketChart = () => {
 
     return (
         <div className="py-[40px] md:py-[80px] text-center">
-            <div className="text-[24px] md:text-[48px] max-md:text-left font-bold leading-[120%] mb-4 md:mb-6">
-                {t("marketTitle")}
-            </div>
+            <AnimatedTitles activeEffect="reveal" className="max-md:text-left leading-[120%] mb-4 md:mb-6" text={t("marketTitle")}></AnimatedTitles>
             <div className="text-base md:text-[20px] max-md:text-left font-medium text-t2 mb-6 md:mb-10 leading-[140%]">
                 {t("marketDesc")}
             </div>

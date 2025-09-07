@@ -10,6 +10,7 @@ import IntroducingDarkIcon2 from "@/assets/imgs/home/introducing-dark-2.png"
 import IntroducingDarkIcon3 from "@/assets/imgs/home/introducing-dark-3.png"
 import IntroducingDarkIcon4 from "@/assets/imgs/home/introducing-dark-4.png"
 import { SeeMore } from "@/components/comm/link/SeeMore"
+import { AnimatedTitle } from "@/components/comm/title/AnimatedTitle"
 import { EXTERNAL_LINKS } from "@/constants/external"
 import useApplicationStore from "@/store/applicationStore"
 
@@ -72,7 +73,7 @@ const Introducing = () => {
           </div>
 
           <div className="w-full md:w-[32.7%] shrink-0 max-md:mb-[32px]">
-            <div className="font-bold text-[24px] md:text-[48px] leading-[120%] mb-4 md:mb-5">{t("introducingTitle")}</div>
+            <AnimatedTitle className="font-bold text-[24px] md:text-[48px] !text-left leading-[120%] mb-4 md:mb-5" text={t("introducingTitle")}></AnimatedTitle>
             <div className="text-t2 leading-[140%]">{t("introducingDesc")}</div>
           </div>
         </div>
