@@ -20,7 +20,6 @@ import CommonPopover from "./Popover/CommonPopover";
 import LanguagePopover from "./Popover/LanguagePopover";
 import MenuPopover from "./Popover/MenuPopover";
 
-
 const Header = () => {
   const popoverRef = useRef<any>(null);
   const navigate = useNavigate();
@@ -29,14 +28,35 @@ const Header = () => {
   const [detailId, setDetailId] = useState("");
   const { t, i18n } = useTranslation("header");
 
+  const [isThemeSwitching, setIsThemeSwitching] = useState(false);
 
   const toggleTheme = () => {
-    document.documentElement.setAttribute(
-      "data-theme",
-      isLight ? "dark" : "light"
-    );
-    localStorage.setItem("theme", isLight ? "dark" : "light");
-    changeTheme();
+    setIsThemeSwitching(true);
+
+    // 页面过渡效果
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        document.documentElement.setAttribute(
+          "data-theme",
+          isLight ? "dark" : "light"
+        );
+        localStorage.setItem("theme", isLight ? "dark" : "light");
+        changeTheme();
+      });
+    } else {
+      // 切换主题
+      document.documentElement.setAttribute(
+        "data-theme",
+        isLight ? "dark" : "light"
+      );
+      localStorage.setItem("theme", isLight ? "dark" : "light");
+      changeTheme();
+    }
+
+    // 重置动画状态
+    setTimeout(() => {
+      setIsThemeSwitching(false);
+    }, 600);
   };
 
   useEffect(() => {
@@ -288,11 +308,13 @@ const Header = () => {
           <LanguagePopover>
             <Language className="text-t1"></Language>
           </LanguagePopover>
-          <div className="w-[40px] flex rounded-[10px] hover:bg-b2 items-center justify-center h-[40px]">
+          <div
+            className={`w-[40px] flex rounded-[10px] hover:bg-b2 items-center justify-center h-[40px] theme-toggle-button ${isThemeSwitching ? "theme-switching" : ""}`}
+          >
             <Theme
               isLight={isLight}
               onClick={() => toggleTheme()}
-              className="text-t1 w-[24px] h-[24px]"
+              className="text-t1 w-[24px] h-[24px] theme-icon"
             ></Theme>
           </div>
         </div>
