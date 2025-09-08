@@ -342,8 +342,8 @@ export const MarketChart = () => {
                     <div className="text-t1 leading-[21px] mb-2">
                         {t("totalMarketCap")}
                     </div>
-                    <div className="text-t1 font-bold text-[32px] leading-[42px] mb-12">
-                        <NumberCounter value={chartData?.market_cap || 0}></NumberCounter>
+                    <div className="text-t1 justify-center font-bold text-[32px] flex items-center leading-[42px] mb-12">
+                        $<NumberCounter value={chartData?.market_cap || 0}></NumberCounter>
                     </div>
                     <div className="text-t1 leading-[21px] mb-2">
                         {t("accountsHoldingCOX")}

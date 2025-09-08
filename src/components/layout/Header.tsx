@@ -20,6 +20,7 @@ import CommonPopover from "./Popover/CommonPopover";
 import LanguagePopover from "./Popover/LanguagePopover";
 import MenuPopover from "./Popover/MenuPopover";
 
+
 const Header = () => {
   const popoverRef = useRef<any>(null);
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Header = () => {
   const [event, setEvent] = useState<any>(null);
   const [detailId, setDetailId] = useState("");
   const { t, i18n } = useTranslation("header");
+
 
   const toggleTheme = () => {
     document.documentElement.setAttribute(

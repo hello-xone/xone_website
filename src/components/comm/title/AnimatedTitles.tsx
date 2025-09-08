@@ -29,6 +29,7 @@ const AnimatedTitles = ({ text, activeEffect = "reveal", className }: { classNam
     const [parallaxValues, setParallaxValues] = useState<any>([]);
     const titleRef = useRef(null);
     const controls = useAnimation();
+    const [hasAnimated, setHasAnimated] = useState(false);
 
     // 处理滚动事件，计算视差效果
     useEffect(() => {
@@ -80,15 +81,35 @@ const AnimatedTitles = ({ text, activeEffect = "reveal", className }: { classNam
 
     // 处理效果切换时的动画
     useEffect(() => {
-        if (controls) {
-            controls.start("visible");
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const [entry] = entries;
+
+                // 元素进入视口且未执行过动画
+                if (entry.isIntersecting && !hasAnimated) {
+                    if (controls) {
+                        controls.start("visible");
+                    }
+                    setHasAnimated(true);
+                }
+            },
+            {
+                // 元素可见比例达到10%时触发
+                threshold: 0.2,
+                // 提前50px开始检测
+                rootMargin: '50px 0px'
+            }
+        );
+        // 观察目标元素
+        if (titleRef.current) {
+            observer.observe(titleRef.current);
         }
         return () => {
-            if (controls) {
-                controls.stop();
+            if (titleRef && titleRef.current) {
+                observer.unobserve(titleRef.current);
             }
         };
-    }, [activeEffect, controls]);
+    }, [activeEffect, controls, hasAnimated]);
 
     // 分割文本为字符数组并应用动画
     const textToChars = (text: string) => {
@@ -105,8 +126,8 @@ const AnimatedTitles = ({ text, activeEffect = "reveal", className }: { classNam
                 animate={activeEffect === "parallax" ? undefined : controls}
                 whileHover="hover"
                 transition={{
-                    duration: 0.5,
-                    delay: index * 0.1
+                    duration: 0.3,
+                    delay: index * 0.04
                 }}
                 style={activeEffect === "parallax" ? {
                     transform: `translateY(${parallaxValues[index] || 0}px)`
@@ -126,7 +147,7 @@ const AnimatedTitles = ({ text, activeEffect = "reveal", className }: { classNam
                         ref={titleRef}
                         initial={{ width: 0 }}
                         animate={{ width: "auto" }}
-                        transition={{ duration: 1 }}
+                        transition={{ duration: 0.3 }}
                     >
                         {textToChars(typedText)}
                     </motion.h1>
@@ -135,7 +156,7 @@ const AnimatedTitles = ({ text, activeEffect = "reveal", className }: { classNam
                             className="absolute right-[-5px] top-0 bottom-0 w-3 bg-green-600"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: [0, 1, 0] }}
-                            transition={{ repeat: Infinity, duration: 1 }}
+                            transition={{ repeat: Infinity, duration: 0.3 }}
                         />
                     )}
                 </div>
