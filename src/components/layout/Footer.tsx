@@ -175,7 +175,8 @@ const Footer = () => {
           {
             name: t("common:proposal-initiation"),
             internalLink: true,
-            url: "/commercial",
+            isLater: true,
+            url: "",
           },
           {
             name: t("common:incentives"),

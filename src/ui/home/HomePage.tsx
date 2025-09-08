@@ -18,48 +18,50 @@ const HomePage = () => {
 
   return (
     <>
+      <MotionScrollReveal delay={0} animation="scale">
+        <Banner></Banner>
+      </MotionScrollReveal>
       <div className="container overflow-x-hidden">
-        <MotionScrollReveal delay={0}>
-          <Banner></Banner>
-        </MotionScrollReveal>
-        <MotionScrollReveal>
+        <MotionScrollReveal animation="slide">
           <XoneChain></XoneChain>
         </MotionScrollReveal>
       </div>
-      <MotionScrollReveal>
+      <MotionScrollReveal animation="slide">
         <Introducing></Introducing>
       </MotionScrollReveal>
-      <div className="container overflow-x-hidden">
-        <MotionScrollReveal>
+      <div className="container overflow-hidden">
+        <MotionScrollReveal animation="slide">
           <MarketChart></MarketChart>
         </MotionScrollReveal>
-        <MotionScrollReveal>
-          <Governance></Governance>
-        </MotionScrollReveal>
-        <MotionScrollReveal>
-          <OnChainIdentity></OnChainIdentity>
-        </MotionScrollReveal>
+      </div>
+      <MotionScrollReveal animation="slide">
+        <Governance></Governance>
+      </MotionScrollReveal>
+      <MotionScrollReveal animation="slide">
+        <OnChainIdentity></OnChainIdentity>
+      </MotionScrollReveal>
+      <div className="container pb-[12px] overflow-hidden">
         {md && (
-          <MotionScrollReveal>
+          <MotionScrollReveal animation="slide">
             <Ecosystem></Ecosystem>
           </MotionScrollReveal>
         )}
-        <MotionScrollReveal>
-          <HelloXone />
-        </MotionScrollReveal>
       </div>
-      <MotionScrollReveal>
+      <MotionScrollReveal animation="slide">
+        <HelloXone />
+      </MotionScrollReveal>
+      <MotionScrollReveal animation="slide">
         <Community></Community>
       </MotionScrollReveal>
       <div className="container overflow-x-hidden">
         {/* <Governance></Governance> */}
         {/* <Explore></Explore> */}
         {!md && (
-          <MotionScrollReveal>
+          <MotionScrollReveal animation="slide">
             <Ecosystem></Ecosystem>{" "}
           </MotionScrollReveal>
         )}
-        <MotionScrollReveal>
+        <MotionScrollReveal animation="slide">
           <Start></Start>
         </MotionScrollReveal>
       </div>

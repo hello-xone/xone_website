@@ -50,82 +50,86 @@ const HelloXone = () => {
   }, [t]);
 
   return (
-    <div className={`${styles.wrapper}`}>
-      <img
-        alt=""
-        src={BgIcon2}
-        className="absolute right-0 max-md:hidden"
-      ></img>
-      <img
-        alt=""
-        src={BgIcon3}
-        className="max-md:hidden absolute mt-[30%] left-0"
-      ></img>
+    <div className="relative">
+      <div className="container overflow-x-hidden">
+        <div className={`${styles.wrapper}`}>
+          <img
+            alt=""
+            src={BgIcon2}
+            className="absolute right-0 max-md:hidden"
+          ></img>
+          <img
+            alt=""
+            src={BgIcon3}
+            className="max-md:hidden absolute mt-[30%] left-0"
+          ></img>
 
-      <div className={`${styles.header} ${AnimationName.SLIDE_IN_BOTTOM}`}>
-        <Title className={styles.headerTitle}>
-          {t("home:hellowXoneTitle")}
-        </Title>
-        <p
-          className={` ${styles.headerDescription} ${AnimationName.SLIDE_IN_BOTTOM}`}
-        >
-          {t("home:hellowXoneDesc")}
-          {/* <SeeMore
+          <div className={`${styles.header} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+            <Title className={styles.headerTitle}>
+              {t("home:hellowXoneTitle")}
+            </Title>
+            <p
+              className={` ${styles.headerDescription} ${AnimationName.SLIDE_IN_BOTTOM}`}
+            >
+              {t("home:hellowXoneDesc")}
+              {/* <SeeMore
             href={EXTERNAL_LINKS.docs + "developers/guide"}
             target="_blank"
             className={`${styles.btn} ${styles.seeMoreBtn}`}
             text={t("home:hellowXoneLinkText2")}
           ></SeeMore> */}
-        </p>
-      </div>
-      <div className={styles.content}>
-        {operations.map((operation) => (
-          <div
-            key={operation.id}
-            className={`${styles.contentItem} ${styles[operation.imagePosition]} ${AnimationName.SLIDE_IN_FADE}`}
-          >
-            {operation.imagePosition === "left" ? (
-              <>
-                {/* <div className={styles.contentItemImage}></div> */}
-                <Lottie animationData={operation.id === 1 ? (isLight ? StartNodeJson : StartNodeDarkJson) : (isLight ? DeployingDappsJson : DeployingDappsDarkJson)} loop={true} ></Lottie>
-                <div className={styles.contentItemDetail}>
-                  <h3 className={styles.contentItemDetailTitle}>
-                    {operation.title}
-                  </h3>
-                  <p className={styles.contentItemDetailDescription}>
-                    {operation.description}
-                  </p>
-                  <SeeMore
-                    className={styles.btn}
-                    href={operation.url ?? ""}
-                    disabled={!operation.url}
-                    text={operation.linkText}
-                    target="_blank"
-                  ></SeeMore>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className={styles.contentItemDetail}>
-                  <h3 className={styles.contentItemDetailTitle}>
-                    {operation.title}
-                  </h3>
-                  <p className={styles.contentItemDetailDescription}>
-                    {operation.description}
-                  </p>
-                  <SeeMore
-                    className={styles.btn}
-                    href={operation.url ?? ""}
-                    disabled={!operation.url}
-                    text={operation.linkText}
-                    target="_blank"
-                  ></SeeMore>
-                </div>
-                <Lottie animationData={isLight ? FinancialSystemJson : FinancialSystemDarkJson} loop={true} ></Lottie>
-              </>
-            )}
+            </p>
           </div>
-        ))}
+          <div className={styles.content}>
+            {operations.map((operation) => (
+              <div
+                key={operation.id}
+                className={`${styles.contentItem} ${styles[operation.imagePosition]} ${AnimationName.SLIDE_IN_FADE}`}
+              >
+                {operation.imagePosition === "left" ? (
+                  <>
+                    {/* <div className={styles.contentItemImage}></div> */}
+                    <Lottie animationData={operation.id === 1 ? (isLight ? StartNodeJson : StartNodeDarkJson) : (isLight ? DeployingDappsJson : DeployingDappsDarkJson)} loop={true} ></Lottie>
+                    <div className={styles.contentItemDetail}>
+                      <h3 className={styles.contentItemDetailTitle}>
+                        {operation.title}
+                      </h3>
+                      <p className={styles.contentItemDetailDescription}>
+                        {operation.description}
+                      </p>
+                      <SeeMore
+                        className={styles.btn}
+                        href={operation.url ?? ""}
+                        disabled={!operation.url}
+                        text={operation.linkText}
+                        target="_blank"
+                      ></SeeMore>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className={styles.contentItemDetail}>
+                      <h3 className={styles.contentItemDetailTitle}>
+                        {operation.title}
+                      </h3>
+                      <p className={styles.contentItemDetailDescription}>
+                        {operation.description}
+                      </p>
+                      <SeeMore
+                        className={styles.btn}
+                        href={operation.url ?? ""}
+                        disabled={!operation.url}
+                        text={operation.linkText}
+                        target="_blank"
+                      ></SeeMore>
+                    </div>
+                    <Lottie animationData={isLight ? FinancialSystemJson : FinancialSystemDarkJson} loop={true} ></Lottie>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
