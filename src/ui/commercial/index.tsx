@@ -17,7 +17,7 @@ export const Commercial = () => {
     <div className="container !pb-[80px] md:!pb-[120px] text-center">
       <img alt="" src={EventBg} className="w-[213px] h-[458px] max-md:hidden top-[16%] absolute left-0"></img>
       <img alt="" src={EventBg} className="w-[213px] h-[458px] max-md:hidden top-[16%] rotate-180 absolute right-0"></img>
-      <Title className="mt-[40px] md:mt-[116px] max-md:!text-[32px] !leading-[38px] !font-bold md:!leading-[63px] !mb-0">{t("bannerTitle1")}</Title>
+      <Title className="mt-[40px] md:mt-[116px] max-md:!text-[28px] !leading-[38px] !font-bold md:!leading-[63px] !mb-0">{t("bannerTitle1")}</Title>
       <Title className="!leading-[38px] md:!leading-[63px] max-md:!text-[32px] !font-bold">{t("bannerTitle2")}</Title>
       <div className="text-t2 text-base md:text-xl leading-[140%] mb-8">{t("bannerDesc")}</div>
       <div className="flex max-md:flex-col items-center text-t2 text-base leading-[22px] justify-center gap-[16px]">

@@ -79,7 +79,7 @@ export const Events = () => {
             <CommonButton
                 onClick={() => window.open("https://luma.com/xone")}
                 type="black"
-                className="max-md:w-full !text-[16px] max-md:h-[48px] h-[56px] md:w-[140px] md:!text-[18px] mx-auto !rounded-[12px]"
+                className="max-md:w-full !text-[16px] max-md:h-[48px] h-[56px] md:min-w-[140px] md:!text-[18px] mx-auto !rounded-[12px]"
             >
                 {t("joinUs")}
             </CommonButton>

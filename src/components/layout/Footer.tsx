@@ -292,7 +292,7 @@ const Footer = () => {
                           >
                             {info.name}
                             {info.isLater && (
-                              <span className="w-[52px] h-[24px] rounded-[4px] flex items-center justify-center bg-b2 text-t1 text-xs">
+                              <span className="max-md:min-w-[52px] max-md:px-[8px] p-[8px] md:h-[24px] rounded-[4px] flex items-center justify-center bg-b2 text-t1 text-xs">
                                 {t("common:later")}
                               </span>
                             )}

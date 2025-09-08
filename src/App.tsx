@@ -21,24 +21,6 @@ import { I18nProvider } from "@/i18n/provider";
 
 import { RenderRoutes } from "./routes/router";
 
-// 动画配置 - 可根据需要修改
-const pageVariants = {
-  initial: {
-    opacity: 0,
-    y: -50,
-    scale: 1
-  },
-  in: {
-    opacity: 1,
-    y: 0,
-    scale: 1
-  },
-  out: {
-    opacity: 0,
-    y: 50,
-    scale: 1
-  }
-};
 
 function App() {
   // const { themeConfig } = useThemeConfig();
@@ -78,22 +60,7 @@ function App() {
                 <Toaster toastOptions={{
                   className: "common-toast"
                 }} />
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    transition={{
-                      type: 'spring',
-                      ease: 'easeOut',
-                      duration: 0.6
-                    }}
-                    className="page-container"
-                  >
-                    <RenderRoutes />
-                  </motion.div>
-                </AnimatePresence>
+                <RenderRoutes />
               </NotificationsProvider>
             </WalletKitProvider>
           </I18nProvider>
