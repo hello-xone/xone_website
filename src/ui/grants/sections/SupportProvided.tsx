@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Lottie from "lottie-react";
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -12,6 +13,16 @@ import IconSvgLight2 from "@/assets/imgs/grants/light/icon_14.png";
 import IconSvgLight3 from "@/assets/imgs/grants/light/icon_15.png";
 import IconSvgLight4 from "@/assets/imgs/grants/light/icon_16.png";
 import IconSvgLight5 from "@/assets/imgs/grants/light/icon_17.png";
+import CoBrandingDarkJson from "@/assets/lottie/grants/dark/co-branding.json";
+import CooperationOpportunitiesDarkJson from "@/assets/lottie/grants/dark/cooperation-opportunities.json";
+import EcologicalExposureDarkJson from "@/assets/lottie/grants/dark/ecological-exposure.json";
+import FinancialSupportDarkJson from "@/assets/lottie/grants/dark/financial-support.json";
+import TechnicalResourcesDarkJson from "@/assets/lottie/grants/dark/technological-resources.json";
+import CoBrandingJson from "@/assets/lottie/grants/light/co-branding.json";
+import CooperationOpportunitiesJson from "@/assets/lottie/grants/light/cooperation-opportunities.json";
+import EcologicalExposureJson from "@/assets/lottie/grants/light/ecological-exposure.json";
+import FinancialSupportJson from "@/assets/lottie/grants/light/financial-support.json";
+import TechnicalResourcesJson from "@/assets/lottie/grants/light/technological-resources.json";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
@@ -36,30 +47,37 @@ export const SupportProvided = () => {
         title: t("grants:supportProvidedTitle01"),
         desc: t("grants:supportProvidedDesc01"),
         icon: isLight ? IconSvgLight1 : IconSvgDark1,
+        lottie: isLight ? FinancialSupportJson : FinancialSupportDarkJson,
         button: t("grants:supportProvidedButton01"),
       },
       {
         title: t("grants:supportProvidedTitle02"),
         desc: t("grants:supportProvidedDesc02"),
         icon: isLight ? IconSvgLight2 : IconSvgDark2,
+        lottie: isLight ? TechnicalResourcesJson : TechnicalResourcesDarkJson,
         button: t("grants:supportProvidedButton02"),
       },
       {
         title: t("grants:supportProvidedTitle03"),
         desc: t("grants:supportProvidedDesc03"),
         icon: isLight ? IconSvgLight3 : IconSvgDark3,
+        lottie: isLight ? EcologicalExposureJson : EcologicalExposureDarkJson,
         button: t("grants:supportProvidedButton03"),
       },
       {
         title: t("grants:supportProvidedTitle04"),
         desc: t("grants:supportProvidedDesc04"),
         icon: isLight ? IconSvgLight4 : IconSvgDark4,
+        lottie: isLight
+          ? CooperationOpportunitiesJson
+          : CooperationOpportunitiesDarkJson,
         button: t("grants:supportProvidedButton04"),
       },
       {
         title: t("grants:supportProvidedTitle05"),
         desc: t("grants:supportProvidedDesc05"),
         icon: isLight ? IconSvgLight5 : IconSvgDark5,
+        lottie: isLight ? CoBrandingJson : CoBrandingDarkJson,
         button: t("grants:supportProvidedButton05"),
       },
     ];
@@ -147,7 +165,7 @@ export const SupportProvided = () => {
       </p>
       <div className="mt-10 flex gap-x-[10px] items-stretch justify-between">
         <div
-          className="md:w-[410px] w-full flex flex-col gap-y-[26px]"
+          className="lg:w-[410px] md:w-[310px] w-full flex flex-col gap-y-[26px]"
           onMouseEnter={() => !isMobile && setIsHovered(true)}
           onMouseLeave={() => !isMobile && setIsHovered(false)}
         >
@@ -185,7 +203,13 @@ export const SupportProvided = () => {
               </div>
               {detail?.title === item.title && (
                 <div className="block md:hidden w-full md:w-[752px]">
-                  <div className="w-full h-[210px] md:h-[445px] bg-[var(--layer2)] md:rounded-[28px] rounded-[8px]"></div>
+                  <div className="w-full h-[210px] md:h-[445px] bg-[var(--layer2)] md:rounded-[28px] rounded-[8px]">
+                    <Lottie
+                      className="w-full h-full"
+                      animationData={detail.lottie}
+                      loop={true}
+                    ></Lottie>
+                  </div>
                   <p className="text-[var(--t2)] mt-4 md:mt-12 text-[16px] md:text-[17px] line-clamp-3">
                     {detail.desc}
                   </p>
@@ -211,7 +235,13 @@ export const SupportProvided = () => {
         </div>
         {detail && (
           <div className="hidden flex-col justify-between md:flex md:flex-1">
-            <div className="w-full h-[460px] bg-[var(--layer2)] rounded-[28px]"></div>
+            <div className="w-full h-[460px] bg-[var(--layer2)] rounded-[28px]">
+              <Lottie
+                className="w-full h-full"
+                animationData={detail.lottie}
+                loop={true}
+              ></Lottie>
+            </div>
             <p className="text-[var(--t2)] mt-2 text-[17px] line-clamp-3">
               {detail.desc}
             </p>
