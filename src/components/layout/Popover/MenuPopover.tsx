@@ -145,6 +145,7 @@ const MenuPopover = () => {
                                                                                     key={`h5-menu-${item.id}-link-${link.id}`}
                                                                                 >
                                                                                     <Link
+                                                                                        onClick={() => close()}
                                                                                         to={link.link || ""}
                                                                                         target={link.link.includes("http") ? "_blank" : "_self"}
                                                                                     >
