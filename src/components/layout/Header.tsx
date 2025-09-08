@@ -23,7 +23,7 @@ import MenuPopover from "./Popover/MenuPopover";
 const Header = () => {
   const popoverRef = useRef<any>(null);
   const navigate = useNavigate();
-  const { isLight, changeTheme } = useApplicationStore()
+  const { isLight, changeTheme } = useApplicationStore();
   const [event, setEvent] = useState<any>(null);
   const [detailId, setDetailId] = useState("");
   const { t, i18n } = useTranslation("header");
@@ -34,7 +34,7 @@ const Header = () => {
       isLight ? "dark" : "light"
     );
     localStorage.setItem("theme", isLight ? "dark" : "light");
-    changeTheme()
+    changeTheme();
   };
 
   useEffect(() => {
@@ -54,21 +54,20 @@ const Header = () => {
       switch (detailId) {
         case "global_active":
           return {
-            images: event.cover_url || '',
-            name: event.name || '',
+            images: event.cover_url || "",
+            name: event.name || "",
           };
       }
       switch (detailId) {
         case "global_active":
           return {
-            images: event.cover_url || '',
-            name: event.name || '',
+            images: event.cover_url || "",
+            name: event.name || "",
           };
       }
     }
     return null;
   }, [event, detailId]);
-
 
   const group = useMemo(() => {
     if (detailId) {
@@ -77,7 +76,7 @@ const Header = () => {
         return groups.find((item) => item.id === detailId);
       }
     }
-  }, [detailId])
+  }, [detailId]);
 
   const handleCallChild = () => {
     if (popoverRef.current) {
@@ -85,10 +84,15 @@ const Header = () => {
     }
   };
   return (
-    <div className={clsx(`w-full fixed backdrop-blur-[5px] z-[10] top-0 left-0 h-[58px] md:h-[64px] px-4 md:px-[30px] flex items-center justify-between`, {
-      'bg-[#ffffff]/50': isLight,
-      'bg-[#070808]/50': !isLight,
-    })} >
+    <div
+      className={clsx(
+        `w-full fixed backdrop-blur-[5px] z-[10] top-0 left-0 h-[58px] md:h-[64px] px-4 md:px-[30px] flex items-center justify-between`,
+        {
+          "bg-[#ffffff]/50": isLight,
+          "bg-[#070808]/50": !isLight,
+        }
+      )}
+    >
       <div className="flex items-center z-10 gap-[48px]">
         <img
           src={LogoRedIcon}
@@ -96,7 +100,12 @@ const Header = () => {
           onClick={() => navigate("/")}
           className="w-[100px] h-auto cursor-pointer max-md:hidden"
         ></img>
-        <img src={LogoIcon} onClick={() => navigate("/")} alt="logo" className="w-8 h-8 md:hidden"></img>
+        <img
+          src={LogoIcon}
+          onClick={() => navigate("/")}
+          alt="logo"
+          className="w-8 h-8 md:hidden"
+        ></img>
         <div className="hidden lg:flex items-center gap-[40px]">
           {menus &&
             menus.map((item) => {
@@ -111,11 +120,30 @@ const Header = () => {
                               item.group.map((gel) => (
                                 <div
                                   onMouseEnter={() => setDetailId(gel.id)}
-                                  className="px-[10px] group gap-[12px] rounded-[8px] mb-[2px] bg-transparent hover:bg-b3 cursor-pointer py-2 flex items-center"
+                                  className={clsx(
+                                    "px-[10px] group gap-[12px] rounded-[8px] mb-[2px] bg-transparent hover:bg-b3 cursor-pointer py-2 flex items-center",
+                                    {
+                                      "!bg-b3": detailId === gel.id,
+                                    }
+                                  )}
                                   key={`children-item-${gel.id}`}
                                 >
-                                  <gel.icon className="text-t2 group-hover:text-t1 shrink-0"></gel.icon>
-                                  <div className="text-t2 group-hover:text-t1">
+                                  <gel.icon
+                                    className={clsx(
+                                      "text-t2 group-hover:text-t1 shrink-0",
+                                      {
+                                        "!text-t1": detailId === gel.id,
+                                      }
+                                    )}
+                                  ></gel.icon>
+                                  <div
+                                    className={clsx(
+                                      "text-t2 group-hover:text-t1 shrink-0",
+                                      {
+                                        "!text-t1": detailId === gel.id,
+                                      }
+                                    )}
+                                  >
                                     <div className="text-sm font-bold leading-[140%] mb-1">
                                       {t(gel.title)}
                                     </div>
@@ -127,8 +155,10 @@ const Header = () => {
                               ))}
                           </div>
                           <div className="w-[480px] flex-1 flex flex-col">
-                            {
-                              group?.id === "global_business" ? <BusinessCard></BusinessCard> : <>
+                            {group?.id === "global_business" ? (
+                              <BusinessCard></BusinessCard>
+                            ) : (
+                              <>
                                 {!globalDetail ? (
                                   <div className="w-full min-h-[164px] flex-1 flex flex-col items-center justify-center rounded-[8px] bg-b3">
                                     <Knight className="text-t2 shrink-0"></Knight>
@@ -140,35 +170,48 @@ const Header = () => {
                                   <img
                                     src={globalDetail.images}
                                     alt=""
-                                    className="w-full aspect-[480/296] object-cover flex-1 rounded-[8px]"
+                                    className="w-full aspect-[480/276] object-cover flex-1 rounded-[8px]"
                                   ></img>
                                 )}
 
                                 <div className="mt-3 text-t2 shrink-0 text-sm font-bold leading-[140%]">
                                   {globalDetail
                                     ? globalDetail.name
-                                    : group?.detailTitle ? t(group?.detailTitle) : ""}
+                                    : group?.detailTitle
+                                      ? t(group?.detailTitle)
+                                      : ""}
                                 </div>
                                 {!globalDetail && (
-                                  <div className="mt-3 text-t2 shrink-0 text-sm leading-[140%]">{group?.detailDesc ? t(group?.detailDesc) : ""}</div>
+                                  <div className="mt-3 text-t2 shrink-0 text-sm leading-[140%]">
+                                    {group?.detailDesc
+                                      ? t(group?.detailDesc)
+                                      : ""}
+                                  </div>
                                 )}
                               </>
-                            }
-                            {
-                              group && group.link && <SeeMore
+                            )}
+                            {group && group.link && (
+                              <SeeMore
                                 href={group.link}
-                                target={group.link.includes("http") ? "_blank" : "_self"}
+                                target={
+                                  group.link.includes("http")
+                                    ? "_blank"
+                                    : "_self"
+                                }
                                 text={t("home:seeMore")}
                                 className="mt-3"
                                 textClassName="!text-[14px] shrink-0 text-t2"
                               ></SeeMore>
-                            }
+                            )}
                           </div>
                         </div>
                       ) : (
                         <div className="flex gap-[24px]">
                           {item.group.map((cel) => (
-                            <div key={`children-item-${cel.id}`} className="w-[200px]">
+                            <div
+                              key={`children-item-${cel.id}`}
+                              className="w-[200px]"
+                            >
                               <div className="text-base mb-1 leading-[140%] font-bold text-t1">
                                 {t(cel.title)}
                               </div>
@@ -183,7 +226,11 @@ const Header = () => {
                                         key={`link-item-${link.id}`}
                                         to={link.link || ""}
                                         onClick={() => handleCallChild()}
-                                        target={link.link.includes("http") ? "_blank" : "_self"}
+                                        target={
+                                          link.link.includes("http")
+                                            ? "_blank"
+                                            : "_self"
+                                        }
                                         className="px-[10px] py-[8px] hover:bg-b3 hover:text-t1 rounded-[8px] cursor-pointer"
                                       >
                                         {t(link.name)}
@@ -228,7 +275,10 @@ const Header = () => {
           {t("askAI")}
           <AiStar className="w-4 h-4 md:w-6 md:h-6"></AiStar>
         </CommonButton> */}
-        <CommonButton className="max-md:text-xs" onClick={() => window.open(EXTERNAL_LINKS.Bvi)}>
+        <CommonButton
+          className="max-md:text-xs"
+          onClick={() => window.open(EXTERNAL_LINKS.Bvi)}
+        >
           {t("exploreXone")}
         </CommonButton>
         <MenuPopover></MenuPopover>
@@ -237,9 +287,12 @@ const Header = () => {
             <Language className="text-t1"></Language>
           </LanguagePopover>
           <div className="w-[40px] flex rounded-[10px] hover:bg-b2 items-center justify-center h-[40px]">
-            <Theme isLight={isLight} onClick={() => toggleTheme()} className="text-t1 w-[24px] h-[24px]"></Theme>
+            <Theme
+              isLight={isLight}
+              onClick={() => toggleTheme()}
+              className="text-t1 w-[24px] h-[24px]"
+            ></Theme>
           </div>
-
         </div>
       </div>
     </div>

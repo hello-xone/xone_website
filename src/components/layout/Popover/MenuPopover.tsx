@@ -146,7 +146,7 @@ const MenuPopover = () => {
                                                                                 >
                                                                                     <Link
                                                                                         to={link.link || ""}
-                                                                                        target="_blank"
+                                                                                        target={link.link.includes("http") ? "_blank" : "_self"}
                                                                                     >
                                                                                         {t(link.name)}
                                                                                     </Link>

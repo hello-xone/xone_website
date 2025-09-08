@@ -20,9 +20,9 @@ const BaseLayout = () => {
   useEffect(() => { });
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="pt-[58px] md:pt-[64px]">
+      <main className="pt-[58px] md:pt-[64px] flex-1">
         <Suspense
           fallback={
             <div className="w-full h-[80vh] flex justify-center items-center">

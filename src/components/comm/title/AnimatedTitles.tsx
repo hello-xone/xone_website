@@ -80,9 +80,13 @@ const AnimatedTitles = ({ text, activeEffect = "reveal", className }: { classNam
 
     // 处理效果切换时的动画
     useEffect(() => {
-        controls.start("visible");
+        if (controls) {
+            controls.start("visible");
+        }
         return () => {
-            controls.start("hidden");
+            if (controls) {
+                controls.stop();
+            }
         };
     }, [activeEffect, controls]);
 
