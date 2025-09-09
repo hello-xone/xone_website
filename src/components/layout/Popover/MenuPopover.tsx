@@ -8,10 +8,22 @@ import {
     PopoverPanel,
 } from "@headlessui/react";
 import clsx from "clsx";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
+import ActiveIcon from "@/assets/imgs/header/active.png";
+import ActiveDarkIcon from "@/assets/imgs/header/active-dark.png";
+import BlogIcon from "@/assets/imgs/header/blog.png";
+import BlogDarkIcon from "@/assets/imgs/header/blog-dark.png";
+import BusinessIcon from "@/assets/imgs/header/business.png";
+import BusinessDarkIcon from "@/assets/imgs/header/business-dark.svg";
+import GrantsIcon from "@/assets/imgs/header/grants.png";
+import GrantsDarkIcon from "@/assets/imgs/header/grants-dark.png";
+import KnightIcon from "@/assets/imgs/header/knight.png";
+import KnightDarkIcon from "@/assets/imgs/header/knight-dark.png";
+import RecruitmentIcon from "@/assets/imgs/header/recruitment.png";
+import RecruitmentDarkIcon from "@/assets/imgs/header/recruitment-dark.png";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import Arrow from "@/components/Icons/Arrow";
 import Close from "@/components/Icons/Close";
@@ -29,24 +41,22 @@ const MenuPopover = () => {
     const [isOpen, setIsOpen] = useState(false);
     const latestOpenRef = useRef(isOpen);
     const needsUpdateRef = useRef(false);
-    const { changeTheme, isLight } = useApplicationStore()
+    const { changeTheme, isLight } = useApplicationStore();
 
     const { t, i18n } = useTranslation("header");
     const toggleTheme = () => {
-
         document.documentElement.setAttribute(
             "data-theme",
             isLight ? "dark" : "light"
         );
         localStorage.setItem("theme", isLight ? "dark" : "light");
-        changeTheme()
-
+        changeTheme();
     };
     useEffect(() => {
         if (isOpen) {
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflow = "hidden";
         } else {
-            document.body.style.overflow = 'inherit';
+            document.body.style.overflow = "inherit";
         }
     }, [isOpen]);
 
@@ -65,6 +75,28 @@ const MenuPopover = () => {
             setIsOpen(latestOpenRef.current);
         }
     }, []);
+
+    const DetailImg = useCallback(
+        (detailId: string) => {
+            switch (detailId) {
+                case "global_business":
+                    return isLight ? BusinessIcon : BusinessDarkIcon;
+                case "global_recruitment":
+                    return isLight ? RecruitmentIcon : RecruitmentDarkIcon;
+                case "global_blog":
+                    return isLight ? BlogIcon : BlogDarkIcon;
+                case "global_active":
+                    return isLight ? ActiveIcon : ActiveDarkIcon;
+                case "global_knight":
+                    return isLight ? KnightIcon : KnightDarkIcon;
+                case "global_grants":
+                    return isLight ? GrantsIcon : GrantsDarkIcon;
+                default:
+                    return isLight ? KnightIcon : KnightDarkIcon;
+            }
+        },
+        [isLight]
+    );
 
     return (
         <>
@@ -111,8 +143,8 @@ const MenuPopover = () => {
                                         <Close
                                             className="text-[#8E8E92]"
                                             onClick={() => {
-                                                setIsOpen(false)
-                                                close()
+                                                setIsOpen(false);
+                                                close();
                                             }}
                                         ></Close>
                                     </div>
@@ -147,7 +179,11 @@ const MenuPopover = () => {
                                                                                     <Link
                                                                                         onClick={() => close()}
                                                                                         to={link.link || ""}
-                                                                                        target={link.link.includes("http") ? "_blank" : "_self"}
+                                                                                        target={
+                                                                                            link.link.includes("http")
+                                                                                                ? "_blank"
+                                                                                                : "_self"
+                                                                                        }
                                                                                     >
                                                                                         {t(link.name)}
                                                                                     </Link>
@@ -157,21 +193,40 @@ const MenuPopover = () => {
                                                                 ) : (
                                                                     <div>
                                                                         <div className="w-full min-h-[72px] flex flex-col items-center justify-center rounded-[8px] bg-b3">
-                                                                            <Knight className="text-t2 shrink-0"></Knight>
-                                                                            <div className="text-t2 font-medium text-xs mt-[4px]">
-                                                                                Look forward to it !
+                                                                            <img
+                                                                                alt=""
+                                                                                src={DetailImg(group.id)}
+                                                                                className="w-[164px] h-[164px]"
+                                                                            ></img>
+                                                                        </div>
+                                                                        {group.detailTitle && (
+                                                                            <div className="mt-2 text-t2 text-xs font-bold leading-[140%]">
+                                                                                {group?.detailTitle
+                                                                                    ? t(group?.detailTitle)
+                                                                                    : ""}
                                                                             </div>
-                                                                        </div>
-                                                                        <div className="mt-2 text-t2 text-xs font-bold leading-[140%]">
-                                                                            助力Xone未来动向，成就更大发展
-                                                                        </div>
-                                                                        <div className="mt-2 text-t2 text-xs leading-[140%]">{`一切工作都是为了帮助 Xone 更好的服务全球企业、组织以及个人。因此，在任何领域，只要你有想法并愿意为此贡献你的独到想法！我们相信，在 Xone 的成长之路上，将无畏即将面对的无数挑战。`}</div>
-                                                                        <SeeMore
-                                                                            href=""
-                                                                            text="寻找机会"
-                                                                            className="mt-2"
-                                                                            textClassName="!text-xs text-t2"
-                                                                        ></SeeMore>
+                                                                        )}
+
+                                                                        {group?.detailDesc && (
+                                                                            <div className="mt-2 text-t2 text-xs leading-[140%]">
+                                                                                {group?.detailDesc
+                                                                                    ? t(group?.detailDesc)
+                                                                                    : ""}
+                                                                            </div>
+                                                                        )}
+                                                                        {
+                                                                            group.link && <SeeMore
+                                                                                href={group.link}
+                                                                                target={
+                                                                                    group.link.includes("http")
+                                                                                        ? "_blank"
+                                                                                        : "_self"
+                                                                                }
+                                                                                text={t("home:seeMore")}
+                                                                                className="mt-2"
+                                                                                textClassName="!text-xs text-t2"
+                                                                            ></SeeMore>
+                                                                        }
                                                                     </div>
                                                                 )}
                                                             </div>
@@ -211,22 +266,28 @@ const MenuPopover = () => {
                                             // </div>
                                         ))}
                                     <div className="mt-4 pt-4 border-t-[1px] border-solid border-border3">
-                                        <div onClick={() => setShowLanguage(true)}
+                                        <div
+                                            onClick={() => setShowLanguage(true)}
                                             className={clsx(
-                                                `flex items-center rounded-[10px] gap-[10px] text-sm font-medium text-t1 h-10 focus:outline-none data-active:text-white data-focus:outline data-focus:outline-white data-hover:text-white`,
+                                                `flex items-center rounded-[10px] gap-[10px] text-sm font-medium text-t1 h-10 focus:outline-none data-active:text-white data-focus:outline data-focus:outline-white data-hover:text-white`
                                             )}
                                         >
                                             <Language className="text-t1 w-6 h-6"></Language>
-                                            <span className="text-t1 font-medium text-sm">{currentLanguage?.name || "English"}</span>
+                                            <span className="text-t1 font-medium text-sm">
+                                                {currentLanguage?.name || "English"}
+                                            </span>
                                         </div>
                                         <div
                                             className="flex h-10 items-center"
                                             onClick={() => {
                                                 toggleTheme();
-                                                close()
+                                                close();
                                             }}
                                         >
-                                            <Theme isLight={isLight} className="w-6 h-6 mr-[10px]"></Theme>
+                                            <Theme
+                                                isLight={isLight}
+                                                className="w-6 h-6 mr-[10px]"
+                                            ></Theme>
                                             <span className="text-t1 font-medium text-sm">
                                                 {isLight ? "Light" : "Dark"}
                                             </span>
@@ -235,12 +296,15 @@ const MenuPopover = () => {
                                 </div>
                             </PopoverPanel>
                         </>
-                    )
+                    );
                 }}
             </Popover>
-            {
-                showLanguage && <MobileLanguagePopover close={() => setShowLanguage(false)} isOpen={showLanguage} ></MobileLanguagePopover>
-            }
+            {showLanguage && (
+                <MobileLanguagePopover
+                    close={() => setShowLanguage(false)}
+                    isOpen={showLanguage}
+                ></MobileLanguagePopover>
+            )}
         </>
     );
 };

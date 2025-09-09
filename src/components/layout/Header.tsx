@@ -23,7 +23,6 @@ import useApplicationStore from "@/store/applicationStore";
 
 import CommonButton from "../comm/button/CommonButton";
 import { SeeMore } from "../comm/link/SeeMore";
-import Knight from "../Icons/Knight";
 import Language from "../Icons/Language";
 import Theme from "../Icons/Theme";
 import BusinessCard from "./Header/components/businessCard";
