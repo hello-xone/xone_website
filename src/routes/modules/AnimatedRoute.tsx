@@ -37,7 +37,7 @@ interface AnimatedRouteProps {
 export const AnimatedRoute = ({ Component }: AnimatedRouteProps) => {
     return (
         <motion.div
-            variants={pageVariants.slide}
+            variants={pageVariants.scale}
             initial="initial"
             animate="in"
             exit="out"
