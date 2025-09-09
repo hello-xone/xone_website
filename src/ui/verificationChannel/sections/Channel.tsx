@@ -135,7 +135,7 @@ const Channel = () => {
         className={`flex ${lg ? "flex-row" : "flex-col"} gap-12 justify-center ${lg ? "mt-8" : "mt-4"} ${lg ? "h-12" : "100%"}`}
       >
         <div
-          className={`${lg ? "min-w-[150px]" : "w-full"} ${lg ? "" : "min-h-[40px] h-[40px] font-medium"} bg-[var(--b3)] rounded-[8px] text-[var(--t1)] text-[14px]`}
+          className={`${lg ? "min-w-[150px]" : "w-full"} ${lg ? "":"min-h-[40px] h-[40px] font-medium"} bg-[var(--b3)] rounded-[8px] text-[var(--t1)] text-[14px]`}
         >
           <SearchInputSelect
             options={platforms}
@@ -146,7 +146,7 @@ const Channel = () => {
           />
         </div>
 
-        <div className="relative group flex items-center w-full md:w-[460px] py-[0] md:py-[5px] px-[12px] bg-[var(--b3)] rounded-[8px] transition-all duration-100 border border-[transparent] hover:border-[var(--t1)] focus-within:border-[var(--t1)] focus-within:pr-[35px]">
+        <div className="relative group flex items-center w-full lg:w-[460px] py-[0] md:py-[5px] px-[12px] bg-[var(--b3)] rounded-[8px] transition-all duration-100 border border-[transparent] hover:border-[var(--t1)] focus-within:border-[var(--t1)] focus-within:pr-[35px]">
           <SearchIcon className="w-[20px] h-[20px] text-[#A0A3A7] group-focus-within:text-[var(--t1)] transition-colors duration-100" />
           <Input
             value={searchValue}

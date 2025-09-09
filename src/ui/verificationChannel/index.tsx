@@ -1,13 +1,36 @@
 import { Box } from "@mui/material";
 
+import darkBgImage from "@/assets/imgs/verification/dark.png";
+import lightBgImage from "@/assets/imgs/verification/light.png";
 import { MotionScrollReveal } from "@/components/comm/animation/ScrollReveal";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
+import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 
 import Channel from "./sections/Channel";
 import SafetyTips from "./sections/SafetyTips";
 
 export const VerificationChannel = () => {
+  const { isLight } = useCurrentTheme();
+  const { lg } = useTailwindBreakpoint();
+
+  const bgStyle = lg
+    ? {
+        backgroundImage: `url(${isLight ? lightBgImage : darkBgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center -265px",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+      }
+    : {};
+
   return (
-    <Box className="w-full" sx={{ paddingTop: "var(--app-header-height)" }}>
+    <Box
+      className="w-full"
+      sx={{
+        paddingTop: "var(--app-header-height)",
+        ...bgStyle,
+      }}
+    >
       <Box
         sx={{
           maxWidth: {
