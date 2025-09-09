@@ -1,0 +1,31 @@
+{
+  "title": "信任，從驗證開始",
+  "description": "無論是一串地址、一通來電，還是一條訊息，先讓我們替你確認真身。安心，是投資路上最好的夥伴。",
+  "website": "網站",
+  "email": "電子郵件",
+  "telegram": "Telegram",
+  "x": "X",
+  "youtube": "YouTube",
+  "medium": "Medium",
+  "discord": "Discord",
+  "github": "GitHub",
+  "chatme": "ChatMe",
+  "reddit": "Reddit",
+  "linkedin": "LinkedIn",
+  "searchPlaceholder": "輸入需驗證的資訊",
+  "verificationButton": "驗證",
+  "safetyTipsTitle": "安全提示",
+  "safetyTip1Title": "選擇類型",
+  "safetyTip1Desc": "選擇你有所疑慮的類型。",
+  "safetyTip2Title": "輸入資訊",
+  "safetyTip2Desc": "填入該類型的 URL、ID 等唯一識別。",
+  "safetyTip3Title": "驗證回饋",
+  "safetyTip3Desc": "若提交的資訊未被收錄，建議立刻停止與對方互動。",
+  "dialog": {
+    "verified": "已驗證",
+    "unverified": "未驗證",
+    "verifiedMessage": "此資訊已被查驗！",
+    "unverifiedMessage": "此資訊未被收錄，請注意！",
+    "confirmButton": "我已知悉"
+  }
+}

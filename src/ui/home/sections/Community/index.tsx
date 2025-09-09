@@ -10,6 +10,13 @@ import more4 from "@/assets/imgs/home/more4.png";
 import more6 from "@/assets/imgs/home/more6.png";
 import more7 from "@/assets/imgs/home/more7.png";
 import more8 from "@/assets/imgs/home/more8.png";
+import more9 from "@/assets/imgs/home/more9.jpg";
+import more10 from "@/assets/imgs/home/more10.jpg";
+import more11 from "@/assets/imgs/home/more11.jpg";
+import more12 from "@/assets/imgs/home/more12.jpg";
+import more13 from "@/assets/imgs/home/more13.jpg";
+import more14 from "@/assets/imgs/home/more14.jpg";
+import more15 from "@/assets/imgs/home/more15.jpg";
 import { Title } from "@/components/comm/title";
 import {
   AnimationName,
@@ -49,20 +56,32 @@ interface LayoutItem {
   id: string;
   type: ColumnType;
   children: (Card1 | Card2)[];
-  columnCount: number; // 新增：竖列数量配置
+  columnCount?: number; // 新增：竖列数量配置
 }
 
 const MaskLayer = ({
   title,
   description,
+  columnType,
 }: {
   title: string;
   description: string;
+  columnType: ColumnType;
 }) => {
+  const isNarrow = columnType === ColumnType.NARROW;
+
   return (
-    <div className={styles.maskLayer}>
-      <h2 className={styles.maskLayerTitle}>{title}</h2>
-      <div className={`__lineHeight115 ${styles.description}`}>
+    <div
+      className={`${styles.maskLayer} ${isNarrow ? styles.maskLayerNarrow : styles.maskLayerWide}`}
+    >
+      <h2
+        className={`${styles.maskLayerTitle} ${isNarrow ? styles.maskLayerTitleNarrow : styles.maskLayerTitleWide}`}
+      >
+        {title}
+      </h2>
+      <div
+        className={`__lineHeight115 ${styles.description} ${isNarrow ? styles.descriptionNarrow : styles.descriptionWide}`}
+      >
         {description}
       </div>
     </div>
@@ -76,15 +95,21 @@ export const Community = () => {
   const NarrowCardCard1 = (data: Card1 | Card2) => {
     switch (data.type) {
       case CardType.img: {
-        const { img } = data as Card1;
+        const { img, title, description } = data as Card1;
         return (
           <div
             className={styles.card1}
             style={{
               backgroundImage: `url(${img})`,
+              backgroundSize: "cover",
+              width: "300px",
             }}
           >
-            {/* <MaskLayer title={title} description={description}></MaskLayer> */}
+            <MaskLayer
+              title={title}
+              description={description}
+              columnType={ColumnType.NARROW}
+            ></MaskLayer>
           </div>
         );
       }
@@ -107,15 +132,21 @@ export const Community = () => {
     }
   };
 
-  const Wide2 = ({ img }: Card1) => {
+  const Wide2 = ({ img, title, description }: Card1) => {
     return (
       <div
         className={styles.card2}
         style={{
           backgroundImage: `url(${img})`,
+          backgroundSize: "cover",
+          width: "720px",
         }}
       >
-        {/* <MaskLayer title={title} description={description}></MaskLayer> */}
+        <MaskLayer
+          title={title}
+          description={description}
+          columnType={ColumnType.WIDE}
+        ></MaskLayer>
       </div>
     );
   };
@@ -126,7 +157,7 @@ export const Community = () => {
       {
         id: "1",
         type: ColumnType.NARROW,
-        columnCount: 2, // 2列平分高度
+        columnCount: 2,
         children: [
           {
             id: "1-1",
@@ -147,7 +178,7 @@ export const Community = () => {
       {
         id: "2",
         type: ColumnType.WIDE,
-        columnCount: 1, // 1列占全高
+        columnCount: 1,
         children: [
           {
             id: "2-1",
@@ -161,7 +192,6 @@ export const Community = () => {
       {
         id: "3",
         type: ColumnType.NARROW,
-        columnCount: 2, // 3列平分高度
         children: [
           {
             id: "3-1",
@@ -181,16 +211,9 @@ export const Community = () => {
       },
       {
         id: "4",
-        type: ColumnType.NARROW,
-        columnCount: 2, // 2列平分高度
+        type: ColumnType.WIDE,
+        columnCount: 1,
         children: [
-          {
-            id: "4-1",
-            type: CardType.img,
-            img: more6,
-            title: t("home:more5"),
-            description: t("home:more5description"),
-          },
           {
             id: "4-2",
             type: CardType.img,
@@ -203,31 +226,122 @@ export const Community = () => {
       {
         id: "5",
         type: ColumnType.WIDE,
-        columnCount: 2, // 2列平分高度
         children: [
           {
             id: "5-1",
             type: CardType.img,
             img: more8,
+            title: t("home:more8"),
+            description: t("home:more8description"),
+          },
+          {
+            id: "5-2",
+            type: CardType.img,
+            img: more7,
             title: t("home:more7"),
             description: t("home:more7description"),
           },
+        ],
+      },
+      {
+        id: "6",
+        type: ColumnType.WIDE,
+        columnCount: 1,
+        children: [
           {
-            id: "4-2",
+            id: "6-2",
             type: CardType.img,
-            img: more7,
-            title: t("home:more8"),
-            description: t("home:more8description"),
+            img: more9,
+            title: t("home:more9"),
+            description: t("home:more9description"),
+          },
+        ],
+      },
+      {
+        id: "7",
+        type: ColumnType.WIDE,
+        columnCount: 1,
+        children: [
+          {
+            id: "7-1",
+            type: CardType.img,
+            img: more10,
+            title: t("home:more10"),
+            description: t("home:more10description"),
+          },
+        ],
+      },
+      {
+        id: "8",
+        type: ColumnType.WIDE,
+        columnCount: 1,
+        children: [
+          {
+            id: "8-1",
+            type: CardType.img,
+            img: more11,
+            title: t("home:more11"),
+            description: t("home:more11description"),
+          },
+        ],
+      },
+      {
+        id: "9",
+        type: ColumnType.NARROW,
+        columnCount: 2,
+        children: [
+          {
+            id: "9-1",
+            type: CardType.img,
+            img: more12,
+            title: t("home:more12"),
+            description: t("home:more12description"),
+          },
+          {
+            id: "9-2",
+            type: CardType.img,
+            img: more13,
+            title: t("home:more13"),
+            description: t("home:more13description"),
+          },
+        ],
+      },
+      {
+        id: "10",
+        type: ColumnType.WIDE,
+        columnCount: 1,
+        children: [
+          {
+            id: "10-1",
+            type: CardType.img,
+            img: more14,
+            title: t("home:more14"),
+            description: t("home:more14description"),
+          },
+        ],
+      },
+      {
+        id: "11",
+        type: ColumnType.WIDE,
+        columnCount: 1,
+        children: [
+          {
+            id: "11-1",
+            type: CardType.img,
+            img: more15,
+            title: t("home:more15"),
+            description: t("home:more15description"),
           },
         ],
       },
     ];
-  }, [i18n.language]);
+  }, [t]);
 
   // 渲染卡片的函数，根据columnCount自动分配高度
   const renderCards = (item: LayoutItem) => {
     const { children, columnCount } = item;
-    const cardHeight = columnCount === 1 ? "100%" : `${100 / columnCount}%`;
+    const cardHeight =
+      columnCount === 1 ? "100%" : `${100 / (columnCount || 0)}%`;
 
     return children.map((card: any, index) => {
       const Card = item.type === ColumnType.NARROW ? NarrowCardCard1 : Wide2;
@@ -253,15 +367,7 @@ export const Community = () => {
       >
         <Marquee className={styles.marquee} pauseOnHover>
           <div className={styles.marqueeWrapper}>
-            {[
-              ...list,
-              ...list,
-              ...list,
-              ...list,
-              ...list,
-              ...list,
-              ...list,
-            ].map((item, i) => {
+            {list.map((item, i) => {
               return (
                 <div className={styles.cardWrapper} key={i}>
                   {renderCards(item)}

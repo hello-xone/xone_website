@@ -1,0 +1,32 @@
+{
+  "bannerTitle": "Giữa “tốc độ” và “chi tiết” trong tăng trưởng<br>làm sao tạo giá trị cho người khác",
+  "bannerDesc": "Trong thời đại đổi thay và cơ hội, Xone không ngừng bứt phá để phục vụ doanh nghiệp, tổ chức và cá nhân trên toàn cầu. Chúng tôi tin chú trọng từng chi tiết và thực thi hiệu quả là cách nổi bật giữa tăng trưởng nhanh. Nếu bạn muốn tạo tác động và cùng chúng tôi đối mặt thách thức tương lai, hãy gia nhập Xone — tỏa sáng tài năng và tạo giá trị thực cho nhiều người hơn.",
+  "bannerSearchPlaceholder": "Tìm chức danh/từ khóa",
+  "bannerSearchButton": "Tìm kiếm",
+  "searchSelectInputPlaceholder": "Vui lòng nhập",
+  "selectAllProjects": "Tất cả dự án",
+  "selectAllPositions": "Tất cả vị trí",
+  "selectAllLocations": "Tất cả địa điểm",
+  "selectAllOffice": "Hình thức làm việc",
+  "remark1": "Tại Xone, chúng tôi tin đa dạng và hòa nhập là động lực đổi mới Web3. Chào đón nhân tài từ mọi nền tảng, góc nhìn và trải nghiệm—không phân biệt chủng tộc, màu da, huyết thống, quốc tịch, tôn giáo (kể cả trang phục tôn giáo), tín ngưỡng, tuổi, khuyết tật thể chất/tinh thần, giới tính (kể cả mang thai, sinh nở, cho con bú hoặc tình trạng y tế liên quan), xu hướng tính dục, bản dạng/biểu hiện giới, tình trạng y tế, thông tin di truyền, chăm sóc gia đình/nghỉ ốm, hôn nhân/đối tác dân sự, quân nhân/cựu chiến binh hay đặc điểm khác được pháp luật bảo vệ.",
+  "remark2": "Chúng tôi cam kết cơ hội việc làm bình đẳng. Kết hợp chuyên môn và góc nhìn đa lĩnh vực sẽ kiến tạo tương lai mở, sáng tạo và phi tập trung. Gia nhập Xone để cùng đội ngũ nhiệt huyết, dám bứt phá dẫn dắt chuyển đổi Web3.",
+  "remark3": "Nếu gặp sự cố khi nộp hồ sơ hoặc lỗi kỹ thuật trên trang, vui lòng liên hệ:",
+  "showing": "Hiển thị",
+  "jobs": "việc",
+  "details": "Chi tiết",
+  "viewMore": "Xem thêm",
+  "noData": "Chưa có dữ liệu",
+  "breadcrumb": {
+    "recruitment": "Tuyển dụng",
+    "jobDetails": "Chi tiết công việc"
+  },
+  "detail": {
+    "warningDesc": "Xone cung cấp cơ hội việc làm bình đẳng cho mọi người. Nền tảng đa dạng là động lực tăng trưởng của chúng tôi. Trước khi gửi, vui lòng đọc và đồng ý với Tuyên bố quyền riêng tư ứng viên.",
+    "applyNow": "Gửi hồ sơ"
+  },
+  "notFound": {
+    "title": "Không tìm thấy việc",
+    "description": "Vị trí không tồn tại hoặc chưa mở.",
+    "button": "Về trang chủ"
+  }
+}

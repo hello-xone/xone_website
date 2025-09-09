@@ -1,12 +1,11 @@
 import { Skeleton } from "@mui/material";
 import { useNotifications } from "@toolpad/core/useNotifications";
 import { ChainType, getWalletKit, useWalletKit } from "@web3jskit/walletkit";
-import { utils } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { numberToHex } from "viem";
 
-import { fetchNetCountersByNet, fetchStatsByNet } from "@/api/common";
+import { fetchStatsByNet } from "@/api/common";
 import BlockExploreIcon from "@/assets/svg/developer/block_explore.svg?react";
 import FolderIcon from "@/assets/svg/developer/folder.svg?react";
 import WalletIcon from "@/assets/svg/developer/wallet.svg?react";
@@ -14,18 +13,9 @@ import ArrowIcon from "@/assets/svg/home/info_arrow.svg?react";
 import { MyCountUp } from "@/components/comm/myCountUp";
 import { XoneChainId, XoneMainNet, XoneTestNet } from "@/constants/net";
 import { useCountdownTimer } from "@/hooks/useCountdownTimer";
-import {
-  AnimationName,
-  DelayClassName,
-  useScrollreveal,
-} from "@/hooks/useScrollreveal";
-import { formatDecimal, preciseRound } from "@/utils/number";
-import { fetchBlockNumber, getXoneEpochByNet } from "@/web3";
+import { preciseRound } from "@/utils/number";
 
 import styles from "./index.module.less";
-
-const MainNetRpc = import.meta.env.VITE_APP_XO_MAIN_NET_RPC;
-const TestNetRpc = import.meta.env.VITE_APP_XO_TEST_NET_RPC;
 
 interface NetData {
   latestBlock?: number;
@@ -40,44 +30,46 @@ export const Net = () => {
   const [mainNetData, setMainNetData] = useState<NetData>();
   const [testNetData, setTestNetData] = useState<NetData>();
   const [loading, setLoading] = useState(true);
-  const { delayClassNames } = useScrollreveal();
   const notifications = useNotifications();
   const { connect, provider, currentConnector } = useWalletKit();
-  const addNet = useCallback(async (connector: any, isConnectAfter?: boolean) => {
-    try {
-      if (!connector) return;
-      const chainIdOfHex = numberToHex(selectedNetKey);
-      const net =
-        selectedNetKey === XoneChainId.MAIN_NET ? XoneMainNet : XoneTestNet;
+  const addNet = useCallback(
+    async (connector: any, isConnectAfter?: boolean) => {
       try {
-        await connector.provider.request({
-          chainType: ChainType.EVM,
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: chainIdOfHex }],
-        });
-      } catch (err: any) {
-        if (err?.code === 4902) {
-          await provider.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                ...net,
-                chainId: chainIdOfHex,
-              },
-            ],
+        if (!connector) return;
+        const chainIdOfHex = numberToHex(selectedNetKey);
+        const net =
+          selectedNetKey === XoneChainId.MAIN_NET ? XoneMainNet : XoneTestNet;
+        try {
+          await connector.provider.request({
+            chainType: ChainType.EVM,
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: chainIdOfHex }],
           });
-        } else {
-          return;
+        } catch (err: any) {
+          if (err?.code === 4902) {
+            await provider.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  ...net,
+                  chainId: chainIdOfHex,
+                },
+              ],
+            });
+          } else {
+            return;
+          }
         }
+        notifications.show("Have been added", {
+          severity: "success",
+          autoHideDuration: 2000,
+        });
+      } catch (err) {
+        console.error(err);
       }
-      notifications.show("Have been added", {
-        severity: "success",
-        autoHideDuration: 2000,
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  }, [notifications, provider, selectedNetKey])
+    },
+    [notifications, provider, selectedNetKey]
+  );
 
   useEffect(() => {
     const handleDisconnect = () => {
@@ -106,84 +98,41 @@ export const Net = () => {
     ];
   }, []);
 
-  const getBlockNumberByNet = async (
-    isTestNet?: boolean
-  ): Promise<number | undefined> => {
-    try {
-      const rpc = isTestNet ? TestNetRpc : MainNetRpc;
-      return await fetchBlockNumber(rpc);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const getGasFee = async (isTestNet?: boolean) => {
-    try {
-      const stats = await fetchStatsByNet(isTestNet);
-      const wei = stats.gas_prices.average.wei;
-      if (Number(wei) === 0) return "0.00";
-      return stats.gas_prices.average.wei
-        ? formatDecimal(utils.formatUnits(parseInt(wei), 9).toString())
-        : undefined;
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  const getMainNetData = useCallback(async () => {
-    const data: NetData = {};
-    const counters = await fetchNetCountersByNet();
-    data.latestBlock = await getBlockNumberByNet();
-    if (data.latestBlock) {
-      data.gasFee = await getGasFee();
-    }
-    data.blockTime = counters.find(
-      (item) => item.id === "averageBlockTime"
-    )?.value;
-    data.epoch = await getXoneEpochByNet();
-    setMainNetData(data);
-  }, [])
-
-  const getTestNetData = useCallback(async () => {
-    const data: NetData = {};
-    const counters = await fetchNetCountersByNet(true);
-    data.latestBlock = await getBlockNumberByNet(true);
-    if (data.latestBlock) {
-      data.gasFee = await getGasFee(true);
-    }
-    data.blockTime = counters.find(
-      (item) => item.id === "averageBlockTime"
-    )?.value;
-    try {
-      data.epoch = await getXoneEpochByNet(true);
-    } catch (err) {
-      console.error(err);
-      data.epoch = undefined;
-    }
-    setTestNetData(data);
-  }, [])
-
   const getData = useCallback(async () => {
     try {
+      const result = (await fetchStatsByNet()) as any;
       if (selectedNetKey === XoneChainId.MAIN_NET) {
-        return getMainNetData()
+        const { mainnet } = result;
+        const data: NetData = {
+          latestBlock: mainnet.block_number,
+          gasFee: mainnet.gas_fee,
+          blockTime: (mainnet.block_time / 1000).toFixed(3),
+          epoch: mainnet.current_epoch,
+        };
+        setMainNetData(data);
       } else {
-        return getTestNetData()
+        const { testnet } = result;
+        const data: NetData = {
+          latestBlock: testnet.block_number,
+          gasFee: testnet.gas_fee,
+          blockTime: (testnet.block_time / 1000).toFixed(3),
+          epoch: testnet.current_epoch,
+        };
+        setTestNetData(data);
       }
-      // const awaitMainNet = getMainNetData();
-      // const awaitTestNet = getTestNetData();
-      // await Promise.allSettled([awaitMainNet, awaitTestNet]);
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
     }
-  }, [getMainNetData, getTestNetData, selectedNetKey])
+  }, [selectedNetKey]);
 
   useCountdownTimer({
     callback: async () => {
       await getData();
     },
     countdown: 5,
+    dependency: [selectedNetKey],
   });
 
   useEffect(() => {
@@ -191,8 +140,8 @@ export const Net = () => {
   }, [getData]);
 
   const currentNetData = useMemo(() => {
-    return selectedNetKey === XoneChainId.MAIN_NET ? mainNetData : testNetData
-  }, [mainNetData, testNetData, selectedNetKey])
+    return selectedNetKey === XoneChainId.MAIN_NET ? mainNetData : testNetData;
+  }, [mainNetData, testNetData, selectedNetKey]);
 
   const datas = useMemo(() => {
     return [
@@ -210,7 +159,14 @@ export const Net = () => {
       {
         label: t("developer:netDataLabel2"),
         value: currentNetData?.gasFee ? (
-          <div className="flex items-end">
+          <div className="flex items-center">
+            {currentNetData?.gasFee < "0.1" ? (
+              <span className="mr-2 mt-1 font-normal text-[24px] text-t2">
+                {"<"}
+              </span>
+            ) : (
+              ""
+            )}
             <MyCountUp
               value={
                 currentNetData?.gasFee < "0.1"
@@ -219,6 +175,9 @@ export const Net = () => {
               }
               duration={1.5}
             />{" "}
+            <div className="ml-2 mt-4 translate-y-[-3px] text-t2 text-[20px] font-[700]">
+              Gwei
+            </div>
           </div>
         ) : (
           "--"
@@ -227,10 +186,13 @@ export const Net = () => {
       {
         label: t("developer:netDataLabel3"),
         value: currentNetData?.blockTime ? (
-          <MyCountUp
-            value={Number(preciseRound(currentNetData?.blockTime, 1))}
-            duration={1.5}
-          />
+          <div>
+            <MyCountUp
+              value={Number(preciseRound(currentNetData?.blockTime, 1))}
+              duration={1.5}
+            />
+            <span className="ml-2 font-[700] text-t2 text-[26px]">s</span>
+          </div>
         ) : (
           "--"
         ),
@@ -247,7 +209,13 @@ export const Net = () => {
         ),
       },
     ];
-  }, [t, currentNetData?.latestBlock, currentNetData?.gasFee, currentNetData?.blockTime, currentNetData?.epoch]);
+  }, [
+    t,
+    currentNetData?.latestBlock,
+    currentNetData?.gasFee,
+    currentNetData?.blockTime,
+    currentNetData?.epoch,
+  ]);
 
   const links = useMemo(() => {
     return [
@@ -258,7 +226,7 @@ export const Net = () => {
           const href =
             selectedNetKey === XoneChainId.MAIN_NET
               ? "https://xonescan.com/"
-              : "https://testnet.xscscan.com/";
+              : "https://testnet.xonescan.com/";
           window.open(href, "_blank");
         },
       },
@@ -297,7 +265,7 @@ export const Net = () => {
         icon: <FolderIcon></FolderIcon>,
         title: t("developer:linkTitle3"),
         onClick: () => {
-          window.open("https://docs.xone.org/developers/rpc", "_blank");
+          window.open("https://docs.xone.org/openapi/overview", "_blank");
         },
       },
     ];
@@ -306,13 +274,14 @@ export const Net = () => {
   return (
     <div className={styles.wrapper}>
       <div className="flex justify-center">
-        <div className={`${styles.nav} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+        <div className={`${styles.nav}`}>
           {navs.map((item) => {
             return (
               <div
                 key={item.key}
-                className={`${styles.navItem} ${selectedNetKey === item.key ? styles.selectedNav : ""
-                  }`}
+                className={`${styles.navItem} ${
+                  selectedNetKey === item.key ? styles.selectedNav : ""
+                }`}
                 onClick={() => setSelectedNetKey(item.key)}
               >
                 {t(item.name)}
@@ -326,7 +295,7 @@ export const Net = () => {
           return (
             <div key={index} className={`${styles.data} `}>
               <h1
-                className={`${styles.value} flex justify-center ${AnimationName.SLIDE_IN_BOTTOM} ${delayClassNames[index * 2]}`}
+                className={`${styles.value} flex justify-center`}
               >
                 {loading ? (
                   <Skeleton variant="text" className="w-[2em]"></Skeleton>
@@ -335,7 +304,7 @@ export const Net = () => {
                 )}
               </h1>
               <div
-                className={`${styles.lable} ${AnimationName.SLIDE_IN_BOTTOM} ${delayClassNames[index + index + 2]}`}
+                className={`${styles.lable}`}
               >
                 {item.label}
               </div>
@@ -344,14 +313,14 @@ export const Net = () => {
         })}
       </div>
       <div
-        className={`${styles.links} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_4}`}
+        className={`${styles.links}`}
       >
         {links.map((item, index) => {
           return (
             <div
               key={index}
               onClick={() => item.onClick()}
-              className={`cursor-pointer ${styles.link} ${AnimationName.SLIDE_IN_BOTTOM} ${delayClassNames[index * 3]}`}
+              className={`cursor-pointer ${styles.link}`}
             >
               <div className={styles.linkLeft}>
                 <div className={styles.linkIcon}>{item.icon}</div>

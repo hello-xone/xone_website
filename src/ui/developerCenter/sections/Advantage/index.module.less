@@ -2,11 +2,11 @@
   margin-top: 180px;
   display: flex;
   align-items: self-start;
+  gap: 22px;
 }
 
 .slogon {
   color: var(--t1);
-  max-width: 510px;
   font-size: 40px;
   line-height: 1.3;
   margin-top: 2px;
@@ -18,8 +18,7 @@
 }
 
 .right {
-  width: 600px;
-  padding-left: 28px;
+  flex: 1;
 }
 
 .codeWrapper {
@@ -54,6 +53,7 @@
   }
 
   .right {
+    width: 100%;
     padding-left: 0px;
   }
 
@@ -66,7 +66,6 @@
 @media (max-width: 768px) {
   .slogon {
     font-size: 24px;
-    width: 340px;
   }
 
   .codePre {

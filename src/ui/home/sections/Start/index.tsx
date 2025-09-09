@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 import StartIcon from "@/assets/imgs/home/start.png";
-import ArrowIcon from "@/assets/svg/home/arrow-right-line.svg?react";
-import { Button } from "@/components/comm/button";
+import StartDarkIcon from "@/assets/imgs/home/start-dark.png";
 import { Description } from "@/components/comm/description";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import { Title } from "@/components/comm/title";
@@ -12,11 +11,13 @@ import {
   DelayClassName,
   useScrollreveal,
 } from "@/hooks/useScrollreveal";
+import useApplicationStore from "@/store/applicationStore";
 
 import styles from "./index.module.less";
 
 export const Start = () => {
   const { t, i18n } = useTranslation();
+  const { isLight } = useApplicationStore();
 
   useScrollreveal();
   return (
@@ -35,23 +36,22 @@ export const Start = () => {
         <div
           className={`${styles.btnWrapper} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_7}`}
         >
-          <Button className={styles.btn} disabled>
-            {t("home:exploreBVI")}
-            <div className={styles.btnIcon}>
-              <ArrowIcon></ArrowIcon>
-            </div>
-          </Button>
+          <SeeMore
+            href={EXTERNAL_LINKS.dashboard + i18n.language}
+            className={styles.btn}
+            text={t("home:exploreBVI")}
+            target="_blank"
+          ></SeeMore>
           <SeeMore
             className={styles.btn}
             href={EXTERNAL_LINKS.dashboard + i18n.language + "/community"}
             text={t("home:joinNow")}
             target="_blank"
-          >
-          </SeeMore>
+          ></SeeMore>
         </div>
       </div>
       <img
-        src={StartIcon}
+        src={isLight ? StartIcon : StartDarkIcon}
         alt="start"
         className={`${styles.startIcon} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_5}`}
       />

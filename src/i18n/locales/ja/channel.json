@@ -1,0 +1,31 @@
+{
+  "title": "信頼は検証から始まる",
+  "description": "アドレス・通話・メッセージ——まずは本物か私たちが確認します。安心こそ、投資の道で最良の相棒です。",
+  "website": "ウェブサイト",
+  "email": "メール",
+  "telegram": "Telegram",
+  "x": "X",
+  "youtube": "YouTube",
+  "medium": "Medium",
+  "discord": "Discord",
+  "github": "GitHub",
+  "chatme": "ChatMe",
+  "reddit": "Reddit",
+  "linkedin": "LinkedIn",
+  "searchPlaceholder": "検証したい情報を入力",
+  "verificationButton": "検証",
+  "safetyTipsTitle": "安全ヒント",
+  "safetyTip1Title": "種類を選択",
+  "safetyTip1Desc": "不安のある種類を選んでください。",
+  "safetyTip2Title": "情報を入力",
+  "safetyTip2Desc": "URL・ID など一意の識別子を入力します。",
+  "safetyTip3Title": "検証フィードバック",
+  "safetyTip3Desc": "未収録の場合は、相手とのやり取りを直ちに中止してください。",
+  "dialog": {
+    "verified": "検証済み",
+    "unverified": "未検証",
+    "verifiedMessage": "この情報は確認済みです！",
+    "unverifiedMessage": "この情報は登録がありません。ご注意ください！",
+    "confirmButton": "了解"
+  }
+}

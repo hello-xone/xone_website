@@ -6,18 +6,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import GithubIcon from "@/assets/svg/developer/github.svg?react";
 import { Description } from "@/components/comm/description";
 import { Link } from "@/components/comm/link";
-import { BaseContainer } from "@/components/layout/BaseContainer";
-import {
-  AnimationName,
-  DelayClassName,
-  useScrollreveal,
-} from "@/hooks/useScrollreveal";
 
 import styles from "./index.module.less";
 
 export const Engineering = () => {
   const { t, i18n } = useTranslation();
-  useScrollreveal();
   const gits = useMemo(() => {
     return [
       {
@@ -66,17 +59,17 @@ export const Engineering = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.info}>
-        <h1 className={`${styles.slogon} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+        <h1 className={`${styles.slogon}`}>
           {t("developer:engineeringTitle")}
         </h1>
         <Description
-          className={`${styles.description} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_3}`}
+          className={`${styles.description}`}
         >
           {t("developer:engineeringDesc")}
         </Description>
       </div>
       <div
-        className={`${styles.content} ${AnimationName.SLIDE_IN_BOTTOM} ${DelayClassName.DELAY_6}`}
+        className={`${styles.content}`}
       >
         <Swiper
           className="w-full"

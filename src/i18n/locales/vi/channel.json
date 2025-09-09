@@ -1,0 +1,31 @@
+{
+  "title": "Niềm tin bắt đầu từ xác minh",
+  "description": "Dù là địa chỉ, cuộc gọi hay tin nhắn—hãy để chúng tôi xác nhận danh tính thật trước. Sự an tâm là người bạn tốt nhất trên hành trình đầu tư.",
+  "website": "Website",
+  "email": "Email",
+  "telegram": "Telegram",
+  "x": "X",
+  "youtube": "YouTube",
+  "medium": "Medium",
+  "discord": "Discord",
+  "github": "GitHub",
+  "chatme": "ChatMe",
+  "reddit": "Reddit",
+  "linkedin": "LinkedIn",
+  "searchPlaceholder": "Nhập thông tin cần xác minh",
+  "verificationButton": "Xác minh",
+  "safetyTipsTitle": "Mẹo an toàn",
+  "safetyTip1Title": "Chọn loại",
+  "safetyTip1Desc": "Chọn loại bạn lo ngại.",
+  "safetyTip2Title": "Nhập thông tin",
+  "safetyTip2Desc": "Cung cấp định danh duy nhất như URL hoặc ID.",
+  "safetyTip3Title": "Kết quả xác minh",
+  "safetyTip3Desc": "Nếu không có trong dữ liệu của chúng tôi, hãy dừng tương tác ngay.",
+  "dialog": {
+    "verified": "Đã xác minh",
+    "unverified": "Chưa xác minh",
+    "verifiedMessage": "Thông tin này đã được kiểm tra!",
+    "unverifiedMessage": "Không có thông tin này trong cơ sở dữ liệu. Hãy cẩn trọng!",
+    "confirmButton": "Đã hiểu"
+  }
+}

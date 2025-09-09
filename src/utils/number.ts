@@ -121,13 +121,51 @@ export function formatNumber(num: string | number, decimalPlaces = 2) {
     { threshold: new BigNumber(1e3), symbol: 'K' }, // 千
   ];
 
+  if (number.lt(10000)) {
+    return number.toString();
+  }
   for (const { threshold, symbol } of units) {
     if (number.abs().isGreaterThanOrEqualTo(threshold)) {
       const formatted = number.dividedBy(threshold).toFixed(decimalPlaces);
       const trimmed = new BigNumber(formatted).toString();
-      return `${trimmed}${symbol}`;
+      return `${trimmed} ${symbol}`;
     }
   }
 
   return number.toFixed(decimalPlaces);
+}
+
+export function countTrailingZeros(decimal: number | string) {
+  if (decimal) {
+    const match = decimal.toString().split(".")[1]?.match(/^0+/); // 匹配小数部分开头连续的 0
+    return match ? match[0].length : 0;
+  }
+  return 0;
+}
+
+export function extractSignificantDigits(
+  value: number | string,
+  extractNum = 2
+) {
+  const decimalPart = value.toString().replace(/^0+\.0+/, ""); // 去掉前导 0 和无效小数点部分
+  return decimalPart.substring(0, extractNum);
+}
+
+export function effectiveDecimals(value: number | string, precision = 4) {
+  if (value) {
+    const num = parseFloat(value.toString());
+
+    if (isNaN(num)) {
+      return "--";
+    }
+
+    // 将数字转换为字符串并保留最多 4 位有效小数
+    const formatted = new BigNumber(num).toPrecision(
+      precision,
+      BigNumber.ROUND_DOWN
+    );
+    // 去掉多余的尾随零和小数点
+    return parseFloat(formatted).toString();
+  }
+  return "--";
 }

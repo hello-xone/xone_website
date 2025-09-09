@@ -1,0 +1,31 @@
+{
+  "title": "Kepercayaan bermula dengan pengesahan",
+  "description": "Sama ada alamat, panggilan atau mesej, biar kami sahkan identiti sebenar terlebih dahulu. Ketenangan fikiran ialah rakan terbaik di jalan pelaburan.",
+  "website": "Laman web",
+  "email": "E-mel",
+  "telegram": "Telegram",
+  "x": "X",
+  "youtube": "YouTube",
+  "medium": "Medium",
+  "discord": "Discord",
+  "github": "GitHub",
+  "chatme": "ChatMe",
+  "reddit": "Reddit",
+  "linkedin": "LinkedIn",
+  "searchPlaceholder": "Masukkan maklumat untuk disahkan",
+  "verificationButton": "Sahkan",
+  "safetyTipsTitle": "Tip keselamatan",
+  "safetyTip1Title": "Pilih jenis",
+  "safetyTip1Desc": "Pilih jenis yang dibimbangkan.",
+  "safetyTip2Title": "Masukkan maklumat",
+  "safetyTip2Desc": "Isi pengecam unik seperti URL atau ID.",
+  "safetyTip3Title": "Maklum balas pengesahan",
+  "safetyTip3Desc": "Jika tiada dalam rekod kami, hentikan interaksi serta-merta.",
+  "dialog": {
+    "verified": "Disahkan",
+    "unverified": "Belum disahkan",
+    "verifiedMessage": "Maklumat ini telah disahkan!",
+    "unverifiedMessage": "Maklumat ini tiada dalam pangkalan data. Sila berjaga-jaga!",
+    "confirmButton": "Faham"
+  }
+}

@@ -2,101 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: Switzer;
-  src: url("../fonts/Switzer-Light.otf") format("opentype");
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Switzer;
-  src: url('../fonts/Switzer-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: Switzer;
-  src: url("../fonts/Switzer-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Switzer;
-  src: url("../fonts/Switzer-Medium.otf") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Switzer;
-  src: url("../fonts/Switzer-Semibold.otf") format("opentype");
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Switzer;
-  src: url("../fonts/Switzer-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-
-
-@font-face {
-  font-family: NotoSans;
-  src: url("../fonts/NotoSans-Light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: NotoSans;
-  src: url("../fonts/NotoSans-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: NotoSans;
-  src: url("../fonts/NotoSans-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: NotoSans;
-  src: url("../fonts/NotoSans-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: NotoSans;
-  src: url("../fonts/NotoSans-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: NotoSans;
-  src: url("../fonts/NotoSans-ExtraBold.ttf") format("truetype");
-  font-weight: 800;
-  font-style: normal;
-}
-
 html,
 body {
   height: 100%;
   margin: 0;
   font-size: 16px;
   font-weight: 400;
-  font-family: Switzer NotoSans;
+  font-family: "Switzer", "NotoSans";
   color: var(--t1);
   background: fixed var(--b1);
+  transition: color 0.3s ease, background 0.3s ease;
 }
 
 // 自定义滚动条样式
@@ -135,13 +50,14 @@ a {
 #root {
   * {
     box-sizing: border-box;
-    font-family: Switzer NotoSans;
+    font-family: "Switzer", "NotoSans";
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
 }
 
 #root:lang(zh-CN) {
   * {
-    font-family: NotoSans;
+    font-family: "NotoSans";
   }
 }
 
@@ -149,6 +65,7 @@ h1,
 h2,
 h3 {
   color: var(--t1);
+  transition: color 0.3s ease;
 }
 
 h1 {
@@ -230,6 +147,7 @@ button {
     --b7: #18191B;
     --b8: #F2F3F4;
     --b9: #ffffff;
+    --b10: #1F2023;
 
     --button-bg: #FF0420;
     --button-text: #FFFFFF;
@@ -238,6 +156,7 @@ button {
     --border2: #F2F3F4;
     --border3: #E9E9EB;
     --border4: #070808;
+    --border5: #DFE0E2;
 
     --link1: #FF0420;
     --link2: #D90021;
@@ -272,6 +191,7 @@ button {
     --b7: #DFE0E2;
     --b8: #1F2023;
     --b9: #131516;
+    --b10: #FAFAFA;
 
     --button-bg: #FF0420;
     --button-text: #FFFFFF;
@@ -281,6 +201,7 @@ button {
     --border2: #18191B;
     --border3: #303236;
     --border4: #FFFFFF;
+    --border5: #1F2023;
 
     --link1: #FF0420;
     --link2: #D90021;
@@ -298,12 +219,14 @@ button {
 
 .container {
   width: 100%;
+  max-width: 100%;
   padding: 0 16px;
 }
 
 @media (min-width: 768px) {
   .container {
     width: 100%;
+    max-width: 100%;
     padding: 0 24px;
   }
 }
@@ -311,6 +234,7 @@ button {
 @media (min-width: 1024px) {
   .container {
     width: 100%;
+    max-width: 100%;
     padding: 0 40px;
   }
 }
@@ -321,4 +245,161 @@ button {
     padding: 0px;
     margin: 0 auto;
   }
+}
+
+@media (min-width: 1919px) {
+  .container {
+    width: 1440px;
+    padding: 0px;
+    margin: 0 auto;
+  }
+}
+
+.common-toast {
+  border: 1px solid var(--t1);
+  color: var(--t1);
+  font-size: 14px;
+}
+
+.auto-complete-input .MuiInputBase-root {
+  padding: 4px !important;
+  background-color: var(--b3) !important;
+  color: var(--t1) !important;
+  border-radius: 8px !important;
+}
+
+.MuiAutocomplete-root .MuiFormControl-root {
+  border-radius: 8px !important;
+}
+
+.auto-complete-input .MuiInputBase-root::placeholder {
+  color: var(--t4) !important;
+}
+
+.auto-complete-input .MuiInputBase-root::after,
+.auto-complete-input .MuiInputBase-root::before {
+  display: none;
+}
+
+.MuiAutocomplete-paper {
+  border-radius: 8px !important;
+  margin-top: 12px !important;
+  background-color: transparent !important;
+  box-shadow: 0px 10px 32px 0px #1F1F1F1A;
+}
+
+.MuiAutocomplete-listbox {
+  background-color: var(--b2) !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+}
+
+.MuiAutocomplete-option {
+  height: 34px !important;
+  color: var(--t2) !important;
+  border-radius: 8px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.MuiAutocomplete-option:hover {
+  background-color: var(--b3) !important;
+  color: var(--t1) !important;
+}
+
+// 主题切换按钮动画
+.theme-toggle-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: var(--b2);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  .theme-icon {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+  }
+
+  &.theme-switching .theme-icon {
+    animation: themeSwitch 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@keyframes themeSwitch {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(0.8);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+// 页面主题切换过渡效果
+.theme-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// 为所有使用CSS变量的元素添加过渡
+* {
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
+}
+
+// View Transitions API 支持
+@supports (view-transition-name: none) {
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  ::view-transition-old(root) {
+    animation-name: theme-fade-out;
+  }
+
+  ::view-transition-new(root) {
+    animation-name: theme-fade-in;
+  }
+}
+
+@keyframes theme-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes theme-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+// 主题切换时的页面过渡效果
+.theme-transition-page {
+  view-transition-name: theme-transition;
+}
+
+// 为根元素添加主题过渡
+#root {
+  view-transition-name: root;
 }

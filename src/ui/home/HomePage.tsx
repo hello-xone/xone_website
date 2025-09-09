@@ -1,15 +1,11 @@
-import { useState } from "react";
-
-import { fetchChart, fetchNetCountersByNet } from "@/api/common";
-import { useCountdownTimer } from "@/hooks/useCountdownTimer";
+import { MotionScrollReveal } from "@/components/comm/animation/ScrollReveal";
 import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
-import { ChartRes } from "@/types/response";
 
 import { Banner } from "./Banner";
 import { Ecosystem } from "./Ecosystem";
 import { Governance } from "./Governance";
 import Introducing from "./Introducing";
-import MarketChart from "./MarketChart";
+import { MarketChart } from "./MarketChart";
 import { OnChainIdentity } from "./OnChainIdentity";
 import { Community } from "./sections/Community";
 import HelloXone from "./sections/HelloXone/index";
@@ -18,39 +14,59 @@ import { Start } from "./sections/Start";
 import { XoneChain } from "./XoneChain";
 
 const HomePage = () => {
-      const { md } = useTailwindBreakpoint();
-      const [chartData, setChartData] = useState<ChartRes | null>(null)
-      const getMainNetData = async () => {
-            const data = await fetchChart();
-            if (data) {
-                  setChartData(data)
-            }
-      };
+  const { md } = useTailwindBreakpoint();
 
-      const { time } = useCountdownTimer({
-            callback: async () => {
-                  await getMainNetData();
-            },
-            dependency: [],
-      });
-
-      return (
-            <div className="container">
-                  <Banner></Banner>
-                  <XoneChain time={time} chartData={chartData}></XoneChain>
-                  <Introducing></Introducing>
-                  <MarketChart chartData={chartData}></MarketChart>
-                  <Governance></Governance>
-                  <OnChainIdentity></OnChainIdentity>
-                  {md && <Ecosystem></Ecosystem>}
-                  <HelloXone />
-                  <Community></Community>
-                  {/* <Governance></Governance> */}
-                  {/* <Explore></Explore> */}
-                  {!md && <Ecosystem></Ecosystem>}
-                  <Start></Start>
-            </div>
-      );
+  return (
+    <>
+      <MotionScrollReveal delay={0} animation="scale">
+        <Banner></Banner>
+      </MotionScrollReveal>
+      <div className="container overflow-x-hidden">
+        <MotionScrollReveal animation="slide">
+          <XoneChain></XoneChain>
+        </MotionScrollReveal>
+      </div>
+      <MotionScrollReveal animation="slide">
+        <Introducing></Introducing>
+      </MotionScrollReveal>
+      <div className="container overflow-hidden">
+        <MotionScrollReveal animation="slide">
+          <MarketChart></MarketChart>
+        </MotionScrollReveal>
+      </div>
+      <MotionScrollReveal animation="slide">
+        <Governance></Governance>
+      </MotionScrollReveal>
+      <MotionScrollReveal animation="slide">
+        <OnChainIdentity></OnChainIdentity>
+      </MotionScrollReveal>
+      <div className="container pb-[12px] overflow-hidden">
+        {md && (
+          <MotionScrollReveal animation="slide">
+            <Ecosystem></Ecosystem>
+          </MotionScrollReveal>
+        )}
+      </div>
+      <MotionScrollReveal animation="slide">
+        <HelloXone />
+      </MotionScrollReveal>
+      <MotionScrollReveal animation="slide">
+        <Community></Community>
+      </MotionScrollReveal>
+      <div className="container overflow-x-hidden">
+        {/* <Governance></Governance> */}
+        {/* <Explore></Explore> */}
+        {!md && (
+          <MotionScrollReveal animation="slide">
+            <Ecosystem></Ecosystem>{" "}
+          </MotionScrollReveal>
+        )}
+        <MotionScrollReveal animation="slide">
+          <Start></Start>
+        </MotionScrollReveal>
+      </div>
+    </>
+  );
 };
 
 export default HomePage;

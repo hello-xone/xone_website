@@ -29,6 +29,10 @@
   transition: all 0.06s ease;
 }
 
+.navItem:last-child {
+  margin-right: 10px;
+}
+
 .selectedTag {
   color: var(--t1);
   font-size: 24px;
@@ -86,6 +90,12 @@
   color: var(--t2);
   font-size: 14px;
   margin-top: 5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
 }
 
 .tagBtn {
@@ -110,23 +120,17 @@
   font-weight: 500;
 }
 
-.tagBtn:hover span {
-  color: var(--t1) !important;
-}
-
-.tagBtn:hover svg {
-  transform: translateX(0) !important;
-}
-
 .seeAll {
+  display: flex;
+  justify-content: center;
   background-color: transparent;
   color: var(--t1);
   font-size: 16px;
   font-weight: 500;
   padding-left: 0;
   padding-right: 0;
-  margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 30px;
+  text-align: center;
 }
 
 .seeAll:hover {
@@ -134,17 +138,47 @@
   color: var(--t1);
 }
 
-.seeAll:hover span {
-  color: var(--t1) !important;
+.seeAll span,
+.showMore span {
+  color: var(--b5);
+  font-size: 16px;
+  font-weight: 500;
 }
 
-.seeAll:hover svg {
-  transform: translateX(0) !important;
+.showMore {
+  padding-bottom: 4px;
+  box-sizing: border-box;
 }
 
-.seeAllIcon {
-  width: 14px;
-  margin-left: 10px;
+.showMoreMobile {
+  padding-bottom: 2px;
+}
+
+.navWrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-behavior: smooth;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  padding-bottom: 4px;
+
+  // Webkit 浏览器滚动条样式
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--b4);
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -175,23 +209,6 @@
 
   .card {
     width: 100%;
-  }
-
-  .navWrapper {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    /* Firefox */
-    -ms-overflow-style: none;
-
-    /* IE and Edge */
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    scroll-behavior: smooth;
-    flex-wrap: nowrap;
-    white-space: nowrap;
   }
 
   .title {

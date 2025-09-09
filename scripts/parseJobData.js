@@ -39,6 +39,23 @@ function parseArrayField(value) {
 }
 
 /**
+ * 处理内容中的引用段落，将连续的引用段落包装在div中
+ * @param {string} content 原始内容
+ * @returns {string} 处理后的内容
+ */
+function processBlockquotes(content) {
+    // 匹配连续的引用段落（以>开头的行）
+    const blockquoteRegex = /(^>.*(?:\n>.*)*)/gm;
+
+    return content.replace(blockquoteRegex, (match) => {
+        // 去除每行开头的>符号，确保内容本身不包含类名
+        const cleanedContent = match.replace(/^> /gm, '').trim();
+        // 将处理后的内容包装在div中，不添加任何class属性
+        return `<div class="section">\n\n${cleanedContent}\n\n</div>`;
+    });
+}
+
+/**
  * 解析 MDX 文件并提取职位数据
  * @param {string} filePath 文件路径
  * @param {string} baseDir 基础目录
@@ -49,8 +66,11 @@ function parseJobFile(filePath) {
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const { data, content } = matter(fileContent);
 
+        // 处理引用段落，将连续的引用段落包装在div中
+        const processedContent = processBlockquotes(content);
+
         // 提取摘要（前200个字符）
-        const excerpt = content.replace(/[#*`]/g, '').substring(0, 200).trim();
+        const excerpt = processedContent.replace(/[#*`]/g, '').substring(0, 200).trim();
 
         // 解析数组格式的字段
         const location = parseArrayField(data.location);
@@ -67,7 +87,7 @@ function parseJobFile(filePath) {
             workType: workType || '未知',
             company: data.company || '未知公司',
             location: location || '未知地点',
-            content,
+            content: processedContent,
             excerpt: excerpt + (excerpt.length === 200 ? '...' : '')
         };
     } catch (error) {

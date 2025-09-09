@@ -1,14 +1,16 @@
 import "@/assets/style/app.less";
 import "@/assets/style/code-highlight.less";
-
 // import "swiper/css";
 // import "swiper/css/autoplay";
 // import "swiper/css/free-mode";
 // import "prismjs/themes/prism-tomorrow.css";
 // import "prismjs/components/prism-solidity";
 // import "@/assets/style/animation.less";
+import "@/assets/style/font.css";
+
 import { NotificationsProvider } from "@toolpad/core/useNotifications";
 import { ChainType, WalletKitProvider } from "@web3jskit/walletkit";
+import { AnimatePresence, motion } from "framer-motion";
 import { Suspense, useEffect } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Toaster } from 'react-hot-toast';
@@ -19,9 +21,11 @@ import { I18nProvider } from "@/i18n/provider";
 
 import { RenderRoutes } from "./routes/router";
 
+
 function App() {
   // const { themeConfig } = useThemeConfig();
   // const theme = createTheme(themeConfig);
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
   }, [])
@@ -53,7 +57,9 @@ function App() {
               defaultChainType={ChainType.EVM}
             >
               <NotificationsProvider>
-                <Toaster />
+                <Toaster toastOptions={{
+                  className: "common-toast"
+                }} />
                 <RenderRoutes />
               </NotificationsProvider>
             </WalletKitProvider>

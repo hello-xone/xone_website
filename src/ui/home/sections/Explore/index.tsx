@@ -1,12 +1,14 @@
-import { Description } from "@/components/comm/description";
-import styles from "./index.module.less";
-import { Title } from "@/components/comm/title";
 import { useTranslation } from "react-i18next";
+
+import { Description } from "@/components/comm/description";
+import { Title } from "@/components/comm/title";
 import {
   AnimationName,
   DelayClassName,
   useScrollreveal,
 } from "@/hooks/useScrollreveal";
+
+import styles from "./index.module.less";
 
 export const Explore = () => {
   const { t } = useTranslation();

@@ -1,39 +1,48 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import FundingIcon from "@/assets/svg/developer/funding.svg?react";
+import FundingIcon01Dark from "@/assets/imgs/developer/dark/funding1.png";
+import FundingIcon02Dark from "@/assets/imgs/developer/dark/funding2.png";
+import FundingIcon03Dark from "@/assets/imgs/developer/dark/funding3.png";
+import FundingIcon01Light from "@/assets/imgs/developer/funding1.png";
+import FundingIcon02Light from "@/assets/imgs/developer/funding2.png";
+import FundingIcon03Light from "@/assets/imgs/developer/funding3.png";
 import { SeeMore } from "@/components/comm/link/SeeMore";
-import { AnimationName, useScrollreveal } from "@/hooks/useScrollreveal";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
 import styles from "./index.module.less";
 
 export const Funding = () => {
   const { t, i18n } = useTranslation();
-  const { delayClassNames } = useScrollreveal();
+  const { isLight } = useCurrentTheme();
+
   const list = useMemo(() => {
     return [
       {
-        icon: <FundingIcon></FundingIcon>,
+        icon: isLight ? FundingIcon01Light : FundingIcon01Dark,
         title: t("developer:fundingFaucet"),
         url: "https://faucet.xone.org/",
       },
       {
-        icon: <FundingIcon></FundingIcon>,
+        icon: isLight ? FundingIcon02Light : FundingIcon02Dark,
         title: t("developer:fundingBountyHunter"),
         url: "https://docs.xone.org/study/bug",
       },
     ];
-  }, [i18n.language]);
+  }, [i18n.language, isLight]);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
-        <h1 className={`${styles.slogon} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+        <h1 className={`${styles.slogon}`}>
           {t("developer:fundingTitle")}
         </h1>
-        <div className={`${styles.card} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+        <div className={`${styles.card}`}>
           <div className={styles.icon}>
-            <FundingIcon></FundingIcon>
+            <img
+              className="w-full h-full"
+              src={isLight ? FundingIcon03Light : FundingIcon03Dark}
+            />
           </div>
           <div>
             <h1 className={styles.name}>{t("developer:fundingGrants")}</h1>
@@ -41,7 +50,6 @@ export const Funding = () => {
               href="https://xone.org/grants"
               className={`${styles.viewDetails}`}
               text={t("common:viewDetails")}
-              target="_blank"
             ></SeeMore>
           </div>
         </div>
@@ -51,9 +59,15 @@ export const Funding = () => {
           return (
             <div
               key={index}
-              className={`${styles.card} ${AnimationName.SLIDE_IN_BOTTOM} ${delayClassNames[index * 2] || ""}`}
+              className={`${styles.card}`}
             >
-              <div className={styles.icon}>{item.icon}</div>
+              <div className={styles.icon}>
+                <img
+                  className="w-full h-full"
+                  src={item.icon}
+                  alt={item.title}
+                />
+              </div>
               <div>
                 <h1 className={styles.name}>{item.title}</h1>
                 <SeeMore

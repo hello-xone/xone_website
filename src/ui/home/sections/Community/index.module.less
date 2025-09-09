@@ -109,21 +109,40 @@
   transition: opacity 0.1s ease-in-out;
 }
 
-.card1 {
-  width: 300px;
-  height: 200px;
-
-  .maskLayer {
-    padding: 32px;
-  }
+// Narrow 列类型的样式
+.maskLayerNarrow {
+  padding: 20px;
 }
 
-.card2 {
-  width: 620px;
+.maskLayerTitleNarrow {
+  font-size: 18px;
+  line-height: 1.2;
+}
 
-  .maskLayer {
-    padding: 48px;
-  }
+.descriptionNarrow {
+  font-size: 14px;
+  margin-top: 8px;
+  line-height: 1.3;
+}
+
+// Wide 列类型的样式
+.maskLayerWide {
+  padding: 28px;
+}
+
+.maskLayerTitleWide {
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.descriptionWide {
+  font-size: 18px;
+  margin-top: 16px;
+  line-height: 1.4;
+}
+
+.card1 {
+  height: 200px;
 }
 
 .card1.info {
@@ -137,15 +156,12 @@
 }
 
 .maskLayerTitle {
-  font-size: 24px;
   color: white;
   text-align: left;
 }
 
 .description {
   color: white;
-  margin-top: 14px;
-  font-size: 16px;
   text-align: left;
 }
 
@@ -156,5 +172,33 @@
 
   .title {
     font-size: 24px;
+  }
+
+  // 移动端 Narrow 列类型的样式
+  .maskLayerNarrow {
+    padding: 16px;
+  }
+
+  .maskLayerTitleNarrow {
+    font-size: 16px;
+  }
+
+  .descriptionNarrow {
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  // 移动端 Wide 列类型的样式
+  .maskLayerWide {
+    padding: 24px;
+  }
+
+  .maskLayerTitleWide {
+    font-size: 20px;
+  }
+
+  .descriptionWide {
+    font-size: 14px;
+    margin-top: 12px;
   }
 }

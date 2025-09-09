@@ -1,4 +1,8 @@
-import { useMemo, useState } from "react";
+import { Autocomplete, TextField } from "@mui/material";
+import clsx from "clsx";
+import dayjs from "dayjs";
+import { FormikProvider, useFormik } from "formik";
+import { useMemo, useRef } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -13,7 +17,10 @@ import RedditIcon from "@/assets/svg/home/reddit.svg?react";
 import TelegramIcon from "@/assets/svg/home/telegram.svg?react";
 import XIcon from "@/assets/svg/home/x.svg?react";
 import YoutubeIcon from "@/assets/svg/home/youtube.svg?react";
+import { domains } from "@/constants/domains";
 import { EXTERNAL_LINKS } from "@/constants/external";
+import { langs, LanguageType } from "@/i18n/settings";
+import useApplicationStore from "@/store/applicationStore";
 import { isEmail } from "@/utils";
 
 import CommonButton from "../comm/button/CommonButton";
@@ -70,10 +77,25 @@ const contacts = [
 
 const Footer = () => {
   const { t } = useTranslation();
-  const [email, setEmail] = useState("")
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'light';
+  const { changeTheme, isLight } = useApplicationStore();
+  const { i18n } = useTranslation();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    onSubmit: () => {},
   });
+  const { values, getFieldProps, setFieldValue } = formik;
+
+  const currentLanguage = useMemo(() => {
+    const fallback = langs.find((item) => item.type === LanguageType.en);
+    return (
+      langs.find((item) => {
+        return item.type === i18n.language;
+      }) || fallback
+    );
+  }, [i18n.language]);
   const footerLinks: Classification[] = useMemo(() => {
     return [
       {
@@ -103,14 +125,14 @@ const Footer = () => {
             name: t("common:roadmap"),
             url: EXTERNAL_LINKS.docs + "study/roadmap",
           },
-          {
-            name: t("common:termsOfService"),
-            url: EXTERNAL_LINKS.docs + "study/service",
-          },
-          {
-            name: t("common:privacyPolicy"),
-            url: EXTERNAL_LINKS.docs + "study/privacy",
-          },
+          // {
+          //   name: t("common:termsOfService"),
+          //   url: EXTERNAL_LINKS.docs + "study/service",
+          // },
+          // {
+          //   name: t("common:privacyPolicy"),
+          //   url: EXTERNAL_LINKS.docs + "study/privacy",
+          // },
         ],
       },
       {
@@ -145,10 +167,6 @@ const Footer = () => {
             name: "Github",
             url: EXTERNAL_LINKS.Github,
           },
-          {
-            name: t("header:navGlobalGrants"),
-            url: "/grants",
-          },
         ],
       },
       {
@@ -157,13 +175,14 @@ const Footer = () => {
           {
             name: t("common:proposal-initiation"),
             internalLink: true,
-            url: "/commercial",
+            isLater: true,
+            url: "",
           },
           {
             name: t("common:incentives"),
             url: "",
             isLater: true,
-          }
+          },
         ],
       },
       {
@@ -180,16 +199,19 @@ const Footer = () => {
           },
           {
             name: t("common:events"),
-            url: '/events',
-          },
-          {
-            name: t("common:knightProject"),
-            url: "",
-            isLater: true,
+            url: "/events",
           },
           {
             name: t("common:recruitment"),
             url: "/recruitment",
+          },
+          {
+            name: t("header:navGlobalGrants"),
+            url: "/grants",
+          },
+          {
+            name: t("common:knightProject"),
+            url: "",
             isLater: true,
           },
         ],
@@ -198,21 +220,30 @@ const Footer = () => {
   }, [t]);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light');
-    localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
+    document.documentElement.setAttribute(
+      "data-theme",
+      isLight ? "dark" : "light"
+    );
+    localStorage.setItem("theme", isLight ? "dark" : "light");
+    changeTheme();
   };
 
   const handleSubmit = async () => {
     await addEmail({
-      email,
+      email: values.email,
     });
-    setEmail('');
+    setFieldValue("email", "");
     toast.success(t("home:subscriptionSuccessful"));
   };
 
+  const generateOptions = (input: string) => {
+    if (!input) return [];
+    const [prefix] = input.split("@");
+    return domains.map((domain) => `${prefix}${domain}`);
+  };
+
   return (
-    <div className="w-screen pt-[64px]">
+    <div className="w-full pt-[64px] bg-b1 overflow-x-hidden">
       <div className="container">
         <div className="flex items-center justify-between max-md:flex-col max-md:items-start max-md:gap-[16px]">
           <img alt="logo" src={LogoIcon} className="w-[104px] h-auto"></img>
@@ -220,7 +251,12 @@ const Footer = () => {
             {contacts &&
               contacts.map((item, index) => {
                 return (
-                  <Link key={`contact-item-${item.url}-${index}`} className="w-6 text-t1 flex items-center justify-center rounded bg-b3 h-6" target="_blank" to={item.url}>
+                  <Link
+                    key={`contact-item-${item.url}-${index}`}
+                    className="w-6 text-t1 flex items-center justify-center rounded bg-b3 h-6"
+                    target={item.url.includes("http") ? "_blank" : "_self"}
+                    to={item.url}
+                  >
                     {item.icon}
                   </Link>
                 );
@@ -229,73 +265,160 @@ const Footer = () => {
         </div>
 
         <div className="flex mt-10 w-full item-center justify-between max-md:gap-y-[58px] max-md:flex-wrap">
-          {
-            footerLinks && footerLinks.map((el, index) => {
-              return <div className="max-md:w-[50%]" key={`footer-menu-${el.title}-${index}`}>
-                <div className="mb-[16px] font-bold text-t1">{el.title}</div>
-                <div className="text-t2 flex text-sm flex-col gap-[12px] font-normal">
-                  {
-                    el.infos && el.infos.map(info => {
-                      return <Link className="" key={`info-item-${info.name}`} target="_blank" to={info.url}>{info.name}</Link>
-                    })
-                  }
-
+          {footerLinks &&
+            footerLinks.map((el, index) => {
+              return (
+                <div
+                  className="max-md:w-[50%]"
+                  key={`footer-menu-${el.title}-${index}`}
+                >
+                  <div className="mb-[16px] font-bold text-t1">{el.title}</div>
+                  <div className="text-t2 flex text-sm flex-col gap-[12px] font-normal">
+                    {el.infos &&
+                      el.infos.map((info) => {
+                        return (
+                          <Link
+                            className={clsx(
+                              "flex items-center gap-[8px]",
+                              {
+                                "hover:text-[#FF0420] group": !info.isLater,
+                                "cursor-not-allowed": info.isLater,
+                              }
+                            )}
+                            key={`info-item-${info.name}`}
+                            target={
+                              info.url.includes("http") ? "_blank" : "_self"
+                            }
+                            to={info.url}
+                          >
+                            {info.name}
+                            {info.isLater && (
+                              <span className="max-md:min-w-[52px] max-md:px-[8px] p-[8px] md:h-[24px] rounded-[4px] flex items-center justify-center bg-b2 text-t1 text-xs">
+                                {t("common:later")}
+                              </span>
+                            )}
+                            {!info.isLater && (
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                className={`transition-all duration-200 opacity-0 group-hover:opacity-100`}
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M13.4771 9.16603L9.00707 4.69603L10.1854 3.5177L16.6671 9.99937L10.1854 16.481L9.00707 15.3027L13.4771 10.8327H3.33374V9.16603H13.4771Z"
+                                  fill={"#FF0420"}
+                                />
+                              </svg>
+                            )}
+                          </Link>
+                        );
+                      })}
+                  </div>
                 </div>
-              </div>
-            })
-          }
+              );
+            })}
 
-          <div className="w-full md:w-[386px]">
-            <div className="font-bold mb-4 text-t1">{t("subscribe")}</div>
-            <div className="text-sm text-t2 mb-4">{t("header:subscribeDesc")}</div>
-            <div className="flex">
-              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="flex-1 h-[40px] outline-none bg-b3 placeholder:text-t4 text-sm px-[20px] rounded-l-[8px]" placeholder="Enter email address"></input>
-              <CommonButton onClick={() => {
-                if (email && isEmail(email)) {
-                  handleSubmit()
-                } else {
-                  toast.error(t("header:invalidEmail"))
-                }
-              }} className="w-[98px] !text-base !font-bold !rounded-r-[8px] !rounded-l-none">{t("join")}</CommonButton>
+          <div className="w-full md:w-[386px] relative">
+            <div className="font-bold mb-4 text-t1">
+              {t("header:subscribe")}
             </div>
+            <div className="text-sm text-t2 mb-4">
+              {t("header:subscribeDesc")}
+            </div>
+            {/* <div className="flex border-[1px] border-transparent hover:border-[1px] hover:border-t1 rounded-[8px] p-1 box-content bg-b3"> */}
+            <FormikProvider value={formik}>
+              <Autocomplete
+                disablePortal
+                freeSolo
+                inputValue={values.email}
+                className="!border-transparent w-full border-[1px] hover:!border-[1px] hover:!border-t1 !rounded-[8px] !bg-b3"
+                options={generateOptions(values.email)}
+                onChange={(_, newValue) => {
+                  setFieldValue("email", newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    {...getFieldProps("email")}
+                    placeholder={t("common:enterEmail")}
+                    variant="filled"
+                    className="auto-complete-input !p-0 !bg-b3"
+                    InputProps={{
+                      ...params.InputProps,
+                      inputRef: inputRef,
+                      endAdornment: (
+                        <CommonButton
+                          onClick={() => {
+                            if (values.email && isEmail(values.email)) {
+                              handleSubmit();
+                            } else {
+                              toast.error(t("header:invalidEmail"));
+                            }
+                          }}
+                          className="w-[120px] h-10 !text-base !font-bold !rounded-r-[8px]"
+                        >
+                          {t("join")}
+                        </CommonButton>
+                      ),
+                      className: "",
+                    }}
+                  ></TextField>
+                  // <input {...params} type="email" className="flex-1 h-[40px] outline-none bg-transparent placeholder:text-t4 text-sm px-[20px] rounded-[8px]" placeholder={t("common:enterEmail")}></input>
+                )}
+              ></Autocomplete>
+            </FormikProvider>
+
+            {/* </div> */}
           </div>
         </div>
 
         <div className="mt-10 text-xs leading-[140%] text-t3">
-          {t("disclaimerTitle")}<br></br>
-          {t("disclaimer")}
+          {t("header:disclaimerTitle")}
+          <br></br>
+          {t("header:disclaimer")}
         </div>
 
         <div className="flex md:hidden mt-10 items-center justify-end">
           <LanguagePopover>
             <Language className="text-t1"></Language>
           </LanguagePopover>
-          <div className="flex h-10 items-center ml-3" onClick={() => toggleTheme()}>
-            <Theme className="w-6 h-6 mr-2"></Theme>
-            <span className="text-t1 text-xs">
-              {theme === "light" ? "Light" : "Dark"} Mode
-            </span>
+          <div
+            className="flex h-10 items-center ml-3"
+            onClick={() => toggleTheme()}
+          >
+            <Theme isLight={isLight} className="w-6 h-6 mr-2"></Theme>
           </div>
         </div>
-        <div className="mt-3 md:mt-10 py-4 max-md:pt-[21px] border-t-[1px] border-solid border-t3 text-t3 flex justify-between items-center">
+        <div className="mt-3 md:mt-10 py-4 max-md:pt-[21px] border-t-[1px] border-solid border-[--border3] text-t3 flex justify-between items-center">
           <div className="flex items-center text-xs max-md:justify-between max-md:w-full">
             <div className="leading-[14px]">
-              © 2025 Xone Foundation
+              © {dayjs().format("YYYY")} {t("common:copyright")}
             </div>
-            <div className="pl-4 ml-4 border-l-[1px] border-t3 leading-[14px] font-medium flex items-center">
-              <Link to={''}>{t("privacy")}</Link>
+            <div className="pl-4 ml-4 border-l-[1px] border-t3 leading-[14px] flex items-center">
+              <Link to={EXTERNAL_LINKS.docs + "study/privacy"} target="_blank">
+                {t("header:privacy")}
+              </Link>
               <span className="block w-[2px] h-[2px] rounded-full bg-t3 mx-4"></span>
-              <Link to={''}>{t("terms")}</Link>
+              <Link to={EXTERNAL_LINKS.docs + "study/service"} target="_blank">
+                {t("header:terms")}
+              </Link>
             </div>
           </div>
-          <LanguagePopover className="max-md:hidden">
+          <LanguagePopover
+            noHoverBg
+            panelClass="mt-0"
+            className="max-md:hidden group"
+          >
             <>
               <Language className="text-t1"></Language>
-              <span className="text-t1 text-sm">English</span>
+              <span className="text-t1 text-sm group-hover:underline group-hover:decoration-dashed">
+                {currentLanguage?.name || "English"}
+              </span>
             </>
           </LanguagePopover>
         </div>
-
       </div>
     </div>
   );

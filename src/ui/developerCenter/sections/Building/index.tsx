@@ -8,8 +8,7 @@ import pic4 from "@/assets/imgs/developer/dark/building1.png";
 import pic5 from "@/assets/imgs/developer/dark/building2.png";
 import pic6 from "@/assets/imgs/developer/dark/building3.png";
 import { SeeMore } from "@/components/comm/link/SeeMore";
-import { useCurrentTheme } from "@/hooks/useCurrentTheme";
-import { AnimationName, useScrollreveal } from "@/hooks/useScrollreveal";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";  
 
 import styles from "./index.module.less";
 
@@ -36,13 +35,12 @@ export const Building = () => {
     ];
   }, [i18n.language, isLight]);
 
-  const { delayClassNames } = useScrollreveal();
 
   return (
     <div className={styles.wrapper}>
       <div>
         <div className="flex justify-center w-full">
-          <h1 className={`${styles.title} ${AnimationName.SLIDE_IN_BOTTOM}`}>
+          <h1 className={`${styles.title}`}>
             {t("developer:buildingTitle")}
           </h1>
         </div>
@@ -52,20 +50,20 @@ export const Building = () => {
             {apps.map((item, index) => {
               return (
                 <div
-                  className={`${styles.app}  ${AnimationName.SLIDE_IN_BOTTOM} ${delayClassNames[index * 2]}`}
+                  className={`${styles.app}`}
                   key={index}
                 >
                   <div className={styles.img}>
                     <img className="w-full" src={item.img} alt="" />
                   </div>
                   <h1
-                    className={`${styles.appName} ${AnimationName.SLIDE_IN_BOTTOM} ${delayClassNames[index * 2 + 2]}`}
+                    className={`${styles.appName}`}
                   >
                     {item.name}
                   </h1>
                   <SeeMore
                     href={item.url}
-                    className={`${styles.viewDetails} ${AnimationName.SLIDE_IN_BOTTOM} ${delayClassNames[index * 2 + 4]}`}
+                    className={`${styles.viewDetails}`}
                     text={t("common:viewDetails")}
                     target="_blank"
                   ></SeeMore>

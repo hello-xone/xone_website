@@ -6,6 +6,7 @@ import LocationIcon from "@/assets/svg/recruitment/detail/location.svg?react";
 import PositionIcon from "@/assets/svg/recruitment/detail/position.svg?react";
 import TimeIcon from "@/assets/svg/recruitment/detail/time.svg?react";
 import IconWarning from "@/assets/svg/recruitment/warning.svg";
+import { MotionScrollReveal } from "@/components/comm/animation/ScrollReveal";
 import type { BreadcrumbItem } from "@/components/comm/breadcrumb";
 import { Breadcrumb } from "@/components/comm/breadcrumb";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
@@ -64,76 +65,85 @@ export const Detail = () => {
   return (
     <div className="container">
       <div className="mt-10">
-        <Breadcrumb
-          items={breadcrumbItems}
-          separator="/"
-          className="mb-9"
-          onItemClick={handleItemClick}
-        />
-        <div
-          className={clsx(
-            "w-full flex items-center gap-[10px] px-[24px] py-[16px] rounded-[8px]",
-            isLight ? "bg-[#FFF5E8]" : "bg-[#2E1F16]"
-          )}
-        >
-          <img className="w-[20px] h-[20px]" src={IconWarning} alt="warning" />
-          <p className="text-[var(--t1)] text-[14px] font-normal">
-            {t("recruitment:detail.warningDesc")}
-          </p>
-        </div>
+        <MotionScrollReveal delay={0}>
+          <Breadcrumb
+            items={breadcrumbItems}
+            separator="/"
+            className="mb-9"
+            onItemClick={handleItemClick}
+          />
+        </MotionScrollReveal>
+        <MotionScrollReveal delay={0.2}>
+          <div
+            className={clsx(
+              "w-full flex items-center gap-[10px] px-[24px] py-[16px] rounded-[8px]",
+              isLight ? "bg-[#FFF5E8]" : "bg-[#2E1F16]"
+            )}
+          >
+            <img className="w-[20px] h-[20px]" src={IconWarning} alt="warning" />
+            <p className="text-[var(--t1)] text-[14px] font-normal">
+              {t("recruitment:detail.warningDesc")}
+            </p>
+          </div>
+        </MotionScrollReveal>
 
         {Array.isArray(job.workType) && job.workType.length > 0 && (
-          <div className="flex flex-wrap gap-8 mt-8">
-            {job.workType.map((type, index) => (
-              <div
-                key={index}
-                className={clsx(
-                  "px-[8px] py-[5px] rounded-[8px] font-normal text-[12px]",
-                  "text-[var(--primary)]",
-                  isLight ? "bg-[#FFE7E6]" : "bg-[#201010]",
-                  isLight ? "text-[#FF4D4F]" : "text-[#D90021]"
-                )}
-              >
-                {type}
-              </div>
-            ))}
-          </div>
+          <MotionScrollReveal delay={0}>
+            <div className="flex flex-wrap gap-8 mt-8">
+              {job.workType.map((type, index) => (
+                <div
+                  key={index}
+                  className={clsx(
+                    "px-[8px] py-[5px] rounded-[8px] font-normal text-[12px]",
+                    "text-[var(--primary)]",
+                    isLight ? "bg-[#FFE7E6]" : "bg-[#201010]",
+                    isLight ? "text-[#FF4D4F]" : "text-[#D90021]"
+                  )}
+                >
+                  {type}
+                </div>
+              ))}
+            </div>
+          </MotionScrollReveal>
         )}
 
-        <h3 className="text-[var(--t1)] mt-3 text-[32px] md:text-[40px] font-bold">
-          {job.title}
-        </h3>
+        <MotionScrollReveal delay={0.2}>
+          <h3 className="text-[var(--t1)] mt-3 text-[32px] md:text-[40px] font-bold">
+            {job.title}
+          </h3>
+        </MotionScrollReveal>
 
-        <div className="flex flex-col gap-y-[10px] mt-6">
-          <div className="flex items-center gap-x-[8px]">
-            <TimeIcon className="w-[20px] h-[20px] text-[var(--t1)]" />
-            <p className="text-[var(--t1)] text-[17px] mt-1">
-              {job.publishDate}
-            </p>
+        <MotionScrollReveal delay={0}>
+          <div className="flex flex-col gap-y-[10px] mt-6">
+            <div className="flex items-center gap-x-[8px]">
+              <TimeIcon className="w-[20px] h-[20px] text-[var(--t1)]" />
+              <p className="text-[var(--t1)] text-[17px] mt-1">
+                {job.publishDate}
+              </p>
+            </div>
+            <div className="flex items-center gap-x-[8px]">
+              <PositionIcon className="w-[20px] h-[20px] text-[var(--t1)]" />
+              <p className="text-[var(--t1)] text-[17px] mt-1">
+                {Array.isArray(job.location)
+                  ? job.location.join(" - ")
+                  : job.location}
+              </p>
+            </div>
+            <div className="flex items-center gap-x-[8px]">
+              <LocationIcon className="w-[20px] h-[20px]" />
+              <p className="text-[var(--t1)] text-[17px] mt-1">{job.company}</p>
+            </div>
           </div>
-          <div className="flex items-center gap-x-[8px]">
-            <PositionIcon className="w-[20px] h-[20px] text-[var(--t1)]" />
-            <p className="text-[var(--t1)] text-[17px] mt-1">
-              {Array.isArray(job.location)
-                ? job.location.join(" - ")
-                : job.location}
-            </p>
-          </div>
-          <div className="flex items-center gap-x-[8px]">
-            <LocationIcon className="w-[20px] h-[20px]" />
-            <p className="text-[var(--t1)] text-[17px] mt-1">{job.company}</p>
-          </div>
-        </div>
+          <a
+            href="mailto:job@xone.org"
+            target="_blank"
+            className="inline-block text-center mt-10 px-[20px] py-[16px] rounded-[12px] bg-[var(--t1)] text-[var(--b1)] text-[18px] font-medium hover:bg-[var(--b10)]"
+          >
+            {t("recruitment:detail.applyNow")}
+          </a>
+        </MotionScrollReveal>
 
-        <a
-          href="mailto:job@xone.org"
-          target="_blank"
-          className="w-[140px] block text-center mt-10 px-[20px] py-[16px] rounded-[12px] bg-[var(--t1)] text-[var(--b1)] text-[18px] font-medium hover:opacity-80 transition-opacity"
-        >
-          {t("recruitment:detail.applyNow")}
-        </a>
-
-        <div className="mt-10 mb-[120px]">
+        <div className="mt-14 mb-[120px]">
           <div className="max-w-none text-[var(--t1)]">
             <div
               dangerouslySetInnerHTML={{ __html: job.content }}

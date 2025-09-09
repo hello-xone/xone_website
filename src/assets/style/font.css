@@ -1,0 +1,108 @@
+@font-face {
+  font-family: "Switzer";
+  src:
+    url("../fonts/Switzer/Switzer-Light.woff2") format("woff2"),
+    url("../fonts/Switzer/Switzer-Light.woff") format("woff"),
+    url("../fonts/Switzer/Switzer-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Switzer";
+  src:
+    url("../fonts/Switzer/Switzer-Regular.woff2") format("woff2"),
+    url("../fonts/Switzer/Switzer-Regular.woff") format("woff"),
+    url("../fonts/Switzer/Switzer-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Switzer";
+  src:
+    url("../fonts/Switzer/Switzer-Medium.woff2") format("woff2"),
+    url("../fonts/Switzer/Switzer-Medium.woff") format("woff"),
+    url("../fonts/Switzer/Switzer-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Switzer";
+  src:
+    url("../fonts/Switzer/Switzer-Semibold.woff2") format("woff2"),
+    url("../fonts/Switzer/Switzer-Semibold.woff") format("woff"),
+    url("../fonts/Switzer/Switzer-Semibold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Switzer";
+  src:
+    url("../fonts/Switzer/Switzer-Bold.woff2") format("woff2"),
+    url("../fonts/Switzer/Switzer-Bold.woff") format("woff"),
+    url("../fonts/Switzer/Switzer-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Switzer";
+  src:
+    url("../fonts/Switzer/Switzer-Extrabold.woff2") format("woff2"),
+    url("../fonts/Switzer/Switzer-Extrabold.woff") format("woff"),
+    url("../fonts/Switzer/Switzer-Extrabold.ttf") format("truetype");
+  font-weight: 800;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: NotoSans;
+  src: url("../fonts/Switzer-Italic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: NotoSans;
+  src: url("../fonts/NotoSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: NotoSans;
+  src: url("../fonts/NotoSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: NotoSans;
+  src: url("../fonts/NotoSans-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: NotoSans;
+  src: url("../fonts/NotoSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: NotoSans;
+  src: url("../fonts/NotoSans-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}

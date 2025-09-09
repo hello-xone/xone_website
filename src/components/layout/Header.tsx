@@ -1,70 +1,73 @@
-import axios from "axios";
 import clsx from "clsx";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
+import ActiveIcon from "@/assets/imgs/header/active.png";
+import ActiveDarkIcon from "@/assets/imgs/header/active-dark.png";
+import BlogIcon from "@/assets/imgs/header/blog.png";
+import BlogDarkIcon from "@/assets/imgs/header/blog-dark.png";
+import BusinessIcon from "@/assets/imgs/header/business.png";
+import BusinessDarkIcon from "@/assets/imgs/header/business-dark.svg";
+import GrantsIcon from "@/assets/imgs/header/grants.png";
+import GrantsDarkIcon from "@/assets/imgs/header/grants-dark.png";
+import KnightIcon from "@/assets/imgs/header/knight.png";
+import KnightDarkIcon from "@/assets/imgs/header/knight-dark.png";
 import LogoIcon from "@/assets/imgs/header/logo.png";
 import LogoRedIcon from "@/assets/imgs/header/logo-red.png";
+import RecruitmentIcon from "@/assets/imgs/header/recruitment.png";
+import RecruitmentDarkIcon from "@/assets/imgs/header/recruitment-dark.png";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import { menus, NavigationType } from "@/constants/menus";
 import useApplicationStore from "@/store/applicationStore";
 
 import CommonButton from "../comm/button/CommonButton";
 import { SeeMore } from "../comm/link/SeeMore";
-import AiStar from "../Icons/AiStar";
 import Knight from "../Icons/Knight";
 import Language from "../Icons/Language";
 import Theme from "../Icons/Theme";
+import BusinessCard from "./Header/components/businessCard";
 import CommonPopover from "./Popover/CommonPopover";
 import LanguagePopover from "./Popover/LanguagePopover";
 import MenuPopover from "./Popover/MenuPopover";
-import { request } from "@/api/request";
 
 const Header = () => {
+  const popoverRef = useRef<any>(null);
   const navigate = useNavigate();
-  const { isLight } = useApplicationStore()
-  const [event, setEvent] = useState<any>(null);
+  const { isLight, changeTheme } = useApplicationStore();
   const [detailId, setDetailId] = useState("");
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") || "light";
-  });
   const { t, i18n } = useTranslation("header");
 
+  const [isThemeSwitching, setIsThemeSwitching] = useState(false);
+
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-    document.documentElement.setAttribute(
-      "data-theme",
-      theme === "light" ? "dark" : "light"
-    );
-    localStorage.setItem("theme", theme === "light" ? "dark" : "light");
-  };
+    setIsThemeSwitching(true);
 
-  useEffect(() => {
-    request
-      .get(
-        "/api/v2/official-assets?calendar_api_id=cal-SHqvOTSSn2B1gf3&pagination_limit=1&period=past"
-      )
-      .then((res) => {
-        if (res.code === 0 && res.data && res.data.entries[0]) {
-          setEvent(res.data.entries[0].event);
-        }
+    // 页面过渡效果
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        document.documentElement.setAttribute(
+          "data-theme",
+          isLight ? "dark" : "light"
+        );
+        localStorage.setItem("theme", isLight ? "dark" : "light");
+        changeTheme();
       });
-  }, []);
-
-  const globalDetail = useMemo(() => {
-    if (event && detailId) {
-      switch (detailId) {
-        case "global_active":
-          return {
-            images: event.cover_url || '',
-            name: event.name || '',
-          };
-      }
+    } else {
+      // 切换主题
+      document.documentElement.setAttribute(
+        "data-theme",
+        isLight ? "dark" : "light"
+      );
+      localStorage.setItem("theme", isLight ? "dark" : "light");
+      changeTheme();
     }
-    return null;
-  }, [event, detailId]);
 
+    // 重置动画状态
+    setTimeout(() => {
+      setIsThemeSwitching(false);
+    }, 600);
+  };
 
   const group = useMemo(() => {
     if (detailId) {
@@ -73,12 +76,42 @@ const Header = () => {
         return groups.find((item) => item.id === detailId);
       }
     }
-  }, [detailId])
+  }, [detailId]);
+
+  const handleCallChild = () => {
+    if (popoverRef.current) {
+      popoverRef.current.close();
+    }
+  };
+
+  const DetailImg = useMemo(() => {
+    switch (detailId) {
+      case "global_business":
+        return isLight ? BusinessIcon : BusinessDarkIcon;
+      case "global_recruitment":
+        return isLight ? RecruitmentIcon : RecruitmentDarkIcon;
+      case "global_blog":
+        return isLight ? BlogIcon : BlogDarkIcon;
+      case "global_active":
+        return isLight ? ActiveIcon : ActiveDarkIcon;
+      case "global_knight":
+        return isLight? KnightIcon : KnightDarkIcon;
+      case "global_grants":
+        return isLight ? GrantsIcon : GrantsDarkIcon;
+      default:
+        return isLight ? KnightIcon : KnightDarkIcon;
+    }
+  }, [isLight, detailId])
   return (
-    <div className={clsx(`w-screen fixed backdrop-blur-[5px] z-[10] top-0 left-0 h-[58px] md:h-[64px] px-4 md:px-[30px] flex items-center justify-between`, {
-      'bg-[#ffffff]/50': isLight,
-      'bg-[#070808]/50': !isLight,
-    })} >
+    <div
+      className={clsx(
+        `w-full fixed backdrop-blur-[5px] z-[10] top-0 left-0 h-[58px] md:h-[64px] px-4 md:px-[30px] flex items-center justify-between`,
+        {
+          "bg-[#ffffff]/50": isLight,
+          "bg-[#070808]/50": !isLight,
+        }
+      )}
+    >
       <div className="flex items-center z-10 gap-[48px]">
         <img
           src={LogoRedIcon}
@@ -86,74 +119,107 @@ const Header = () => {
           onClick={() => navigate("/")}
           className="w-[100px] h-auto cursor-pointer max-md:hidden"
         ></img>
-        <img src={LogoIcon} onClick={() => navigate("/")} alt="logo" className="w-8 h-8 md:hidden"></img>
-        <div className="hidden md:flex items-center gap-[40px]">
+        <img
+          src={LogoIcon}
+          onClick={() => navigate("/")}
+          alt="logo"
+          className="w-8 h-8 md:hidden"
+        ></img>
+        <div className="hidden lg:flex items-center gap-[40px]">
           {menus &&
             menus.map((item) => {
               return (
                 <div key={`header-item-${item.id}`}>
                   {item.group && item.group.length > 0 ? (
-                    <CommonPopover text={t(item.name)}>
+                    <CommonPopover ref={popoverRef} text={t(item.name)}>
                       {item.type === NavigationType.INFO ? (
-                        <div className="flex gap-[24px]">
+                        <div className="flex items-stretch gap-[24px]">
                           <div className="w-[372px]">
                             {item.group &&
                               item.group.map((gel) => (
                                 <div
                                   onMouseEnter={() => setDetailId(gel.id)}
-                                  className="px-[10px] group gap-[12px] rounded-[8px] mb-[2px] bg-transparent hover:bg-b3 cursor-pointer py-2 flex items-center"
+                                  className={clsx(
+                                    "px-[10px] w-full group gap-[12px] rounded-[8px] mb-[2px] bg-transparent hover:bg-b3 cursor-pointer py-2 flex items-center",
+                                    {
+                                      "!bg-b3": detailId === gel.id,
+                                    }
+                                  )}
                                   key={`children-item-${gel.id}`}
                                 >
-                                  <Knight className="text-t2 group-hover:text-t1 shrink-0"></Knight>
-                                  <div className="text-t2 group-hover:text-t1">
-                                    <div className="text-sm font-bold leading-[140%] mb-1">
+                                  <gel.icon
+                                    className={clsx(
+                                      "text-t2 group-hover:text-t1 shrink-0",
+                                      {
+                                        "!text-t1": detailId === gel.id,
+                                      }
+                                    )}
+                                  ></gel.icon>
+                                  <div
+                                    className={clsx(
+                                      "text-t2 w-full pr-[34px] group-hover:text-t1 shrink-0",
+                                      {
+                                        "!text-t1": detailId === gel.id,
+                                      }
+                                    )}
+                                  >
+                                    <div className="text-sm w-full font-bold leading-[140%] mb-1">
                                       {t(gel.title)}
                                     </div>
-                                    <div className="text-xs leading-[16px]">
+                                    <div className="text-xs w-full leading-[16px]">
                                       {t(gel.description)}
                                     </div>
                                   </div>
                                 </div>
                               ))}
                           </div>
-                          <div className="w-[480px]">
-                            {!globalDetail ? (
-                              <div className="w-full min-h-[164px] flex flex-col items-center justify-center rounded-[8px] bg-b3">
-                                <Knight className="text-t2 shrink-0"></Knight>
-                                <div className="text-t2 font-medium text-sm mt-[7px]">
-                                  Look forward to it !
-                                </div>
-                              </div>
+                          <div className="w-[480px] flex-1 flex flex-col">
+                            {group?.id === "global_business" ? (
+                              <BusinessCard></BusinessCard>
                             ) : (
-                              <img
-                                src={globalDetail.images}
-                                alt=""
-                                className="w-full h-[164px] rounded-[8px]"
-                              ></img>
-                            )}
+                              <>
+                                <div className="w-full min-h-[164px] flex-1 flex flex-col items-center justify-center rounded-[8px] bg-b3">
+                                  <img alt="" src={DetailImg} className="w-[164px] h-[164px]"></img>
+                                </div>
+                                {
+                                  group?.detailTitle && <div className="mt-3 text-t2 shrink-0 text-sm font-bold leading-[140%]">
+                                    {group?.detailTitle
+                                      ? t(group?.detailTitle)
+                                      : ""}
+                                  </div>
+                                }
 
-                            <div className="mt-3 text-t2 text-sm font-bold leading-[140%]">
-                              {globalDetail
-                                ? globalDetail.name
-                                : "助力Xone未来动向，成就更大发展"}
-                            </div>
-                            {!globalDetail && (
-                              <div className="mt-3 text-t2 text-sm leading-[140%]">{`一切工作都是为了帮助 Xone 更好的服务全球企业、组织以及个人。因此，在任何领域，只要你有想法并愿意为此贡献你的独到想法！我们相信，在 Xone 的成长之路上，将无畏即将面对的无数挑战。`}</div>
+                                {group?.detailDesc && (
+                                  <div className="mt-3 text-t2 shrink-0 text-sm leading-[140%]">
+                                    {group?.detailDesc
+                                      ? t(group?.detailDesc)
+                                      : ""}
+                                  </div>
+                                )}
+                              </>
                             )}
-                            {
-                              group && group.link && <SeeMore
+                            {group && group.link && (
+                              <SeeMore
                                 href={group.link}
+                                target={
+                                  group.link.includes("http")
+                                    ? "_blank"
+                                    : "_self"
+                                }
                                 text={t("home:seeMore")}
                                 className="mt-3"
-                                textClassName="!text-[14px] text-t2"
+                                textClassName="!text-[14px] shrink-0 text-t2"
                               ></SeeMore>
-                            }
+                            )}
                           </div>
                         </div>
                       ) : (
                         <div className="flex gap-[24px]">
                           {item.group.map((cel) => (
-                            <div key={`children-item-${cel.id}`}>
+                            <div
+                              key={`children-item-${cel.id}`}
+                              className="w-[200px]"
+                            >
                               <div className="text-base mb-1 leading-[140%] font-bold text-t1">
                                 {t(cel.title)}
                               </div>
@@ -167,8 +233,13 @@ const Header = () => {
                                       <Link
                                         key={`link-item-${link.id}`}
                                         to={link.link || ""}
-                                        target="_blank"
-                                        className="px-[10px] py-[8px] hover:bg-b3 rounded-[8px] cursor-pointer"
+                                        onClick={() => handleCallChild()}
+                                        target={
+                                          link.link.includes("http")
+                                            ? "_blank"
+                                            : "_self"
+                                        }
+                                        className="px-[10px] py-[8px] hover:bg-b3 hover:text-t1 rounded-[8px] cursor-pointer"
                                       >
                                         {t(link.name)}
                                       </Link>
@@ -178,6 +249,7 @@ const Header = () => {
                               {item.id === "Ecology" && (
                                 <SeeMore
                                   href={EXTERNAL_LINKS.Bvi}
+                                  onClick={() => handleCallChild()}
                                   text={t("home:seeMore")}
                                   className="mt-4 ml-[10px]"
                                   textClassName="!text-[14px] font-medium text-t2"
@@ -207,19 +279,30 @@ const Header = () => {
         </div>
       </div>
       <div className="flex items-center gap-[12px] md:gap-[24px]">
-        <CommonButton type="outline">
+        {/* <CommonButton type="outline">
           {t("askAI")}
-          <AiStar className="text-t1 w-4 h-4 md:w-6 md:h-6"></AiStar>
-        </CommonButton>
-        <CommonButton onClick={() => window.open(EXTERNAL_LINKS.MainExplorer)}>
+          <AiStar className="w-4 h-4 md:w-6 md:h-6"></AiStar>
+        </CommonButton> */}
+        <CommonButton
+          className="max-md:text-xs"
+          onClick={() => window.open(EXTERNAL_LINKS.Bvi)}
+        >
           {t("exploreXone")}
         </CommonButton>
         <MenuPopover></MenuPopover>
-        <div className="hidden md:flex items-center gap-[16px]">
+        <div className="hidden lg:flex items-center gap-[8px]">
           <LanguagePopover>
             <Language className="text-t1"></Language>
           </LanguagePopover>
-          <Theme onClick={() => toggleTheme()} className="text-t1"></Theme>
+          <div
+            className={`w-[40px] flex rounded-[10px] hover:bg-b2 items-center justify-center h-[40px] theme-toggle-button ${isThemeSwitching ? "theme-switching" : ""}`}
+          >
+            <Theme
+              isLight={isLight}
+              onClick={() => toggleTheme()}
+              className="text-t1 w-[24px] h-[24px] theme-icon"
+            ></Theme>
+          </div>
         </div>
       </div>
     </div>

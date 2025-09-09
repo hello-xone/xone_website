@@ -8,9 +8,22 @@ import LocationIcon from "@/assets/svg/recruitment/home/location.svg?react";
 import PositionIcon from "@/assets/svg/recruitment/home/position.svg?react";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
+// 预加载所有 job 图片
+const jobImages = import.meta.glob("@/assets/job/image/**/*.png", {
+  eager: true,
+});
+
 export const List = ({ data, onMore }: { data: any; onMore: () => void }) => {
   const { isLight } = useCurrentTheme();
   const { t } = useTranslation();
+
+  // 获取图片 URL 的函数
+  const getImageUrl = (logoPath: string) => {
+    const fullPath = `/src/assets${logoPath}`;
+    const imageModule = jobImages[fullPath] as { default: string } | undefined;
+    return imageModule?.default || "";
+  };
+
   return (
     <div className="mt-8">
       <p className="text-[20px] md:text-[22px] text-[var(--t1)] font-light">
@@ -26,7 +39,7 @@ export const List = ({ data, onMore }: { data: any; onMore: () => void }) => {
           >
             <div className="flex flex-col md:flex-row items-start md:items-center gap-x-[24px]">
               <img
-                src={item.logo}
+                src={getImageUrl(item.logo)}
                 alt={item.title}
                 className="w-[100px] h-[100px] object-scale-down"
               />
@@ -37,7 +50,7 @@ export const List = ({ data, onMore }: { data: any; onMore: () => void }) => {
                 <h3 className="text-[var(--t1)] text-[24px] font-bold mt-[6px]">
                   {item.title}
                 </h3>
-                <div className="flex items-center mt-[8px] gap-x-[24px]">
+                <div className="flex md:items-center items-start md:flex-row flex-col mt-[6px] md:mt-[8px] gap-x-[24px] gap-y-[4px] md:gap-y-[8px]">
                   <div className="flex items-center gap-x-[6px]">
                     <PositionIcon className="w-[18px] h-[18px]" />
                     <p className="text-[var(--t2)] text-[15px] mt-[1px]">
@@ -51,15 +64,20 @@ export const List = ({ data, onMore }: { data: any; onMore: () => void }) => {
                     </p>
                   </div>
                 </div>
-                <div
-                  className={clsx(
-                    "h-[32px] flex items-center justify-center mt-[14px] px-[8px] py-[5px] rounded-[8px] font-normal text-[12px] w-fit",
-                    "text-[var(--primary)]",
-                    isLight ? "bg-[#FFE7E6]" : "bg-[#201010]",
-                    isLight ? "text-[#FF4D4F]" : "text-[#D90021]"
-                  )}
-                >
-                  {item.workType.join("、")}
+                <div className="flex items-center gap-x-[8px] mt-[14px]">
+                  {item.workType.map((type: string, index: number) => (
+                    <div
+                      key={index}
+                      className={clsx(
+                        "h-[32px] flex items-center justify-center px-[8px] py-[5px] rounded-[8px] font-normal text-[12px] w-fit",
+                        "text-[var(--primary)]",
+                        isLight ? "bg-[#FFE7E6]" : "bg-[#201010]",
+                        isLight ? "text-[#FF4D4F]" : "text-[#D90021]"
+                      )}
+                    >
+                      {type}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -83,11 +101,6 @@ export const List = ({ data, onMore }: { data: any; onMore: () => void }) => {
           onClick={onMore}
         >
           {t("recruitment:viewMore")}
-        </p>
-      )}
-      {!data.hasMore && (
-        <p className="text-[var(--t2)] text-[15px] mt-6 text-center mx-auto w-[80px]">
-          {t("recruitment:noMore")}
         </p>
       )}
     </div>

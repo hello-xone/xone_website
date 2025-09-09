@@ -1,5 +1,9 @@
-import BusinessIcon from "@/assets/svg/home/business.svg?react";
-import KnightIcon from "@/assets/svg/home/knight.svg?react";
+import ActiveIcon from "@/assets/svg/header/active.svg?react";
+import BlogIcon from "@/assets/svg/header/blog.svg?react";
+import BusinessIcon from "@/assets/svg/header/business.svg?react";
+import GrantsIcon from "@/assets/svg/header/grants.svg?react";
+import KnightIcon from "@/assets/svg/header/knight.svg?react";
+import RecruitmentIcon from "@/assets/svg/header/recruitment.svg?react";
 
 import { EXTERNAL_LINKS } from "./external";
 
@@ -32,6 +36,8 @@ interface MenuModel {
     menuId?: InfoMenuId;
     link?: string;
     description: string;
+    detailTitle?: string;
+    detailDesc?: string;
     links?: Array<NavigationLink>;
   }>;
 }
@@ -80,6 +86,28 @@ export const menus: Array<MenuModel> = [
         ],
       },
       {
+        id: "learning_Power",
+        title: "navLearnPower",
+        description: "navLearnPowerDesc",
+        links: [
+          {
+            id: "learning_Power_1",
+            name: "navLearnPowerItem1",
+            link: EXTERNAL_LINKS.docs + "bvi/readme",
+          },
+          {
+            id: "learning_Power_2",
+            name: "navLearnPowerItem2",
+            link: EXTERNAL_LINKS.docs + "bvi/identity",
+          },
+          {
+            id: "learning_Power_3",
+            name: "navLearnPowerItem3",
+            link: EXTERNAL_LINKS.docs + "bvi/season",
+          },
+        ],
+      },
+      {
         id: "learning_Positive",
         title: "navLearnPositive",
         description: "navLearnPositiveDesc",
@@ -119,6 +147,11 @@ export const menus: Array<MenuModel> = [
           {
             id: "learning_Resources_4",
             name: "navLearnResourceItem4",
+            link: EXTERNAL_LINKS.docs + "roadmap",
+          },
+          {
+            id: "learning_Resources_5",
+            name: "navLearnResourceItem5",
             link: "/verification-channel",
           },
         ],
@@ -239,115 +272,115 @@ export const menus: Array<MenuModel> = [
       },
     ],
   },
-  {
-    id: "Governance",
-    type: NavigationType.LINK,
-    name: "headerNav5",
-    group: [
-      {
-        id: "onboarding",
-        title: "navOnboarding",
-        description: "navOnboardingDesc",
-        links: [
-          {
-            id: "learning_Idea_1",
-            name: "navLearnIdeaItem1",
-            link: EXTERNAL_LINKS.docs + "study/account",
-          },
-          {
-            id: "learning_Idea_2",
-            name: "navLearnIdeaItem2",
-            link: EXTERNAL_LINKS.docs + "study/xoc",
-          },
-          {
-            id: "learning_Idea_3",
-            name: "navLearnIdeaItem3",
-            link: EXTERNAL_LINKS.docs + "study/gas",
-          },
-          {
-            id: "learning_Idea_4",
-            name: "navLearnIdeaItem4",
-            link: EXTERNAL_LINKS.docs + "study/nodes",
-          },
-          {
-            id: "learning_Idea_5",
-            name: "navLearnIdeaItem5",
-            link: EXTERNAL_LINKS.docs + "study/modules",
-          },
-          {
-            id: "learning_Idea_6",
-            name: "navLearnIdeaItem6",
-            link: EXTERNAL_LINKS.docs + "study/epoch",
-          },
-        ],
-      },
-      {
-        id: "launch",
-        title: "navLaunch",
-        description: "navLaunchDesc",
-        links: [
-          {
-            id: "learning_Positive_1",
-            name: "navLearnPositiveItem1",
-            link: EXTERNAL_LINKS.docs + "study/donate",
-          },
-          {
-            id: "learning_Positive_2",
-            name: "navLearnPositiveItem2",
-            link: EXTERNAL_LINKS.docs + "study/release",
-          },
-        ],
-      },
-      {
-        id: "vote",
-        title: "navVote",
-        description: "navVoteDesc",
-        links: [
-          {
-            id: "learning_Resources_1",
-            name: "navLearnResourceItem1",
-            link: EXTERNAL_LINKS.docs + "study/media",
-          },
-          {
-            id: "learning_Resources_2",
-            name: "navLearnResourceItem2",
-            link: EXTERNAL_LINKS.docs + "study/contribut",
-          },
-          {
-            id: "learning_Resources_3",
-            name: "navLearnResourceItem3",
-            link: EXTERNAL_LINKS.docs + "study/wiki",
-          },
-        ],
-      },
-      {
-        id: "influence",
-        title: "navInfluence",
-        description: "navInfluenceDesc",
-        links: [
-          {
-            id: "learning_Resources_1",
-            name: "navLearnResourceItem1",
-            link: EXTERNAL_LINKS.docs + "study/media",
-          },
-          {
-            id: "learning_Resources_2",
-            name: "navLearnResourceItem2",
-            link: EXTERNAL_LINKS.docs + "study/contribut",
-          },
-          {
-            id: "learning_Resources_3",
-            name: "navLearnResourceItem3",
-            link: EXTERNAL_LINKS.docs + "study/wiki",
-          },
-        ],
-      },
-    ],
-  },
+  // {
+  //   id: "Governance",
+  //   type: NavigationType.LINK,
+  //   name: "headerNav3",
+  //   group: [
+  //     {
+  //       id: "onboarding",
+  //       title: "navOnboarding",
+  //       description: "navOnboardingDesc",
+  //       links: [
+  //         {
+  //           id: "learning_Idea_1",
+  //           name: "navLearnIdeaItem1",
+  //           link: EXTERNAL_LINKS.docs + "study/account",
+  //         },
+  //         {
+  //           id: "learning_Idea_2",
+  //           name: "navLearnIdeaItem2",
+  //           link: EXTERNAL_LINKS.docs + "study/xoc",
+  //         },
+  //         {
+  //           id: "learning_Idea_3",
+  //           name: "navLearnIdeaItem3",
+  //           link: EXTERNAL_LINKS.docs + "study/gas",
+  //         },
+  //         {
+  //           id: "learning_Idea_4",
+  //           name: "navLearnIdeaItem4",
+  //           link: EXTERNAL_LINKS.docs + "study/nodes",
+  //         },
+  //         {
+  //           id: "learning_Idea_5",
+  //           name: "navLearnIdeaItem5",
+  //           link: EXTERNAL_LINKS.docs + "study/modules",
+  //         },
+  //         {
+  //           id: "learning_Idea_6",
+  //           name: "navLearnIdeaItem6",
+  //           link: EXTERNAL_LINKS.docs + "study/epoch",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       id: "launch",
+  //       title: "navLaunch",
+  //       description: "navLaunchDesc",
+  //       links: [
+  //         {
+  //           id: "learning_Positive_1",
+  //           name: "navLearnPositiveItem1",
+  //           link: EXTERNAL_LINKS.docs + "study/donate",
+  //         },
+  //         {
+  //           id: "learning_Positive_2",
+  //           name: "navLearnPositiveItem2",
+  //           link: EXTERNAL_LINKS.docs + "study/release",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       id: "vote",
+  //       title: "navVote",
+  //       description: "navVoteDesc",
+  //       links: [
+  //         {
+  //           id: "learning_Resources_1",
+  //           name: "navLearnResourceItem1",
+  //           link: EXTERNAL_LINKS.docs + "study/media",
+  //         },
+  //         {
+  //           id: "learning_Resources_2",
+  //           name: "navLearnResourceItem2",
+  //           link: EXTERNAL_LINKS.docs + "study/contribut",
+  //         },
+  //         {
+  //           id: "learning_Resources_3",
+  //           name: "navLearnResourceItem3",
+  //           link: EXTERNAL_LINKS.docs + "study/wiki",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       id: "influence",
+  //       title: "navInfluence",
+  //       description: "navInfluenceDesc",
+  //       links: [
+  //         {
+  //           id: "learning_Resources_1",
+  //           name: "navLearnResourceItem1",
+  //           link: EXTERNAL_LINKS.docs + "study/media",
+  //         },
+  //         {
+  //           id: "learning_Resources_2",
+  //           name: "navLearnResourceItem2",
+  //           link: EXTERNAL_LINKS.docs + "study/contribut",
+  //         },
+  //         {
+  //           id: "learning_Resources_3",
+  //           name: "navLearnResourceItem3",
+  //           link: EXTERNAL_LINKS.docs + "study/wiki",
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
   {
     id: "Ecology",
     type: NavigationType.LINK,
-    name: "headerNav3",
+    name: "headerNav4",
     link: "/ecology",
     group: [
       {
@@ -392,7 +425,7 @@ export const menus: Array<MenuModel> = [
   {
     id: "global",
     type: NavigationType.INFO,
-    name: "headerNav4",
+    name: "headerNav5",
     group: [
       {
         id: "global_knight",
@@ -412,34 +445,42 @@ export const menus: Array<MenuModel> = [
       {
         id: "global_recruitment",
         title: "navGlobalRecruitment",
-        icon: BusinessIcon,
+        icon: RecruitmentIcon,
         link: "/recruitment",
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalRecruitmentDesc",
+        detailTitle: "navGlobalRecruDetailTitle",
+        detailDesc: "navGlobalRecruDetailDescribe",
       },
       {
         id: "global_blog",
         title: "navGlobalBlog",
-        icon: BusinessIcon,
+        icon: BlogIcon,
         link: EXTERNAL_LINKS.docs + "blog",
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalBlogDesc",
+        detailTitle: "navGlobalBlogDetailTitle",
+        detailDesc: "navGlobalBlogDetailDescribe",
       },
       {
         id: "global_active",
         title: "navGlobalActive",
-        icon: BusinessIcon,
+        icon: ActiveIcon,
         link: EXTERNAL_LINKS.Events,
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalActiveDesc",
+        detailTitle: "navGlobalActiveDetailTitle",
+        detailDesc: "navGlobalActiveDetailDescribe",
       },
       {
         id: "global_grants",
         title: "navGlobalGrants",
-        icon: BusinessIcon,
+        icon: GrantsIcon,
         link: "/grants",
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalGrantsDesc",
+        detailTitle: "navGlobalGrantsDetailTitle",
+        detailDesc: "navGlobalGrantsDetailDescribe",
       },
     ],
   },

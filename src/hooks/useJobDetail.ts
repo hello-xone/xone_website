@@ -83,6 +83,13 @@ function processMdxContent(content: string): string {
         '<p class="ml-4 mb-1 text-[var(--t2)]">$1</p>'
       )
 
+      // 处理section div内的p标签，移除class属性
+      .replace(/<div class="section">([\s\S]*?)<\/div>/g, (match, content) => {
+        // 移除section div内p标签的class属性
+        const cleanedContent = content.replace(/<p class="[^"]*">/g, "<p>");
+        return `<div class="section text-[var(--t1)] text-[16px] font-normal" style="margin-bottom: 50px;">${cleanedContent}</div>`;
+      })
+
       // 处理粗体和斜体
       .replace(
         /\*\*(.*?)\*\*/g,

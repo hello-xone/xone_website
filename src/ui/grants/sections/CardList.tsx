@@ -1,12 +1,11 @@
 import clsx from "clsx";
-import React from "react";
 
 interface Props {
   title: string;
   description: string;
   list: {
     title: string;
-    icon: React.ComponentType<any> | string;
+    icon: string;
     description?: string;
   }[];
   isMobileTow?: boolean;
@@ -33,7 +32,7 @@ export const CardList = ({ title, description, list, isMobileTow }: Props) => {
             className="flex flex-col items-start bg-[var(--b2)] md:rounded-[24px] rounded-[8px] md:p-[24px] p-[16px]"
           >
             <div className="w-[40px] h-[40px] md:w-[54px] md:h-[54px] flex items-center justify-center mb-2 md:mb-3">
-              <item.icon className="w-full h-full" />
+              <img src={item.icon} alt={item.title} className="w-full h-full" />
             </div>
             <h3 className="text-[var(--t1)] text-[20px] md:text-[28px] font-bold leading-[1.2]">
               {item.title}

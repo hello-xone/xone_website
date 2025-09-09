@@ -69,7 +69,7 @@ on:
 
 # 环境变量
 env:
-  ALLOWED_REPOSITORIES: "hello-xone/official_docs"
+  ALLOWED_REPOSITORIES: "hello-xone/xone_website"
   
 jobs:
   # 预检查作业

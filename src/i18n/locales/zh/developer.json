@@ -1,5 +1,5 @@
 {
-  "bannerTitle": "开始构建可交互的价值应用",
+  "bannerTitle": "开始构建<br/>可交互的价值应用",
   "bannerDesc": "释放创新潜力，构建兼具高性能与互操作性的去中心化应用。",
   "mainnet": "主网",
   "testnet": "测试网",
@@ -9,9 +9,9 @@
   "netDataLabel4": "纪元",
   "linkTitle1": "区块浏览器",
   "linkTitle2": "添加主网到钱包",
-  "linkTitle3": "查看文档",
+  "linkTitle3": "JSON RPC",
   "linkTitle4": "添加测试网到钱包",
-  "buildingTitle": "开始构建可交互的价值应用",
+  "buildingTitle": "构建之前，先了解 Xone",
   "app1": "Xone 账户",
   "app2": "Xone 交易",
   "app3": "Xone 重放保护",

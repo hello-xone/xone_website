@@ -15,7 +15,7 @@ import {
 } from "./request";
 
 export const addEmail = async (data: { email: string }): Promise<null> => {
-  const res: ApiResponse<null> = await request.post("/api/v1/email/subscribe", data);
+  const res: ApiResponse<null> = await request.post("/api/v2/email/subscribe", data);
 
   if (res.code === 0) {
     return res.data;
@@ -47,8 +47,8 @@ export const fetchNetCountersByNet = async (
 
 export const fetchStatsByNet = async (isTestNet?: boolean) => {
   // const reqInstance = isTestNet ? xoTestScanRequest : xoMainScanRequest;
-  const res: Stats = await request.get("/api/v2/stats");
-  return res;
+  const res = await request.get("/api/v2/stats");
+  return res.data;
 };
 
 export const fetchChart = async () => {

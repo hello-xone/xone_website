@@ -34,6 +34,12 @@ export default {
         primaryButtonBg: "var(--button-bg)",
         primaryButtonText: "var(--button-text)"
       },
+      transitionTimingFunction: {
+        'theme': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
+      transitionDuration: {
+        'theme': '300ms',
+      }
     },
   },
   plugins: []

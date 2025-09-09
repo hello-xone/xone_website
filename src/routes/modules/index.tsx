@@ -11,6 +11,13 @@ import Recruitment from "@/pages/Recruitment";
 import RecruitmentDetail from "@/pages/RecruitmentDetail";
 import VerificationChannel from "@/pages/VerificationChannel";
 
+import { AnimatedRoute } from "./AnimatedRoute";
+
+const withAnimation = (Component: React.ComponentType) => {
+  return () => <AnimatedRoute Component={Component} />;
+};
+
+
 export const Routes: RouteObject[] = [
   {
     path: "/",
@@ -18,7 +25,7 @@ export const Routes: RouteObject[] = [
     children: [
       {
         index: true,
-        Component: Home,
+        Component: withAnimation(Home),
       },
     ],
   },
@@ -28,7 +35,7 @@ export const Routes: RouteObject[] = [
     children: [
       {
         index: true,
-        Component: DeveloperCenter,
+        Component: withAnimation(DeveloperCenter),
       },
     ],
   },
@@ -38,7 +45,7 @@ export const Routes: RouteObject[] = [
     children: [
       {
         index: true,
-        Component: Commercial,
+        Component: withAnimation(Commercial),
       },
     ],
   },
@@ -48,7 +55,7 @@ export const Routes: RouteObject[] = [
     children: [
       {
         index: true,
-        Component: VerificationChannel,
+        Component: withAnimation(VerificationChannel),
       },
     ],
   },
@@ -58,7 +65,7 @@ export const Routes: RouteObject[] = [
     children: [
       {
         index: true,
-        Component: Events,
+        Component: withAnimation(Events),
       },
     ],
   },
@@ -68,7 +75,7 @@ export const Routes: RouteObject[] = [
     children: [
       {
         index: true,
-        Component: Recruitment,
+        Component: withAnimation(Recruitment),
       },
     ],
   },
@@ -78,7 +85,7 @@ export const Routes: RouteObject[] = [
     children: [
       {
         index: true,
-        Component: RecruitmentDetail,
+        Component: withAnimation(RecruitmentDetail),
       },
     ],
   },
@@ -88,7 +95,7 @@ export const Routes: RouteObject[] = [
     children: [
       {
         index: true,
-        Component: Grants,
+        Component: withAnimation(Grants),
       },
     ],
   },
@@ -98,7 +105,7 @@ export const Routes: RouteObject[] = [
     children: [
       {
         index: true,
-        Component: lazy(() => import("@/pages/404")),
+        Component: withAnimation(lazy(() => import("@/pages/404"))),
       },
     ],
   },

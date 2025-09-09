@@ -18,13 +18,13 @@ export const Header = () => {
           <div className="flex flex-col md:flex-row gap-[14px] md:gap-[32px] mt-8 md:mt-14 items-center">
             <div
               onClick={() => window.open("https://forms.gle/U7yatCsQzY7LS1NY7")}
-              className="bg-[var(--t1)] w-full md:w-[140px] h-[48px] md:h-[56px] text-center md:leading-[56px] leading-[48px] cursor-pointer rounded-[12px] text-[var(--t5)] text-[16px] md:text-[18px] font-semibold md:font-bold"
+              className="bg-[var(--t1)] w-full md:w-[140px] h-[48px] md:h-[56px] text-center md:leading-[56px] leading-[48px] cursor-pointer rounded-[12px] text-[var(--t5)] text-[16px] md:text-[18px] font-semibold hover:bg-[var(--b10)]"
             >
               {t("grants:headerButton1")}
             </div>
             <div
               onClick={() => window.open("https://docs.xone.org/study/grants")}
-              className="bg-[var(--b3)] w-full md:w-[140px] h-[48px] md:h-[56px] mt-1 text-center md:leading-[56px] leading-[48px] cursor-pointer rounded-[12px] text-[var(--t1)] text-[16px] md:text-[18px] font-semibold md:font-bold"
+              className="bg-[var(--b3)] w-full md:w-[140px] h-[48px] md:h-[56px] mt-1 text-center md:leading-[56px] leading-[48px] cursor-pointer rounded-[12px] text-[var(--t1)] text-[16px] md:text-[18px] font-semibold hover:bg-[var(--layer4)]"
             >
               {t("grants:headerButton2")}
             </div>
