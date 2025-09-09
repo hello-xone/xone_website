@@ -241,7 +241,8 @@ const Footer = () => {
     const [prefix] = input.split("@");
     return domains.map((domain) => `${prefix}${domain}`);
   };
-
+  console.log(process.env, "process.env")
+  console.log(import.meta.env, "import.meta.env")
   return (
     <div className="w-full pt-[64px] bg-b1 overflow-x-hidden">
       <div className="container">
