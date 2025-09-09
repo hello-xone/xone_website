@@ -1,8 +1,9 @@
+import Lottie from "lottie-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import OnChainIdentityIcon from "@/assets/imgs/home/on-chain-identity-right.png";
-import OnChainIdentityLightIcon from "@/assets/imgs/home/on-chain-identity-right-light.png";
+import OnChainIdentityJson from "@/assets/lottie/on-chainIdentity.json";
+import OnChainIdentityDarkJson from "@/assets/lottie/on-chainIdentity-dark.json";
 import AssetAnalysisIcon from "@/assets/svg/home/asset-analysis.svg?react";
 import AssetsIcon from "@/assets/svg/home/assets.svg?react";
 import IdIcon from "@/assets/svg/home/id.svg?react";
@@ -55,11 +56,7 @@ export const OnChainIdentity = () => {
             </Link>
             {t("chainIdentityDesc2")}
           </div>
-          <img
-            alt=""
-            src={isLight ? OnChainIdentityLightIcon : OnChainIdentityIcon}
-            className="shrink-0 mb-6 md:hidden w-full h-auto"
-          ></img>
+          <Lottie className="shrink-0 mb-6 md:hidden w-full h-auto" animationData={isLight ? OnChainIdentityJson : OnChainIdentityDarkJson} loop={true} ></Lottie>
           {tips &&
             tips.map((item, index) => {
               return (
@@ -81,11 +78,7 @@ export const OnChainIdentity = () => {
             {t("try")}
           </CommonButton>
         </div>
-        <img
-          alt=""
-          src={isLight ? OnChainIdentityLightIcon : OnChainIdentityIcon}
-          className="shrink-0 max-md:hidden w-[45%] h-auto"
-        ></img>
+        <Lottie className="shrink-0 max-md:hidden w-[45%] h-auto" animationData={isLight ? OnChainIdentityJson : OnChainIdentityDarkJson} loop={true} ></Lottie>
       </div>
     </div>
   </div>;
