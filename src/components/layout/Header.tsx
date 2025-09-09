@@ -1,11 +1,22 @@
 import clsx from "clsx";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
-import { request } from "@/api/request";
+import ActiveIcon from "@/assets/imgs/header/active.png";
+import ActiveDarkIcon from "@/assets/imgs/header/active-dark.png";
+import BlogIcon from "@/assets/imgs/header/blog.png";
+import BlogDarkIcon from "@/assets/imgs/header/blog-dark.png";
+import BusinessIcon from "@/assets/imgs/header/business.png";
+import BusinessDarkIcon from "@/assets/imgs/header/business-dark.svg";
+import GrantsIcon from "@/assets/imgs/header/grants.png";
+import GrantsDarkIcon from "@/assets/imgs/header/grants-dark.png";
+import KnightIcon from "@/assets/imgs/header/knight.png";
+import KnightDarkIcon from "@/assets/imgs/header/knight-dark.png";
 import LogoIcon from "@/assets/imgs/header/logo.png";
 import LogoRedIcon from "@/assets/imgs/header/logo-red.png";
+import RecruitmentIcon from "@/assets/imgs/header/recruitment.png";
+import RecruitmentDarkIcon from "@/assets/imgs/header/recruitment-dark.png";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import { menus, NavigationType } from "@/constants/menus";
 import useApplicationStore from "@/store/applicationStore";
@@ -24,7 +35,6 @@ const Header = () => {
   const popoverRef = useRef<any>(null);
   const navigate = useNavigate();
   const { isLight, changeTheme } = useApplicationStore();
-  const [event, setEvent] = useState<any>(null);
   const [detailId, setDetailId] = useState("");
   const { t, i18n } = useTranslation("header");
 
@@ -59,18 +69,6 @@ const Header = () => {
     }, 600);
   };
 
-  useEffect(() => {
-    request
-      .get(
-        "/api/v2/official-assets?calendar_api_id=cal-SHqvOTSSn2B1gf3&pagination_limit=1&period=past"
-      )
-      .then((res) => {
-        if (res.code === 0 && res.data && res.data.entries[0]) {
-          setEvent(res.data.entries[0].event);
-        }
-      });
-  }, []);
-
   const group = useMemo(() => {
     if (detailId) {
       const groups = menus.find((item) => item.id === "global")?.group;
@@ -85,6 +83,25 @@ const Header = () => {
       popoverRef.current.close();
     }
   };
+
+  const DetailImg = useMemo(() => {
+    switch (detailId) {
+      case "global_business":
+        return isLight ? BusinessIcon : BusinessDarkIcon;
+      case "global_recruitment":
+        return isLight ? RecruitmentIcon : RecruitmentDarkIcon;
+      case "global_blog":
+        return isLight ? BlogIcon : BlogDarkIcon;
+      case "global_active":
+        return isLight ? ActiveIcon : ActiveDarkIcon;
+      case "global_knight":
+        return isLight? KnightIcon : KnightDarkIcon;
+      case "global_grants":
+        return isLight ? GrantsIcon : GrantsDarkIcon;
+      default:
+        return isLight ? KnightIcon : KnightDarkIcon;
+    }
+  }, [isLight, detailId])
   return (
     <div
       className={clsx(
@@ -162,12 +179,8 @@ const Header = () => {
                             ) : (
                               <>
                                 <div className="w-full min-h-[164px] flex-1 flex flex-col items-center justify-center rounded-[8px] bg-b3">
-                                  <Knight className="text-t2 shrink-0"></Knight>
-                                  <div className="text-t2 font-medium text-sm mt-[7px]">
-                                    Look forward to it !
-                                  </div>
+                                  <img alt="" src={DetailImg} className="w-[164px] h-[164px]"></img>
                                 </div>
-
                                 {
                                   group?.detailTitle && <div className="mt-3 text-t2 shrink-0 text-sm font-bold leading-[140%]">
                                     {group?.detailTitle
