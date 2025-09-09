@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 
-import StartIcon from "@/assets/imgs/home/start.png";
-import StartDarkIcon from "@/assets/imgs/home/start-dark.png";
+import StartIcon from "@/assets/imgs/home/home-start.png";
+import StartDarkIcon from "@/assets/imgs/home/home-start-dark.png";
 import { Description } from "@/components/comm/description";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import { Title } from "@/components/comm/title";
