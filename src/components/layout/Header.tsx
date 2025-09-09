@@ -71,26 +71,6 @@ const Header = () => {
       });
   }, []);
 
-  const globalDetail = useMemo(() => {
-    if (event && detailId) {
-      switch (detailId) {
-        case "global_active":
-          return {
-            images: event.cover_url || "",
-            name: event.name || "",
-          };
-      }
-      switch (detailId) {
-        case "global_active":
-          return {
-            images: event.cover_url || "",
-            name: event.name || "",
-          };
-      }
-    }
-    return null;
-  }, [event, detailId]);
-
   const group = useMemo(() => {
     if (detailId) {
       const groups = menus.find((item) => item.id === "global")?.group;
@@ -143,7 +123,7 @@ const Header = () => {
                                 <div
                                   onMouseEnter={() => setDetailId(gel.id)}
                                   className={clsx(
-                                    "px-[10px] group gap-[12px] rounded-[8px] mb-[2px] bg-transparent hover:bg-b3 cursor-pointer py-2 flex items-center",
+                                    "px-[10px] w-full group gap-[12px] rounded-[8px] mb-[2px] bg-transparent hover:bg-b3 cursor-pointer py-2 flex items-center",
                                     {
                                       "!bg-b3": detailId === gel.id,
                                     }
@@ -160,16 +140,16 @@ const Header = () => {
                                   ></gel.icon>
                                   <div
                                     className={clsx(
-                                      "text-t2 group-hover:text-t1 shrink-0",
+                                      "text-t2 w-full pr-[34px] group-hover:text-t1 shrink-0",
                                       {
                                         "!text-t1": detailId === gel.id,
                                       }
                                     )}
                                   >
-                                    <div className="text-sm font-bold leading-[140%] mb-1">
+                                    <div className="text-sm w-full font-bold leading-[140%] mb-1">
                                       {t(gel.title)}
                                     </div>
-                                    <div className="text-xs leading-[16px]">
+                                    <div className="text-xs w-full leading-[16px]">
                                       {t(gel.description)}
                                     </div>
                                   </div>
@@ -181,29 +161,22 @@ const Header = () => {
                               <BusinessCard></BusinessCard>
                             ) : (
                               <>
-                                {!globalDetail ? (
-                                  <div className="w-full min-h-[164px] flex-1 flex flex-col items-center justify-center rounded-[8px] bg-b3">
-                                    <Knight className="text-t2 shrink-0"></Knight>
-                                    <div className="text-t2 font-medium text-sm mt-[7px]">
-                                      Look forward to it !
-                                    </div>
+                                <div className="w-full min-h-[164px] flex-1 flex flex-col items-center justify-center rounded-[8px] bg-b3">
+                                  <Knight className="text-t2 shrink-0"></Knight>
+                                  <div className="text-t2 font-medium text-sm mt-[7px]">
+                                    Look forward to it !
                                   </div>
-                                ) : (
-                                  <img
-                                    src={globalDetail.images}
-                                    alt=""
-                                    className="w-full aspect-[480/276] object-cover flex-1 rounded-[8px]"
-                                  ></img>
-                                )}
+                                </div>
 
-                                <div className="mt-3 text-t2 shrink-0 text-sm font-bold leading-[140%]">
-                                  {globalDetail
-                                    ? globalDetail.name
-                                    : group?.detailTitle
+                                {
+                                  group?.detailTitle && <div className="mt-3 text-t2 shrink-0 text-sm font-bold leading-[140%]">
+                                    {group?.detailTitle
                                       ? t(group?.detailTitle)
                                       : ""}
-                                </div>
-                                {!globalDetail && (
+                                  </div>
+                                }
+
+                                {group?.detailDesc && (
                                   <div className="mt-3 text-t2 shrink-0 text-sm leading-[140%]">
                                     {group?.detailDesc
                                       ? t(group?.detailDesc)

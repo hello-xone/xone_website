@@ -469,6 +469,8 @@ export const menus: Array<MenuModel> = [
         link: EXTERNAL_LINKS.Events,
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalActiveDesc",
+        detailTitle: "navGlobalActiveDetailTitle",
+        detailDesc: "navGlobalActiveDetailDescribe",
       },
       {
         id: "global_grants",
