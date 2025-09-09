@@ -8,9 +8,22 @@ import LocationIcon from "@/assets/svg/recruitment/home/location.svg?react";
 import PositionIcon from "@/assets/svg/recruitment/home/position.svg?react";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
+// 预加载所有 job 图片
+const jobImages = import.meta.glob("@/assets/job/image/**/*.png", {
+  eager: true,
+});
+
 export const List = ({ data, onMore }: { data: any; onMore: () => void }) => {
   const { isLight } = useCurrentTheme();
   const { t } = useTranslation();
+
+  // 获取图片 URL 的函数
+  const getImageUrl = (logoPath: string) => {
+    const fullPath = `/src/assets${logoPath}`;
+    const imageModule = jobImages[fullPath] as { default: string } | undefined;
+    return imageModule?.default || "";
+  };
+
   return (
     <div className="mt-8">
       <p className="text-[20px] md:text-[22px] text-[var(--t1)] font-light">
@@ -26,7 +39,7 @@ export const List = ({ data, onMore }: { data: any; onMore: () => void }) => {
           >
             <div className="flex flex-col md:flex-row items-start md:items-center gap-x-[24px]">
               <img
-                src={item.logo}
+                src={getImageUrl(item.logo)}
                 alt={item.title}
                 className="w-[100px] h-[100px] object-scale-down"
               />

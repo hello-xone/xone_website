@@ -6,6 +6,7 @@ import CloseIcon from "@/assets/svg/recruitment/close.svg?react";
 import SearchIcon from "@/assets/svg/recruitment/search-solid.svg?react";
 import { Animation, AnimationType } from "@/components/comm/animation";
 import CommonButton from "@/components/comm/button/CommonButton";
+import { useWindowResize } from "@/hooks/useWindowResize";
 import { debounce, throttle } from "@/utils/helper";
 
 interface BannerProps {
@@ -16,6 +17,7 @@ interface BannerProps {
 export const Banner = ({ onSearch, onClear }: BannerProps) => {
   const { t } = useTranslation();
   const [searchValue, setSearchValue] = useState("");
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
 
   // 使用 debounce 进行实时搜索，延迟 300ms
   const debouncedSearch = useMemo(
@@ -86,6 +88,25 @@ export const Banner = ({ onSearch, onClear }: BannerProps) => {
     [handleSearch]
   );
 
+  // 除去HTML中的br标签
+  const removeBrTags = useCallback((htmlString: string) => {
+    return htmlString.replace(/<br\s*\/?>/gi, "");
+  }, []);
+
+  // 监听窗口大小变化，检查是否超过1700px
+  const handleWindowResize = useCallback(() => {
+    const width = window.innerWidth;
+    setIsLargeScreen(width >= 1700);
+  }, []);
+
+  // 使用 useWindowResize 监听窗口大小变化
+  useWindowResize(handleWindowResize, []);
+
+  // 初始化时检查屏幕大小
+  useEffect(() => {
+    handleWindowResize();
+  }, [handleWindowResize]);
+
   // 组件卸载时清理 debounce
   useEffect(() => {
     return () => {
@@ -101,17 +122,25 @@ export const Banner = ({ onSearch, onClear }: BannerProps) => {
           <Animation animationClassName={AnimationType.SLIDE_IN_UP} delay={0.1}>
             <h1
               className="font-bold leading-[140%] text-[32px] text-[var(--t1)] md:text-[56px] [&_br]:hidden md:[&_br]:block"
-              dangerouslySetInnerHTML={{ __html: t("recruitment:bannerTitle") }}
+              dangerouslySetInnerHTML={{
+                __html: isLargeScreen
+                  ? t("recruitment:bannerTitle")
+                  : removeBrTags(t("recruitment:bannerTitle")),
+              }}
             />
           </Animation>
           <Animation animationClassName={AnimationType.SLIDE_IN_UP} delay={0.3}>
-            <p className="text-[15px] md:text-[16px] lg:text-left lg:w-[1048px] text-[var(--t2)] leading-[1.5] md:text-[var(--t1)] mt-3 md:mt-8">
+            <p
+              className={`text-[15px] md:text-[16px] lg:text-left lg:w-[1048px] text-[var(--t2)] leading-[1.5] md:text-[var(--t1)] mt-3 md:mt-8`}
+            >
               {t("recruitment:bannerDesc")}
             </p>
           </Animation>
           <Animation animationClassName={AnimationType.SLIDE_IN_UP} delay={0.5}>
             <div className="flex flex-col gap-y-4 justify-center items-center mt-6 md:gap-x-4 md:flex-row md:mt-12 lg:mb-[80px]">
-              <div className="relative group flex items-center w-full md:w-[460px] py-[0] md:py-[5px] px-[12px] bg-[var(--b3)] rounded-[8px] transition-all duration-100 border border-[transparent] hover:border-[var(--t1)] focus-within:border-[var(--t1)] focus-within:pr-[35px]">
+              <div
+                className={`relative group flex items-center w-full ${isLargeScreen ? "md:w-[520px]" : "md:w-[460px]"} py-[0] md:py-[5px] px-[12px] bg-[var(--b3)] rounded-[8px] transition-all duration-100 border border-[transparent] hover:border-[var(--t1)] focus-within:border-[var(--t1)] focus-within:pr-[35px]`}
+              >
                 <SearchIcon className="w-[20px] h-[20px] text-[#A0A3A7] group-focus-within:text-[var(--t1)] transition-colors duration-100" />
                 <Input
                   value={searchValue}
@@ -128,7 +157,7 @@ export const Banner = ({ onSearch, onClear }: BannerProps) => {
                 </div>
               </div>
               <CommonButton
-                className="rounded-[8px] w-full md:w-[140px] h-[40px] md:h-[45px]"
+                className="rounded-[8px] w-full md:w-auto h-[40px] md:h-[45px]"
                 onClick={handleSearch}
               >
                 <span className="px-[24px] py-[3px] text-[var(--t5)] text-[18px] font-medium text-white">
