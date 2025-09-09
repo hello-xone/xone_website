@@ -24,9 +24,9 @@ export default defineConfig(({ mode, command }) => {
         "@": r("./src"),
       },
     },
-    esbuild: {
-      drop: isPro && isBuild ? ["console", "debugger"] : [],
-    },
+    // esbuild: {
+    //   drop: isPro && isBuild ? ["console", "debugger"] : [],
+    // },
     build: {
       minify: isProduction,
       emptyOutDir: true,
