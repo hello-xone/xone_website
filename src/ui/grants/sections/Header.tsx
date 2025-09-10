@@ -1,9 +1,13 @@
 import { useTranslation } from "react-i18next";
 
-import logo from "@/assets/imgs/grants/logo.png";
+import illustrationDrak from "@/assets/imgs/grants/header-illustration-drak.png";
+import illustrationLight from "@/assets/imgs/grants/header-illustration-light.png";
+import useApplicationStore from "@/store/applicationStore";
 
 export const Header = () => {
   const { t } = useTranslation();
+  const { isLight } = useApplicationStore();
+  
   return (
     <div className="lg:pt-20 md:pb-[160px] pb-[40px]">
       <div className="container flex flex-col-reverse justify-center items-center lg:flex-row lg:items-center lg:justify-between">
@@ -30,11 +34,11 @@ export const Header = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-1 justify-end">
+        <div className="flex flex-1 justify-end pl-[10px]">
           <img
-            className="w-[357px] h-[357px] lg:w-[496px] lg:h-[496px]"
-            src={logo}
-            alt="logo"
+            className="w-[400px] h-[357px] lg:w-[500px] lg:h-[448px]"
+            src={isLight ? illustrationLight : illustrationDrak}
+            alt="illustration"
           />
         </div>
       </div>

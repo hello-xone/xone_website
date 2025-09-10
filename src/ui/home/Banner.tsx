@@ -1,15 +1,17 @@
+import Lottie from "lottie-react";
 import { useTranslation } from "react-i18next";
 
-import BannerIcon from "@/assets/imgs/home/banner-right.png";
 import BgIcon from "@/assets/imgs/home/bg-1.png";
+import BannerJson from "@/assets/lottie/banner.json";
+import BannerDarkJson from "@/assets/lottie/banner-dark.json";
 import CommonButton from "@/components/comm/button/CommonButton";
-import AnimatedTitles from "@/components/comm/title/AnimatedTitles";
+import { Title } from "@/components/comm/title";
 import { EXTERNAL_LINKS } from "@/constants/external";
-import { useScrollreveal } from "@/hooks/useScrollreveal";
+import useApplicationStore from "@/store/applicationStore";
 
 export const Banner = () => {
   const { t } = useTranslation("home");
-  useScrollreveal();
+  const { isLight } = useApplicationStore()
   return (
     <div className="relative">
       <img
@@ -20,18 +22,10 @@ export const Banner = () => {
       <div className="container overflow-x-hidden">
         <div className="flex items-center max-md:flex-col-reverse w-full max-md:gap-[20px] justify-between">
           <div className="w-full md:w-[57.25%] shrink-0 text-t1">
-            <AnimatedTitles
-              activeEffect="float"
-              className="!text-[32px] !mb-0 md:!text-[64px] !text-left leading-[140%] relative z-[2] font-bold"
-              text={t("bannerTitle1")}
-            ></AnimatedTitles>
-            {t("bannerTitle2") && (
-              <AnimatedTitles
-                activeEffect="float"
-                className="!text-[32px] md:!text-[64px] !text-left leading-[140%] relative z-[2] font-bold"
-                text={t("bannerTitle2")}
-              ></AnimatedTitles>
-            )}
+            <Title className="!text-[32px] !mb-0 md:!text-[64px] !text-left leading-[140%] relative z-[2] font-bold">{t("bannerTitle1")}</Title>
+            {
+              t("bannerTitle2") && <Title className="!text-[32px] md:!text-[64px] !text-left leading-[140%] relative z-[2] font-bold">{t("bannerTitle2")}</Title>
+            }
             <div className="text-base md:text-[20px] relative z-[2] text-t2 md:text-t1 leading-[140%] mt-4 md:mt-6">
               {t("bannerDescription")}
             </div>
@@ -58,11 +52,7 @@ export const Banner = () => {
             </div>
           </div>
           <div className="w-full md:w-[41.5%] shrink-0">
-            <img
-              alt=""
-              src={BannerIcon}
-              className="w-full h-auto object-contain"
-            ></img>
+            <Lottie className="w-full h-auto object-contain" animationData={isLight ? BannerJson : BannerDarkJson} loop={true} ></Lottie>
           </div>
         </div>
       </div>

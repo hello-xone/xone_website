@@ -23,7 +23,6 @@ import useApplicationStore from "@/store/applicationStore";
 
 import CommonButton from "../comm/button/CommonButton";
 import { SeeMore } from "../comm/link/SeeMore";
-import Knight from "../Icons/Knight";
 import Language from "../Icons/Language";
 import Theme from "../Icons/Theme";
 import BusinessCard from "./Header/components/businessCard";
@@ -201,6 +200,7 @@ const Header = () => {
                             {group && group.link && (
                               <SeeMore
                                 href={group.link}
+                                onClick={() => handleCallChild()}
                                 target={
                                   group.link.includes("http")
                                     ? "_blank"

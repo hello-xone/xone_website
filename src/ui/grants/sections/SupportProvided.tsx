@@ -49,6 +49,7 @@ export const SupportProvided = () => {
         icon: isLight ? IconSvgLight1 : IconSvgDark1,
         lottie: isLight ? FinancialSupportJson : FinancialSupportDarkJson,
         button: t("grants:supportProvidedButton01"),
+        link: "https://docs.xone.org/study/grants#4-funding-models--grant-amounts"
       },
       {
         title: t("grants:supportProvidedTitle02"),
@@ -56,6 +57,7 @@ export const SupportProvided = () => {
         icon: isLight ? IconSvgLight2 : IconSvgDark2,
         lottie: isLight ? TechnicalResourcesJson : TechnicalResourcesDarkJson,
         button: t("grants:supportProvidedButton02"),
+        link: "https://docs.xone.org/developers/guide"
       },
       {
         title: t("grants:supportProvidedTitle03"),
@@ -63,6 +65,7 @@ export const SupportProvided = () => {
         icon: isLight ? IconSvgLight3 : IconSvgDark3,
         lottie: isLight ? EcologicalExposureJson : EcologicalExposureDarkJson,
         button: t("grants:supportProvidedButton03"),
+        link: "https://docs.xone.org/blog"
       },
       {
         title: t("grants:supportProvidedTitle04"),
@@ -72,6 +75,7 @@ export const SupportProvided = () => {
           ? CooperationOpportunitiesJson
           : CooperationOpportunitiesDarkJson,
         button: t("grants:supportProvidedButton04"),
+        href: "/commercial"
       },
       {
         title: t("grants:supportProvidedTitle05"),
@@ -79,6 +83,7 @@ export const SupportProvided = () => {
         icon: isLight ? IconSvgLight5 : IconSvgDark5,
         lottie: isLight ? CoBrandingJson : CoBrandingDarkJson,
         button: t("grants:supportProvidedButton05"),
+        link: "https://x.com/xone_chain"
       },
     ];
   }, [isLight, t]);
@@ -215,9 +220,9 @@ export const SupportProvided = () => {
                   </p>
                   <SeeMore
                     className={`mt-3 md:mt-6 ${styles.seeMore} ${styles.seeMoreSupport}`}
-                    href="https://docs.xone.org/study/grants"
+                    href={detail.link || detail.href || ""}
                     text={detail.button}
-                    target="_blank"
+                    target={!detail.href ? "_blank" : "_self"}
                   ></SeeMore>
 
                   <div className="mt-[15px] w-full">
@@ -248,9 +253,9 @@ export const SupportProvided = () => {
             <div className="mt-6">
               <SeeMore
                 className={`${styles.seeMore} ${styles.seeMoreSupport}`}
-                href="https://docs.xone.org/study/grants"
+                href={detail.link || detail.href || ""}
                 text={detail.button}
-                target="_blank"
+                target={!detail.href ? "_blank" : "_self"}
               ></SeeMore>
 
               <div className="mt-5 w-full">

@@ -6,6 +6,7 @@ import ArrowRightLineDarkIcon from "@/assets/svg/recruitment/arrow-right-line-da
 import ArrowRightLineLightIcon from "@/assets/svg/recruitment/arrow-right-line-light.svg?react";
 import LocationIcon from "@/assets/svg/recruitment/home/location.svg?react";
 import PositionIcon from "@/assets/svg/recruitment/home/position.svg?react";
+import Empty from "@/components/comm/Empty";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
 // 预加载所有 job 图片
@@ -102,6 +103,9 @@ export const List = ({ data, onMore }: { data: any; onMore: () => void }) => {
         >
           {t("recruitment:viewMore")}
         </p>
+      )}
+      {data.list.length === 0 && (
+        <Empty />
       )}
     </div>
   );

@@ -5,7 +5,6 @@ import { fetchStatsByNet } from "@/api/common";
 import NumberCounter from "@/components/comm/animation/NumberCounter";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import Price from "@/components/comm/Price";
-import { AnimatedTitle } from "@/components/comm/title/AnimatedTitle";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 import { Stats } from "@/types/response";
@@ -30,10 +29,10 @@ export const XoneChain = () => {
     return (
         <div className="flex w-full md:pb-[12px] max-md:flex-col justify-between mt-10 md:mt-[162px]">
             <div className="shrink-0 text-t1 max-md:flex max-md:items-center max-md:justify-between">
-                {/* <div className="text-[24px] md:text-[48px] leading-[140%] font-bold">
+                <div className="text-[24px] md:text-[48px] leading-[140%] font-bold">
                     {t("xoneMainNet")}
-                </div> */}
-                <AnimatedTitle  text={t("xoneMainNet")}></AnimatedTitle>
+                </div>
+                {/* <AnimatedTitle  text={t("xoneMainNet")}></AnimatedTitle> */}
                 <div className="text-[14px] md:text-[20px] leading-[140%] md:mt-6">
                     {t("update")} : {time}s
                 </div>
