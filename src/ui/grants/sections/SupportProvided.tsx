@@ -149,7 +149,7 @@ export const SupportProvided = () => {
             }
             return prevProgress + 2;
           });
-        }, 120);
+        }, 100);
       }
     }
 
@@ -178,7 +178,7 @@ export const SupportProvided = () => {
             <Fragment key={index}>
               <div
                 className={clsx(
-                  "border-l-[4px] md:pl-[20px] pl-[20px] cursor-pointer flex flex-col items-start gap-[10px] md:gap-[16px] hover:border-l-[var(--primary)] [&>h3]:hover:text-[var(--primary)] [&>h3]:hover:text-[32px] [&>img]:hover:w-[54px] [&>img]:hover:h-[54px]",
+                  "border-l-[4px] md:pl-[20px] pl-[20px] cursor-pointer flex flex-col items-start gap-[10px] md:gap-[16px] hover:border-l-[var(--primary)] [&>h3]:hover:text-[var(--primary)]",
                   activeIndex === index
                     ? "border-l-[var(--primary)]"
                     : "border-l-[transparent]"
