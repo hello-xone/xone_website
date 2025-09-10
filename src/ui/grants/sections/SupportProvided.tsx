@@ -199,7 +199,7 @@ export const SupportProvided = () => {
                   className={clsx(
                     "font-bold",
                     activeIndex === index
-                      ? "text-[var(--primary)] text-[32px]"
+                      ? "text-[var(--primary)] text-[24px]"
                       : "text-[var(--t1)] text-[24px]"
                   )}
                 >
