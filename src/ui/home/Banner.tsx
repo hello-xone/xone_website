@@ -1,15 +1,17 @@
+import Lottie from "lottie-react";
 import { useTranslation } from "react-i18next";
 
-import BannerIcon from "@/assets/imgs/home/banner-right.png";
 import BgIcon from "@/assets/imgs/home/bg-1.png";
+import BannerJson from "@/assets/lottie/banner.json";
+import BannerDarkJson from "@/assets/lottie/banner-dark.json";
 import CommonButton from "@/components/comm/button/CommonButton";
 import AnimatedTitles from "@/components/comm/title/AnimatedTitles";
 import { EXTERNAL_LINKS } from "@/constants/external";
-import { useScrollreveal } from "@/hooks/useScrollreveal";
+import useApplicationStore from "@/store/applicationStore";
 
 export const Banner = () => {
   const { t } = useTranslation("home");
-  useScrollreveal();
+  const { isLight } = useApplicationStore()
   return (
     <div className="relative">
       <img
@@ -58,11 +60,7 @@ export const Banner = () => {
             </div>
           </div>
           <div className="w-full md:w-[41.5%] shrink-0">
-            <img
-              alt=""
-              src={BannerIcon}
-              className="w-full h-auto object-contain"
-            ></img>
+            <Lottie className="w-full h-auto object-contain" animationData={isLight ? BannerJson : BannerDarkJson} loop={true} ></Lottie>
           </div>
         </div>
       </div>
