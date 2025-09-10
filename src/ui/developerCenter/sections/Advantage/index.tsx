@@ -62,7 +62,7 @@ export const Advantage = () => {
         strings: [highlightedHTML],
         typeSpeed: 0,
         backSpeed: 500,
-        loop: true,
+        loop: false,
       });
     } catch (error) {
       console.warn("Prism.js highlighting failed:", error);

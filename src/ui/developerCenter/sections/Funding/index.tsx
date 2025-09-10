@@ -47,7 +47,7 @@ export const Funding = () => {
           <div>
             <h1 className={styles.name}>{t("developer:fundingGrants")}</h1>
             <SeeMore
-              href="https://xone.org/grants"
+              href="/grants"
               className={`${styles.viewDetails}`}
               text={t("common:viewDetails")}
             ></SeeMore>

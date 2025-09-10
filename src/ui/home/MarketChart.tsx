@@ -8,13 +8,12 @@ import { fetchChart } from "@/api/common";
 import MarketSource2 from "@/assets/imgs/home/market-source-2.png";
 import MarketSource1 from "@/assets/imgs/home/market-source1.png";
 import NumberCounter from "@/components/comm/animation/NumberCounter";
+import AnimatedTitles from "@/components/comm/title/AnimatedTitles";
 import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 import useApplicationStore from "@/store/applicationStore";
 import { ChartRes } from "@/types/response";
 import { formatNumber } from "@/utils/number";
-import { AnimatedTitle } from "@/components/comm/title/AnimatedTitle";
-import AnimatedTitles from "@/components/comm/title/AnimatedTitles";
 
 const DATA_ZOOM_MIN_VALUE_SPAN = 3600 * 1000;
 const BottomMenu = [
@@ -99,7 +98,6 @@ export const MarketChart = () => {
                     useHTML: true,
                     padding: 0,
                     border: 'none',
-                    position: ["50%", "50%"],
                 },
                 grid: {
                     left: 0,
@@ -362,7 +360,8 @@ export const MarketChart = () => {
                             key={`market-chart-bottom-${el.title}`}
                             className="w-full py-[12px] rounded-[8px] text-center bg-[--layer2]"
                         >
-                            <div className="text-[32px] font-bold leading-[42px]">
+                            <div className="text-[32px] flex items-center justify-center font-bold leading-[42px]">
+                                {el.title === "currentPrice" ? "$" : ""}
                                 <NumberCounter
                                     decimalPlaces={el.title === "currentPrice" ? 4 : 0}
                                     value={

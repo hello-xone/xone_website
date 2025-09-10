@@ -229,11 +229,15 @@ const Footer = () => {
   };
 
   const handleSubmit = async () => {
+   try {
     await addEmail({
       email: values.email,
     });
     setFieldValue("email", "");
     toast.success(t("home:subscriptionSuccessful"));
+   } catch (error: any) {
+    toast.error(error.message)
+   }
   };
 
   const generateOptions = (input: string) => {
