@@ -550,17 +550,17 @@ export const Recruitment = () => {
           </div>
         </MotionScrollReveal>
         <MotionScrollReveal delay={0.2}>
-          <List
-            data={{
-              list: allDisplayedData,
-              totalCount: filteredData.totalCount,
-              currentPage,
-              totalPages: Math.ceil(filteredData.totalCount / pageSize),
-              hasMore:
-                currentPage < Math.ceil(filteredData.totalCount / pageSize),
-            }}
-            onMore={handleLoadMore}
-          />
+        <List
+          data={{
+            list: allDisplayedData,
+            totalCount: filteredData.totalCount,
+            currentPage,
+            totalPages: Math.ceil(filteredData.totalCount / pageSize),
+            hasMore:
+              currentPage < Math.ceil(filteredData.totalCount / pageSize),
+          }}
+          onMore={handleLoadMore}
+        />
         </MotionScrollReveal>
         <MotionScrollReveal delay={0.2} animation="slide">
           <Remark />

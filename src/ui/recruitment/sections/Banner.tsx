@@ -8,6 +8,7 @@ import RecruitmentDarkBg from "@/assets/svg/recruitment/recruitment-dark.svg";
 import SearchIcon from "@/assets/svg/recruitment/search-solid.svg?react";
 import { Animation, AnimationType } from "@/components/comm/animation";
 import CommonButton from "@/components/comm/button/CommonButton";
+import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 import { useWindowResize } from "@/hooks/useWindowResize";
 import useApplicationStore from "@/store/applicationStore";
 import { debounce, throttle } from "@/utils/helper";
@@ -19,6 +20,7 @@ interface BannerProps {
 
 export const Banner = ({ onSearch, onClear }: BannerProps) => {
   const { t } = useTranslation();
+  const breakpoints = useTailwindBreakpoint()
   const [searchValue, setSearchValue] = useState("");
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   const { isLight } = useApplicationStore()
@@ -120,12 +122,14 @@ export const Banner = ({ onSearch, onClear }: BannerProps) => {
   return (
     <div className="md:h-[700px]">
       <div className="relative w-full h-full">
-        <div className="w-full h-full bg-cover bg-[center_bottom] hidden md:block"></div>
-        <div style={{
-              backgroundImage: `url(${isLight ? RecruitmentBg : RecruitmentDarkBg})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-        }} className="flex flex-col mt-[20px] md:pt-[164px] md:mt-0 p-4 max-md:!bg-none text-left md:items-center md:justify-center md:text-center md:p-16 md:pb-30 md:absolute md:top-0 md:right-0 md:bottom-0 md:left-0">
+        <div className="hidden w-full h-full md:block" style={{
+          backgroundImage: `url(${isLight ? RecruitmentBg : RecruitmentDarkBg})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: breakpoints["2xl"] ? 'contain' : 'contain',
+          backgroundPosition: breakpoints["2xl"] ? 'center bottom' : 'center',
+          transition: 'opacity 0.3s ease-in-out',
+        }}></div>
+        <div className="flex flex-col mt-[20px] md:pt-[164px] md:mt-0 p-4 max-md:!bg-none text-left md:items-center md:justify-center md:text-center md:p-16 md:pb-30 md:absolute md:top-0 md:right-0 md:bottom-0 md:left-0">
           <Animation animationClassName={AnimationType.SLIDE_IN_UP} delay={0.1}>
             <h1
               className="font-bold leading-[140%] text-[32px] text-[var(--t1)] md:text-[56px] [&_br]:hidden md:[&_br]:block"
