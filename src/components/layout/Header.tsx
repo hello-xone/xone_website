@@ -200,6 +200,7 @@ const Header = () => {
                             {group && group.link && (
                               <SeeMore
                                 href={group.link}
+                                onClick={() => handleCallChild()}
                                 target={
                                   group.link.includes("http")
                                     ? "_blank"

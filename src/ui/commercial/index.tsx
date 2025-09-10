@@ -2,7 +2,7 @@ import Lottie from "lottie-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import CommerciaJson from "@/assets/lottie/commercial.json";
+import CommercialJson from "@/assets/lottie/commercial.json";
 import CommercialDarkJson from "@/assets/lottie/commercial-dark.json";
 import CopyIcon from "@/assets/svg/home/copy.svg?react";
 import EmailIcon from "@/assets/svg/home/email.svg?react";
@@ -18,8 +18,8 @@ export const Commercial = () => {
   const { t } = useTranslation("commercial")
   return (
     <div className="relative !pb-[80px] md:!pb-[120px]">
-      <Lottie className="absolute max-md:hidden left-0 top-[-186px] w-full" animationData={isLight ? CommerciaJson : CommercialDarkJson} loop={true} ></Lottie>
-      <div className="container text-center md:min-h-[400px]">
+      <Lottie className="absolute max-md:hidden left-0 top-[-15vh] aspect-[1440/600] w-full" animationData={isLight ? CommercialJson : CommercialDarkJson} loop={true} ></Lottie>
+      <div className="container text-center md:aspect-[1440/600]">
         <Title className="mt-[40px] md:mt-[116px] max-md:!text-[28px] !leading-[38px] !font-bold md:!leading-[63px] !mb-0">{t("bannerTitle1")}</Title>
         <Title className="!leading-[38px] md:!leading-[63px] max-md:!text-[32px] !font-bold">{t("bannerTitle2")}</Title>
         <div className="text-t2 text-base md:text-xl leading-[140%] mb-8">{t("bannerDesc")}</div>

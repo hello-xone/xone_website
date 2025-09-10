@@ -466,7 +466,7 @@ export const menus: Array<MenuModel> = [
         id: "global_active",
         title: "navGlobalActive",
         icon: ActiveIcon,
-        link: EXTERNAL_LINKS.Events,
+        link: "/events",
         menuId: InfoMenuId.BUSINESS,
         description: "navGlobalActiveDesc",
         detailTitle: "navGlobalActiveDetailTitle",

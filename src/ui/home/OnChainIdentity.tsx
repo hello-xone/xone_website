@@ -73,7 +73,7 @@ export const OnChainIdentity = () => {
             })}
           <CommonButton
             onClick={() => window.open(`https://xid.world/${i18n.language}`)}
-            className="mt-6 md:mt-8 md:min-w-[148px] max-md:!w-full max-md:!h-[40px] max-md:!text-[16px] !rounded-[12px] h-[48px]"
+            className="mt-6 md:mt-8 md:min-w-[148px] max-md:!w-full max-md:!h-[40px] max-md:!text-[16px] !rounded-[12px] h-[48px] !bg-[#FFAAA8] !cursor-not-allowed"
           >
             {t("try")}
           </CommonButton>
