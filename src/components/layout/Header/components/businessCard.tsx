@@ -11,9 +11,15 @@ const BusinessCard = () => {
         <div className="text-t2 leading-[140%] h-full text-[14px]">
             <div className="font-bold mb-3">{t("common:contactUsForFurtherAssistance")}</div>
             <div className="flex items-center gap-[12px]">
-                <span>Business@Xone.org</span>
+                <span>business@xone.org</span>
                 <CopyIcon onClick={() => {
-                    copy("Business@Xone.org");
+                    copy("business@xone.org");
+                }} className="w-[24px] h-[24px] cursor-pointer" />
+            </div>
+            <div className="flex items-center gap-[12px]">
+                <span>labs@xone.org</span>
+                <CopyIcon onClick={() => {
+                    copy("labs@xone.org");
                 }} className="w-[24px] h-[24px] cursor-pointer" />
             </div>
             <div className="font-bold mb-3 mt-8">{t("common:navGlobalBusinessKit")}</div>

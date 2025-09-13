@@ -173,6 +173,10 @@ const Footer = () => {
         title: t("common:gov-inc"),
         infos: [
           {
+            name: t("common:forum"),
+            url: EXTERNAL_LINKS.forum,
+          },
+          {
             name: t("common:proposal-initiation"),
             internalLink: true,
             isLater: true,
