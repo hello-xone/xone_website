@@ -1,5 +1,6 @@
 {
     "xoneChain": "Xone Chain",
+    "headerNav4": "全球",
     "build": "建设",
     "about": "关于我们",
     "events": "活动",
@@ -35,6 +36,7 @@
     "viewMore": "查看更多",
     "viewLess": "收起",
     "gov-inc": "治理与激励",
+    "forum": "论坛",
     "proposal-initiation": "提案发起",
     "incentives": "激励措施",
     "officialVerification": "官方验证",
