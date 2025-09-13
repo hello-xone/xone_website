@@ -1,6 +1,7 @@
 export const EXTERNAL_LINKS = {
   faucet: "https://faucet.xone.org/en",
   docs: "https://docs.xone.org/",
+  forum: "https://forum.xone.org/",
   dashboard: "https://bvi.xone.org/",
   TestnetExplorer: "https://testnet.xscscan.com",
   MainExplorer: "https://xonescan.com/",
