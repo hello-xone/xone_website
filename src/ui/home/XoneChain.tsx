@@ -27,7 +27,7 @@ export const XoneChain = () => {
         dependency: [],
     });
     return (
-        <div className="flex w-full md:pb-[12px] max-md:flex-col justify-between mt-10 md:mt-[162px]">
+        <div className="flex w-full md:pb-[12px] overflow-y-hidden max-md:flex-col justify-between mt-10 md:mt-[162px]">
             <div className="shrink-0 text-t1 max-md:flex max-md:items-center max-md:justify-between">
                 <div className="text-[24px] md:text-[48px] leading-[140%] font-bold">
                     {t("xoneMainNet")}
@@ -37,7 +37,7 @@ export const XoneChain = () => {
                     {t("update")} : {time}s
                 </div>
             </div>
-            <div className="shrink-0 max-md:mt-3 w-full md:w-[57%]">
+            <div className="shrink-0 max-md:mt-3 overflow-y-hidden w-full md:w-[57%]">
                 <div className="grid grid-cols-2 gap-[16px] md:gap-[24px]">
                     <div className="md:px-6 md:py-3">
                         <div className="text-[20px] md:h-[100px] md:text-[64px] mb-[6px] md:mb-2 leading-[140%] md:leading-[140%] font-bold">
