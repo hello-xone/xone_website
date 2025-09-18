@@ -8,13 +8,9 @@ permissions:
 
 # 触发条件：只针对 test 分支的 Pull Request
 on:
-  pull_request:
+  push:
     branches: 
       - test
-    types:
-      - opened
-      - synchronize
-      - reopened
     # 只扫描代码文件，排除文档和配置文件
     paths:
       - '**.py'
@@ -93,14 +89,8 @@ jobs:
             exit 0
           fi
           
-          # 检查目标分支
-          if [[ "${{ github.base_ref }}" == "dev" ]] || [[ "${{ github.event.inputs.force_scan }}" == "true" ]]; then
-            echo "should-run=true" >> $GITHUB_OUTPUT
-            echo "✅ 目标分支为 dev 或强制扫描，将执行安全扫描"
-          else
-            echo "should-run=false" >> $GITHUB_OUTPUT
-            echo "⏭️ 目标分支不是 dev，跳过安全扫描"
-          fi
+          echo "should-run=true" >> $GITHUB_OUTPUT
+          echo "✅ 目标分支为 dev 或强制扫描，将执行安全扫描"
 
   # 主要安全扫描作业
   claude-security-scan:
