@@ -262,7 +262,7 @@ const Footer = () => {
                 return (
                   <Link
                     key={`contact-item-${item.url}-${index}`}
-                    className="w-6 text-t1 flex items-center justify-center rounded bg-b3 h-6"
+                    className="w-6 text-t1 flex items-center justify-center rounded hover:bg-b4 bg-b3 h-6"
                     target={item.url.includes("http") ? "_blank" : "_self"}
                     to={item.url}
                   >

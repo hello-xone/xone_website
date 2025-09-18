@@ -21,7 +21,7 @@ const HomePage = () => {
       <MotionScrollReveal delay={0} animation="scale">
         <Banner></Banner>
       </MotionScrollReveal>
-      <div className="container overflow-x-hidden">
+      <div className="container overflow-hidden">
         <MotionScrollReveal animation="slide">
           <XoneChain></XoneChain>
         </MotionScrollReveal>
