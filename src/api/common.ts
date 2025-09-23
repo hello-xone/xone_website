@@ -3,21 +3,27 @@ import {
   Counter,
   FetchNetCountersRes,
   FetchNftTotalRes,
-  Stats,
+  NewStatsData,
 } from "@/types/response";
+
 import {
-  request,
   nftScanRequest,
+  openApiRequest,
+  request,
   xoMainScanRequest,
   xoTestScanRequest,
 } from "./request";
+
 export const addEmail = async (data: { email: string }): Promise<null> => {
-  const res: ApiResponse<null> = await request.post("/api/v1/email/add", data);
+  const res: ApiResponse<null> = await request.post(
+    "/emailsub/subscribe",
+    data
+  );
 
   if (res.code === 0) {
     return res.data;
   }
-  throw Error(res.message || "");
+  throw Error(res.data || res.message || "");
 };
 
 export const fetchNftTotal = async (): Promise<FetchNftTotalRes> => {
@@ -42,8 +48,11 @@ export const fetchNetCountersByNet = async (
   }
 };
 
-export const fetchStatsByNet = async (isTestNet?: boolean) => {
-  const reqInstance = isTestNet ? xoTestScanRequest : xoMainScanRequest;
-  const res: Stats = await reqInstance.get("/api/v2/stats");
+export const fetchStatsByNet = async (
+  isTestNet?: boolean
+): Promise<NewStatsData> => {
+  const { data } = await openApiRequest.get("/chaindata/stats");
+  const { mainnet, testnet } = data;
+  const res = isTestNet ? testnet : mainnet;
   return res;
 };

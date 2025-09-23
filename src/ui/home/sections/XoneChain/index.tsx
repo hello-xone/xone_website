@@ -1,23 +1,19 @@
-import { BaseContainer } from "@/components/layout/BaseContainer";
-import { CircularProgress } from "@mui/material";
-import { useMemo, useRef, useState } from "react";
+import { CircularProgress, Skeleton } from "@mui/material";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  fetchNetCountersByNet,
-  fetchNftTotal,
-  fetchStatsByNet,
-} from "@/api/common";
+import { CountUp } from "use-count-up";
 
-import styles from "./index.module.less";
-import { numberIndent } from "@/utils/number";
+import { fetchStatsByNet } from "@/api/common";
+import { BaseContainer } from "@/components/layout/BaseContainer";
+import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 import {
   AnimationName,
   DelayClassName,
   useScrollreveal,
 } from "@/hooks/useScrollreveal";
-import { CountUp } from "use-count-up";
-import { Skeleton } from "@mui/material";
-import { useCountdownTimer } from "@/hooks/useCountdownTimer";
+import { numberIndent } from "@/utils/number";
+
+import styles from "./index.module.less";
 
 interface Data {
   totalAddress?: string;
@@ -27,29 +23,12 @@ interface Data {
 }
 
 export const XoneChain = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [datas, setDatas] = useState<Data>();
   const [loading, setLoading] = useState(false);
   const [firstLoading, setFirstLoading] = useState(true);
+  const [previousDatas, setPreviousDatas] = useState<Data>();
   useScrollreveal();
-
-  const getTotalAddress = async () => {
-    try {
-      const res = await fetchStatsByNet();
-      return res?.total_addresses;
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const getTotalNFT = async () => {
-    try {
-      const res = await fetchNftTotal();
-      return res?.total;
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   const getMainNetData = async () => {
     const data: Data = {
@@ -59,13 +38,18 @@ export const XoneChain = () => {
       averageTransactionCost: undefined,
     };
     setLoading(true);
-    data.totalAddress = await getTotalAddress();
-    data.totalArtwork = await getTotalNFT();
-    const counter = await fetchNetCountersByNet();
-    data.totalToken = counter.find((item) => item.id === "totalTokens")?.value;
-    data.averageTransactionCost = counter.find(
-      (item) => item.id === "averageTxnFee24h"
-    )?.value;
+
+    try {
+      const stats = await fetchStatsByNet(false); // false for mainnet
+      data.totalAddress = stats.total_addresses.toString();
+      data.totalArtwork = stats.total_nfts.toString();
+      data.totalToken = stats.total_tokens.toString();
+      data.averageTransactionCost = stats.average_txn_fee24h.toString();
+    } catch (err) {
+      console.error(err);
+    }
+
+    setPreviousDatas(datas);
     setDatas(data);
     setLoading(false);
   };
@@ -89,24 +73,31 @@ export const XoneChain = () => {
         render: () => {
           const { number, symbol } = numberIndent(datas?.totalAddress, {
             suffix: "",
-            digits: 1,
+            digits: 2,
           });
-          if (loading) {
+
+          if (firstLoading) {
             return <Skeleton variant="text" className="w-[2em]"></Skeleton>;
           }
+
+          // 判断是否需要动画：第一次加载 或 数字发生变化
+          const shouldAnimate =
+            firstLoading ||
+            (datas?.totalAddress !== previousDatas?.totalAddress &&
+              previousDatas?.totalAddress !== undefined);
 
           return (
             <div>
               {datas?.totalAddress ? (
                 <>
                   <CountUp
-                    isCounting
+                    isCounting={shouldAnimate}
                     decimalSeparator={"."}
                     thousandsSeparator={","}
                     end={Number(number || 0)}
-                    duration={2}
+                    duration={shouldAnimate ? 2 : 0}
                   />
-                  {plusSymbol(`${number}${symbol}`)}
+                  {symbol && <span>{symbol.toUpperCase()}</span>}
                 </>
               ) : (
                 "--"
@@ -208,7 +199,7 @@ export const XoneChain = () => {
         },
       },
     ];
-  }, [i18n.language, datas, firstLoading]);
+  }, [datas, previousDatas, firstLoading, t]);
 
   return (
     <BaseContainer className={styles.wrapper}>

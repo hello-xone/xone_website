@@ -30,28 +30,13 @@ export interface StatsPrice {
   wei: string;
 }
 
-export interface Stats {
-  average_block_time: number;
-  coin_image: null | string;
-  coin_price: null | string;
-  coin_price_change_percentage: null;
-  gas_price_updated_at: string;
-  gas_prices: {
-    slow: StatsPrice;
-    average: StatsPrice;
-    fast: StatsPrice;
-  };
-  gas_prices_update_in: number;
-  gas_used_today: string;
-  market_cap: string;
-  network_utilization_percentage: number;
-  secondary_coin_image: null | string;
-  secondary_coin_price: null | string;
-  static_gas_price: null | string;
-  total_addresses: string;
-  total_blocks: string;
-  total_gas_used: string;
-  total_transactions: string;
-  transactions_today: string;
-  tvl: null;
+export interface NewStatsData {
+  total_addresses: number;
+  total_nfts: number;
+  total_tokens: number;
+  average_txn_fee24h: number;
+  block_number: number;
+  gas_fee: number;
+  current_epoch: number;
+  block_time: number;
 }
