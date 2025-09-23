@@ -5,14 +5,19 @@ import {
   FetchNftTotalRes,
   Stats,
 } from "@/types/response";
+
 import {
-  request,
   nftScanRequest,
+  request,
   xoMainScanRequest,
   xoTestScanRequest,
 } from "./request";
+
 export const addEmail = async (data: { email: string }): Promise<null> => {
-  const res: ApiResponse<null> = await request.post("/api/v1/email/add", data);
+  const res: ApiResponse<null> = await request.post(
+    "/emailsub/subscribe",
+    data
+  );
 
   if (res.code === 0) {
     return res.data;
