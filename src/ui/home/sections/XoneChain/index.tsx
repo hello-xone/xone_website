@@ -23,10 +23,11 @@ interface Data {
 }
 
 export const XoneChain = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [datas, setDatas] = useState<Data>();
   const [loading, setLoading] = useState(false);
   const [firstLoading, setFirstLoading] = useState(true);
+  const [previousDatas, setPreviousDatas] = useState<Data>();
   useScrollreveal();
 
   const getMainNetData = async () => {
@@ -48,6 +49,7 @@ export const XoneChain = () => {
       console.error(err);
     }
 
+    setPreviousDatas(datas);
     setDatas(data);
     setLoading(false);
   };
@@ -71,24 +73,31 @@ export const XoneChain = () => {
         render: () => {
           const { number, symbol } = numberIndent(datas?.totalAddress, {
             suffix: "",
-            digits: 1,
+            digits: 2,
           });
-          if (loading) {
+
+          if (firstLoading) {
             return <Skeleton variant="text" className="w-[2em]"></Skeleton>;
           }
+
+          // 判断是否需要动画：第一次加载 或 数字发生变化
+          const shouldAnimate =
+            firstLoading ||
+            (datas?.totalAddress !== previousDatas?.totalAddress &&
+              previousDatas?.totalAddress !== undefined);
 
           return (
             <div>
               {datas?.totalAddress ? (
                 <>
                   <CountUp
-                    isCounting
+                    isCounting={shouldAnimate}
                     decimalSeparator={"."}
                     thousandsSeparator={","}
                     end={Number(number || 0)}
-                    duration={2}
+                    duration={shouldAnimate ? 2 : 0}
                   />
-                  {plusSymbol(`${number}${symbol}`)}
+                  {symbol && <span>{symbol.toUpperCase()}</span>}
                 </>
               ) : (
                 "--"
@@ -190,7 +199,7 @@ export const XoneChain = () => {
         },
       },
     ];
-  }, [datas, firstLoading, loading, t]);
+  }, [datas, previousDatas, firstLoading, t]);
 
   return (
     <BaseContainer className={styles.wrapper}>
