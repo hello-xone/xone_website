@@ -22,6 +22,10 @@ export const xoTestScanRequest = axios.create({
   },
 });
 
+export const openApiRequest = axios.create({
+  baseURL: "/openapi",
+});
+
 const commonResponseInterceptors = (response: AxiosResponse<any, any>) => {
   return response.data;
 };
@@ -30,3 +34,4 @@ request.interceptors.response.use(commonResponseInterceptors);
 nftScanRequest.interceptors.response.use(commonResponseInterceptors);
 xoMainScanRequest.interceptors.response.use(commonResponseInterceptors);
 xoTestScanRequest.interceptors.response.use(commonResponseInterceptors);
+openApiRequest.interceptors.response.use(commonResponseInterceptors);

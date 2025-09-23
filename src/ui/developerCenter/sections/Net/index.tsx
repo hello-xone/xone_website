@@ -1,31 +1,27 @@
-import { BaseContainer } from "@/components/layout/BaseContainer";
-import { useEffect, useMemo, useState } from "react";
-import BlockExploreIcon from "@/assets/svg/developer/block_explore.svg?react";
-import WalletIcon from "@/assets/svg/developer/wallet.svg?react";
-import FolderIcon from "@/assets/svg/developer/folder.svg?react";
-import ArrowIcon from "@/assets/svg/home/info_arrow.svg?react";
-import styles from "./index.module.less";
+import { Skeleton } from "@mui/material";
+import { useNotifications } from "@toolpad/core/useNotifications";
+import { ChainType, getWalletKit, useWalletKit } from "@web3jskit/walletkit";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { fetchNetCountersByNet } from "@/api/common";
-import { fetchBlockNumber, getXoneEpochByNet } from "@/web3";
+import { numberToHex } from "viem";
+
 import { fetchStatsByNet } from "@/api/common";
-import { formatDecimal, preciseRound } from "@/utils/number";
-import { utils } from "ethers";
+import BlockExploreIcon from "@/assets/svg/developer/block_explore.svg?react";
+import FolderIcon from "@/assets/svg/developer/folder.svg?react";
+import WalletIcon from "@/assets/svg/developer/wallet.svg?react";
+import ArrowIcon from "@/assets/svg/home/info_arrow.svg?react";
+import { MyCountUp } from "@/components/comm/myCountUp";
+import { BaseContainer } from "@/components/layout/BaseContainer";
+import { XoneChainId, XoneMainNet, XoneTestNet } from "@/constants/net";
+import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 import {
   AnimationName,
   DelayClassName,
   useScrollreveal,
 } from "@/hooks/useScrollreveal";
-import { Skeleton } from "@mui/material";
-import { XoneChainId, XoneMainNet, XoneTestNet } from "@/constants/net";
-import { numberToHex } from "viem";
-import { useNotifications } from "@toolpad/core/useNotifications";
-import { useWalletKit, getWalletKit, ChainType } from "@web3jskit/walletkit";
-import { useCountdownTimer } from "@/hooks/useCountdownTimer";
-import { MyCountUp } from "@/components/comm/myCountUp";
+import { formatDecimal, preciseRound } from "@/utils/number";
 
-const MainNetRpc = import.meta.env.VITE_APP_XO_MAIN_NET_RPC;
-const TestNetRpc = import.meta.env.VITE_APP_XO_TEST_NET_RPC;
+import styles from "./index.module.less";
 
 interface NetData {
   latestBlock?: number;
@@ -35,7 +31,7 @@ interface NetData {
 }
 
 export const Net = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [selectedNetKey, setSelectedNetKey] = useState(XoneChainId.MAIN_NET);
   const [mainNetData, setMainNetData] = useState<NetData>();
   const [testNetData, setTestNetData] = useState<NetData>();
@@ -44,42 +40,45 @@ export const Net = () => {
   const { delayClassNames } = useScrollreveal();
   const notifications = useNotifications();
   const { connect, provider, currentConnector } = useWalletKit();
-  const addNet = async (connector: any, isConnectAfter?: boolean) => {
-    try {
-      if (!connector) return;
-      const chainIdOfHex = numberToHex(selectedNetKey);
-      const net =
-        selectedNetKey === XoneChainId.MAIN_NET ? XoneMainNet : XoneTestNet;
+  const addNet = useCallback(
+    async (connector: any) => {
       try {
-        await connector.provider.request({
-          chainType: ChainType.EVM,
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: chainIdOfHex }],
-        });
-      } catch (err: any) {
-        if (err?.code === 4902) {
-          await provider.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                ...net,
-                chainId: chainIdOfHex,
-              },
-            ],
+        if (!connector) return;
+        const chainIdOfHex = numberToHex(selectedNetKey);
+        const net =
+          selectedNetKey === XoneChainId.MAIN_NET ? XoneMainNet : XoneTestNet;
+        try {
+          await connector.provider.request({
+            chainType: ChainType.EVM,
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: chainIdOfHex }],
           });
-        } else {
-          return;
+        } catch (err: any) {
+          if (err?.code === 4902) {
+            await provider.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  ...net,
+                  chainId: chainIdOfHex,
+                },
+              ],
+            });
+          } else {
+            return;
+          }
         }
+        notifications.show("Have been added", {
+          severity: "success",
+          autoHideDuration: 2000,
+        });
+      } catch (err) {
+        console.error(err);
       }
-      notifications.show("Have been added", {
-        severity: "success",
-        autoHideDuration: 2000,
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  console.log("currentNetData", currentNetData);
+    },
+    [selectedNetKey, provider, notifications]
+  );
+
   useEffect(() => {
     const handleDisconnect = () => {
       currentConnector?.disconnect && currentConnector?.disconnect();
@@ -105,76 +104,53 @@ export const Net = () => {
         key: XoneChainId.TEST_NET,
       },
     ];
-  }, [i18n.language]);
+  }, [t]);
 
-  const getBlockNumberByNet = async (
-    isTestNet?: boolean
-  ): Promise<number | undefined> => {
+  const getMainNetData = useCallback(async () => {
+    const data: NetData = {};
     try {
-      const rpc = isTestNet ? TestNetRpc : MainNetRpc;
-      return await fetchBlockNumber(rpc);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const getGasFee = async (isTestNet?: boolean) => {
-    try {
-      const stats = await fetchStatsByNet(isTestNet);
-      const wei = stats.gas_prices.average.wei;
-      if (Number(wei) === 0) return "0.00";
-      return stats.gas_prices.average.wei
-        ? formatDecimal(utils.formatUnits(parseInt(wei), 9).toString())
+      const stats = await fetchStatsByNet(false); // false for mainnet
+      data.latestBlock = stats.block_number;
+      data.gasFee = stats.gas_fee
+        ? formatDecimal(stats.gas_fee.toString())
         : undefined;
+      data.blockTime = (stats.block_time / 1000).toString(); // Convert ms to seconds
+      data.epoch = stats.current_epoch.toString();
     } catch (err) {
       console.error(err);
     }
-  };
-
-  const getMainNetData = async () => {
-    const data: NetData = {};
-    const counters = await fetchNetCountersByNet();
-    data.latestBlock = await getBlockNumberByNet();
-    if (data.latestBlock) {
-      data.gasFee = await getGasFee();
-    }
-    data.blockTime = counters.find(
-      (item) => item.id === "averageBlockTime"
-    )?.value;
-    data.epoch = await getXoneEpochByNet();
     setMainNetData(data);
-  };
+  }, []);
 
-  const getTestNetData = async () => {
+  const getTestNetData = useCallback(async () => {
     const data: NetData = {};
-    const counters = await fetchNetCountersByNet(true);
-    data.latestBlock = await getBlockNumberByNet(true);
-    if (data.latestBlock) {
-      data.gasFee = await getGasFee(true);
-    }
-    data.blockTime = counters.find(
-      (item) => item.id === "averageBlockTime"
-    )?.value;
     try {
-      data.epoch = await getXoneEpochByNet(true);
+      const stats = await fetchStatsByNet(true); // true for testnet
+      data.latestBlock = stats.block_number;
+      data.gasFee = stats.gas_fee
+        ? formatDecimal(stats.gas_fee.toString())
+        : undefined;
+      data.blockTime = (stats.block_time / 1000).toString(); // Convert ms to seconds
+      data.epoch = stats.current_epoch.toString();
     } catch (err) {
       console.error(err);
-      data.epoch = undefined;
     }
     setTestNetData(data);
-  };
+  }, []);
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     try {
-      const awaitMainNet = getMainNetData();
-      const awaitTestNet = getTestNetData();
-      await Promise.allSettled([awaitMainNet, awaitTestNet]);
+      const awaitNet =
+        selectedNetKey === XoneChainId.MAIN_NET
+          ? getMainNetData()
+          : getTestNetData();
+      await Promise.allSettled([awaitNet]);
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
     }
-  };
+  }, [getMainNetData, getTestNetData, selectedNetKey]);
 
   useCountdownTimer({
     callback: async () => {
@@ -185,7 +161,7 @@ export const Net = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   useEffect(() => {
     window.setTimeout(() => {
@@ -213,7 +189,7 @@ export const Net = () => {
         value: currentNetData?.gasFee ? (
           <div className="flex items-end">
             {currentNetData?.gasFee < "0.1" ? (
-              <span className="mr-1 text-t2 font-normal">{"<"}</span>
+              <span className="mr-1 font-normal text-t2">{"<"}</span>
             ) : (
               ""
             )}
@@ -241,7 +217,7 @@ export const Net = () => {
               value={Number(preciseRound(currentNetData?.blockTime, 1))}
               duration={1.5}
             />
-            <div className="font-normal ml-1 text-t2">s</div>
+            <div className="ml-1 font-normal text-t2">s</div>
           </>
         ) : (
           "--"
@@ -259,7 +235,7 @@ export const Net = () => {
         ),
       },
     ];
-  }, [i18n.language, currentNetData, loading]);
+  }, [t, currentNetData]);
 
   const links = useMemo(() => {
     return [
@@ -284,7 +260,7 @@ export const Net = () => {
           if (!currentConnector) {
             await connect();
             const connector = getWalletKit().currentConnector;
-            addNet(connector, true);
+            addNet(connector);
           } else {
             try {
               const accounts = await currentConnector.provider.request({
@@ -293,7 +269,7 @@ export const Net = () => {
               if (accounts?.length === 0) {
                 currentConnector.disconnect();
                 await connect();
-                addNet(currentConnector, true);
+                addNet(currentConnector);
               } else {
                 addNet(currentConnector);
               }
@@ -313,7 +289,7 @@ export const Net = () => {
         },
       },
     ];
-  }, [i18n.language, selectedNetKey, currentConnector]);
+  }, [t, selectedNetKey, currentConnector, addNet, connect]);
 
   return (
     <BaseContainer className={styles.wrapper}>

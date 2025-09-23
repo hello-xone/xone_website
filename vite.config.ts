@@ -1,11 +1,12 @@
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
-import { defineConfig } from "vite";
-import { nodePolyfills } from "vite-plugin-node-polyfills";
-import svgr from "vite-plugin-svgr";
 import copy from "rollup-plugin-copy";
 import tailwindcss from "tailwindcss";
+import { defineConfig } from "vite";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 import { VitePWA } from "vite-plugin-pwa";
+import svgr from "vite-plugin-svgr";
+
 // @ts-ignore
 import seoPrerender from "./prerender.js";
 
@@ -69,6 +70,11 @@ export default defineConfig(({ mode, command }) => {
           target: "https://xscscan.com",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/xoScan/, ""),
+        },
+        "/openapi": {
+          target: "https://openapi.xone.org",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/openapi/, ""),
         },
       },
     },

@@ -3,11 +3,12 @@ import {
   Counter,
   FetchNetCountersRes,
   FetchNftTotalRes,
-  Stats,
+  NewStatsData,
 } from "@/types/response";
 
 import {
   nftScanRequest,
+  openApiRequest,
   request,
   xoMainScanRequest,
   xoTestScanRequest,
@@ -47,8 +48,11 @@ export const fetchNetCountersByNet = async (
   }
 };
 
-export const fetchStatsByNet = async (isTestNet?: boolean) => {
-  const reqInstance = isTestNet ? xoTestScanRequest : xoMainScanRequest;
-  const res: Stats = await reqInstance.get("/api/v2/stats");
+export const fetchStatsByNet = async (
+  isTestNet?: boolean
+): Promise<NewStatsData> => {
+  const { data } = await openApiRequest.get("/chaindata/stats");
+  const { mainnet, testnet } = data;
+  const res = isTestNet ? testnet : mainnet;
   return res;
 };
