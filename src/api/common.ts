@@ -23,7 +23,7 @@ export const addEmail = async (data: { email: string }): Promise<null> => {
   if (res.code === 0) {
     return res.data;
   }
-  throw Error(res.message || "");
+  throw Error(res.data || res.message || "");
 };
 
 export const fetchNftTotal = async (): Promise<FetchNftTotalRes> => {

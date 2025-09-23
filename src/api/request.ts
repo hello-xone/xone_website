@@ -23,7 +23,7 @@ export const xoTestScanRequest = axios.create({
 });
 
 export const openApiRequest = axios.create({
-  baseURL: "/openapi",
+  baseURL: import.meta.env.VITE_APP_BASE_URL,
 });
 
 const commonResponseInterceptors = (response: AxiosResponse<any, any>) => {

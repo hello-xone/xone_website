@@ -21,7 +21,7 @@ export const EXTERNAL_LINKS = {
     "https://share.chatme.global/share/group/ztgqmws2k?lang=en&mode=light",
   Discord: "https://discord.com/invite/Du9y2GHV",
   Reddit: "https://www.reddit.com/r/XoneChain/",
-  Coingecko: "https://www.coingecko.com/en/coins/bitcoin",
+  Coingecko: "https://www.coingecko.com/en/chains/xone",
   Official_Email: "hello@xone.org",
   Support_Email: "support@xone.org",
   Business_Email: "business@xone.org",
