@@ -31,6 +31,7 @@ const Announcement = () => {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [announcements, setAnnouncements] = useState<AnnouncementItem[]>([]);
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
   // 初始化公告数据
   useEffect(() => {
@@ -38,6 +39,25 @@ const Announcement = () => {
     if (announcementData.list && announcementData.list.length > 0) {
       setAnnouncements(announcementData.list);
     }
+  }, []);
+
+  // 监听窗口尺寸变化
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    // 初始化窗口尺寸
+    handleResize();
+
+    // 添加事件监听器
+    window.addEventListener('resize', handleResize);
+
+    // 清理事件监听器
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
@@ -89,14 +109,30 @@ const Announcement = () => {
 
   // 轮播控制函数
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % announcements.length);
+    if (currentSlide < announcements.length - 1) {
+      setCurrentSlide((prev) => prev + 1);
+    }
   };
 
   const prevSlide = () => {
-    setCurrentSlide(
-      (prev) => (prev - 1 + announcements.length) % announcements.length
-    );
+    if (currentSlide > 0) {
+      setCurrentSlide((prev) => prev - 1);
+    }
   };
+
+  // 判断是否可以前进/后退
+  const canGoNext = currentSlide < announcements.length - 1;
+  const canGoPrev = currentSlide > 0;
+
+  // 判断是否需要全屏适配
+  const isDesktop = windowSize.width >= 768;
+  const maxModalWidth = isDesktop ? 1720 : 860; // PC端1720px，移动端860px
+  const maxModalHeight = isDesktop ? 900 : 600; // 预估的弹窗高度
+  
+  const needFullscreen = isDesktop && (
+    windowSize.width < maxModalWidth + 10 || // 留10px边距
+    windowSize.height < maxModalHeight + 10
+  );
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
@@ -125,9 +161,9 @@ const Announcement = () => {
     const isLeftSwipe = distance > 50;
     const isRightSwipe = distance < -50;
 
-    if (isLeftSwipe) {
+    if (isLeftSwipe && canGoNext) {
       nextSlide();
-    } else if (isRightSwipe) {
+    } else if (isRightSwipe && canGoPrev) {
       prevSlide();
     }
   };
@@ -144,12 +180,18 @@ const Announcement = () => {
       />
 
       {/* 弹窗内容 */}
-      <div className="fixed inset-0 flex md:items-center md:justify-center justify-end items-end z-[9999] md:p-4">
+      <div className={clsx(
+        "flex fixed inset-0 z-[9999]",
+        needFullscreen 
+          ? "items-stretch p-0 justify-stretch" 
+          : "justify-end items-end md:items-center md:justify-center md:p-4"
+      )}>
         <div
           className={clsx(
-            "relative mx-auto rounded-t-2xl shadow-2xl md:rounded-2xl bg-b1",
-            "transition-all duration-300 ease-out transform",
-            "animate-in fade-in-0 zoom-in-95 w-[860px] swipe-container"
+            "relative mx-auto shadow-2xl transition-all duration-300 ease-out transform bg-b1 animate-in fade-in-0 zoom-in-95 swipe-container",
+            needFullscreen 
+              ? "w-full h-full rounded-none fullscreen" 
+              : "w-full rounded-t-2xl max-w-[860px] md:max-w-[1720px] md:rounded-2xl"
           )}
           onClick={(e) => e.stopPropagation()}
           onTouchStart={handleTouchStart}
@@ -164,36 +206,55 @@ const Announcement = () => {
             <CloseIcon className="w-[24px] h-[24px]" />
           </button>
 
-          {/* 轮播导航 */}
-          <div className="hidden absolute top-0 bottom-0 right-6 left-6 justify-between items-center m-auto h-16 md:flex">
-            {/* 左箭头 */}
-            <button
-              onClick={prevSlide}
-              className="flex justify-center items-center w-8 h-8 rounded-full carousel-nav-btn border border-[#A0A3A7] border-solid hover:bg-[#DFE0E2] hover:border-[#A0A3A7]"
-            >
-              <ArrowIcon />
-            </button>
+          {/* 左箭头 */}
+          <button
+            onClick={prevSlide}
+            disabled={!canGoPrev}
+            className={clsx(
+              "hidden absolute top-0 bottom-0 left-6 m-auto md:flex justify-center items-center w-8 h-8 rounded-full carousel-nav-btn border border-solid transition-all duration-200",
+              canGoPrev
+                ? "border-[#A0A3A7] hover:bg-[#DFE0E2] hover:border-[#A0A3A7] cursor-pointer"
+                : "border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed"
+            )}
+          >
+            <ArrowIcon />
+          </button>
 
-            {/* 右箭头 */}
-            <button
-              onClick={nextSlide}
-              className="flex justify-center items-center w-8 h-8 rounded-full carousel-nav-btn border border-[#A0A3A7] border-solid hover:bg-[#DFE0E2] hover:border-[#A0A3A7]"
-            >
-              <ArrowIcon className="rotate-180" />
-            </button>
-          </div>
+          {/* 右箭头 */}
+          <button
+            onClick={nextSlide}
+            disabled={!canGoNext}
+            className={clsx(
+              "hidden absolute top-0 bottom-0 right-6 m-auto md:flex justify-center items-center w-8 h-8 rounded-full carousel-nav-btn border border-solid transition-all duration-200",
+              canGoNext
+                ? "border-[#A0A3A7] hover:bg-[#DFE0E2] hover:border-[#A0A3A7] cursor-pointer"
+                : "border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed"
+            )}
+          >
+            <ArrowIcon className="rotate-180" />
+          </button>
 
           {/* 内容区域 */}
-          <div className="p-4 pt-6 md:pt-8 md:p-6">
+          <div className={clsx(
+            "flex flex-col h-full",
+            needFullscreen 
+              ? "p-4 pt-6" 
+              : "p-4 pt-6 md:pt-12 md:p-12"
+          )}>
             {/* 公告标题 */}
             <div className="mb-4">
               <h2 className="text-xl font-bold text-center text-t1">{ t("common:announcement") }</h2>
             </div>
 
             {/* 内容 */}
-            <div className="flex flex-col justify-between align-center">
-              <div
-                className="overflow-y-auto pt-1 mb-3 h-[460px] md:h-96 md:mx-10 md:pt-0 md:mb-4 announcement-scrollbar text-[15px] font-normal text-left whitespace-normal break-words carousel-content text-t1 rich-text-content"
+            <div className="flex flex-col flex-1 justify-between align-center">
+                <div
+                  className={clsx(
+                    "overflow-y-auto pt-1 mb-3 font-normal text-left whitespace-normal break-words announcement-scrollbar text-[15px] carousel-content text-t1 rich-text-content",
+                    needFullscreen 
+                      ? "flex-1 min-h-0 md:pt-0 md:mb-4" 
+                      : "h-[460px] md:h-[768px] md:mx-10 md:pt-0 md:mb-4"
+                  )}
                 dangerouslySetInnerHTML={{ __html: currentItem.content }}
               />
 

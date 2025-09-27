@@ -27,9 +27,18 @@
   transition: all 0.2s ease;
 }
 
-.carousel-nav-btn:hover {
+.carousel-nav-btn:hover:not(:disabled) {
   background-color: rgba(0, 0, 0, 0.1);
   transform: scale(1.1);
+}
+
+.carousel-nav-btn:disabled {
+  opacity: 0.5;
+  transform: none !important;
+}
+
+.carousel-nav-btn:disabled svg {
+  color: #9ca3af;
 }
 
 .carousel-indicator {
@@ -107,7 +116,7 @@
   max-width: 100%;
   height: auto;
   border-radius: 8px;
-  margin: 1rem 0;
+  margin: 1rem auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -146,12 +155,7 @@
 
 .rich-text-content strong {
   font-weight: 600;
-  color: var(--text-primary, #1a1a1a);
-  background: linear-gradient(135deg, #dc2626, #b91c1c);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 100%;
+  color: rgba(51,65,85, 1);
 }
 
 .rich-text-content em {
@@ -163,7 +167,6 @@
 .rich-text-content a {
   color: #dc2626;
   text-decoration: none;
-  position: relative;
   transition: all 0.3s ease;
   border-bottom: 1px solid transparent;
 }
@@ -277,6 +280,38 @@
   color: var(--text-secondary, #4a4a4a);
 }
 
+/* 全屏模式优化 */
+.swipe-container.fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+}
+
+.swipe-container.fullscreen .rich-text-content {
+  padding: 0 2rem;
+  /* 确保在flex容器中能正确滚动 */
+  overflow-y: auto !important;
+  min-height: 0 !important;
+}
+
+.swipe-container.fullscreen .rich-text-content img {
+  max-width: calc(100% - 4rem);
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+/* 修复flex容器中的滚动问题 */
+.swipe-container.fullscreen > div {
+  min-height: 0;
+}
+
+.swipe-container.fullscreen > div > div {
+  min-height: 0;
+}
+
 /* 移动端优化 */
 @media (max-width: 768px) {
   .rich-text-content h1 {
@@ -308,7 +343,7 @@
   }
 
   .rich-text-content img {
-    margin: 0.75rem 0;
+    margin: 0.75rem auto;
     border-radius: 6px;
   }
   
