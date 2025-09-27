@@ -148,7 +148,7 @@ const Header = () => {
                                 >
                                   <gel.icon
                                     className={clsx(
-                                      "text-t2 group-hover:text-t1 shrink-0",
+                                      "text-t1 shrink-0",
                                       {
                                         "!text-t1": detailId === gel.id,
                                       }
@@ -156,7 +156,7 @@ const Header = () => {
                                   ></gel.icon>
                                   <div
                                     className={clsx(
-                                      "text-t2 w-full pr-[34px] group-hover:text-t1 shrink-0",
+                                      "text-t1 w-full pr-[34px] shrink-0",
                                       {
                                         "!text-t1": detailId === gel.id,
                                       }
@@ -220,11 +220,13 @@ const Header = () => {
                               key={`children-item-${cel.id}`}
                               className="w-[200px]"
                             >
-                              <div className="text-base mb-1 leading-[140%] font-bold text-t1">
-                                {t(cel.title)}
-                              </div>
-                              <div className="text-xs font-normal leading-[140%] text-t2">
-                                {t(cel.description)}
+                              <div className="px-[10px]">
+                                <div className="text-base mb-1 leading-[140%] font-bold text-t1">
+                                  {t(cel.title)}
+                                </div>
+                                <div className="text-xs font-normal leading-[140%] text-t2">
+                                  {t(cel.description)}
+                                </div>
                               </div>
                               <div className="mt-4 text-[14px] flex flex-col gap-[2px] leading-[140%] text-t2">
                                 {cel.links &&
@@ -239,7 +241,7 @@ const Header = () => {
                                             ? "_blank"
                                             : "_self"
                                         }
-                                        className="px-[10px] py-[8px] hover:bg-b3 hover:text-t1 rounded-[8px] cursor-pointer"
+                                        className="px-[12px] py-[8px] hover:bg-b3 text-t1 rounded-[8px] cursor-pointer"
                                       >
                                         {t(link.name)}
                                       </Link>
@@ -252,7 +254,7 @@ const Header = () => {
                                   onClick={() => handleCallChild()}
                                   text={t("home:seeMore")}
                                   className="mt-4 ml-[10px]"
-                                  textClassName="!text-[14px] font-medium text-t2"
+                                  textClassName="!text-[14px] font-medium text-t1"
                                 ></SeeMore>
                               )}
                             </div>
