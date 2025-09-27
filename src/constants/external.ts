@@ -4,6 +4,8 @@ export const EXTERNAL_LINKS = {
   dashboard: "https://bvi.xone.org/",
   TestnetExplorer: "https://testnet.xscscan.com",
   MainExplorer: "https://xonescan.com/",
+  Status: "https://status.xone.org/",
+  Forum: "https://forum.xone.org/",
   Events: "https://lu.ma/xone",
   Github: "https://github.com/hello-xone/",
   Twitter: "https://x.com/xone_chain",

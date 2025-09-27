@@ -98,6 +98,10 @@ export const Footer = () => {
             url: EXTERNAL_LINKS.faucet,
           },
           {
+            name: t("common:status"),
+            url: EXTERNAL_LINKS.Status,
+          },
+          {
             name: "Github",
             url: EXTERNAL_LINKS.Github,
           },
@@ -106,6 +110,10 @@ export const Footer = () => {
       {
         title: t("common:headerNav4"),
         infos: [
+          {
+            name: t("common:forum"),
+            url: EXTERNAL_LINKS.Forum,
+          },
           {
             name: t("common:commercialPr"),
             internalLink: true,
