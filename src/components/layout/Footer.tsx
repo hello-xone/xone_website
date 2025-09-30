@@ -1,4 +1,4 @@
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, Popper, TextField } from "@mui/material";
 import clsx from "clsx";
 import dayjs from "dayjs";
 import { FormikProvider, useFormik } from "formik";
@@ -19,6 +19,7 @@ import XIcon from "@/assets/svg/home/x.svg?react";
 import YoutubeIcon from "@/assets/svg/home/youtube.svg?react";
 import { domains } from "@/constants/domains";
 import { EXTERNAL_LINKS } from "@/constants/external";
+import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 import { langs, LanguageType } from "@/i18n/settings";
 import useApplicationStore from "@/store/applicationStore";
 import { isEmail } from "@/utils";
@@ -79,6 +80,7 @@ const Footer = () => {
   const { t } = useTranslation();
   const { changeTheme, isLight } = useApplicationStore();
   const { i18n } = useTranslation();
+  const breakpoints = useTailwindBreakpoint();
   const inputRef = useRef<HTMLInputElement>(null);
   const formik = useFormik({
     initialValues: {
@@ -249,8 +251,7 @@ const Footer = () => {
     const [prefix] = input.split("@");
     return domains.map((domain) => `${prefix}${domain}`);
   };
-  console.log(process.env, "process.env")
-  console.log(import.meta.env, "import.meta.env")
+  
   return (
     <div className="w-full pt-[64px] bg-b1 overflow-x-hidden">
       <div className="container">
@@ -262,7 +263,7 @@ const Footer = () => {
                 return (
                   <Link
                     key={`contact-item-${item.url}-${index}`}
-                    className="w-6 text-t1 flex items-center justify-center rounded hover:bg-b4 bg-b3 h-6"
+                    className="flex justify-center items-center w-6 h-6 rounded text-t1 hover:bg-b4 bg-b3"
                     target={item.url.includes("http") ? "_blank" : "_self"}
                     to={item.url}
                   >
@@ -311,7 +312,7 @@ const Footer = () => {
                                 width="20"
                                 height="20"
                                 viewBox="0 0 20 20"
-                                className={`transition-all duration-200 opacity-0 group-hover:opacity-100`}
+                                className={`opacity-0 transition-all duration-200 group-hover:opacity-100`}
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                               >
@@ -330,10 +331,10 @@ const Footer = () => {
             })}
 
           <div className="w-full md:w-[386px] relative">
-            <div className="font-bold mb-4 text-t1">
+            <div className="mb-4 font-bold text-t1">
               {t("header:subscribe")}
             </div>
-            <div className="text-sm text-t2 mb-4">
+            <div className="mb-4 text-sm text-t2">
               {t("header:subscribeDesc")}
             </div>
             {/* <div className="flex border-[1px] border-transparent hover:border-[1px] hover:border-t1 rounded-[8px] p-1 box-content bg-b3"> */}
@@ -347,6 +348,38 @@ const Footer = () => {
                 onChange={(_, newValue) => {
                   setFieldValue("email", newValue);
                 }}
+                PopperComponent={(props) => (
+                  <Popper
+                    {...props}
+                    placement={breakpoints.md ? "right" : "bottom-start"}
+                    modifiers={[
+                      {
+                        name: 'flip',
+                        enabled: true,
+                        options: {
+                          altBoundary: true,
+                          rootBoundary: 'viewport',
+                        },
+                      },
+                      {
+                        name: 'preventOverflow',
+                        enabled: true,
+                        options: {
+                          altAxis: true,
+                          altBoundary: true,
+                          tether: false,
+                          rootBoundary: 'viewport',
+                        },
+                      },
+                      {
+                        name: 'offset',
+                        options: {
+                          offset: [0, 14],
+                        },
+                      },
+                    ]}
+                  />
+                )}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -389,15 +422,15 @@ const Footer = () => {
           {t("header:disclaimer")}
         </div>
 
-        <div className="flex md:hidden mt-10 items-center justify-end">
+        <div className="flex justify-end items-center mt-10 md:hidden">
           <LanguagePopover>
             <Language className="text-t1"></Language>
           </LanguagePopover>
           <div
-            className="flex h-10 items-center ml-3"
+            className="flex items-center ml-3 h-10"
             onClick={() => toggleTheme()}
           >
-            <Theme isLight={isLight} className="w-6 h-6 mr-2"></Theme>
+            <Theme isLight={isLight} className="mr-2 w-6 h-6"></Theme>
           </div>
         </div>
         <div className="mt-3 md:mt-10 py-4 max-md:pt-[21px] border-t-[1px] border-solid border-[--border3] text-t3 flex justify-between items-center">
@@ -422,7 +455,7 @@ const Footer = () => {
           >
             <>
               <Language className="text-t1"></Language>
-              <span className="text-t1 text-sm group-hover:underline group-hover:decoration-dashed">
+              <span className="text-sm text-t1 group-hover:underline group-hover:decoration-dashed">
                 {currentLanguage?.name || "English"}
               </span>
             </>

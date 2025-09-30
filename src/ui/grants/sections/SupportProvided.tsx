@@ -189,11 +189,7 @@ export const SupportProvided = () => {
                 <img
                   src={item.icon}
                   alt={item.title}
-                  className={clsx(
-                    activeIndex === index
-                      ? "w-[54px] h-[54px]"
-                      : "w-[40px] h-[40px]"
-                  )}
+                  className="w-[40px] h-[40px]"
                 />
                 <h3
                   className={clsx(

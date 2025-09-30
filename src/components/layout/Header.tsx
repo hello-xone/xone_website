@@ -156,16 +156,16 @@ const Header = () => {
                                   ></gel.icon>
                                   <div
                                     className={clsx(
-                                      "text-t1 w-full pr-[34px] shrink-0",
+                                      "text-t2 w-full pr-[34px] shrink-0",
                                       {
                                         "!text-t1": detailId === gel.id,
                                       }
                                     )}
                                   >
-                                    <div className="text-sm w-full font-bold leading-[140%] mb-1">
+                                    <div className="text-sm text-t1 w-full font-bold leading-[140%] mb-1">
                                       {t(gel.title)}
                                     </div>
-                                    <div className="text-xs w-full leading-[16px]">
+                                    <div className="text-xs group-hover:text-t1 w-full leading-[16px]">
                                       {t(gel.description)}
                                     </div>
                                   </div>

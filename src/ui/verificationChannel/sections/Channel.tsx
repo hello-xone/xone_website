@@ -122,7 +122,7 @@ const Channel = () => {
       </div>
 
       <h3
-        className={`${lg ? "mt-10" : "mt-4"} ${lg ? "text-center" : null} text-[${lg ? "20px" : "14px"}] text-[--t2] font-normal`}
+        className={`${lg ? "mx-auto mt-10 max-w-[1000px]" : "mt-4"} ${lg ? "text-center" : null} text-[${lg ? "20px" : "14px"}] text-[--t2] font-normal`}
         style={{
           lineHeight: lg ? undefined : "20px",
           letterSpacing: lg ? undefined : "0.03em",

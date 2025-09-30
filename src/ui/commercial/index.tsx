@@ -17,8 +17,8 @@ export const Commercial = () => {
   const { isLight } = useApplicationStore()
   const { t } = useTranslation("commercial")
   return (
-    <div className="relative !pb-[80px] md:!pb-[120px]">
-      <Lottie className="absolute max-md:hidden left-0 top-[-15vh] aspect-[1440/600] w-full" animationData={isLight ? CommercialJson : CommercialDarkJson} loop={true} ></Lottie>
+    <div className="relative overflow-hidden !pb-[80px] md:!pb-[120px]">
+      <Lottie className="absolute max-md:hidden left-0 top-[-4vh] aspect-[1440/600] w-full" animationData={isLight ? CommercialJson : CommercialDarkJson} loop={true} ></Lottie>
       <div className="container text-center md:aspect-[1440/600]">
         <Title className="mt-[40px] md:mt-[116px] max-md:!text-[28px] !leading-[38px] !font-bold md:!leading-[63px] !mb-0">{t("bannerTitle1")}</Title>
         <Title className="!leading-[38px] md:!leading-[63px] max-md:!text-[32px] !font-bold">{t("bannerTitle2")}</Title>
