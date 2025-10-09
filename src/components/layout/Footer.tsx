@@ -348,10 +348,34 @@ const Footer = () => {
                 onChange={(_, newValue) => {
                   setFieldValue("email", newValue);
                 }}
+                renderOption={(props, option) => (
+                  <li {...props} style={{ margin: '8px 0' }}>
+                    {option}
+                  </li>
+                )}
                 PopperComponent={(props) => (
                   <Popper
                     {...props}
                     placement={breakpoints.md ? "right" : "bottom-start"}
+                    className="[&_.MuiAutocomplete-listbox]:!py-3"
+                    sx={{
+                      '& .MuiAutocomplete-listbox': {
+                        '&::-webkit-scrollbar': {
+                          width: '6px',
+                        },
+                        '&::-webkit-scrollbar-track': {
+                          background: 'var(--b3)',
+                          borderRadius: '10px',
+                        },
+                        '&::-webkit-scrollbar-thumb': {
+                          background: 'var(--t3)',
+                          borderRadius: '10px',
+                        },
+                        '&::-webkit-scrollbar-thumb:hover': {
+                          background: 'var(--t2)',
+                        },
+                      }
+                    }}
                     modifiers={[
                       {
                         name: 'flip',
