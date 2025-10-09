@@ -9,7 +9,6 @@ import { StoreGet, StoreSet } from "./typing";
 
 class NoticeStore {
   closed?: boolean;
-  isLight?: boolean;
   constructor(
     private readonly set: StoreSet<NoticeStore>,
     // @ts-ignore

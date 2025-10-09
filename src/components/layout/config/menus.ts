@@ -1,4 +1,4 @@
-import { EXTERNAL_LINKS } from '@/lib/external';
+import { EXTERNAL_LINKS } from '@/constants/external';
 
 export const MENUS_CONFIG = [
   {

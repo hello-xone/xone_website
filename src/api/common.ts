@@ -1,18 +1,9 @@
 import {
   ApiResponse,
   ChartRes,
-  Counter,
-  FetchNetCountersRes,
-  FetchNftTotalRes,
-  Stats,
 } from "@/types/response";
 
-import {
-  nftScanRequest,
-  request,
-  xoMainScanRequest,
-  xoTestScanRequest,
-} from "./request";
+import { request } from "./request";
 
 export const addEmail = async (data: { email: string }): Promise<null> => {
   const res: ApiResponse<null> = await request.post("/emailsub/subscribe", data);
@@ -23,30 +14,8 @@ export const addEmail = async (data: { email: string }): Promise<null> => {
   throw Error(res.data || "");
 };
 
-export const fetchNftTotal = async (): Promise<FetchNftTotalRes> => {
-  const res: ApiResponse<FetchNftTotalRes> =
-    await nftScanRequest.get("/api/v2/nft/total");
-  if (res.code === 0) {
-    return res.data;
-  }
-  throw Error(res.message || "");
-};
 
-export const fetchNetCountersByNet = async (
-  isTestNet?: boolean
-): Promise<Counter[]> => {
-  // const reqInstance = isTestNet ? xoTestScanRequest : xoMainScanRequest;
-  try {
-    const res: FetchNetCountersRes = await request.get(`/api/v2/counters`);
-    return res?.data || [];
-  } catch (err) {
-    console.error(err);
-    return [];
-  }
-};
-
-export const fetchStatsByNet = async (isTestNet?: boolean) => {
-  // const reqInstance = isTestNet ? xoTestScanRequest : xoMainScanRequest;
+export const fetchStatsByNet = async () => {
   const res = await request.get("/chaindata/stats");
   return res.data;
 };

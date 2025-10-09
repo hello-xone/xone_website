@@ -33,10 +33,6 @@
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
-  <!-- <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    /> -->
   <style>
     #loading-container {
       position: fixed;
@@ -61,106 +57,7 @@
 </head>
 
 <body>
-  <!-- <div id="loading-container">
-    <canvas width="120px" height="120px" id="__loading"></canvas>
-    <div id="__loading-progress"></div>
-  </div> -->
   <div id="root"></div>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/libpag@4.2.84/lib/libpag.min.js"></script>
-  <script>
-    window.__getPAG = async () => {
-      if (__getPAG.__PAG) {
-        return __getPAG.__PAG;
-      }
-      __getPAG.__PAG = await window.libpag.PAGInit({
-        locateFile: () => {
-          return "/libpag.wasm";
-        },
-      });
-      return __getPAG.__PAG;
-    };
-
-    let timer = 0;
-    let timer2 = 0;
-    let pagView = null;
-    let windowLoaded = false;
-
-    const finish = () => {
-      if (pagView) {
-        pagView?.destroy();
-      }
-      window.__loaded = true;
-      window.dispatchEvent(
-        new CustomEvent("__loaded", {
-          detail: "loaded",
-        })
-      );
-    };
-
-    const setProgress = () => {
-      let progressNum = 0;
-      timer = window.setInterval(() => {
-        // if (windowLoaded) {
-        //   progressContainer.innerHTML = `100%`;
-        //   window.clearInterval(timer);
-        //   window.setTimeout(() => {
-        //     finish();
-        //   }, 200);
-        // }
-        if (progressNum >= 99) {
-          if (windowLoaded) {
-            progressContainer.innerHTML = `100%`;
-            window.clearInterval(timer);
-            window.setTimeout(() => {
-              finish();
-            }, 100);
-          }
-          return;
-        }
-        progressNum++;
-        if (!progressContainer) {
-          window.clearInterval(timer2);
-          return;
-        }
-        progressContainer.innerHTML = `${progressNum}%`;
-      }, 12);
-    };
-
-    const initAnimation = async () => {
-      const PAG = await __getPAG();
-      const buffer = await fetch("/pag/loding.pag").then((response) =>
-        response.arrayBuffer()
-      );
-      const pagFile = await PAG.PAGFile.load(buffer);
-      const canvas = document.getElementById("__loading");
-      pagView = await PAG.PAGView.init(pagFile, canvas);
-      pagView.setRepeatCount(0);
-      pagView.play();
-      setProgress();
-    };
-    const checkCacheExist = async () => {
-      if ("caches" in window) {
-        const cacheNames = await caches.keys();
-        return cacheNames.some((name) => name.includes("workbox-precache"));
-      }
-      return false;
-    };
-    async function loading() {
-      initAnimation();
-      // const isCacheExist = await checkCacheExist();
-      // if (isCacheExist) {
-      //   finish();
-      // } else {
-      //   initAnimation();
-      // }
-    }
-
-    loading();
-
-    window.onload = () => {
-      windowLoaded = true;
-    };
-  </script> -->
   <script type="module" src="/src/main.tsx"></script>
 </body>
 
