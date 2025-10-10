@@ -26,9 +26,9 @@ function processExternalLinks(html) {
                 attributes += ' target="_blank"';
             }
 
-            // 如果没有 rel 属性，添加 rel="noopener noreferrer"
+            // 如果没有 rel 属性，添加 rel="nofollow noopener noreferrer"
             if (!hasRel) {
-                attributes += ' rel="noopener noreferrer"';
+                attributes += ' rel="nofollow noopener noreferrer"';
             }
 
             return `<a ${attributes} href="${url}">`;

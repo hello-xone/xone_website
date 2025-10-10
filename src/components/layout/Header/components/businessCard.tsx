@@ -9,7 +9,7 @@ const BusinessCard = () => {
     const { t } = useTranslation();
     return (
         <div className="text-t2 leading-[140%] h-full text-[14px]">
-            <div className="font-bold mb-3">{t("common:contactUsForFurtherAssistance")}</div>
+            <div className="mb-3 font-bold">{t("common:contactUsForFurtherAssistance")}</div>
             <div className="flex items-center gap-[12px]">
                 <span>business@xone.org</span>
                 <CopyIcon onClick={() => {
@@ -22,36 +22,40 @@ const BusinessCard = () => {
                     copy("labs@xone.org");
                 }} className="w-[24px] h-[24px] cursor-pointer" />
             </div>
-            <div className="font-bold mb-3 mt-8">{t("common:navGlobalBusinessKit")}</div>
+            <div className="mt-8 mb-3 font-bold">{t("common:navGlobalBusinessKit")}</div>
             <div className="flex items-center gap-[32px]">
-                <Link
+                <a
                     target="_blank"
+                    rel="nofollow noopener noreferrer"
                     className="hover:text-[--link1]"
-                    to="https://docs.xone.org/study/media#our-logo"
+                    href="https://docs.xone.org/study/media#our-logo"
                 >
                     {t("common:navGlobalBusinessItem1")}
-                </Link>
-                <Link
+                </a>
+                <a
                     target="_blank"
+                    rel="nofollow noopener noreferrer"
                     className="hover:text-[--link1]"
-                    to="https://docs.xone.org/study/media#our-color"
+                    href="https://docs.xone.org/study/media#our-color"
                 >
                     {t("common:navGlobalBusinessItem2")}
-                </Link>
-                <Link
+                </a>
+                <a
                     target="_blank"
+                    rel="nofollow noopener noreferrer"
                     className="hover:text-[--link1]"
-                    to="https://docs.xone.org/study/media#our-font"
+                    href="https://docs.xone.org/study/media#our-font"
                 >
                     {t("common:navGlobalBusinessItem3")}
-                </Link>
-                <Link
+                </a>
+                <a
                     target="_blank"
+                    rel="nofollow noopener noreferrer"
                     className="hover:text-[--link1]"
-                    to="https://docs.xone.org/study/media#our-coin"
+                    href="https://docs.xone.org/study/media#our-coin"
                 >
                     {t("common:navGlobalBusinessItem4")}
-                </Link>
+                </a>
             </div>
         </div>
     );

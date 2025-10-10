@@ -241,6 +241,11 @@ const Header = () => {
                                             ? "_blank"
                                             : "_self"
                                         }
+                                        rel={
+                                          link.link.includes("http")
+                                            ? "nofollow noopener noreferrer"
+                                            : undefined
+                                        }
                                         className="px-[12px] py-[8px] hover:bg-b3 text-t1 rounded-[8px] cursor-pointer"
                                       >
                                         {t(link.name)}
@@ -271,6 +276,7 @@ const Header = () => {
                       }
                       className="text-sm text-t1"
                       target="_blank"
+                      rel="nofollow noopener noreferrer"
                     >
                       {t(item.name)}
                     </Link>

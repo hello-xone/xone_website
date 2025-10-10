@@ -70,6 +70,7 @@ export const SeeMore = ({
     <Link
       to={href}
       target={href.includes("http") ? target : "_self"}
+      rel={href.includes("http") ? "nofollow noopener noreferrer" : undefined}
       className={`flex items-center gap-[8px] cursor-pointer group ${className ? className : ""}`}
       onClick={handleClick}
     >

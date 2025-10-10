@@ -116,7 +116,7 @@ const MenuPopover = () => {
                             <PopoverButton
                                 onClick={() => setIsOpen(!isOpen)}
                                 className={clsx(
-                                    `flex items-center px-[8px] gap-1 text-sm font-medium text-t1 h-10 focus:outline-none data-active:text-white data-focus:outline data-focus:outline-white data-hover:text-white`
+                                    `flex gap-1 items-center h-10 text-sm font-medium px-[8px] text-t1 focus:outline-none data-active:text-white data-focus:outline data-focus:outline-white data-hover:text-white`
                                 )}
                             >
                                 <svg
@@ -151,7 +151,7 @@ const MenuPopover = () => {
                                     {menus &&
                                         menus.map((item) => (
                                             <Disclosure as="div" key={`h5-menu-${item.id}`}>
-                                                <DisclosureButton className="group h-10 flex w-full items-center justify-between">
+                                                <DisclosureButton className="flex justify-between items-center w-full h-10 group">
                                                     <span className="font-medium">{t(item.name)}</span>
                                                     <Arrow className="w-5 h-5 group-data-open:rotate-180"></Arrow>
                                                 </DisclosureButton>
@@ -183,6 +183,11 @@ const MenuPopover = () => {
                                                                                             link.link.includes("http")
                                                                                                 ? "_blank"
                                                                                                 : "_self"
+                                                                                        }
+                                                                                        rel={
+                                                                                            link.link.includes("http")
+                                                                                                ? "nofollow noopener noreferrer"
+                                                                                                : undefined
                                                                                         }
                                                                                     >
                                                                                         {t(link.name)}
@@ -234,7 +239,7 @@ const MenuPopover = () => {
                                                 </DisclosurePanel>
                                             </Disclosure>
                                             // <div key={`h5-menu-${item.id}`} className="">
-                                            //     <div className="flex items-center text-t1 h-10 justify-between">
+                                            //     <div className="flex justify-between items-center h-10 text-t1">
                                             //         <span className="font-medium">{t(item.name)}</span>
                                             //         <Arrow className="w-5 h-5"></Arrow>
                                             //     </div>
@@ -269,16 +274,16 @@ const MenuPopover = () => {
                                         <div
                                             onClick={() => setShowLanguage(true)}
                                             className={clsx(
-                                                `flex items-center rounded-[10px] gap-[10px] text-sm font-medium text-t1 h-10 focus:outline-none data-active:text-white data-focus:outline data-focus:outline-white data-hover:text-white`
+                                                `flex items-center h-10 text-sm font-medium rounded-[10px] gap-[10px] text-t1 focus:outline-none data-active:text-white data-focus:outline data-focus:outline-white data-hover:text-white`
                                             )}
                                         >
-                                            <Language className="text-t1 w-6 h-6"></Language>
-                                            <span className="text-t1 font-medium text-sm">
+                                            <Language className="w-6 h-6 text-t1"></Language>
+                                            <span className="text-sm font-medium text-t1">
                                                 {currentLanguage?.name || "English"}
                                             </span>
                                         </div>
                                         <div
-                                            className="flex h-10 items-center"
+                                            className="flex items-center h-10"
                                             onClick={() => {
                                                 toggleTheme();
                                                 close();
@@ -288,7 +293,7 @@ const MenuPopover = () => {
                                                 isLight={isLight}
                                                 className="w-6 h-6 mr-[10px]"
                                             ></Theme>
-                                            <span className="text-t1 font-medium text-sm">
+                                            <span className="text-sm font-medium text-t1">
                                                 {isLight ? "Light" : "Dark"}
                                             </span>
                                         </div>

@@ -49,7 +49,7 @@ export const NotFoundPage = () => {
         className={styles.goToContact}
         href={EXTERNAL_LINKS.dashboard + i18n.language + "/community"}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="nofollow noopener noreferrer"
       >
         {t("common:contactUsForFurtherAssistance")}
       </a>

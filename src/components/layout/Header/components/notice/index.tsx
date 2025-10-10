@@ -1,12 +1,14 @@
-import styles from "./index.module.less";
+import { useRef } from "react";
+import { useTranslation } from "react-i18next";
+
 import icon1 from "@/assets/imgs/home/notice1.png";
 import icon2 from "@/assets/imgs/home/notice2.png";
 import ArrowIcon from "@/assets/svg/home/arrow.svg?react";
 import CloseIcon from "@/assets/svg/home/close.svg?react";
 import { Link } from "@/components/comm/link";
-import { useTranslation } from "react-i18next";
 import { EXTERNAL_LINKS } from "@/constants/external";
-import { useRef } from "react";
+
+import styles from "./index.module.less";
 
 export const Notice = ({ onClose }: { onClose: () => void }) => {
   const { t } = useTranslation();
@@ -56,7 +58,7 @@ export const Notice = ({ onClose }: { onClose: () => void }) => {
           }}
         />
         <span></span>
-        <Link className={styles.sellMore} href={EXTERNAL_LINKS.dashboard} target="_blank">
+        <Link className={styles.sellMore} href={EXTERNAL_LINKS.dashboard} target="_blank" rel="nofollow noopener noreferrer">
           <span className={styles.sellMoreText}>{t("common:seeMore")}</span>
           <div className={styles.arrowIcon}>
             <ArrowIcon></ArrowIcon>

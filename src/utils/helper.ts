@@ -104,6 +104,7 @@ export const getToProps: any = (to?: To) => {
         as: "a",
         href: to,
         target: "_blank",
+        rel: "nofollow noopener noreferrer",
       };
     }
   }
