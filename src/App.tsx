@@ -11,6 +11,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import { I18nProvider } from "@/i18n/provider";
 
+import Announcement from "./components/comm/announcement";
 import { RenderRoutes } from "./routes/router";
 
 
@@ -50,6 +51,8 @@ function App() {
                   className: "common-toast"
                 }} />
                 <RenderRoutes />
+
+                <Announcement />
               </NotificationsProvider>
             </WalletKitProvider>
           </I18nProvider>

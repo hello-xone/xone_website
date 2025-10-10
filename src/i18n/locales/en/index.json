@@ -30,7 +30,7 @@
   "commercialPr": "Cooperation",
   "knightProject": "Knight Project",
   "recruitment": "Recruitment",
-  "headerNotice": "Check out the Xone Dashboard, a one-stop shop for managing your Xone.",
+  "headerNotice": "A Letter from Sunflower | To All Builders of the Xone Community 💌",
   "navLearnIdea": "Idea",
   "navLearnIdeaDesc": "Learn the basic ideas of Xone.",
   "navLearnIdeaItem1": "Xone Account",
@@ -104,5 +104,7 @@
   "blog": "Blog",
   "roadmap": "Roadmap",
   "enterEmail": "Enter email address",
-  "later": "Later"
+  "later": "Later",
+  "announcement": "Announcement",
+  "learnMore": "Learn More"
 }

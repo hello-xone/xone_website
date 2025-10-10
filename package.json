@@ -9,7 +9,8 @@
     "build": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "parse:jobs": "node scripts/parseJobData.js"
+    "parse:jobs": "node scripts/parseJobData.js",
+    "parse-announcements": "node scripts/parseAnnouncementData.js"
   },
   "files": [
     "dist"
@@ -30,6 +31,7 @@
     "echarts": "^6.0.0",
     "ethers": "^5.8.0",
     "formik": "^2.4.6",
+    "gray-matter": "^4.0.3",
     "framer-motion": "^12.23.12",
     "i18next": "^24.2.3",
     "lottie-react": "^2.4.1",
@@ -43,6 +45,8 @@
     "react-i18next": "^15.4.1",
     "react-router": "^6.30.0",
     "react-router-dom": "^6.30.0",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
     "scrollreveal": "^4.0.9",
     "swiper": "^11.2.6",
     "tailwindcss": "^3.4.17",
