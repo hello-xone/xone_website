@@ -40,7 +40,8 @@ const seoPrerender = (routes) => {
         const routePath = routes[index];
 
         await page.goto(`http://localhost:${port}${routePath}`, {
-          waitUntil: "networkidle0",
+          waitUntil: "networkidle2", // 使用更宽松的网络空闲策略
+          timeout: 40000, // 设置超时时间为40秒
         });
         await page.setViewport({ width: 1024, height: 768 });
 
