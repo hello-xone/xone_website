@@ -6,7 +6,6 @@ import puppeteer from 'puppeteer-core';
 /**
  @param routes 
  */
-
 const seoPrerender = (routes) => {
   return {
     name: "viteSeoPrerender",
