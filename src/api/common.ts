@@ -4,14 +4,11 @@ import {
   Counter,
   FetchNetCountersRes,
   FetchNftTotalRes,
-  Stats,
 } from "@/types/response";
 
 import {
   nftScanRequest,
-  request,
-  xoMainScanRequest,
-  xoTestScanRequest,
+  request
 } from "./request";
 
 export const addEmail = async (data: { email: string }): Promise<null> => {

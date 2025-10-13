@@ -40,6 +40,7 @@ export const ExploreNature = () => {
     "TRON.svg": "https://tron.network/",
     "Uniswap.svg": "https://app.uniswap.org/",
     "Xion.svg": "https://xion.burnt.com/",
+    "feixiaohao.svg": "https://www.feixiaohao.com/"
   };
 
   const images = useMemo(() => {

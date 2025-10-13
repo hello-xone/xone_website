@@ -1,21 +1,23 @@
 import { useMemo } from "react";
-import { BaseContainer } from "../BaseContainer";
-import { EXTERNAL_LINKS } from "@/constants/external";
-import TelegramIcon from "@/assets/svg/home/telegram.svg?react";
-import XIcon from "@/assets/svg/home/x.svg?react";
-import DiscardIcon from "@/assets/svg/home/discard.svg?react";
-import YoutubeIcon from "@/assets/svg/home/youtube.svg?react";
-import GithubIcon from "@/assets/svg/home/github.svg?react";
-import RedditIcon from "@/assets/svg/home/reddit.svg?react";
-import MediumIcon from "@/assets/svg/home/medium.svg?react";
-import MustacheIcon from "@/assets/svg/home/mustache.svg?react";
-import Logo from "@/assets/svg/home/xone_logo.svg?react";
-import { LanguageButton } from "../Header/components/languageButton";
-
-import styles from "./index.module.less";
-import { Link } from "@/components/comm/link";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+
+import CoingeckoIcon from "@/assets/svg/home/coingecko.svg?react";
+import DiscardIcon from "@/assets/svg/home/discard.svg?react";
+import GithubIcon from "@/assets/svg/home/github.svg?react";
+import MediumIcon from "@/assets/svg/home/medium.svg?react";
+import MustacheIcon from "@/assets/svg/home/mustache.svg?react";
+import RedditIcon from "@/assets/svg/home/reddit.svg?react";
+import TelegramIcon from "@/assets/svg/home/telegram.svg?react";
+import XIcon from "@/assets/svg/home/x.svg?react";
+import Logo from "@/assets/svg/home/xone_logo.svg?react";
+import YoutubeIcon from "@/assets/svg/home/youtube.svg?react";
+import { Link } from "@/components/comm/link";
+import { EXTERNAL_LINKS } from "@/constants/external";
+
+import { BaseContainer } from "../BaseContainer";
+import { LanguageButton } from "../Header/components/languageButton";
+import styles from "./index.module.less";
 
 interface Info {
   name: string;
@@ -96,6 +98,10 @@ export const Footer = () => {
             url: EXTERNAL_LINKS.faucet,
           },
           {
+            name: t("common:status"),
+            url: EXTERNAL_LINKS.Status,
+          },
+          {
             name: "Github",
             url: EXTERNAL_LINKS.Github,
           },
@@ -104,6 +110,10 @@ export const Footer = () => {
       {
         title: t("common:headerNav4"),
         infos: [
+          {
+            name: t("common:forum"),
+            url: EXTERNAL_LINKS.Forum,
+          },
           {
             name: t("common:commercialPr"),
             internalLink: true,
@@ -157,6 +167,10 @@ export const Footer = () => {
       {
         icon: <MustacheIcon></MustacheIcon>,
         url: EXTERNAL_LINKS.ChatMe,
+      },
+      {
+        icon: <CoingeckoIcon></CoingeckoIcon>,
+        url: EXTERNAL_LINKS.Coingecko,
       },
     ];
   }, []);

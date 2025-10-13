@@ -56,7 +56,7 @@ export const Notice = ({ onClose }: { onClose: () => void }) => {
           }}
         />
         <span></span>
-        <Link className={styles.sellMore} href={EXTERNAL_LINKS.dashboard} target="_blank">
+        <Link className={styles.sellMore} href={EXTERNAL_LINKS.docs + "blog/bulletin/letter"} target="_blank">
           <span className={styles.sellMoreText}>{t("common:seeMore")}</span>
           <div className={styles.arrowIcon}>
             <ArrowIcon></ArrowIcon>

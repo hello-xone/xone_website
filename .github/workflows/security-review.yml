@@ -6,7 +6,10 @@ permissions:
   pull-requests: write    # 在 PR 中写入评论
   actions: read          # 读取 Actions 状态
 
+<<<<<<< HEAD
 # 触发条件：只针对 test 分支的 Pull Request
+=======
+>>>>>>> fix-puppeteer
 on:
   push:
     branches: 
@@ -102,7 +105,11 @@ jobs:
     
     steps:
       - name: 📥 检出代码
+<<<<<<< HEAD
         uses: actions/checkout@v4
+=======
+        uses: actions/checkout@v5
+>>>>>>> fix-puppeteer
         with:
           # 获取 PR 的 HEAD commit
           ref: ${{ github.event.pull_request.head.sha || github.sha }}

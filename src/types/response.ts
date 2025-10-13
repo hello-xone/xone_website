@@ -31,43 +31,29 @@ export interface StatsPrice {
 }
 
 export interface StatsModel {
-
-  average_txn_fee24h
-  :
-  number
-  block_time
-  :
-  number
-  current_epoch
-  :
-  number
-  total_addresses
-  :
-  number
-  total_nfts
-  :
-  number
-  total_tokens
-  :
-  number
-
+  average_txn_fee24h: number;
+  block_time: number;
+  current_epoch: number;
+  total_addresses: number;
+  total_nfts: number;
+  total_tokens: number;
 }
 export interface Stats {
-  mainnet: StatsModel
-  testnet: StatsModel
+  mainnet: StatsModel;
+  testnet: StatsModel;
 }
 
 export interface ChartModel {
-  date: number
-  avg_price: number
-  tx_count: number
+  date: number;
+  avg_price: number;
+  tx_count: number;
 }
 
 export interface ChartRes {
-  prices: Array<ChartModel>
-  total_accounts: number
-  transaction_amounts_today: number
-  transactions_today: number
-  current_price: number
-  market_cap: number
+  prices: Array<ChartModel>;
+  total_accounts: number;
+  transaction_amounts_today: number;
+  transactions_today: number;
+  current_price: number;
+  market_cap: number;
 }

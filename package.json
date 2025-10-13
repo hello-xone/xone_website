@@ -9,7 +9,8 @@
     "build": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "parse:jobs": "node scripts/parseJobData.js"
+    "parse:jobs": "node scripts/parseJobData.js",
+    "parse-announcements": "cd src/announcement && node cli.js"
   },
   "files": [
     "dist"
@@ -24,6 +25,7 @@
     "@web3jskit/walletkit": "^0.4.6",
     "axios": "^1.8.4",
     "bignumber.js": "^9.3.0",
+    "chrome-aws-lambda": "^10.1.0",
     "clsx": "^2.1.1",
     "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.13",
@@ -36,7 +38,7 @@
     "lodash": "^4.17.21",
     "lottie-react": "^2.4.1",
     "prismjs": "^1.30.0",
-    "puppeteer-core": "^24.17.0",
+    "puppeteer-core": "^24.24.0",
     "react": "^18.3.1",
     "react-cookie": "^7.2.2",
     "react-dom": "^18.3.1",
@@ -47,6 +49,8 @@
     "react-router": "^6.30.0",
     "react-router-dom": "^6.30.0",
     "recharts": "^3.1.2",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
     "scrollreveal": "^4.0.9",
     "swiper": "^11.2.6",
     "tailwindcss": "^3.4.17",
@@ -74,7 +78,6 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "less": "^4.3.0",
     "portfinder": "^1.0.36",
-    "puppeteer": "^24.6.1",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-visualizer": "^5.14.0",
     "typescript": "^5.8.3",

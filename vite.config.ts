@@ -7,8 +7,6 @@ import { nodePolyfills } from "vite-plugin-node-polyfills";
 import { VitePWA } from "vite-plugin-pwa";
 import svgr from "vite-plugin-svgr";
 
-// @ts-ignore
-import seoPrerender from "./prerender.js";
 
 const r = (p: string) => resolve(__dirname, p);
 
@@ -71,10 +69,14 @@ export default defineConfig(({ mode, command }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/xoScan/, ""),
         },
+        "/openapi": {
+          target: "https://openapi.xone.org",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/openapi/, ""),
+        },
       },
     },
     plugins: [
-      seoPrerender(["/", "/developer", "/commercial", "/404"]),
       VitePWA({
         registerType: "autoUpdate",
         injectRegister: "auto",
