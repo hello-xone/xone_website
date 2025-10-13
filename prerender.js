@@ -1,8 +1,8 @@
-import puppeteer from "puppeteer";
-import fs from "fs";
 import { spawn } from "child_process";
+import chromium from 'chrome-aws-lambda';
+import fs from "fs";
 import portfinder from "portfinder";
-
+import puppeteer from 'puppeteer-core';
 /**
  @param routes 
  */
@@ -26,12 +26,10 @@ const seoPrerender = (routes) => {
       });
 
       const browser = await puppeteer.launch({
-        headless: "new",
-        args: [
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-dev-shm-usage",
-        ],
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath,
+        headless: chromium.headless,
       });
       const page = await browser.newPage();
       const len = (routes || []).length;
