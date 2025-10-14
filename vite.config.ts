@@ -13,6 +13,7 @@ import seoPrerender from "./prerender.js";
 const r = (p: string) => resolve(__dirname, p);
 
 const isProduction = process.env.NODE_ENV !== "development";
+const isVercelEnv = process.env.VERCEL === '1';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
@@ -79,7 +80,7 @@ export default defineConfig(({ mode, command }) => {
       },
     },
     plugins: [
-      seoPrerender(["/", "/developer", "/commercial", "/404"]),
+      isVercelEnv ? seoPrerender(["/", "/developer", "/commercial", "/404"]) : undefined,
       VitePWA({
         registerType: "autoUpdate",
         injectRegister: "auto",
