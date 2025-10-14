@@ -11,7 +11,7 @@ export const Link = ({
   [key: string]: any;
 }>) => {
   return (
-    <a {...rest} href={href} target="_blank" className={className}>
+    <a {...rest} href={href} target="_blank" rel="nofollow noopener noreferrer" className={className}>
       {children}
     </a>
   );

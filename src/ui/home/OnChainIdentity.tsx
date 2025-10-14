@@ -47,16 +47,17 @@ export const OnChainIdentity = () => {
           </div>
           <div className="text-t2 leading-[140%] text-base md:text-[20px] mb-6 md:mb-8">
             {t("chainIdentityDesc1")}
-            <Link
-              to={"https://ens.domains/"}
+            <a
+              href="https://ens.domains/"
               className="text-[--link1]"
               target="_blank"
+              rel="nofollow noopener noreferrer"
             >
               {t("ENS")}
-            </Link>
+            </a>
             {t("chainIdentityDesc2")}
           </div>
-          <Lottie className="shrink-0 mb-6 md:hidden w-full h-auto" animationData={isLight ? OnChainIdentityJson : OnChainIdentityDarkJson} loop={true} ></Lottie>
+          <Lottie className="mb-6 w-full h-auto shrink-0 md:hidden" animationData={isLight ? OnChainIdentityJson : OnChainIdentityDarkJson} loop={true} ></Lottie>
           {tips &&
             tips.map((item, index) => {
               return (

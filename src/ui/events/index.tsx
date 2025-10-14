@@ -115,7 +115,7 @@ export const Events = () => {
           <Title className="mt-[80px] md:mt-[264px] !text-left">
             {t("pastEvents")}
           </Title>
-          {events &&
+          {events && events.length > 0 ?
             events.map((el) => (
               <div
                 key={`all-event-item-${el.api_id}`}
@@ -206,7 +206,7 @@ export const Events = () => {
                               <img
                                 alt={el.name}
                                 src={el.avatar_url}
-                                className="w-full rounded-full h-full"
+                                className="w-full h-full rounded-full"
                               ></img>
                             </div>
                           ))}
@@ -227,7 +227,7 @@ export const Events = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            )) : <Empty></Empty>}
         </div>
       </div>
     </div>

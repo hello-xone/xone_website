@@ -189,31 +189,32 @@ export const Ecosystem = () => {
                         className={"mx-[12px] md:mx-[60px] group h-[34px]"}
                         key={index}
                       >
-                        <Link
-                          to={img.link || ""}
+                        <a
+                          href={img.link || ""}
                           target="_blank"
+                          rel="nofollow noopener noreferrer"
                           className="relative"
                         >
                           <img
-                            className="h-full block group-hover:hidden object-contain"
+                            className="block object-contain h-full group-hover:hidden"
                             src={img.default}
                             alt=""
                           />
                           {isLight && (
                             <img
-                              className="h-full hidden group-hover:block object-contain"
+                              className="hidden object-contain h-full group-hover:block"
                               src={img.light}
                               alt=""
                             />
                           )}
                           {!isLight && (
                             <img
-                              className="h-full hidden group-hover:block object-contain"
+                              className="hidden object-contain h-full group-hover:block"
                               src={img.dark}
                               alt=""
                             />
                           )}
-                        </Link>
+                        </a>
                       </div>
                     );
                   })}

@@ -36,7 +36,6 @@ export default defineConfig(({ mode, command }) => {
                 "react",
                 "react-dom",
                 "react-router-dom",
-                "react-helmet-async",
               ],
               i18next: ["i18next", "react-i18next"],
 

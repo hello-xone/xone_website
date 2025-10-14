@@ -106,20 +106,16 @@ export const Grants = () => {
 
   return (
     <>
-      <MotionScrollReveal delay={0}>
-        <Header />
-      </MotionScrollReveal>
+      <Header />
       <div className="container">
-        <MotionScrollReveal delay={0.2}>
-          <div className="pt-[20px]">
-            <CardList
-              title={t("grants:cardTitle01")}
-              description={t("grants:cardDesc01")}
-              list={card01List}
-            />
-          </div>
-        </MotionScrollReveal>
-        <MotionScrollReveal delay={0.4}>
+        <div className="pt-[20px]">
+          <CardList
+            title={t("grants:cardTitle01")}
+            description={t("grants:cardDesc01")}
+            list={card01List}
+          />
+        </div>
+        <MotionScrollReveal delay={0.2} animation="slide">
           <div className="mt-[80px] md:mt-[150px]">
             <CardList
               title={t("grants:cardTitle02")}
@@ -137,13 +133,13 @@ export const Grants = () => {
             </div>
           </div>
         </MotionScrollReveal>
-        <MotionScrollReveal delay={0.3}>
+        <MotionScrollReveal delay={0.2} animation="slide">
           <SupportProvided />
         </MotionScrollReveal>
-        <MotionScrollReveal delay={0.3}>
+        <MotionScrollReveal delay={0.2} animation="slide">
           <CommonProblem />
         </MotionScrollReveal>
-        <MotionScrollReveal delay={0.4} animation="slide">
+        <MotionScrollReveal delay={0.3} animation="slide">
           <Start />
         </MotionScrollReveal>
       </div>

@@ -26,7 +26,7 @@
   "commercialPr": "協力",
   "knightProject": "ナイトプログラム",
   "recruitment": "採用情報",
-  "headerNotice": "Xone ダッシュボードをチェックして、Xone を一箇所から管理してください。",
+  "headerNotice": "ひまわりからの手紙｜Xone コミュニティのすべてのビルダーへ 💌",
   "navLearnIdea": "アイデア",
   "navLearnIdeaDesc": "Xoneの基本コンセプトを学ぶ。",
   "navLearnIdeaItem1": "Xoneアカウント",
@@ -100,5 +100,7 @@
   "blog": "ブログ",
   "roadmap": "ロードマップ",
   "enterEmail": "購読してご連絡ください！",
-  "later": "建設中"
+  "later": "建設中",
+  "announcement": "お知らせ",
+  "learnMore": "もっと詳しく" 
 }

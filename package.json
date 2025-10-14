@@ -10,7 +10,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "parse:jobs": "node scripts/parseJobData.js",
-    "parse-announcements": "cd src/announcement && node cli.js"
+    "parse-announcements": "node scripts/parseAnnouncementData.js"
   },
   "files": [
     "dist"
@@ -35,7 +35,6 @@
     "framer-motion": "^12.23.12",
     "gray-matter": "^4.0.3",
     "i18next": "^24.2.3",
-    "lodash": "^4.17.21",
     "lottie-react": "^2.4.1",
     "prismjs": "^1.30.0",
     "puppeteer-core": "^24.24.0",
@@ -43,7 +42,6 @@
     "react-cookie": "^7.2.2",
     "react-dom": "^18.3.1",
     "react-fast-marquee": "^1.6.5",
-    "react-helmet-async": "^2.0.5",
     "react-hot-toast": "^2.6.0",
     "react-i18next": "^15.4.1",
     "react-router": "^6.30.0",
@@ -60,13 +58,10 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
-    "@emotion/babel-plugin": "^11.13.5",
     "@types/node": "^20.17.30",
-    "@types/numeral": "^2.0.5",
     "@types/prismjs": "^1.26.5",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
-    "@types/react-slick": "^0.23.13",
     "@types/scrollreveal": "^0.0.11",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",

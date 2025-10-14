@@ -26,7 +26,7 @@
   "commercialPr": "협력",
   "knightProject": "나이트 프로그램",
   "recruitment": "채용",
-  "headerNotice": "Xone 대시보드를 확인하여 한곳에서 Xone을 관리해보세요.",
+  "headerNotice": "해바라기의 편지｜Xone 커뮤니티 모든 빌더들에게 💌",
   "navLearnIdea": "아이디어",
   "navLearnIdeaDesc": "Xone의 기본 개념을 학습하세요.",
   "navLearnIdeaItem1": "Xone 계정",
@@ -100,5 +100,7 @@
   "blog": "블로그",
   "roadmap": "로드맵",
   "enterEmail": "구독하고 연락주세요!",
-  "later": "공사 중"
+  "later": "공사 중",
+  "announcement": "공지",
+  "learnMore": "더 알아보기"
 }

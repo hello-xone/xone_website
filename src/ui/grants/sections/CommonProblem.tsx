@@ -40,7 +40,7 @@ const parseRichText = (text: string): string => {
       // 处理链接 [text](url)
       .replace(
         /\[([^\]]+)\]\(([^)]+)\)/g,
-        '<a href="$2" class="text-[var(--primary)] hover:underline" target="_blank" rel="noopener noreferrer">$1</a>'
+        '<a href="$2" class="text-[var(--primary)] hover:underline" target="_blank" rel="nofollow noopener noreferrer">$1</a>'
       )
   );
 };

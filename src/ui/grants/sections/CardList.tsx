@@ -22,7 +22,7 @@ export const CardList = ({ title, description, list, isMobileTow }: Props) => {
       </p>
       <div
         className={clsx(
-          "grid grid-cols-1 mt-8 gap-y-[16px] gap-x-[16px] md:gap-y-[24px] md:gap-x-[36px] md:grid-cols-3",
+          "grid grid-cols-1 mt-8 gap-y-[16px] gap-x-[16px] md:gap-y-[24px] md:gap-x-[24px] md:grid-cols-3",
           isMobileTow && "grid-cols-2"
         )}
       >

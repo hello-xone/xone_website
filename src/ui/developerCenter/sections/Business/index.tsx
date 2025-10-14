@@ -302,12 +302,12 @@ export const Business = () => {
       </div>
 
       {shouldShowToggleButton && (
-        <div className={`${styles.toggleButton}`}>
+        <div className="flex justify-center">
           <div
-            className="cursor-pointer flex items-center justify-center gap-x-[5px] mt-8"
+            className="cursor-pointer flex items-center justify-center gap-x-[5px] mt-8 text-[var(--t1)] hover:text-[var(--link1)]"
             onClick={handleToggle}
           >
-            <span className="text-[var(--t1)] text-[16px] font-medium">
+            <span className="text-[16px] font-medium">
               {isExpanded ? t("common:viewLess") : t("common:viewMore")}
             </span>
             <ArrowBottomInline
