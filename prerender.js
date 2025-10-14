@@ -1,7 +1,8 @@
-import puppeteer from "puppeteer";
-import fs from "fs";
+import chromium from '@sparticuz/chromium';
 import { spawn } from "child_process";
+import fs from "fs";
 import portfinder from "portfinder";
+import puppeteer from 'puppeteer-core';
 
 /**
  @param routes 
@@ -26,12 +27,11 @@ const seoPrerender = (routes) => {
       });
 
       const browser = await puppeteer.launch({
-        headless: "new",
-        args: [
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-dev-shm-usage",
-        ],
+            args: [...chromium.args, '--disable-gpu'],
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath(),
+            headless: chromium.headless,
+            ignoreHTTPSErrors: true,
       });
       const page = await browser.newPage();
       const len = (routes || []).length;
