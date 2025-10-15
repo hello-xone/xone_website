@@ -22,7 +22,7 @@ export default function Banner() {
         }}
       />
       {/* 内容层 */}
-      <div className="relative md:pt-[200px] md:h-[auto] h-[380px] pt-[40px] md:px-0 px-[16px] flex flex-col md:items-center items-start md:gap-y-[16px] gap-y-[10px]">
+      <div className="relative md:pt-[200px] md:h-[auto] h-[380px] pt-[40px] px-[16px] flex flex-col md:items-center items-start md:gap-y-[16px] gap-y-[10px]">
         <h1 className="md:text-[56px] text-[32px] font-bold text-[var(--t1)]">
           {t("lab:bannerTitle")}
         </h1>
@@ -32,7 +32,7 @@ export default function Banner() {
         <img
           src={isLight ? bannerMobileLight : bannerMobileDark}
           alt=""
-          className="block w-full absolute bottom-[20px] left-0 right-0 h-[200px] md:hidden object-cover"
+          className="block w-full absolute bottom-[0px] left-0 right-0 h-[200px] md:hidden object-cover"
         />
       </div>
     </div>

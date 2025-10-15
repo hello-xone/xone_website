@@ -6,6 +6,7 @@ import grants from "./grants.json";
 import header from "./header.json";
 import home from "./home.json";
 import common from "./index.json";
+import lab from "./lab.json";
 import recruitment from "./recruitment.json";
 
 export default {
@@ -18,4 +19,5 @@ export default {
   recruitment,
   grants,
   events,
+  lab,
 };
