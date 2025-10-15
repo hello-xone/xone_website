@@ -1,6 +1,8 @@
 import { PropsWithChildren } from "react";
-import styles from "./index.module.less";
+
 import blur from "@/assets/imgs/home/blur.png";
+
+import styles from "./index.module.less";
 
 type ButtonType =
   | "primary"

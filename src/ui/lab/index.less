@@ -1,0 +1,95 @@
+.line_clamp_2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+
+    @supports not (-webkit-line-clamp: 2) {
+        max-height: 3.2em;
+        /* 假设行高为 1.6em，2行 = 3.2em */
+        line-height: 1.6em;
+
+        &::after {
+            content: '...';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--b2);
+            padding-left: 20px;
+        }
+    }
+}
+
+.line_clamp_3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+
+    @supports not (-webkit-line-clamp: 3) {
+        max-height: 4.8em;
+        /* 假设行高为 1.6em，3行 = 4.8em */
+        line-height: 1.6em;
+
+        &::after {
+            content: '...';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--b2);
+            padding-left: 20px;
+        }
+    }
+}
+
+.horizontal-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    // 平滑滚动
+    scroll-behavior: smooth;
+
+    // 自定义滚动条样式 - 适配主题
+    &::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 0;
+        margin: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--t4);
+        border-radius: 4px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: var(--t2);
+            box-shadow: 0 0 0 2px var(--t1);
+            border-color: var(--t1);
+            transform: scaleY(1.3);
+        }
+
+        &:active {
+            background: var(--t1);
+            box-shadow: 0 0 4px var(--t1);
+            border-color: var(--t1);
+        }
+    }
+
+    // Firefox 滚动条样式 - 适配主题  
+    scrollbar-width: auto;
+    scrollbar-color: var(--t4) transparent;
+
+    // 主题过渡效果
+    transition: all 0.3s ease;
+}
+
+.lab-see-more span {
+    font-size: 16px;
+    font-weight: 500;
+}

@@ -1,5 +1,6 @@
+import { forwardRef, PropsWithChildren, useMemo, useState } from "react";
+
 import { useStartupLoaded } from "@/hooks/useStartupLoaded";
-import { PropsWithChildren, forwardRef, useMemo, useState } from "react";
 
 export enum AnimationType {
   SLIDE_IN_DOWN = "__slideInDown",

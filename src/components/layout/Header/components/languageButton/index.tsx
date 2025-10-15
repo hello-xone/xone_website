@@ -1,14 +1,15 @@
-import { Button } from "@/components/comm/button/index";
-import GlobalIcon from "@/assets/svg/home/global.svg?react";
-
-import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
-import { LanguageType, langs, cookieName } from "@/i18n/settings";
 import i18next from "i18next";
+import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
-import SelectedIcon from "@/assets/svg/home/selected.svg?react";
-import { Popover } from "@/components/comm/popover";
+
 import ArrowICon from "@/assets/svg/home/arrow.svg?react";
+import GlobalIcon from "@/assets/svg/home/global.svg?react";
+import SelectedIcon from "@/assets/svg/home/selected.svg?react";
+import { Button } from "@/components/comm/button/index";
+import { Popover } from "@/components/comm/popover";
 import { changeLanguage } from "@/i18n";
+import { cookieName,langs, LanguageType } from "@/i18n/settings";
+
 import styles from "./index.module.less";
 
 interface LanguageButtonProps {

@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigationData, NavigationData, InfoMenuId, NavigationType, NavigationGroup } from "@/hooks/useNavigationData";
-import ArrowIcon from "@/assets/svg/home/arrow.svg?react";
-import InfoArrowIcon from "@/assets/svg/home/info_arrow.svg?react";
-import { Link } from "@/components/comm/link";
-import { useNavigate } from "react-router-dom";
-import KnightIcon from "@/assets/svg/home/knight.svg?react";
-import CopyIcon from "@/assets/svg/home/copy.svg?react";
 import { useTranslation } from "react-i18next";
-import { useCopy } from "@/hooks/useCopy";
+import { useNavigate } from "react-router-dom";
 
+import ArrowIcon from "@/assets/svg/home/arrow.svg?react";
+import CopyIcon from "@/assets/svg/home/copy.svg?react";
+import InfoArrowIcon from "@/assets/svg/home/info_arrow.svg?react";
+import KnightIcon from "@/assets/svg/home/knight.svg?react";
+import { Link } from "@/components/comm/link";
+import { useCopy } from "@/hooks/useCopy";
+import { InfoMenuId, NavigationData, NavigationGroup,NavigationType, useNavigationData } from "@/hooks/useNavigationData";
 
 import styles from "./index.module.less";
 
@@ -32,7 +32,7 @@ export const MobileMenu = ({ show, onClose }: MobileMenuProps) => {
     if (navData.link) {
       window.open(navData.link, '__blank');
       return
-    };
+    }
     const id = navData.id;
     const temp: { [id: string]: boolean } = { ...openMenuMap };
     if (temp[String(id)]) {

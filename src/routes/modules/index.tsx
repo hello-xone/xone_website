@@ -7,6 +7,7 @@ import DeveloperCenter from "@/pages/DeveloperCenter";
 import Events from "@/pages/Events";
 import Grants from "@/pages/Grants";
 import Home from "@/pages/Home.tsx";
+import Lab from "@/pages/Lab";
 import Recruitment from "@/pages/Recruitment";
 import RecruitmentDetail from "@/pages/RecruitmentDetail";
 import VerificationChannel from "@/pages/VerificationChannel";
@@ -96,6 +97,16 @@ export const Routes: RouteObject[] = [
       {
         index: true,
         Component: withAnimation(Grants),
+      },
+    ],
+  },
+  {
+    path: "/lab",
+    Component: BaseLayout,
+    children: [
+      {
+        index: true,
+        Component: withAnimation(Lab),
       },
     ],
   },

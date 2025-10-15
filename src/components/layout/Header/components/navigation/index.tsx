@@ -1,20 +1,22 @@
-import {
-  NavigationData,
-  useNavigationData,
-  NavigationType,
-  InfoMenuId,
-} from "@/hooks/useNavigationData";
-import ArrowIcon from "@/assets/svg/home/arrow.svg?react";
-import styles from "./index.module.less";
 import { useEffect, useState } from "react";
-import { Link } from "@/components/comm/link";
-import KnightIcon from "@/assets/svg/home/knight.svg?react";
-import CopyIcon from "@/assets/svg/home/copy.svg?react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+
+import ArrowIcon from "@/assets/svg/home/arrow.svg?react";
+import CopyIcon from "@/assets/svg/home/copy.svg?react";
+import KnightIcon from "@/assets/svg/home/knight.svg?react";
 import { Animation, AnimationType } from "@/components/comm/animation";
 import { CustomTooltip } from "@/components/comm/customTooltip";
+import { Link } from "@/components/comm/link";
 import { useCopy } from "@/hooks/useCopy";
+import {
+  InfoMenuId,
+  NavigationData,
+  NavigationType,
+  useNavigationData,
+} from "@/hooks/useNavigationData";
+
+import styles from "./index.module.less";
 
 export const Navigation = () => {
   const { data } = useNavigationData();
