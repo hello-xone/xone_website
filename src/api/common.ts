@@ -4,14 +4,14 @@ import { request } from "./request";
 
 export const addEmail = async (data: { email: string }): Promise<null> => {
   const res: ApiResponse<null> = await request.post(
-    "/emailsub/subscribe",
+    `${import.meta.env.VITE_APP_EMAIL_SERVER}/api/subscribe/submit?token=087a1fef6489`,
     data
   );
 
-  if (res.code === 0) {
+  if (res.code === 200) {
     return res.data;
   }
-  throw Error(res.data || "");
+  throw Error(res.msg || "");
 };
 
 export const fetchStatsByNet = async () => {
