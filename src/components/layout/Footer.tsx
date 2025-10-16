@@ -5,7 +5,7 @@ import { FormikProvider, useFormik } from "formik";
 import { useMemo, useRef } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { addEmail } from "@/api/common";
 import LogoIcon from "@/assets/imgs/header/logo-red.png";
@@ -78,6 +78,7 @@ const contacts = [
 
 const Footer = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { changeTheme, isLight } = useApplicationStore();
   const { i18n } = useTranslation();
   const breakpoints = useTailwindBreakpoint();
@@ -235,15 +236,15 @@ const Footer = () => {
   };
 
   const handleSubmit = async () => {
-   try {
-    await addEmail({
-      email: values.email,
-    });
-    setFieldValue("email", "");
-    toast.success(t("home:subscriptionSuccessful"));
-   } catch (error: any) {
-    toast.error(error.message)
-   }
+    try {
+      await addEmail({
+        email: values.email,
+      });
+      setFieldValue("email", "");
+      toast.success(t("home:subscriptionSuccessful"));
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   };
 
   const generateOptions = (input: string) => {
@@ -251,12 +252,17 @@ const Footer = () => {
     const [prefix] = input.split("@");
     return domains.map((domain) => `${prefix}${domain}`);
   };
-  
+
   return (
     <div className="w-full pt-[64px] bg-b1 overflow-x-hidden">
       <div className="container">
         <div className="flex items-center justify-between max-md:flex-col max-md:items-start max-md:gap-[16px]">
-          <img alt="logo" src={LogoIcon} className="w-[104px] h-auto"></img>
+          <img
+            alt="logo"
+            src={LogoIcon}
+            className="w-[104px] h-auto cursor-pointer"
+            onClick={() => navigate("/")}
+          ></img>
           <div className="flex items-center !gap-2">
             {contacts &&
               contacts.map((item, index) => {
@@ -265,7 +271,11 @@ const Footer = () => {
                     key={`contact-item-${item.url}-${index}`}
                     className="flex justify-center items-center w-6 h-6 rounded text-t1 hover:bg-b4 bg-b3"
                     target={item.url.includes("http") ? "_blank" : "_self"}
-                    rel={item.url.includes("http") ? "nofollow noopener noreferrer" : undefined}
+                    rel={
+                      item.url.includes("http")
+                        ? "nofollow noopener noreferrer"
+                        : undefined
+                    }
                     to={item.url}
                   >
                     {item.icon}
@@ -290,9 +300,10 @@ const Footer = () => {
                         return (
                           <Link
                             className={clsx(
-                              "flex items-center gap-[8px]",
+                              "w-fit flex items-center gap-[8px]",
                               {
-                                "hover:text-[#FF0420] group": !info.isLater,
+                                "hover:text-[var(--link1)] group":
+                                  !info.isLater,
                                 "cursor-not-allowed": info.isLater,
                               }
                             )}
@@ -300,7 +311,11 @@ const Footer = () => {
                             target={
                               info.url.includes("http") ? "_blank" : "_self"
                             }
-                            rel={info.url.includes("http") ? "nofollow noopener noreferrer" : undefined}
+                            rel={
+                              info.url.includes("http")
+                                ? "nofollow noopener noreferrer"
+                                : undefined
+                            }
                             to={info.url}
                           >
                             {info.name}
@@ -350,7 +365,7 @@ const Footer = () => {
                   setFieldValue("email", newValue);
                 }}
                 renderOption={(props, option) => (
-                  <li {...props} style={{ margin: '8px 0' }}>
+                  <li {...props} style={{ margin: "8px 0" }}>
                     {option}
                   </li>
                 )}
@@ -360,44 +375,44 @@ const Footer = () => {
                     placement={breakpoints.md ? "right" : "bottom-start"}
                     className="[&_.MuiAutocomplete-listbox]:!py-3"
                     sx={{
-                      '& .MuiAutocomplete-listbox': {
-                        '&::-webkit-scrollbar': {
-                          width: '6px',
+                      "& .MuiAutocomplete-listbox": {
+                        "&::-webkit-scrollbar": {
+                          width: "6px",
                         },
-                        '&::-webkit-scrollbar-track': {
-                          background: 'var(--b3)',
-                          borderRadius: '10px',
+                        "&::-webkit-scrollbar-track": {
+                          background: "var(--b3)",
+                          borderRadius: "10px",
                         },
-                        '&::-webkit-scrollbar-thumb': {
-                          background: 'var(--t3)',
-                          borderRadius: '10px',
+                        "&::-webkit-scrollbar-thumb": {
+                          background: "var(--t3)",
+                          borderRadius: "10px",
                         },
-                        '&::-webkit-scrollbar-thumb:hover': {
-                          background: 'var(--t2)',
+                        "&::-webkit-scrollbar-thumb:hover": {
+                          background: "var(--t2)",
                         },
-                      }
+                      },
                     }}
                     modifiers={[
                       {
-                        name: 'flip',
+                        name: "flip",
                         enabled: true,
                         options: {
                           altBoundary: true,
-                          rootBoundary: 'viewport',
+                          rootBoundary: "viewport",
                         },
                       },
                       {
-                        name: 'preventOverflow',
+                        name: "preventOverflow",
                         enabled: true,
                         options: {
                           altAxis: true,
                           altBoundary: true,
                           tether: false,
-                          rootBoundary: 'viewport',
+                          rootBoundary: "viewport",
                         },
                       },
                       {
-                        name: 'offset',
+                        name: "offset",
                         options: {
                           offset: [0, 14],
                         },
@@ -458,14 +473,29 @@ const Footer = () => {
         <div className="mt-3 md:mt-10 py-4 max-md:pt-[21px] border-t-[1px] border-solid border-[--border3] text-t3 flex justify-between items-center">
           <div className="flex items-center text-xs max-md:justify-between max-md:w-full">
             <div className="leading-[14px]">
-              © {dayjs().format("YYYY")} {t("common:copyright")}
+              © {dayjs().format("YYYY")}{" "}
+              <Link
+                to="/"
+                className="transition-colors text-[var(--link1)] font-medium"
+              >
+                Xone
+              </Link>{" "}
+              {t("common:copyright").replace(/^Xone\s*/i, "")}
             </div>
             <div className="pl-4 ml-4 border-l-[1px] border-t3 leading-[14px] flex items-center">
-              <a href={EXTERNAL_LINKS.docs + "study/privacy"} target="_blank" rel="nofollow noopener noreferrer">
+              <a
+                href={EXTERNAL_LINKS.docs + "study/privacy"}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+              >
                 {t("header:privacy")}
               </a>
               <span className="block w-[2px] h-[2px] rounded-full bg-t3 mx-4"></span>
-              <a href={EXTERNAL_LINKS.docs + "study/service"} target="_blank" rel="nofollow noopener noreferrer">
+              <a
+                href={EXTERNAL_LINKS.docs + "study/service"}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+              >
                 {t("header:terms")}
               </a>
             </div>
