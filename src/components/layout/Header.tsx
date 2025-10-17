@@ -35,6 +35,7 @@ const Header = () => {
   const navigate = useNavigate();
   const { isLight, changeTheme } = useApplicationStore();
   const [detailId, setDetailId] = useState("");
+  const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
   const { t, i18n } = useTranslation("header");
 
   const [isThemeSwitching, setIsThemeSwitching] = useState(false);
@@ -94,13 +95,13 @@ const Header = () => {
       case "global_active":
         return isLight ? ActiveIcon : ActiveDarkIcon;
       case "global_knight":
-        return isLight? KnightIcon : KnightDarkIcon;
+        return isLight ? KnightIcon : KnightDarkIcon;
       case "global_grants":
         return isLight ? GrantsIcon : GrantsDarkIcon;
       default:
         return isLight ? KnightIcon : KnightDarkIcon;
     }
-  }, [isLight, detailId])
+  }, [isLight, detailId]);
   return (
     <div
       className={clsx(
@@ -130,7 +131,13 @@ const Header = () => {
               return (
                 <div key={`header-item-${item.id}`}>
                   {item.group && item.group.length > 0 ? (
-                    <CommonPopover ref={popoverRef} text={t(item.name)}>
+                    <CommonPopover
+                      ref={popoverRef}
+                      text={t(item.name)}
+                      menuId={item.id}
+                      activeMenuId={activeMenuId}
+                      setActiveMenuId={setActiveMenuId}
+                    >
                       {item.type === NavigationType.INFO ? (
                         <div className="flex items-stretch gap-[24px]">
                           <div className="w-[372px]">
@@ -147,12 +154,9 @@ const Header = () => {
                                   key={`children-item-${gel.id}`}
                                 >
                                   <gel.icon
-                                    className={clsx(
-                                      "text-t1 shrink-0",
-                                      {
-                                        "!text-t1": detailId === gel.id,
-                                      }
-                                    )}
+                                    className={clsx("text-t1 shrink-0", {
+                                      "!text-t1": detailId === gel.id,
+                                    })}
                                   ></gel.icon>
                                   <div
                                     className={clsx(
@@ -178,15 +182,19 @@ const Header = () => {
                             ) : (
                               <>
                                 <div className="w-full min-h-[164px] flex-1 flex flex-col items-center justify-center rounded-[8px] bg-b3">
-                                  <img alt="" src={DetailImg} className="w-[164px] h-[164px]"></img>
+                                  <img
+                                    alt=""
+                                    src={DetailImg}
+                                    className="w-[164px] h-[164px]"
+                                  ></img>
                                 </div>
-                                {
-                                  group?.detailTitle && <div className="mt-3 text-t2 shrink-0 text-sm font-bold leading-[140%]">
+                                {group?.detailTitle && (
+                                  <div className="mt-3 text-t2 shrink-0 text-sm font-bold leading-[140%]">
                                     {group?.detailTitle
                                       ? t(group?.detailTitle)
                                       : ""}
                                   </div>
-                                }
+                                )}
 
                                 {group?.detailDesc && (
                                   <div className="mt-3 text-t2 shrink-0 text-sm leading-[140%]">
@@ -287,10 +295,6 @@ const Header = () => {
         </div>
       </div>
       <div className="flex items-center gap-[12px] md:gap-[24px]">
-        {/* <CommonButton type="outline">
-          {t("askAI")}
-          <AiStar className="w-4 h-4 md:w-6 md:h-6"></AiStar>
-        </CommonButton> */}
         <CommonButton
           className="max-md:text-xs"
           onClick={() => window.open(EXTERNAL_LINKS.Bvi)}

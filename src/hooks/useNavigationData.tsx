@@ -1,7 +1,8 @@
 import { ReactElement, useMemo } from "react";
-import KnightIcon from "@/assets/svg/home/knight.svg?react";
-import BusinessIcon from "@/assets/svg/home/business.svg?react";
 import { useTranslation } from "react-i18next";
+
+import BusinessIcon from "@/assets/svg/home/business.svg?react";
+import KnightIcon from "@/assets/svg/home/knight.svg?react";
 import { EXTERNAL_LINKS } from "@/constants/external";
 
 export interface NavigationLink {

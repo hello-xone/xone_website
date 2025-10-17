@@ -1,5 +1,5 @@
-import KnightIcon from "@/assets/svg/home/knight.svg?react";
 import BusinessIcon from "@/assets/svg/home/business.svg?react";
+import KnightIcon from "@/assets/svg/home/knight.svg?react";
 
 export const menuInfo = [
   {

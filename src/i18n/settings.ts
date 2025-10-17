@@ -1,11 +1,11 @@
 import en from "./locales/en";
-import zhTW from "./locales/zhTW";
-import zh from "./locales/zh";
-import ko from "./locales/ko";
 import ja from "./locales/ja";
+import ko from "./locales/ko";
 import ms from "./locales/ms";
-import vi from "./locales/vi";
 import th from "./locales/th";
+import vi from "./locales/vi";
+import zh from "./locales/zh";
+import zhTW from "./locales/zhTW";
 
 export enum LanguageType {
   en = "en",

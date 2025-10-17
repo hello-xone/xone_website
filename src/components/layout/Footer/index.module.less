@@ -5,6 +5,7 @@
   padding: 24px 0;
   z-index: 1;
 }
+
 .footerContent {
   display: flex;
   justify-content: space-between;
@@ -13,14 +14,17 @@
 .logo {
   width: 90px;
 }
+
 .footerRight {
   font-size: 14px;
   gap: 100px;
   display: flex;
 }
+
 .title {
   color: white;
 }
+
 .link {
   display: block;
   margin-top: 16px;
@@ -28,16 +32,19 @@
   opacity: 0.6;
   transition: all 0.1s ease-in-out;
   cursor: pointer;
+
   &:hover {
     opacity: 1;
   }
 }
+
 .later {
   margin-top: 16px;
   display: flex;
   align-items: center;
   gap: 4px;
 }
+
 .laterTag {
   width: max-content;
   font-size: 12px;
@@ -46,9 +53,11 @@
   color: var(--t4);
   border: 0.5px solid #ff04204d;
 }
+
 .followUs {
   margin-top: 26px;
 }
+
 .followUsTitle {
   font-size: 14px;
   color: white;
@@ -59,27 +68,34 @@
   display: flex;
   justify-content: space-between;
 }
+
 .followUsLeft {
   display: flex;
   gap: 8px;
 }
+
 .contact {
   width: 24px;
 }
+
 .logo {
   width: 90px;
   color: white;
 }
+
 .langBtnWrapper {
   margin-top: 28px;
 }
+
 .copyright {
   color: white;
   font-size: 12px;
 }
+
 .small {
   display: none;
 }
+
 .large {
   display: block;
 }
@@ -88,17 +104,21 @@
   .footerContent {
     flex-wrap: wrap;
   }
+
   .footerLeft {
     width: 100%;
   }
+
   .footerRight {
     margin-top: 40px;
     // flex-wrap: wrap;
     // gap: unset;
   }
+
   .followUs {
     margin-top: 48px;
   }
+
   .col {
     width: 110px;
     // &:nth-of-type(2) {
@@ -108,12 +128,15 @@
     //   margin-top: 32px;
     // }
   }
+
   .small {
     display: block;
   }
+
   .large {
     display: none;
   }
+
   .wrapper {
     display: flex;
     justify-content: space-between;
@@ -126,8 +149,10 @@
     flex-wrap: wrap;
     gap: unset;
   }
+
   .col {
     width: 122px;
+
     &:nth-of-type(2) {
       margin: 0 48px;
     }
@@ -137,6 +162,7 @@
 @media (max-width: 520px) {
   .col {
     margin-right: 48px;
+
     &:nth-of-type(3) {
       margin-top: 32px;
     }
@@ -146,10 +172,12 @@
 @media (max-width: 480px) {
   .col {
     margin-right: 0;
+
     &:nth-of-type(2) {
       margin-left: 48px;
       margin-right: 0;
     }
+
     &:nth-of-type(3) {
       margin-right: 48px;
     }

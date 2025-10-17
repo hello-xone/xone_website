@@ -1,12 +1,14 @@
-import XoneLogo from "@/assets/svg/home/loog_small.svg?react";
-import CopyIcon from "@/assets/svg/home/copy.svg?react";
-import styles from "./index.module.less";
-import { useTranslation } from "react-i18next";
-import { useScrollreveal } from "@/hooks/useScrollreveal";
 import { useEffect } from "react";
-import { AnimationType, Animation } from "@/components/comm/animation";
+import { useTranslation } from "react-i18next";
+
+import CopyIcon from "@/assets/svg/home/copy.svg?react";
+import XoneLogo from "@/assets/svg/home/loog_small.svg?react";
+import { Animation,AnimationType } from "@/components/comm/animation";
 import { BannerWrapper } from "@/components/layout/BannerWrapper";
 import { useCopy } from "@/hooks/useCopy";
+import { useScrollreveal } from "@/hooks/useScrollreveal";
+
+import styles from "./index.module.less";
 
 export const Banner = () => {
   const { t } = useTranslation();

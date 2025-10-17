@@ -1,20 +1,22 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { LanguageButton } from "./components/languageButton";
-import { Button } from "@/components/comm/button";
-import { Notice } from "./components/notice/index";
-import SmallLogo from "@/assets/svg/home/loog_small.svg?react";
-import MenuIcon from "@/assets/svg/home/menu.svg?react";
-import { MobileMenu } from "./components/mobileMenu";
-import { Navigation } from "./components/navigation";
-import Logo from "@/assets/svg/home/xone_logo.svg?react";
-import CloseIcon from "@/assets/svg/home/close.svg?react";
-import styles from "./index.module.less";
+import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+
+import CloseIcon from "@/assets/svg/home/close.svg?react";
+import SmallLogo from "@/assets/svg/home/loog_small.svg?react";
+import MenuIcon from "@/assets/svg/home/menu.svg?react";
+import Logo from "@/assets/svg/home/xone_logo.svg?react";
 import { Animation, AnimationType } from "@/components/comm/animation";
-import { useNoticeStore } from "@/store/noticeStore";
+import { Button } from "@/components/comm/button";
 import { EXTERNAL_LINKS } from "@/constants/external";
+import { useNoticeStore } from "@/store/noticeStore";
+
+import { LanguageButton } from "./components/languageButton";
+import { MobileMenu } from "./components/mobileMenu";
+import { Navigation } from "./components/navigation";
+import { Notice } from "./components/notice/index";
+import styles from "./index.module.less";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
