@@ -21,7 +21,7 @@ export default function Construction() {
     },
     {
       title: t("lab:constructionLink03"),
-      link: "https://xone.org",
+      link: "/grants",
       img: isLight ? constructionLight03 : constructionDark03,
     },
     {

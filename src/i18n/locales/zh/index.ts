@@ -1,3 +1,4 @@
+import about from "./about.json";
 import channel from "./channel.json";
 import commercial from "./commercial.json";
 import developer from "./developer.json";
@@ -20,4 +21,5 @@ export default {
   grants,
   events,
   lab,
+  about,
 };

@@ -11,13 +11,13 @@ import Lab from "@/pages/Lab";
 import Recruitment from "@/pages/Recruitment";
 import RecruitmentDetail from "@/pages/RecruitmentDetail";
 import VerificationChannel from "@/pages/VerificationChannel";
+import { About } from "@/ui/about";
 
 import { AnimatedRoute } from "./AnimatedRoute";
 
 const withAnimation = (Component: React.ComponentType) => {
   return () => <AnimatedRoute Component={Component} />;
 };
-
 
 export const Routes: RouteObject[] = [
   {
@@ -107,6 +107,16 @@ export const Routes: RouteObject[] = [
       {
         index: true,
         Component: withAnimation(Lab),
+      },
+    ],
+  },
+  {
+    path: "/about",
+    Component: BaseLayout,
+    children: [
+      {
+        index: true,
+        Component: withAnimation(About),
       },
     ],
   },
