@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { forwardRef, ReactNode, useImperativeHandle, useRef } from "react";
 
 import Arrow from "@/components/Icons/Arrow";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
 const CommonPopover = forwardRef(
   (
@@ -23,6 +24,7 @@ const CommonPopover = forwardRef(
   ) => {
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const enterTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const { isLight } = useCurrentTheme();
 
     // 如果有传入 activeMenuId，则使用全局控制；否则使用本地状态
     const isOpen =
@@ -52,7 +54,7 @@ const CommonPopover = forwardRef(
         if (setActiveMenuId && menuId) {
           setActiveMenuId(menuId);
         }
-      }, 50);
+      }, 150);
     };
 
     const handleMouseLeave = () => {
@@ -62,11 +64,12 @@ const CommonPopover = forwardRef(
         enterTimeoutRef.current = null;
       }
 
+      // 增加关闭延迟，给用户更多时间移动鼠标
       timeoutRef.current = setTimeout(() => {
         if (setActiveMenuId) {
           setActiveMenuId(null);
         }
-      }, 50);
+      }, 100);
     };
 
     return (
@@ -100,15 +103,21 @@ const CommonPopover = forwardRef(
         </Popover>
         <div
           style={{
-            transform: isOpen ? "translateY(0)" : "translateY(0.25rem)",
+            transform: isOpen ? "translateY(0)" : "translateY(-8px)",
             opacity: isOpen ? 1 : 0,
             visibility: isOpen ? "visible" : "hidden",
             transition: isOpen
-              ? "opacity 200ms ease-out, transform 200ms ease-out, visibility 200ms"
-              : "opacity 150ms ease-in, transform 150ms ease-in, visibility 150ms",
+              ? "opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms"
+              : "opacity 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1), visibility 200ms",
             pointerEvents: isOpen ? "auto" : "none",
           }}
-          className="absolute left-0 top-full px-[10px] py-[24px] mt-2 shadow-[0px_10px_32px_0px_#1F1F1F1A] z-[9999] rounded-[16px] bg-b2 text-t1"
+          className={clsx(
+            "absolute left-0 top-full px-[15px] py-[15px] mt-2 border border-solid z-[9999] rounded-[16px] bg-b2 text-t1",
+            {
+              "border-[#CDCDCD]": isLight,
+              "border-[#404040]": !isLight,
+            }
+          )}
         >
           {children}
         </div>

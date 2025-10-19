@@ -49,81 +49,6 @@ export const Navigation = () => {
     setCurrentNavId(InfoMenuId.KNIGHT);
   };
 
-  const renderInfo = () => {
-    const knightInfo = (
-      <div
-        className={`${styles.infoBox} flex justify-center items-center text-t2 flex-col`}
-      >
-        <div className="w-[18px]">
-          <KnightIcon></KnightIcon>
-        </div>
-        <div className="text-[14px] mt-2">{t("common:comingSoon")}</div>
-      </div>
-    );
-    switch (currentNavId) {
-      case InfoMenuId.KNIGHT:
-        return knightInfo;
-      case InfoMenuId.BUSINESS:
-        return (
-          <div
-            className={`${styles.infoBox} flex flex-col justify-between font-normal`}
-          >
-            <div>
-              <div className="text-[12px] text-t2">{t("common:navGlobalBusinessConnect")}</div>
-              <div className="mt-2 flex items-center">
-                <Link
-                  className="text-[14px] underline underline-offset-[2px]"
-                  href="mailto:business@xone.org"
-                >
-                  buiness@xone.org
-                </Link>
-                <div
-                  className="w-[20px] ml-4 cursor-pointer"
-                  onClick={() => copy("buiness@xone.org")}
-                >
-                  <CopyIcon></CopyIcon>
-                </div>
-              </div>
-              <div className="text-[12px] text-t2 mt-6">{t("common:navGlobalBusinessKit")}</div>
-              <div className="text-[14px] flex gap-[10px] mt-2">
-                <Link
-                  href="https://docs.xone.org/study/media#our-logo"
-                >
-                  {t("common:navGlobalBusinessItem1")}
-                </Link>
-                <Link
-                  href="https://docs.xone.org/study/media#our-color"
-                >
-                  {t("common:navGlobalBusinessItem2")}
-                </Link>
-                <Link
-                  href="https://docs.xone.org/study/media#our-font"
-                >
-                  {t("common:navGlobalBusinessItem3")}
-                </Link>
-                <Link
-                  href="https://docs.xone.org/study/media#our-coin"
-                >
-                  {t("common:navGlobalBusinessItem4")}
-                </Link>
-              </div>
-            </div>
-            <div
-              className="text-t2 text-sm flex items-center cursor-pointer"
-              onClick={() => {
-                navigate("/commercial");
-                close();
-              }}
-            >
-              {t("seeMore")}
-            </div>
-          </div>
-        );
-      default:
-        return knightInfo;
-    }
-  };
-
   const renderMenu = (menuData: NavigationData) => {
     if (!menuData?.group) return;
     switch (menuData?.type) {
@@ -149,8 +74,8 @@ export const Navigation = () => {
                               style={
                                 index === len - 1
                                   ? {
-                                    paddingBottom: 0,
-                                  }
+                                      paddingBottom: 0,
+                                    }
                                   : {}
                               }
                               onClick={() => {
@@ -168,8 +93,8 @@ export const Navigation = () => {
                               style={
                                 index === len - 1
                                   ? {
-                                    paddingBottom: 0,
-                                  }
+                                      paddingBottom: 0,
+                                    }
                                   : {}
                               }
                             >
@@ -194,8 +119,9 @@ export const Navigation = () => {
                 return (
                   <div
                     key={item.id}
-                    className={`${styles.wrapper} ${item.menuId === currentNavId ? styles.active : ""
-                      }`}
+                    className={`${styles.wrapper} ${
+                      item.menuId === currentNavId ? styles.active : ""
+                    }`}
                     onMouseOver={() =>
                       item.menuId && setCurrentNavId(item.menuId)
                     }
@@ -209,7 +135,6 @@ export const Navigation = () => {
                 );
               })}
             </div>
-            {renderInfo()}
           </div>
         );
     }
@@ -217,13 +142,13 @@ export const Navigation = () => {
 
   const handleClick = (navigationData: NavigationData) => {
     if (!navigationData.link) return;
-    console.log('handleClick', navigationData, navigationData.internalLink,)
+    console.log("handleClick", navigationData, navigationData.internalLink);
     navigationData.internalLink
       ? navigate(navigationData.link)
       : window.open(navigationData.link, "_blank");
   };
 
-  console.log('data', data);
+  console.log("data", data);
 
   return (
     <div

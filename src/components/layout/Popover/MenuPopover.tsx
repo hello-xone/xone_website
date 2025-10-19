@@ -8,28 +8,16 @@ import {
   PopoverPanel,
 } from "@headlessui/react";
 import clsx from "clsx";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import ActiveIcon from "@/assets/imgs/header/active.png";
-import ActiveDarkIcon from "@/assets/imgs/header/active-dark.png";
-import BlogIcon from "@/assets/imgs/header/blog.png";
-import BlogDarkIcon from "@/assets/imgs/header/blog-dark.png";
-import BusinessIcon from "@/assets/imgs/header/business.png";
-import BusinessDarkIcon from "@/assets/imgs/header/business-dark.svg";
-import GrantsIcon from "@/assets/imgs/header/grants.png";
-import GrantsDarkIcon from "@/assets/imgs/header/grants-dark.png";
-import KnightIcon from "@/assets/imgs/header/knight.png";
-import KnightDarkIcon from "@/assets/imgs/header/knight-dark.png";
-import RecruitmentIcon from "@/assets/imgs/header/recruitment.png";
-import RecruitmentDarkIcon from "@/assets/imgs/header/recruitment-dark.png";
 import { SeeMore } from "@/components/comm/link/SeeMore";
 import Arrow from "@/components/Icons/Arrow";
 import Close from "@/components/Icons/Close";
 import Language from "@/components/Icons/Language";
 import Theme from "@/components/Icons/Theme";
-import { menus, NavigationType } from "@/constants/menus";
+import { getMenus } from "@/constants/menus";
 import { langs, LanguageType } from "@/i18n/settings";
 import useApplicationStore from "@/store/applicationStore";
 
@@ -59,6 +47,9 @@ const MenuPopover = () => {
     }
   }, [isOpen]);
 
+  // 根据主题获取菜单配置
+  const menus = useMemo(() => getMenus(isLight ? "light" : "dark"), [isLight]);
+
   const currentLanguage = useMemo(() => {
     const fallback = langs.find((item) => item.type === LanguageType.en);
     return (
@@ -74,28 +65,6 @@ const MenuPopover = () => {
       setIsOpen(latestOpenRef.current);
     }
   }, []);
-
-  const DetailImg = useCallback(
-    (detailId: string) => {
-      switch (detailId) {
-        case "global_business":
-          return isLight ? BusinessIcon : BusinessDarkIcon;
-        case "global_recruitment":
-          return isLight ? RecruitmentIcon : RecruitmentDarkIcon;
-        case "global_blog":
-          return isLight ? BlogIcon : BlogDarkIcon;
-        case "global_active":
-          return isLight ? ActiveIcon : ActiveDarkIcon;
-        case "global_knight":
-          return isLight ? KnightIcon : KnightDarkIcon;
-        case "global_grants":
-          return isLight ? GrantsIcon : GrantsDarkIcon;
-        default:
-          return isLight ? KnightIcon : KnightDarkIcon;
-      }
-    },
-    [isLight]
-  );
 
   return (
     <>
@@ -176,42 +145,43 @@ const MenuPopover = () => {
                                     <div className="text-t7 mb-3 text-xs mt-1 leading-[140%]">
                                       {t(group.description)}
                                     </div>
-                                    {item.type === NavigationType.LINK ? (
+                                    {group.links && group.links.length > 0 ? (
                                       <>
-                                        {group.links &&
-                                          group.links.map((link) => (
-                                            <div
-                                              className="h-[36px] text-t2 rounded-[8px] pl-[10px] flex items-center cursor-pointer hover:bg-b3"
-                                              key={`h5-menu-${item.id}-link-${link.id}`}
+                                        {group.links.map((link) => (
+                                          <div
+                                            className="h-[36px] text-t2 rounded-[8px] pl-[10px] flex items-center cursor-pointer hover:bg-b3"
+                                            key={`h5-menu-${item.id}-link-${link.id}`}
+                                          >
+                                            <Link
+                                              onClick={() => close()}
+                                              to={link.link || ""}
+                                              target={
+                                                link.link.includes("http")
+                                                  ? "_blank"
+                                                  : "_self"
+                                              }
+                                              rel={
+                                                link.link.includes("http")
+                                                  ? "nofollow noopener noreferrer"
+                                                  : undefined
+                                              }
                                             >
-                                              <Link
-                                                onClick={() => close()}
-                                                to={link.link || ""}
-                                                target={
-                                                  link.link.includes("http")
-                                                    ? "_blank"
-                                                    : "_self"
-                                                }
-                                                rel={
-                                                  link.link.includes("http")
-                                                    ? "nofollow noopener noreferrer"
-                                                    : undefined
-                                                }
-                                              >
-                                                {t(link.name)}
-                                              </Link>
-                                            </div>
-                                          ))}
+                                              {t(link.name)}
+                                            </Link>
+                                          </div>
+                                        ))}
                                       </>
                                     ) : (
                                       <div>
-                                        <div className="w-full min-h-[72px] flex flex-col items-center justify-center rounded-[8px] bg-b3">
-                                          <img
-                                            alt=""
-                                            src={DetailImg(group.id)}
-                                            className="w-[164px] h-[164px]"
-                                          ></img>
-                                        </div>
+                                        {group.mainIcon && (
+                                          <div className="w-full min-h-[72px] flex flex-col items-center justify-center rounded-[8px]">
+                                            <img
+                                              alt={group.title}
+                                              src={group.mainIcon}
+                                              className="object-cover w-full h-full"
+                                            ></img>
+                                          </div>
+                                        )}
                                         {group.detailTitle && (
                                           <div className="mt-2 text-t2 text-xs font-bold leading-[140%]">
                                             {group?.detailTitle

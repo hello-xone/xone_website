@@ -1,42 +1,54 @@
 import clsx from "clsx";
-import { useMemo, useRef, useState } from "react";
+import {
+  type FC,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
-import ActiveIcon from "@/assets/imgs/header/active.png";
-import ActiveDarkIcon from "@/assets/imgs/header/active-dark.png";
-import BlogIcon from "@/assets/imgs/header/blog.png";
-import BlogDarkIcon from "@/assets/imgs/header/blog-dark.png";
-import BusinessIcon from "@/assets/imgs/header/business.png";
-import BusinessDarkIcon from "@/assets/imgs/header/business-dark.svg";
-import GrantsIcon from "@/assets/imgs/header/grants.png";
-import GrantsDarkIcon from "@/assets/imgs/header/grants-dark.png";
-import KnightIcon from "@/assets/imgs/header/knight.png";
-import KnightDarkIcon from "@/assets/imgs/header/knight-dark.png";
 import LogoIcon from "@/assets/imgs/header/logo.png";
 import LogoRedIcon from "@/assets/imgs/header/logo-red.png";
-import RecruitmentIcon from "@/assets/imgs/header/recruitment.png";
-import RecruitmentDarkIcon from "@/assets/imgs/header/recruitment-dark.png";
 import { EXTERNAL_LINKS } from "@/constants/external";
-import { menus, NavigationType } from "@/constants/menus";
+import { getMenus, InfoMenuId } from "@/constants/menus";
 import useApplicationStore from "@/store/applicationStore";
 
 import CommonButton from "../comm/button/CommonButton";
-import { SeeMore } from "../comm/link/SeeMore";
 import Language from "../Icons/Language";
 import Theme from "../Icons/Theme";
+import BuildDocCard from "./Header/components/buildDocCard";
 import BusinessCard from "./Header/components/businessCard";
+import ImageCard from "./Header/components/imageCard";
+import MenuItem from "./Header/components/menuItem";
+import ResourceCard from "./Header/components/resourceCard";
+import SolutionCard from "./Header/components/solutionCard";
 import CommonPopover from "./Popover/CommonPopover";
 import LanguagePopover from "./Popover/LanguagePopover";
 import MenuPopover from "./Popover/MenuPopover";
+
+// 右侧详情卡片组件映射
+const DetailCardComponents: Record<string, FC<{ group: any }>> = {
+  [InfoMenuId.SOLUTION]: SolutionCard,
+  [InfoMenuId.BUILD_DOC]: BuildDocCard,
+  [InfoMenuId.RESOURCE]: ResourceCard,
+  [InfoMenuId.IMAGE]: ImageCard,
+  [InfoMenuId.PROMOTION]: BusinessCard,
+};
 
 const Header = () => {
   const popoverRef = useRef<any>(null);
   const navigate = useNavigate();
   const { isLight, changeTheme } = useApplicationStore();
   const [detailId, setDetailId] = useState("");
-  const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
+  const [displayDetailId, setDisplayDetailId] = useState(""); // 用于显示的延迟状态
+  const [activeMenuId, setActiveMenuId] = useState<string | null>("");
   const { t, i18n } = useTranslation("header");
+
+  // 用于防抖的
+  const detailIdTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const [isThemeSwitching, setIsThemeSwitching] = useState(false);
 
@@ -69,39 +81,75 @@ const Header = () => {
     }, 600);
   };
 
-  const group = useMemo(() => {
-    if (detailId) {
-      const groups = menus.find((item) => item.id === "global")?.group;
-      if (groups) {
-        return groups.find((item) => item.id === detailId);
+  // 根据主题获取菜单配置
+  const menus = useMemo(() => getMenus(isLight ? "light" : "dark"), [isLight]);
+
+  useEffect(() => {
+    // 清除之前的定时器
+    if (detailIdTimeoutRef.current) {
+      clearTimeout(detailIdTimeoutRef.current);
+    }
+
+    if (detailId !== displayDetailId) {
+      // 如果已经有显示的卡片，先淡出
+      if (displayDetailId) {
+        // 淡出后更新显示的 detailId
+        detailIdTimeoutRef.current = setTimeout(() => {
+          setDisplayDetailId(detailId);
+        }, 100);
+      } else {
+        // 如果没有显示的卡片，直接显示新卡片
+        setDisplayDetailId(detailId);
       }
     }
-  }, [detailId]);
 
-  const handleCallChild = () => {
-    if (popoverRef.current) {
-      popoverRef.current.close();
-    }
-  };
+    return () => {
+      if (detailIdTimeoutRef.current) {
+        clearTimeout(detailIdTimeoutRef.current);
+      }
+    };
+  }, [detailId, displayDetailId]);
 
-  const DetailImg = useMemo(() => {
-    switch (detailId) {
-      case "global_business":
-        return isLight ? BusinessIcon : BusinessDarkIcon;
-      case "global_recruitment":
-        return isLight ? RecruitmentIcon : RecruitmentDarkIcon;
-      case "global_blog":
-        return isLight ? BlogIcon : BlogDarkIcon;
-      case "global_active":
-        return isLight ? ActiveIcon : ActiveDarkIcon;
-      case "global_knight":
-        return isLight ? KnightIcon : KnightDarkIcon;
-      case "global_grants":
-        return isLight ? GrantsIcon : GrantsDarkIcon;
-      default:
-        return isLight ? KnightIcon : KnightDarkIcon;
+  // 防抖处理菜单项悬停
+  const handleMenuItemHover = useCallback((id: string) => {
+    // 清除之前的定时器
+    if (detailIdTimeoutRef.current) {
+      clearTimeout(detailIdTimeoutRef.current);
     }
-  }, [isLight, detailId]);
+
+    // 避免快速划过时频繁切换
+    detailIdTimeoutRef.current = setTimeout(() => {
+      setDetailId(id);
+    }, 100);
+  }, []);
+
+  const group = useMemo(() => {
+    const menu = menus.find((item) => item.id === activeMenuId);
+    if (menu && menu.group) {
+      return menu.group.find((item) => item.id === displayDetailId) ?? null;
+    }
+    return null;
+  }, [activeMenuId, displayDetailId, menus]);
+
+  // 渲染右侧详情卡片
+  const renderDetailCard = useMemo(() => {
+    if (!group) return null;
+
+    let CardComponent: FC<{ group: any }> | null = null;
+
+    if (activeMenuId === InfoMenuId.SOLUTION) {
+      CardComponent = DetailCardComponents[InfoMenuId.SOLUTION];
+    } else if (displayDetailId && DetailCardComponents[displayDetailId]) {
+      CardComponent = DetailCardComponents[displayDetailId];
+    } else if (group.menuId && DetailCardComponents[group.menuId]) {
+      CardComponent = DetailCardComponents[group.menuId];
+    }
+
+    if (!CardComponent) return null;
+
+    return <CardComponent group={group} />;
+  }, [group, activeMenuId, displayDetailId]);
+
   return (
     <div
       className={clsx(
@@ -138,142 +186,22 @@ const Header = () => {
                       activeMenuId={activeMenuId}
                       setActiveMenuId={setActiveMenuId}
                     >
-                      {item.type === NavigationType.INFO ? (
-                        <div className="flex items-stretch gap-[24px]">
-                          <div className="w-[372px]">
-                            {item.group &&
-                              item.group.map((gel) => (
-                                <div
-                                  onMouseEnter={() => setDetailId(gel.id)}
-                                  className={clsx(
-                                    "px-[10px] w-full group gap-[12px] rounded-[8px] mb-[2px] bg-transparent hover:bg-b3 cursor-pointer py-2 flex items-center",
-                                    {
-                                      "!bg-b3": detailId === gel.id,
-                                    }
-                                  )}
-                                  key={`children-item-${gel.id}`}
-                                >
-                                  <gel.icon
-                                    className={clsx("text-t1 shrink-0", {
-                                      "!text-t1": detailId === gel.id,
-                                    })}
-                                  ></gel.icon>
-                                  <div
-                                    className={clsx(
-                                      "text-t2 w-full pr-[34px] shrink-0",
-                                      {
-                                        "!text-t1": detailId === gel.id,
-                                      }
-                                    )}
-                                  >
-                                    <div className="text-sm text-t1 w-full font-bold leading-[140%] mb-1">
-                                      {t(gel.title)}
-                                    </div>
-                                    <div className="text-xs group-hover:text-t1 w-full leading-[16px]">
-                                      {t(gel.description)}
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
-                          </div>
-                          <div className="w-[480px] flex-1 flex flex-col">
-                            {group?.id === "global_business" ? (
-                              <BusinessCard></BusinessCard>
-                            ) : (
-                              <>
-                                <div className="w-full min-h-[164px] flex-1 flex flex-col items-center justify-center rounded-[8px] bg-b3">
-                                  <img
-                                    alt=""
-                                    src={DetailImg}
-                                    className="w-[164px] h-[164px]"
-                                  ></img>
-                                </div>
-                                {group?.detailTitle && (
-                                  <div className="mt-3 text-t2 shrink-0 text-sm font-bold leading-[140%]">
-                                    {group?.detailTitle
-                                      ? t(group?.detailTitle)
-                                      : ""}
-                                  </div>
-                                )}
-
-                                {group?.detailDesc && (
-                                  <div className="mt-3 text-t2 shrink-0 text-sm leading-[140%]">
-                                    {group?.detailDesc
-                                      ? t(group?.detailDesc)
-                                      : ""}
-                                  </div>
-                                )}
-                              </>
-                            )}
-                            {group && group.link && (
-                              <SeeMore
-                                href={group.link}
-                                onClick={() => handleCallChild()}
-                                target={
-                                  group.link.includes("http")
-                                    ? "_blank"
-                                    : "_self"
+                      <div className="flex gap-x-[24px]">
+                        <div className="w-[320px] flex flex-col gap-y-[10px]">
+                          {item.group &&
+                            item.group.map((gel) => (
+                              <MenuItem
+                                key={`children-item-${gel.id}`}
+                                item={gel}
+                                detailId={displayDetailId as InfoMenuId}
+                                onMouseEnter={() =>
+                                  handleMenuItemHover(gel.id as InfoMenuId)
                                 }
-                                text={t("home:seeMore")}
-                                className="mt-3"
-                                textClassName="!text-[14px] shrink-0 text-t2"
-                              ></SeeMore>
-                            )}
-                          </div>
+                              />
+                            ))}
                         </div>
-                      ) : (
-                        <div className="flex gap-[24px]">
-                          {item.group.map((cel) => (
-                            <div
-                              key={`children-item-${cel.id}`}
-                              className="w-[200px]"
-                            >
-                              <div className="px-[10px]">
-                                <div className="text-base mb-1 leading-[140%] font-bold text-t1">
-                                  {t(cel.title)}
-                                </div>
-                                <div className="text-xs font-normal leading-[140%] text-t2">
-                                  {t(cel.description)}
-                                </div>
-                              </div>
-                              <div className="mt-4 text-[14px] flex flex-col gap-[2px] leading-[140%] text-t2">
-                                {cel.links &&
-                                  cel.links.map((link) => {
-                                    return (
-                                      <Link
-                                        key={`link-item-${link.id}`}
-                                        to={link.link || ""}
-                                        onClick={() => handleCallChild()}
-                                        target={
-                                          link.link.includes("http")
-                                            ? "_blank"
-                                            : "_self"
-                                        }
-                                        rel={
-                                          link.link.includes("http")
-                                            ? "nofollow noopener noreferrer"
-                                            : undefined
-                                        }
-                                        className="px-[12px] py-[8px] hover:bg-b3 text-t1 rounded-[8px] cursor-pointer"
-                                      >
-                                        {t(link.name)}
-                                      </Link>
-                                    );
-                                  })}
-                              </div>
-                              {item.id === "Ecology" && (
-                                <SeeMore
-                                  href={EXTERNAL_LINKS.Bvi}
-                                  onClick={() => handleCallChild()}
-                                  text={t("home:seeMore")}
-                                  className="mt-4 ml-[10px]"
-                                  textClassName="!text-[14px] font-medium text-t1"
-                                ></SeeMore>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
+                        {renderDetailCard}
+                      </div>
                     </CommonPopover>
                   ) : (
                     <Link
