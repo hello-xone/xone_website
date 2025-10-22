@@ -6,7 +6,13 @@ import { SeeMore } from "@/components/comm/link/SeeMore";
 import { EXTERNAL_LINKS } from "@/constants/external";
 import type { NavigationLink } from "@/constants/menus";
 
-const SolutionCard = ({ group }: { group: any }) => {
+const SolutionCard = ({
+  group,
+  onClose,
+}: {
+  group: any;
+  onClose?: () => void;
+}) => {
   const { t, i18n } = useTranslation("header");
 
   if (!group) return null;
@@ -57,6 +63,7 @@ const SolutionCard = ({ group }: { group: any }) => {
             textClassName="!text-[14px] !font-normal"
             href={EXTERNAL_LINKS.dashboard + i18n.language + "/ecology"}
             text={t("viewMore")}
+            onClick={onClose}
           />
         </div>
       )}

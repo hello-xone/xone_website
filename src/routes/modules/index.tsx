@@ -2,7 +2,9 @@ import { lazy } from "react";
 import { Navigate, RouteObject } from "react-router";
 
 import BaseLayout from "@/components/layout/BaseLayout";
+import About from "@/pages/About";
 import Commercial from "@/pages/Commercial";
+import Compliance from "@/pages/Compliance";
 import DeveloperCenter from "@/pages/DeveloperCenter";
 import Events from "@/pages/Events";
 import Grants from "@/pages/Grants";
@@ -11,7 +13,6 @@ import Lab from "@/pages/Lab";
 import Recruitment from "@/pages/Recruitment";
 import RecruitmentDetail from "@/pages/RecruitmentDetail";
 import VerificationChannel from "@/pages/VerificationChannel";
-import { About } from "@/ui/about";
 
 import { AnimatedRoute } from "./AnimatedRoute";
 
@@ -117,6 +118,16 @@ export const Routes: RouteObject[] = [
       {
         index: true,
         Component: withAnimation(About),
+      },
+    ],
+  },
+  {
+    path: "/compliance",
+    Component: BaseLayout,
+    children: [
+      {
+        index: true,
+        Component: withAnimation(Compliance),
       },
     ],
   },

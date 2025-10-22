@@ -135,7 +135,7 @@ const Header = () => {
   const renderDetailCard = useMemo(() => {
     if (!group) return null;
 
-    let CardComponent: FC<{ group: any }> | null = null;
+    let CardComponent: FC<{ group: any; onClose?: () => void }> | null = null;
 
     if (activeMenuId === InfoMenuId.SOLUTION) {
       CardComponent = DetailCardComponents[InfoMenuId.SOLUTION];
@@ -147,7 +147,9 @@ const Header = () => {
 
     if (!CardComponent) return null;
 
-    return <CardComponent group={group} />;
+    return (
+      <CardComponent group={group} onClose={() => setActiveMenuId(null)} />
+    );
   }, [group, activeMenuId, displayDetailId]);
 
   return (
@@ -197,6 +199,7 @@ const Header = () => {
                                 onMouseEnter={() =>
                                   handleMenuItemHover(gel.id as InfoMenuId)
                                 }
+                                onClose={() => setActiveMenuId(null)}
                               />
                             ))}
                         </div>

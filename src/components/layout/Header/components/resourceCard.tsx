@@ -2,7 +2,13 @@ import { useState } from "react";
 
 import MenuItem from "./menuItem";
 
-const ResourceCard = ({ group }: { group: any }) => {
+const ResourceCard = ({
+  group,
+  onClose,
+}: {
+  group: any;
+  onClose?: () => void;
+}) => {
   const [detailId, setDetailId] = useState<any>("");
 
   if (!group) return null;
@@ -17,6 +23,7 @@ const ResourceCard = ({ group }: { group: any }) => {
             detailId={detailId}
             onMouseEnter={() => setDetailId(gel.id)}
             isResource
+            onClose={onClose}
           />
         ))}
     </div>

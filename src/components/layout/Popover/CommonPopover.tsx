@@ -112,7 +112,7 @@ const CommonPopover = forwardRef(
             pointerEvents: isOpen ? "auto" : "none",
           }}
           className={clsx(
-            "absolute left-0 top-full px-[15px] py-[15px] mt-2 border border-solid z-[9999] rounded-[16px] bg-b2 text-t1",
+            "absolute left-0 top-full px-[15px] py-[15px] mt-2 border border-solid z-[9999] rounded-[16px] bg-b1 text-t1",
             {
               "border-[#CDCDCD]": isLight,
               "border-[#404040]": !isLight,

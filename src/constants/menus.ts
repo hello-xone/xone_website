@@ -150,6 +150,7 @@ export interface NavigationGroup {
   mainIcon?: any;
   menuId?: InfoMenuId; // 没有则默认是NORMAL
   link?: string;
+  moreLink?: string;
   description: string;
   detailTitle?: string;
   detailDesc?: string;
@@ -570,8 +571,10 @@ export const getMenus = (theme: string): Array<MenuModel> => {
             ? SolutionGlobalCityAmbassadorMainIconDark
             : SolutionGlobalCityAmbassadorMainIconLight,
           menuId: InfoMenuId.IMAGE,
-          link: "/events",
+          moreLink: "/events",
           internalLink: true,
+          detailTitle: "globalCityAmbassadorSubTitle",
+          detailDesc: "globalCityAmbassadorSubDesc",
         },
         {
           id: "global_business_promotion",
@@ -584,7 +587,7 @@ export const getMenus = (theme: string): Array<MenuModel> => {
             ? SolutionGlobalBusinessPromotionMainIconDark
             : SolutionGlobalBusinessPromotionMainIconLight,
           menuId: InfoMenuId.PROMOTION,
-          link: "/commercial",
+          moreLink: "/commercial",
           internalLink: true,
         },
         {
@@ -598,8 +601,10 @@ export const getMenus = (theme: string): Array<MenuModel> => {
             ? SolutionGlobalRecruitmentMainIconDark
             : SolutionGlobalRecruitmentMainIconLight,
           menuId: InfoMenuId.IMAGE,
-          link: "/recruitment",
+          moreLink: "/recruitment",
           internalLink: true,
+          detailTitle: "globalRecruitmentSubTitle",
+          detailDesc: "globalRecruitmentSubDesc",
         },
         {
           id: "global_blog",
@@ -612,7 +617,9 @@ export const getMenus = (theme: string): Array<MenuModel> => {
             ? SolutionGlobalBlogMainIconDark
             : SolutionGlobalBlogMainIconLight,
           menuId: InfoMenuId.IMAGE,
-          link: EXTERNAL_LINKS.docs + "blog",
+          moreLink: EXTERNAL_LINKS.docs + "blog",
+          detailTitle: "globalBlogSubTitle",
+          detailDesc: "globalBlogSubDesc",
         },
         {
           id: "global_active",
@@ -625,8 +632,10 @@ export const getMenus = (theme: string): Array<MenuModel> => {
             ? SolutionGlobalActiveMainIconDark
             : SolutionGlobalActiveMainIconLight,
           menuId: InfoMenuId.IMAGE,
-          link: "/events",
+          moreLink: "/events",
           internalLink: true,
+          detailTitle: "globalActiveSubTitle",
+          detailDesc: "globalActiveSubDesc",
         },
         {
           id: "global_grants",
@@ -639,13 +648,14 @@ export const getMenus = (theme: string): Array<MenuModel> => {
             ? SolutionGlobalGrantsMainIconDark
             : SolutionGlobalGrantsMainIconLight,
           menuId: InfoMenuId.IMAGE,
-          link: "/grants",
+          moreLink: "/grants",
           internalLink: true,
+          detailTitle: "globalGrantsSubTitle",
+          detailDesc: "globalGrantsSubDesc",
         },
       ],
     },
   ];
 };
 
-// 为了向后兼容,保留 menus 导出(默认使用 light 主题)
 export const menus = getMenus("light");

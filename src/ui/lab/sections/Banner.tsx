@@ -10,14 +10,14 @@ export default function Banner() {
   const { t } = useTranslation();
   const { isLight } = useCurrentTheme();
   return (
-    <div className="w-full md:h-[800px] h-[auto]relative">
+    <div className="w-full md:h-[770px] h-[auto]relative">
       {/* 背景层 - 只在 md 及以上显示 */}
       <div
         className="hidden absolute inset-0 md:block"
         style={{
           backgroundImage: `url(${isLight ? bannerLight : bannerDark})`,
-          backgroundSize: "100% 850px",
-          backgroundPosition: "0px -60px",
+          backgroundSize: "100% 800px",
+          backgroundPosition: "0px -45px",
           backgroundRepeat: "no-repeat",
         }}
       />

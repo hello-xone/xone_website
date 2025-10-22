@@ -1,3 +1,5 @@
+import { MotionScrollReveal } from "@/components/comm/animation/ScrollReveal";
+
 import Banner from "./sections/Banner";
 import BeBorn from "./sections/BeBorn";
 import Face from "./sections/Face";
@@ -9,12 +11,22 @@ export const About = () => {
   return (
     <>
       <Banner />
-      <BeBorn />
+      <MotionScrollReveal animation="fade" delay={0}>
+        <BeBorn />
+      </MotionScrollReveal>
       <div className="container">
-        <Significance />
-        <Face />
-        <Govern />
-        <JoinUs />
+        <MotionScrollReveal animation="slide" delay={0.1}>
+          <Significance />
+        </MotionScrollReveal>
+        <MotionScrollReveal animation="slide" delay={0.2}>
+          <Face />
+        </MotionScrollReveal>
+        <MotionScrollReveal animation="fade" delay={0.3}>
+          <Govern />
+        </MotionScrollReveal>
+        <MotionScrollReveal animation="slide" delay={0.4}>
+          <JoinUs />
+        </MotionScrollReveal>
       </div>
     </>
   );

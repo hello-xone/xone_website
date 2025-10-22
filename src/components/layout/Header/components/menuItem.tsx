@@ -8,9 +8,10 @@ import type { InfoMenuId } from "@/constants/menus";
 
 interface MenuItemProps {
   item: any;
-  detailId: InfoMenuId;
+  detailId?: InfoMenuId;
   isResource?: boolean;
-  onMouseEnter: () => void;
+  onMouseEnter?: () => void;
+  onClose?: () => void;
 }
 
 const MenuItem = ({
@@ -18,6 +19,7 @@ const MenuItem = ({
   detailId,
   onMouseEnter,
   isResource,
+  onClose,
 }: MenuItemProps) => {
   const { t } = useTranslation("header");
   const navigate = useNavigate();
@@ -25,6 +27,11 @@ const MenuItem = ({
   const openLink = useCallback(
     (link: string) => {
       if (link) {
+        // 关闭弹窗
+        if (onClose) {
+          onClose();
+        }
+
         if (item.internalLink) {
           navigate(link);
         } else {
@@ -32,7 +39,7 @@ const MenuItem = ({
         }
       }
     },
-    [item.internalLink, navigate]
+    [item.internalLink, navigate, onClose]
   );
 
   return (
