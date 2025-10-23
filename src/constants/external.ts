@@ -18,8 +18,9 @@ export const EXTERNAL_LINKS = {
   TokenUp: "https://tokenup.org/en",
   SwapX: "https://swapx.exchange/en",
   RainLink: "https://rainlink.co",
-  ChatMe: "https://share.chatme.global/share/group/ztgqmws2k?lang=en&mode=light",
-  Discord: "https://discord.com/invite/Du9y2GHV",
+  ChatMe:
+    "https://share.chatme.global/share/group/ztgqmws2k?lang=en&mode=light",
+  Discord: "https://discord.com/invite/SzTaqpns",
   Reddit: "https://www.reddit.com/r/XoneChain/",
   Official_Email: "hello@xone.org",
   Support_Email: "support@xone.org",
