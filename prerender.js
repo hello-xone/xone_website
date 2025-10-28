@@ -27,7 +27,7 @@ const seoPrerender = (routes) => {
       });
 
       const browser = await puppeteer.launch({
-            args: [...chromium.args, '--disable-gpu'],
+            args: [...chromium.args, '--disable-gpu', "--no-sandbox"],
             defaultViewport: chromium.defaultViewport,
             executablePath: await chromium.executablePath(),
             headless: chromium.headless,
@@ -39,7 +39,7 @@ const seoPrerender = (routes) => {
       for (var index = 0; index < len; index++) {
         const routePath = routes[index];
 
-        await page.goto(`http://localhost:${port}${routePath}`, {
+        await page.goto(`https://xone.org${routePath}`, {
           waitUntil: "networkidle0",
         });
         await page.setViewport({ width: 1024, height: 768 });
