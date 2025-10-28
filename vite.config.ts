@@ -7,10 +7,13 @@ import { nodePolyfills } from "vite-plugin-node-polyfills";
 import { VitePWA } from "vite-plugin-pwa";
 import svgr from "vite-plugin-svgr";
 
+// @ts-ignore
+import seoPrerender from "./prerender.js";
 
 const r = (p: string) => resolve(__dirname, p);
 
 const isProduction = process.env.NODE_ENV !== "development";
+const isVercelEnv = process.env.VERCEL === '1';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
@@ -36,6 +39,7 @@ export default defineConfig(({ mode, command }) => {
                 "react",
                 "react-dom",
                 "react-router-dom",
+                "react-helmet-async",
               ],
               i18next: ["i18next", "react-i18next"],
 
@@ -76,6 +80,7 @@ export default defineConfig(({ mode, command }) => {
       },
     },
     plugins: [
+      isVercelEnv ? seoPrerender(["/", "/developer", "/commercial", "/404"]) : undefined,
       VitePWA({
         registerType: "autoUpdate",
         injectRegister: "auto",
