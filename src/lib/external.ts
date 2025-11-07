@@ -16,7 +16,7 @@ export const EXTERNAL_LINKS = {
   TokenUp: "https://tokenup.org/en",
   SwapX: "https://swapx.exchange/en",
   RainLink: "https://bridge.xonetest.plus/",
-  Discord: "https://discord.gg/Du9y2GHV",
+  Discord: "https://discord.gg/UtFzuKNZ",
   Suggest_Dapp:
     "https://github.com/hello-xone/official_docs/issues/new?template=suggest_dapp.yaml",
 };
