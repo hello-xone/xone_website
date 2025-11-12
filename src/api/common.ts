@@ -16,7 +16,7 @@ import {
 
 export const addEmail = async (data: { email: string }): Promise<null> => {
   const res: ApiResponse<null> = await emailApiRequest.post(
-    "api/subscribe/submit?token=087a1fef6489",
+    `api/subscribe/submit?token=${import.meta.env.VITE_APP_EMAIL_TOKEN}`,
     data
   );
 
