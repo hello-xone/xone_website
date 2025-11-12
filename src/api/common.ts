@@ -7,15 +7,15 @@ import {
 } from "@/types/response";
 
 import {
+  emailApiRequest,
   nftScanRequest,
   openApiRequest,
-  request,
   xoMainScanRequest,
   xoTestScanRequest,
 } from "./request";
 
 export const addEmail = async (data: { email: string }): Promise<null> => {
-  const res: ApiResponse<null> = await request.post(
+  const res: ApiResponse<null> = await emailApiRequest.post(
     "api/subscribe/submit?token=087a1fef6489",
     data
   );

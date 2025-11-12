@@ -26,6 +26,10 @@ export const openApiRequest = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_URL,
 });
 
+export const emailApiRequest = axios.create({
+  baseURL: import.meta.env.VITE_APP_EMAIL_URL,
+});
+
 const commonResponseInterceptors = (response: AxiosResponse<any, any>) => {
   return response.data;
 };
@@ -35,3 +39,4 @@ nftScanRequest.interceptors.response.use(commonResponseInterceptors);
 xoMainScanRequest.interceptors.response.use(commonResponseInterceptors);
 xoTestScanRequest.interceptors.response.use(commonResponseInterceptors);
 openApiRequest.interceptors.response.use(commonResponseInterceptors);
+emailApiRequest.interceptors.response.use(commonResponseInterceptors);
