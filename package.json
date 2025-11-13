@@ -20,6 +20,8 @@
     "@mui/material": "^6.4.11",
     "@sparticuz/chromium": "^141.0.0",
     "@toolpad/core": "^0.13.0",
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
     "@web3jskit/walletkit": "^0.4.6",
     "axios": "^1.8.4",
     "bignumber.js": "^9.3.0",

@@ -15,6 +15,8 @@ import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/components/prism-solidity";
 import "@/assets/style/animation.less";
 import { WalletKitProvider, ChainType } from "@web3jskit/walletkit";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
   const { themeConfig } = useThemeConfig();
@@ -50,6 +52,8 @@ function App() {
                 <NotificationsProvider>
                   <RenderRoutes />
                 </NotificationsProvider>
+                <Analytics />
+                <SpeedInsights />
               </WalletKitProvider>
             </I18nProvider>
           </Suspense>
